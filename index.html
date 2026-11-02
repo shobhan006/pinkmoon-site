@@ -30,6 +30,10 @@ body{overflow-x:hidden}
   background:
     radial-gradient(ellipse 75% 70% at 50% 58%, rgba(221,224,241,0) 45%, rgba(159,177,211,.38) 100%),
     linear-gradient(to bottom, rgba(150,170,208,.38) 0%, rgba(150,170,208,0) 26%);}
+#grain{position:fixed;inset:-8%;width:116%;height:116%;pointer-events:none;z-index:1;opacity:.055;background-repeat:repeat;background-size:200px 200px;will-change:transform;animation:grain .9s steps(5) infinite}
+@keyframes grain{0%{transform:translate3d(0,0,0)}25%{transform:translate3d(-3%,2%,0)}50%{transform:translate3d(2%,-3%,0)}75%{transform:translate3d(-2%,-2%,0)}100%{transform:translate3d(0,0,0)}}
+@media (prefers-reduced-motion:reduce){#grain{animation:none}}
+.still #grain,.still .hint::after{animation:none}
 #scroller{position:relative;z-index:2;pointer-events:none}
 
 /* fixed chrome */
@@ -117,6 +121,7 @@ body{overflow-x:hidden}
 <body>
 <canvas id="stage" aria-hidden="true"></canvas>
 <div id="vignette"></div>
+<div id="grain" aria-hidden="true"></div>
 
 <div id="loader" role="status">
   <img src="img/logo.png" alt="PINKMOON">
@@ -243,26 +248,23 @@ import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
-import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
-import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
-import {GTAOPass} from 'three/addons/postprocessing/GTAOPass.js';
-import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
-import {ShaderPass} from 'three/addons/postprocessing/ShaderPass.js';
 
 const HAZE = 0xd4d8ec;
 const V = (x,y,z)=>new THREE.Vector3(x,y,z);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches || location.search.includes('still');
 const STILL = location.search.includes('still');
+if (STILL) document.documentElement.classList.add('still');
 
 /* ---------- renderer and studio ---------- */
 const canvas = document.getElementById('stage');
 const renderer = new THREE.WebGLRenderer({canvas, antialias:true, powerPreference:'high-performance'});
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+let DPR_MAX = Math.min(devicePixelRatio, 1.5), dpr = DPR_MAX;
+renderer.setPixelRatio(dpr);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.05;
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.VSMShadowMap;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 const LITE = innerWidth < 760 || (navigator.hardwareConcurrency||8) < 4;
 
 const scene = new THREE.Scene();
@@ -277,6 +279,8 @@ const scene = new THREE.Scene();
   scene.background = t;
 })();
 scene.fog = new THREE.Fog(HAZE, 42, 290);
+// fog is mixed after colour conversion, so give it the display values directly: far floor then meets the sky's horizon exactly
+scene.fog.color.setRGB(0xd4/255, 0xd8/255, 0xec/255, THREE.LinearSRGBColorSpace);
 
 const pmrem = new THREE.PMREMGenerator(renderer);
 scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
@@ -284,38 +288,10 @@ const ENV_I = 0.32;
 
 const camera = new THREE.PerspectiveCamera(48, innerWidth/innerHeight, 0.3, 1400);
 
-const composer = new EffectComposer(renderer, new THREE.WebGLRenderTarget(innerWidth, innerHeight, {type:THREE.HalfFloatType, samples: LITE ? 0 : 4}));
-composer.addPass(new RenderPass(scene, camera));
-let gtao = null;
-if (!LITE){
-  gtao = new GTAOPass(scene, camera, innerWidth, innerHeight);
-  gtao.updateGtaoMaterial({radius:3.2, distanceExponent:1.6, thickness:4, scale:1.15, samples:16, distanceFallOff:1});
-  gtao.updatePdMaterial({lumaPhi:10, depthPhi:2, normalPhi:3, radius:6, rings:2, samples:16});
-  gtao.blendIntensity = 1.0;
-  composer.addPass(gtao);
-}
-composer.addPass(new OutputPass());
-// finish: soft vignette, a whisper of split-tone and fine film grain
-const finish = new ShaderPass({
-  uniforms:{tDiffuse:{value:null}, time:{value:0}, res:{value:new THREE.Vector2(innerWidth, innerHeight)}},
-  vertexShader:`varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.); }`,
-  fragmentShader:`uniform sampler2D tDiffuse; uniform float time; uniform vec2 res; varying vec2 vUv;
-    float h(vec2 p){ return fract(sin(dot(p, vec2(12.9898,78.233))) * 43758.5453); }
-    void main(){
-      vec3 c = texture2D(tDiffuse, vUv).rgb;
-      float l = dot(c, vec3(.299,.587,.114));
-      c += vec3(-.012,-.006,.02) * (1.-l) + vec3(.012,.006,-.006) * l;      // cool shadows, warm highlights
-      vec2 q = vUv - .5; q.x *= res.x/res.y;
-      c *= mix(1., .86, smoothstep(.45, 1.15, length(q)));                  // vignette
-      c += (h(vUv*res + fract(time)*97.) - .5) * .035;                       // grain
-      gl_FragColor = vec4(c, 1.);
-    }`
-});
-composer.addPass(finish);
 
 // endless floor: one huge matte sheet that dissolves into the haze
 const floor = new THREE.Mesh(new THREE.PlaneGeometry(4000, 4000),
-  new THREE.MeshStandardMaterial({color:0xc6cbe3, roughness:.9, metalness:0, envMapIntensity:.2}));
+  new THREE.MeshLambertMaterial({color:0xbcc1dc}));
 floor.rotation.x = -Math.PI/2; floor.receiveShadow = true; scene.add(floor);
 
 // cool sky fill, warm key with long soft shadows, cool rim from behind for separation
@@ -324,22 +300,29 @@ const key = new THREE.DirectionalLight(0xfff0de, 3.3);
 key.castShadow = true;
 const SM = LITE ? 2048 : 4096;
 key.shadow.mapSize.set(SM, SM);
-key.shadow.camera.left = -56; key.shadow.camera.right = 56;
-key.shadow.camera.top = 56; key.shadow.camera.bottom = -56;
-key.shadow.camera.near = 1; key.shadow.camera.far = 220;
-key.shadow.bias = -0.0006; key.shadow.normalBias = 0.05; key.shadow.radius = 14; key.shadow.blurSamples = 20;
+key.shadow.camera.left = -190; key.shadow.camera.right = 190;
+key.shadow.camera.top = 190; key.shadow.camera.bottom = -190;
+key.shadow.camera.near = 1; key.shadow.camera.far = 700;
+renderer.shadowMap.autoUpdate = false;   // the set never moves: draw shadows once
+key.shadow.bias = -0.0002; key.shadow.normalBias = 0.08; key.shadow.radius = 5; key.shadow.blurSamples = 12;
 scene.add(key, key.target);
 const KEY_OFFSET = V(-46, 44, 26);
+key.target.position.set(0, 0, -130); key.position.copy(key.target.position).addScaledVector(KEY_OFFSET.clone().normalize(), 320);
 const rim = new THREE.DirectionalLight(0xb9caff, 1.5);
 scene.add(rim, rim.target);
-const RIM_OFFSET = V(34, 22, -70);
+rim.target.position.set(0, 0, -130); rim.position.set(34, 22, -200);
 
+
+/* ---------- grain tile ---------- */
+(function(){ const c = document.createElement('canvas'); c.width = c.height = 200; const g = c.getContext('2d'); const d = g.createImageData(200,200);
+  for (let i=0;i<d.data.length;i+=4){ const v = Math.random()*255; d.data[i]=d.data[i+1]=d.data[i+2]=v; d.data[i+3]=255; }
+  g.putImageData(d,0,0); document.getElementById('grain').style.backgroundImage = `url(${c.toDataURL()})`; })();
 
 /* ---------- helpers ---------- */
 function blobTexture(){
   const c = document.createElement('canvas'); c.width = c.height = 256;
   const g = c.getContext('2d'), gr = g.createRadialGradient(128,128,0,128,128,128);
-  gr.addColorStop(0,'rgba(34,40,78,0.5)'); gr.addColorStop(.4,'rgba(34,40,78,0.2)'); gr.addColorStop(1,'rgba(40,46,80,0)');
+  gr.addColorStop(0,'rgba(30,36,74,0.62)'); gr.addColorStop(.35,'rgba(30,36,74,0.26)'); gr.addColorStop(1,'rgba(40,46,80,0)');
   g.fillStyle = gr; g.fillRect(0,0,256,256);
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
 }
@@ -452,7 +435,7 @@ function buildGallery(G){
     holder.rotation.y = -cx*0.014;
     root.add(holder);
     const back = new THREE.Mesh(new THREE.PlaneGeometry(w+0.36, h+0.36), new THREE.MeshStandardMaterial({color:0x1b2036, roughness:.6}));
-    back.position.z = -0.06; back.castShadow = true; holder.add(back);
+    back.position.z = -0.06; holder.add(back);
     const mat = new THREE.MeshBasicMaterial({color:0x777777, toneMapped:false, fog:true});
     const scr = new THREE.Mesh(new THREE.PlaneGeometry(w, h), mat);
     holder.add(scr);
@@ -467,15 +450,15 @@ function buildGallery(G){
     const wp = new THREE.Vector3(); holder.getWorldPosition(wp);
     addBlob(wp.x, wp.z + 0.6, w*1.05, 3.0, .45);
     const glow = new THREE.Mesh(new THREE.PlaneGeometry(1,1),
-      new THREE.MeshBasicMaterial({map:GLOW, color:0xffffff, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending, opacity:.2, toneMapped:false, fog:false}));
-    glow.rotation.x = -Math.PI/2; glow.position.set(wp.x, 0.05, wp.z + 3.2); glow.scale.set(w*2.1, 13, 1); glow.renderOrder = 2;
+      new THREE.MeshBasicMaterial({map:GLOW, color:0xffffff, transparent:true, depthWrite:false, opacity:0, toneMapped:false, fog:false}));
+    glow.rotation.x = -Math.PI/2; glow.position.set(wp.x, 0.05, wp.z + 2.4); glow.scale.set(w*1.7, 10, 1); glow.renderOrder = 2;
     scene.add(glow);
     scr.userData.url = it.url;
     const S = {holder, mat, glow, stop:G.stop, baseY:holder.position.y, phase:i*1.7 + G.stop, url:it.url, scr, tint:new THREE.Color(0xffffff)};
     SCREENS.push(S);
     texLoader.load(`img/${it.img}.jpg`, t=>{
       t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; mat.map = t; mat.needsUpdate = true;
-      S.tint.copy(averageColor(t.image)); glow.material.color.copy(S.tint).multiplyScalar(2.6);
+      S.tint.copy(averageColor(t.image)); glow.material.color.copy(S.tint);
     });
   });
 }
@@ -612,10 +595,11 @@ function cameraAt(s){
   camera.fov = A.fov + (B.fov - A.fov)*t;
 }
 
-let last = performance.now(), started = false;
+let last = performance.now(), started = false, lastActive = -1, frameAvg = 1/60, frameN = 0;
+const hint = document.getElementById('hint');
 function frame(now){
   const dt = Math.min(0.05, (now - last)/1000); last = now;
-  sCur += (sTarget - sCur) * (reduced ? 1 : 1 - Math.exp(-dt*3.2));
+  sCur += (sTarget - sCur) * (reduced ? 1 : 1 - Math.exp(-dt*5.5));
   if (Math.abs(sTarget - sCur) < 1e-4) sCur = sTarget;
   cameraAt(sCur);
   const tt = now/1000;
@@ -623,8 +607,6 @@ function frame(now){
   camera.position.copy(pos); camera.lookAt(look); camera.updateProjectionMatrix();
 
   // key light and its shadow follow what we're looking at
-  key.target.position.set(look.x, 0, look.z); key.position.copy(key.target.position).add(KEY_OFFSET);
-  rim.target.position.copy(key.target.position); rim.position.copy(key.target.position).add(RIM_OFFSET);
 
   // screens: dim and set back when far, bright and forward on their stop
   for (const S of SCREENS){
@@ -633,7 +615,8 @@ function frame(now){
     S.mat.color.setRGB(b, b, b);
     S.holder.position.y = S.baseY + (reduced ? 0 : Math.sin(tt*.6 + S.phase)*.22) + near*0.4;
     S.holder.scale.setScalar(0.94 + 0.06*near);
-    S.glow.material.opacity = 0.3 + 0.7*near;
+    S.glow.material.opacity = 0.34*near*near;
+    S.glow.visible = near > 0.02;
   }
 
   // panels
@@ -642,6 +625,7 @@ function frame(now){
     const k = +p.dataset.stop; const d = Math.abs(sCur - k);
     if (d < best){ best = d; active = k; }
     const o = 1 - smooth(clamp((d - 0.1) / 0.22, 0, 1));
+    if (Math.abs((p._o ?? -1) - o) < 0.002) return; p._o = o;
     p.style.opacity = o.toFixed(3);
     p.style.visibility = o > 0.01 ? 'visible' : 'hidden';
     p.style.pointerEvents = o > .6 ? 'auto' : 'none';
@@ -650,19 +634,24 @@ function frame(now){
     else if (p.classList.contains('hero')) p.style.transform = `translate(-50%, ${lift}px)`;
     else p.style.transform = `translateY(${lift}px)`;
   });
-  [...segs.children].forEach((b,i)=>b.classList.toggle('on', i <= active));
-  cnum.textContent = String(active+1).padStart(2,'0'); cname.textContent = NAMES[active];
-  document.getElementById('hint').style.opacity = Math.max(0, 1 - sCur*4).toFixed(2);
+  if (active !== lastActive){ lastActive = active;
+    [...segs.children].forEach((b,i)=>b.classList.toggle('on', i <= active));
+    cnum.textContent = String(active+1).padStart(2,'0'); cname.textContent = NAMES[active]; }
+  hint.style.opacity = Math.max(0, 1 - sCur*4).toFixed(2);
 
-  finish.uniforms.time.value = tt;
-  composer.render(dt);
+  // adaptive resolution: drop pixel ratio if frames run slow, recover when smooth
+  frameAvg = frameAvg*0.95 + dt*0.05;
+  if (++frameN > 90){
+    if (frameAvg > 1/42 && dpr > 0.75){ dpr = Math.max(0.75, dpr - 0.25); renderer.setPixelRatio(dpr); renderer.setSize(innerWidth, innerHeight, false); frameN = 0; }
+    else if (frameAvg < 1/58 && dpr < DPR_MAX){ dpr = Math.min(DPR_MAX, dpr + 0.25); renderer.setPixelRatio(dpr); renderer.setSize(innerWidth, innerHeight, false); frameN = 0; }
+  }
+
+  renderer.render(scene, camera);
   if (!STILL) requestAnimationFrame(frame);
 }
 
 function resize(){
   renderer.setSize(innerWidth, innerHeight, false);
-  composer.setPixelRatio(Math.min(devicePixelRatio, 2)); composer.setSize(innerWidth, innerHeight);
-  finish.uniforms.res.value.set(innerWidth, innerHeight);
   camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
   buildStops(); layout(); readScroll();
 }
@@ -670,6 +659,7 @@ addEventListener('resize', resize);
 
 function ready(){
   resize();
+  renderer.shadowMap.needsUpdate = true;
   sCur = sTarget;
   document.getElementById('loader').classList.add('done');
   if (!started){ started = true; requestAnimationFrame(frame); }
