@@ -30,7 +30,7 @@ body{overflow-x:hidden}
   background:
     radial-gradient(ellipse 75% 70% at 50% 58%, rgba(221,224,241,0) 45%, rgba(159,177,211,.38) 100%),
     linear-gradient(to bottom, rgba(150,170,208,.38) 0%, rgba(150,170,208,0) 26%);}
-#grain{position:fixed;inset:-8%;width:116%;height:116%;pointer-events:none;z-index:1;opacity:.055;background-repeat:repeat;background-size:200px 200px;will-change:transform;animation:grain .9s steps(5) infinite}
+#grain{position:fixed;inset:-8%;width:116%;height:116%;pointer-events:none;z-index:1;opacity:.055;background-repeat:repeat;background-size:200px 200px;}
 @keyframes grain{0%{transform:translate3d(0,0,0)}25%{transform:translate3d(-3%,2%,0)}50%{transform:translate3d(2%,-3%,0)}75%{transform:translate3d(-2%,-2%,0)}100%{transform:translate3d(0,0,0)}}
 @media (prefers-reduced-motion:reduce){#grain{animation:none}}
 .still #grain,.still .hint::after{animation:none}
@@ -64,7 +64,7 @@ body{overflow-x:hidden}
 .panel{position:fixed;z-index:4;opacity:0;visibility:hidden;will-change:opacity,transform;max-width:min(460px,calc(100vw - 48px))}
 .panel.left,.panel.right{isolation:isolate}
 .panel.left::before,.panel.right::before{content:"";position:absolute;inset:-60px -80px -50px -80px;z-index:-1;pointer-events:none;
-  background:radial-gradient(closest-side,rgba(212,216,236,.72),rgba(212,216,236,.45) 55%,rgba(212,216,236,0));filter:blur(10px)}
+  background:radial-gradient(closest-side,rgba(212,216,236,.68),rgba(212,216,236,.4) 50%,rgba(212,216,236,.12) 78%,rgba(212,216,236,0))}
 .panel.left{left:max(24px,6vw);bottom:78px}
 .panel.right{right:max(24px,6vw);bottom:78px}
 .panel.center{left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;max-width:min(760px,calc(100vw - 48px))}
@@ -265,7 +265,7 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.05;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-const LITE = innerWidth < 760 || (navigator.hardwareConcurrency||8) < 4;
+const LITE = (innerWidth < 760 || (navigator.hardwareConcurrency||8) < 4) && !location.search.includes('full');
 
 const scene = new THREE.Scene();
 // sky: steel blue overhead melting into the lavender haze at the horizon (no visible horizon line)
@@ -506,38 +506,62 @@ function buildStops(){
   ];
 }
 
-/* ---------- load models ---------- */
+/* ---------- load models: light preview first, full quality streams in by proximity ---------- */
 const TOTAL_ITEMS = OBJECTS.length;
+const LOD_NEAR = 80;   // closer than this (metres) the full model is drawn
+function prep(root, cast){
+  root.traverse(n=>{
+    if (!n.isMesh) return;
+    n.castShadow = cast; n.receiveShadow = true;
+    const m = n.material;
+    if (m){ m.metalness = Math.min(m.metalness ?? 0, 0.15); m.roughness = Math.max(m.roughness ?? 1, 0.5); m.envMapIntensity = ENV_I; }
+  });
+}
+function uploadTextures(root){
+  root.traverse(n=>{ if (n.isMesh && n.material) for (const k of ['map','normalMap','roughnessMap','metalnessMap','emissiveMap','aoMap']) if (n.material[k]) renderer.initTexture(n.material[k]); });
+}
 OBJECTS.forEach(o=>{
   progress[o.id] = 0;
-  gltf.load(`models/${o.file}.glb`, g=>onModel(o, g),
+  gltf.load(`models/${o.file}_lo.glb`, g=>onPreview(o, g),
     e=>{ if (e.total) setProgress(o.id, e.loaded/e.total*0.95); },
     ()=>{ document.getElementById('loadtext').textContent = `Could not load ${o.file}. Refresh to try again.`; });
 });
-function onModel(o, g){ {
-    const root = g.scene;
-    root.traverse(n=>{
-      if (n.isMesh){
-        n.castShadow = true; n.receiveShadow = true;
-        const m = n.material;
-        if (m){ m.metalness = Math.min(m.metalness ?? 0, 0.15); m.roughness = Math.max(m.roughness ?? 1, 0.5); m.envMapIntensity = ENV_I; }
-      }
-    });
-    const box = new THREE.Box3().setFromObject(root); const size = box.getSize(V(0,0,0));
-    const s = o.W ? o.W / Math.max(size.x, size.z) : o.H / size.y;
-    o.H = size.y * s;
-    const pivot = new THREE.Group(); pivot.add(root);
-    root.scale.setScalar(s);
-    const c = box.getCenter(V(0,0,0));
-    root.position.set(-c.x*s, -box.min.y*s, -c.z*s);
-    pivot.position.set(o.pos[0], o.pos[1], o.pos[2]);
-    pivot.rotation.y = o.yaw;
-    scene.add(pivot); o.pivot = pivot;
-    const fx = size.x*s, fz = size.z*s;
-    addBlob(o.pos[0], o.pos[2], Math.max(fx,fz)*1.35, Math.max(fx,fz)*1.35, o.pos[1] > 0 ? .35 : .8);
-    setProgress(o.id, 1);
-    if (Object.values(progress).every(v=>v===1)) ready();
-  }
+function onPreview(o, g){
+  const root = g.scene; prep(root, true);
+  const box = new THREE.Box3().setFromObject(root); const size = box.getSize(V(0,0,0));
+  const s = o.W ? o.W / Math.max(size.x, size.z) : o.H / size.y;
+  o.H = size.y * s;
+  const c = box.getCenter(V(0,0,0));
+  o.fit = {s, x:-c.x*s, y:-box.min.y*s, z:-c.z*s};
+  root.scale.setScalar(s); root.position.set(o.fit.x, o.fit.y, o.fit.z);
+  const lod = new THREE.LOD();
+  lod.addLevel(root, 0);
+  lod.position.set(o.pos[0], o.pos[1], o.pos[2]);
+  lod.rotation.y = o.yaw;
+  scene.add(lod); o.lod = lod; o.lo = root;
+  const fx = size.x*s, fz = size.z*s;
+  addBlob(o.pos[0], o.pos[2], Math.max(fx,fz)*1.35, Math.max(fx,fz)*1.35, o.pos[1] > 0 ? .35 : .8);
+  setProgress(o.id, 1);
+  if (Object.values(progress).every(v=>v===1)) ready();
+}
+// full-quality models: one at a time, nearest to the camera first, uploaded to the GPU before they appear
+let hiBusy = false;
+function streamNextHi(){
+  if (hiBusy || LITE) return;
+  const pending = OBJECTS.filter(o=>o.lod && !o.hi && !o.hiFailed);
+  if (!pending.length) return;
+  pending.sort((a,b)=>a.lod.position.distanceToSquared(camera.position) - b.lod.position.distanceToSquared(camera.position));
+  const o = pending[0]; hiBusy = true;
+  gltf.load(`models/${o.file}.glb`, g=>{
+    const root = g.scene; prep(root, false);
+    root.scale.setScalar(o.fit.s); root.position.set(o.fit.x, o.fit.y, o.fit.z);
+    uploadTextures(root);
+    o.lod.remove(o.lo); o.lod.levels.length = 0;   // rebuild levels: full near, preview far
+    o.lod.addLevel(root, 0, 0.08);
+    o.lod.addLevel(o.lo, LOD_NEAR, 0.08);
+    o.hi = root; hiBusy = false; needsFrame = true;
+    setTimeout(streamNextHi, 60);
+  }, undefined, ()=>{ o.hiFailed = true; hiBusy = false; setTimeout(streamNextHi, 60); });
 }
 
 /* ---------- scroll, tracker, panels ---------- */
@@ -595,9 +619,14 @@ function cameraAt(s){
   camera.fov = A.fov + (B.fov - A.fov)*t;
 }
 
-let last = performance.now(), started = false, lastActive = -1, frameAvg = 1/60, frameN = 0;
+let last = performance.now(), started = false, lastActive = -1, frameAvg = 1/60, frameN = 0, idleT = 0, skip = false, needsFrame = true;
 const hint = document.getElementById('hint');
 function frame(now){
+  const moving = Math.abs(sTarget - sCur) > 0.0005;
+  if (moving || needsFrame){ idleT = 0; } else { idleT += Math.min(0.05, (now - last)/1000); }
+  const idle = idleT > 0.8;
+  if (idle && !STILL){ skip = !skip; if (skip){ requestAnimationFrame(frame); return; } }
+  needsFrame = false;
   const dt = Math.min(0.05, (now - last)/1000); last = now;
   sCur += (sTarget - sCur) * (reduced ? 1 : 1 - Math.exp(-dt*5.5));
   if (Math.abs(sTarget - sCur) < 1e-4) sCur = sTarget;
@@ -640,8 +669,8 @@ function frame(now){
   hint.style.opacity = Math.max(0, 1 - sCur*4).toFixed(2);
 
   // adaptive resolution: drop pixel ratio if frames run slow, recover when smooth
-  frameAvg = frameAvg*0.95 + dt*0.05;
-  if (++frameN > 90){
+  if (!idle) frameAvg = frameAvg*0.95 + dt*0.05;
+  if (!idle && ++frameN > 90){
     if (frameAvg > 1/42 && dpr > 0.75){ dpr = Math.max(0.75, dpr - 0.25); renderer.setPixelRatio(dpr); renderer.setSize(innerWidth, innerHeight, false); frameN = 0; }
     else if (frameAvg < 1/58 && dpr < DPR_MAX){ dpr = Math.min(DPR_MAX, dpr + 0.25); renderer.setPixelRatio(dpr); renderer.setSize(innerWidth, innerHeight, false); frameN = 0; }
   }
@@ -655,11 +684,14 @@ function resize(){
   camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
   buildStops(); layout(); readScroll();
 }
-addEventListener('resize', resize);
+addEventListener('resize', ()=>{ resize(); needsFrame = true; });
 
 function ready(){
   resize();
   renderer.shadowMap.needsUpdate = true;
+  scene.traverse(n=>{ if (n.isMesh && n.material && n.material.map) renderer.initTexture(n.material.map); });
+  renderer.compile(scene, camera);
+  setTimeout(streamNextHi, 400);
   sCur = sTarget;
   document.getElementById('loader').classList.add('done');
   if (!started){ started = true; requestAnimationFrame(frame); }
