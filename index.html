@@ -41,6 +41,9 @@ body.r-home #bg,body.r-archive #bg{display:block}
 .lab{position:absolute;left:0;top:0;display:flex;gap:24px;font-size:var(--f1);line-height:20px;white-space:nowrap;opacity:0;will-change:transform,opacity}
 .lab .n{min-width:22px}
 #info{position:fixed;inset:0;z-index:3;pointer-events:none;display:none}
+#info .ttl img{display:inline-block;height:clamp(64px,8.5vw,120px);width:auto;max-width:44vw;vertical-align:middle}
+#info.carded .ttl{top:calc(50% - 26px)}
+#info.carded .dir{top:calc(50% + 62px)}
 #info .ttl{position:absolute;left:0;right:0;top:calc(50% - 7px);transform:translateY(-50%);text-align:center;font-style:italic;font-size:var(--f3);line-height:1.1;padding:0 90px}
 #info .dir{position:absolute;left:0;right:0;top:calc(50% + 53px);transform:translateY(-50%);text-align:center;font-size:var(--f2);line-height:24px}
 #info .cli{position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:var(--f2);line-height:24px;text-align:right}
@@ -159,10 +162,16 @@ body.r-contact #hd .copy{display:block}
 .p-ttl{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:rgba(0,0,0,.2);pointer-events:none;opacity:0;transition:opacity .5s}
 .p-ttl .c,.p-ttl .d{font-size:var(--f2);line-height:24px}
 .p-ttl .t{font-style:italic;font-size:var(--f3);line-height:1.15;margin:14px 0 12px}
-.p-ttl .t img{display:none;width:min(130px,30vw);height:auto;margin:0 auto}
-#player.card-on .p-ttl .t img{display:block}
-#player.card-on .p-ttl .t span{display:none}
+.p-ttl .t{display:grid;justify-items:center;align-items:center}
+.p-ttl .t>*{grid-area:1/1;transition:opacity .55s var(--eo)}
+.p-ttl .t img{display:block;width:min(130px,30vw);height:auto;opacity:0}
+#player.card-on .p-ttl .t img{opacity:1}
+#player.card-on .p-ttl .t span{opacity:0}
 #player.ttl-top .p-ttl{justify-content:flex-start;padding-top:44px;background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,0) 45%)}
+@media (min-width:761px){
+  #player.ttl-top .p-ttl{align-items:flex-end;text-align:right;padding:23px 24px 0 0;background:radial-gradient(ellipse at 100% 0,rgba(0,0,0,.5),rgba(0,0,0,0) 45%)}
+  #player.ttl-top .p-ttl .t{justify-items:end}
+}
 .p-ui>*{position:absolute;opacity:0;pointer-events:none;transition:opacity .5s}
 #player.show .p-ui>*,#player.show:not(.capping) .p-ttl{opacity:1}
 .p-cap{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font-size:var(--f1);line-height:27px;letter-spacing:.06em;pointer-events:none;opacity:0}
@@ -192,7 +201,12 @@ body.r-contact #hd .copy{display:block}
 @keyframes idZoom{0%{transform:scale(.97) translateZ(0);animation-timing-function:cubic-bezier(.16,1,.3,1)}46%{transform:scale(1) translateZ(0);animation-timing-function:cubic-bezier(.7,0,.84,0)}100%{transform:scale(45) translateZ(0)}}
 /* end of episode buttons */
 .p-end{position:absolute;right:24px;bottom:23px;display:flex;gap:28px;opacity:0;pointer-events:none;transition:opacity .6s var(--eo)}
-#player.ending .p-end{opacity:1;pointer-events:auto}
+#player:not(.is-ep) .p-end{display:none}
+#player.show .p-end,#player.ending .p-end{opacity:1;pointer-events:auto}
+.p-end .nx{position:relative}
+.p-end .nx i{position:absolute;left:0;right:0;bottom:-3px;height:1px;background:rgba(255,255,255,.3);opacity:0;transition:opacity .4s}
+.p-end .nx i b{display:block;height:100%;background:#fff;transform-origin:0 0;transform:scaleX(var(--cd,0))}
+#player.ending .p-end .nx i{opacity:1}
 #player.last-ep .p-end .nx{display:none}
 /* episodes page (archive style) */
 #p-justmates{background:#000;color:#fff;overflow:hidden}
@@ -324,7 +338,7 @@ body.film #hd .hold{pointer-events:none}
       <button class="u p-snd">Sound <span>On</span></button>
       <button class="u p-close">Close</button>
     </div>
-    <div class="p-end"><button class="u nx">Next Episode</button><a class="u al" href="#justmates">All Episodes</a></div>
+    <div class="p-end"><button class="u nx">Next Episode<i><b></b></i></button><a class="u al" href="#justmates">More Episodes</a></div>
   </div>
 </section>
 
@@ -348,8 +362,8 @@ const CONFIG = {
 const PROJECTS = [
   {title:"Introducing PINKMOON", director:"PINKMOON", client:"Storystudio", year:"2026", scene:"moon", pal:["#12060c","#3a0f22","#fff1f4","#f08aa8"], video:"films/pinkmoon-intro.mp4", text:"Culture, community and the stories in between.",
    captions:[[0,24.75,"CULTURE"],[25.042,49.383,"COMMUNITY"],[49.967,62.375,"CONTENT"]]},
-  {title:"WAKEUP", director:"A PINKMOON ORIGINAL", client:"Series", year:"2026", scene:"silk", pal:["#0b0a10","#000000","#f6d7c8","#c86b8a"], video:"films/wakeup-trailer.mp4", text:"A cinematic microfiction universe where every night, ordinary people confront the one thought they could not silence before falling asleep."},
-  {title:"JustMates", director:"TV Sitcom", client:"TV Sitcom", year:"2026", scene:"bloom", pal:["#07040a","#ff4f8b","#7b3cff","#ffb36b"], video:"films/justmates-ep1.mp4", full:"films/justmates-ep1-full.mp4", titleCard:"img/justmates-title.png", cardAfter:4, series:"justmates", ep:1, text:"A sitcom about friends, bad timing and the third date that ends everything."},
+  {title:"WAKEUP", director:"A PINKMOON ORIGINAL", client:"Series", year:"2026", scene:"silk", pal:["#0b0a10","#000000","#f6d7c8","#c86b8a"], video:"films/wakeup-trailer.mp4", homeCard:"img/wakeup-title.png", text:"A cinematic microfiction universe where every night, ordinary people confront the one thought they could not silence before falling asleep."},
+  {title:"JustMates", director:"TV Sitcom", client:"TV Sitcom", year:"2026", scene:"bloom", pal:["#07040a","#ff4f8b","#7b3cff","#ffb36b"], video:"films/justmates-ep1.mp4", full:"films/justmates-ep1-full.mp4", titleCard:"img/justmates-title.png", homeCard:"img/justmates-title.png", cardAfter:4, series:"justmates", ep:1, text:"A sitcom about friends, bad timing and the third date that ends everything."},
   {title:"Monsoon",     director:"PINKMOON", client:"Short Film",     year:"2025", scene:"rain",    pal:["#04070c","#0d1b2a","#5d7fa8","#cfe3ff"], video:"", text:"Two people, one window, the first rain of the year."},
   {title:"Afterglow",   director:"PINKMOON", client:"Brand Film",     year:"2025", scene:"horizon", pal:["#2b1030","#f07a63","#ffe1b0","#14081a"], video:"", text:"The ten minutes after sunset, stretched into a story about staying."},
   {title:"Paper Moon",  director:"PINKMOON", client:"Editorial",      year:"2025", scene:"noir",    pal:["#0e0e0e","#2b2b2b","#ffffff","#050505"], video:"", text:"Black and white, hard light, soft people."},
@@ -518,7 +532,10 @@ const arows=PROJECTS.map((p,i)=>{const b=document.createElement("button");b.clas
 /* info */
 const info=$("#info"),iT=$("#info .ttl"),iD=$("#info .dir"),iC=$("#info .cli"),iN=$("#info .num"),iL1=$("#info .l1"),iL2=$("#info .l2");
 let infoIdx=-1;
-function setInfo(i){infoIdx=i;const p=PROJECTS[i];iT.textContent="“"+p.title+"”";iD.textContent=p.director;iC.textContent=p.client;iN.textContent=ROMAN(i+1)}
+function setInfo(i){infoIdx=i;const p=PROJECTS[i];
+  // films with a homeCard show their title card instead of the text title
+  if(p.homeCard){iT.textContent="";const im=new Image();im.src=p.homeCard;im.alt=p.title;iT.appendChild(im)}else iT.textContent="“"+p.title+"”";
+  info.classList.toggle("carded",!!p.homeCard);iD.textContent=p.director;iC.textContent=p.client;iN.textContent=ROMAN(i+1)}
 
 /* ---------- state ---------- */
 let route=null,filmIdx=-1;
@@ -589,7 +606,7 @@ function openEpisode(s,n){openItem(epItem(s,n),SERIES[s].film)}
 function openItem(p,i){
   const key=p.series?p.series+"-"+p.ep:"film-"+i;
   const fresh=!PL.el.classList.contains("on");const same=PL.key===key&&!fresh;filmIdx=i;PL.item=p;PL.key=key;
-  const S=p.series&&SERIES[p.series];PL.el.classList.toggle("last-ep",!!S&&p.ep>=S.count);PL.el.classList.remove("ending");
+  const S=p.series&&SERIES[p.series];PL.el.classList.toggle("last-ep",!!S&&p.ep>=S.count);PL.el.classList.remove("ending");PL.el.classList.toggle("is-ep",!!p.series);
   // inside the player an episode always reads "Episode N" under the title
   $(".p-ttl .c").textContent=p.client;$(".p-ttl .d").textContent=p.series?"Episode "+p.ep:p.director;
   // a film can carry its own title card image; those sit at the top of the player instead of the middle
@@ -627,7 +644,7 @@ function playIdent(i){
   $("#ident").onclick=()=>endIdent(i);
 }
 let baseHash="featured";
-function closeFilmNav(){location.hash=baseHash}
+function closeFilmNav(){location.hash=PL.item&&PL.item.series&&filmIdx>=0?PL.item.series:baseHash}
 function plProgress(){return PL.video?(PL.vid.duration?PL.vid.currentTime/PL.vid.duration:0):PL.t/PL.dur}
 function plSeek(p){p=clamp(p,0,.999);if(PL.video){if(PL.vid.duration)PL.vid.currentTime=p*PL.vid.duration}else PL.t=p*PL.dur;PL.lastMove=performance.now()}
 function plNext(){
@@ -636,7 +653,7 @@ function plNext(){
   location.hash="film-"+(mod(filmIdx+1,N)+1);
 }
 $(".p-end .nx").addEventListener("click",plNext);
-$(".p-scr").addEventListener("click",()=>plSetPlaying(!PL.playing));
+$(".p-scr").addEventListener("click",()=>{if(!fine){PL.lastMove=performance.now();return}plSetPlaying(!PL.playing)});
 $(".p-play").addEventListener("click",()=>plSetPlaying(!PL.playing));
 $(".p-snd").addEventListener("click",()=>plSetSound(!PL.sound));
 $(".p-close").addEventListener("click",closeFilmNav);
@@ -660,7 +677,7 @@ function playerKey(ev){
 }
 function playerFrame(now,dt){
   if(filmIdx<0)return;
-  const show=!PL.playing||PL.drag||now-PL.lastMove<1000||!fine;
+  const show=!PL.playing||PL.drag||now-PL.lastMove<(fine?1000:2500);
   PL.el.classList.toggle("show",show);PL.el.classList.toggle("hide",!show);
   if(!PL.video){
     if(PL.playing&&!PL.drag){PL.t+=dt;if(PL.t>=PL.dur){PL.t=PL.dur;plNext();return}}
@@ -671,7 +688,8 @@ function playerFrame(now,dt){
   }
   const pj=PL.item||PROJECTS[filmIdx];
   // Next Episode / All Episodes appear over the last 8 seconds of an episode
-  if(pj.series){const d=PL.video&&PL.vid.duration?PL.vid.duration:PL.dur,ct=PL.video?PL.vid.currentTime:PL.t;PL.el.classList.toggle("ending",d-ct<=8)}
+  // the countdown line under Next Episode fills over the last 8 seconds; the next episode starts only when this one ends
+  if(pj.series){const d=PL.video&&PL.vid.duration?PL.vid.duration:PL.dur,ct=PL.video?PL.vid.currentTime:PL.t,left=d-ct;PL.el.classList.toggle("ending",left<=8);PL.el.style.setProperty("--cd",clamp(1-left/8,0,1).toFixed(4))}
   if(pj.titleCard){const ct=PL.video?PL.vid.currentTime:PL.t;PL.el.classList.toggle("card-on",ct>=(pj.cardAfter||0))}
   // timed words over the film, only while it plays
   // the whole span from the first word to the end of the last one counts as word time,
