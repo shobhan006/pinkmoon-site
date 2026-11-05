@@ -159,7 +159,9 @@ body.r-contact #hd .copy{display:block}
 .p-ttl{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:rgba(0,0,0,.2);pointer-events:none;opacity:0;transition:opacity .5s}
 .p-ttl .c,.p-ttl .d{font-size:var(--f2);line-height:24px}
 .p-ttl .t{font-style:italic;font-size:var(--f3);line-height:1.15;margin:14px 0 12px}
-.p-ttl .t img{display:block;width:min(240px,42vw);height:auto;margin:0 auto}
+.p-ttl .t img{display:none;width:min(130px,30vw);height:auto;margin:0 auto}
+#player.ttl-top .p-ttl .t img{display:block}
+#player.ttl-top .p-ttl .t span{display:none}
 #player.ttl-top .p-ttl{justify-content:flex-start;padding-top:44px;background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,0) 45%)}
 .p-ui>*{position:absolute;opacity:0;pointer-events:none;transition:opacity .5s}
 #player.show .p-ui>*,#player.show:not(.capping) .p-ttl{opacity:1}
@@ -305,7 +307,7 @@ const PROJECTS = [
   {title:"Introducing PINKMOON", director:"PINKMOON", client:"Storystudio", year:"2026", scene:"moon", pal:["#12060c","#3a0f22","#fff1f4","#f08aa8"], video:"films/pinkmoon-intro.mp4", text:"Culture, community and the stories in between.",
    captions:[[0,24.75,"CULTURE"],[25.042,49.383,"COMMUNITY"],[49.967,62.375,"CONTENT"]]},
   {title:"WAKEUP", director:"A PINKMOON ORIGINAL", client:"Series", year:"2026", scene:"silk", pal:["#0b0a10","#000000","#f6d7c8","#c86b8a"], video:"films/wakeup-trailer.mp4", text:"A cinematic microfiction universe where every night, ordinary people confront the one thought they could not silence before falling asleep."},
-  {title:"JustMates", director:"Episode 1", client:"TV Sitcom", year:"2026", scene:"bloom", pal:["#07040a","#ff4f8b","#7b3cff","#ffb36b"], video:"films/justmates-ep1.mp4", full:"films/justmates-ep1-full.mp4", titleCard:"img/justmates-title.png", text:"A sitcom about friends, bad timing and the third date that ends everything."},
+  {title:"JustMates", director:"Episode 1", client:"TV Sitcom", year:"2026", scene:"bloom", pal:["#07040a","#ff4f8b","#7b3cff","#ffb36b"], video:"films/justmates-ep1.mp4", full:"films/justmates-ep1-full.mp4", titleCard:"img/justmates-title.png", cardAfter:4, text:"A sitcom about friends, bad timing and the third date that ends everything."},
   {title:"Monsoon",     director:"PINKMOON", client:"Short Film",     year:"2025", scene:"rain",    pal:["#04070c","#0d1b2a","#5d7fa8","#cfe3ff"], video:"", text:"Two people, one window, the first rain of the year."},
   {title:"Afterglow",   director:"PINKMOON", client:"Brand Film",     year:"2025", scene:"horizon", pal:["#2b1030","#f07a63","#ffe1b0","#14081a"], video:"", text:"The ten minutes after sunset, stretched into a story about staying."},
   {title:"Paper Moon",  director:"PINKMOON", client:"Editorial",      year:"2025", scene:"noir",    pal:["#0e0e0e","#2b2b2b","#ffffff","#050505"], video:"", text:"Black and white, hard light, soft people."},
@@ -529,9 +531,11 @@ function openFilm(i){
   const p=PROJECTS[i];const same=filmIdx===i&&PL.el.classList.contains("on");filmIdx=i;
   $(".p-ttl .c").textContent=p.client;$(".p-ttl .d").textContent=p.director;
   // a film can carry its own title card image; those sit at the top of the player instead of the middle
-  const tt=$(".p-ttl .t");tt.textContent="";
-  if(p.titleCard){const im=new Image();im.src=p.titleCard;im.alt=p.title;tt.appendChild(im)}else tt.textContent=p.title;
-  PL.el.classList.toggle("ttl-top",!!p.titleCard);
+  // before cardAfter seconds the film shows its own title, so the player keeps the plain text title;
+  // after that the card replaces it, aligned to the top
+  const tt=$(".p-ttl .t");tt.textContent="";const sp=document.createElement("span");sp.textContent=p.title;tt.appendChild(sp);
+  if(p.titleCard){const im=new Image();im.src=p.titleCard;im.alt=p.title;tt.appendChild(im)}
+  PL.el.classList.remove("ttl-top");
   if(!same){
     // "full" is the complete cut for the player; "video" is the loop used on Featured
     const src=p.full||p.video;
@@ -588,6 +592,8 @@ function playerFrame(now,dt){
     const k=Math.min(PL.pc.width/SW,PL.pc.height/SH),w=SW*k,hh=SH*k;
     plx.drawImage(s.sc.canvas,(PL.pc.width-w)/2,(PL.pc.height-hh)/2,w,hh);
   }
+  const pj=PROJECTS[filmIdx];
+  if(pj.titleCard){const ct=PL.video?PL.vid.currentTime:PL.t;PL.el.classList.toggle("ttl-top",ct>=(pj.cardAfter||0))}
   // timed words over the film, only while it plays
   // the whole span from the first word to the end of the last one counts as word time,
   // so the title never slips in during the short blank beats between words
