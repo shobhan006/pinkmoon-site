@@ -295,7 +295,7 @@ body.film #hd .hold{pointer-events:none}
 const CONFIG = {
   email: "hello@pinkmoon.studio",
   instagram: "#", vimeo: "#", linkedin: "#",
-  slideSeconds: 7.5,
+  slideSeconds: 8,
   filmSeconds: 45
 };
 const PROJECTS = [
@@ -720,9 +720,7 @@ function frame(now){
 
   // auto advance on the featured view
   if(route==="home"&&filmIdx<0&&started&&t<.01&&Math.abs(pos-posT)<.01&&fMix>=1&&!document.hidden){
-    const vp=sources[fi].vprog();
-    if(vp!=null){progress=vp;if(vp>.985){posT=Math.round(pos)+1;progress=0}}
-    else{progress+=dt/CONFIG.slideSeconds;if(progress>=1){posT=Math.round(pos)+1;progress=0}}
+    progress+=dt/CONFIG.slideSeconds;if(progress>=1){posT=Math.round(pos)+1;progress=0}
   }
 
   // full screen film layer: stays full size, only blurs in index mode
