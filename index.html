@@ -160,8 +160,8 @@ body.r-contact #hd .copy{display:block}
 .p-ttl .c,.p-ttl .d{font-size:var(--f2);line-height:24px}
 .p-ttl .t{font-style:italic;font-size:var(--f3);line-height:1.15;margin:14px 0 12px}
 .p-ttl .t img{display:none;width:min(130px,30vw);height:auto;margin:0 auto}
-#player.ttl-top .p-ttl .t img{display:block}
-#player.ttl-top .p-ttl .t span{display:none}
+#player.card-on .p-ttl .t img{display:block}
+#player.card-on .p-ttl .t span{display:none}
 #player.ttl-top .p-ttl{justify-content:flex-start;padding-top:44px;background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,0) 45%)}
 .p-ui>*{position:absolute;opacity:0;pointer-events:none;transition:opacity .5s}
 #player.show .p-ui>*,#player.show:not(.capping) .p-ttl{opacity:1}
@@ -535,7 +535,7 @@ function openFilm(i){
   // after that the card replaces it, aligned to the top
   const tt=$(".p-ttl .t");tt.textContent="";const sp=document.createElement("span");sp.textContent=p.title;tt.appendChild(sp);
   if(p.titleCard){const im=new Image();im.src=p.titleCard;im.alt=p.title;tt.appendChild(im)}
-  PL.el.classList.remove("ttl-top");
+  PL.el.classList.toggle("ttl-top",!!p.titleCard);PL.el.classList.remove("card-on");
   if(!same){
     // "full" is the complete cut for the player; "video" is the loop used on Featured
     const src=p.full||p.video;
@@ -593,7 +593,7 @@ function playerFrame(now,dt){
     plx.drawImage(s.sc.canvas,(PL.pc.width-w)/2,(PL.pc.height-hh)/2,w,hh);
   }
   const pj=PROJECTS[filmIdx];
-  if(pj.titleCard){const ct=PL.video?PL.vid.currentTime:PL.t;PL.el.classList.toggle("ttl-top",ct>=(pj.cardAfter||0))}
+  if(pj.titleCard){const ct=PL.video?PL.vid.currentTime:PL.t;PL.el.classList.toggle("card-on",ct>=(pj.cardAfter||0))}
   // timed words over the film, only while it plays
   // the whole span from the first word to the end of the last one counts as word time,
   // so the title never slips in during the short blank beats between words
