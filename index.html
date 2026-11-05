@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PINKMOON</title>
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="preload" as="image" href="img/logo.png">
 <meta name="description" content="PINKMOON. A story studio with a cinematic eye.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,7 +59,9 @@ body.r-archive #info .prog .num{top:50% !important;transform:translateY(-50%)}
 /* ---------- header ---------- */
 #hd{position:fixed;left:0;right:0;top:0;z-index:8;pointer-events:none}
 #hd .hold{position:absolute;left:50%;top:23px;width:min(304px,calc(100vw - 48px));transform:translateX(-50%);pointer-events:auto}
-#hd .brand{display:flex;justify-content:space-between;letter-spacing:.06em}
+.lgm{display:block;background:currentColor;-webkit-mask:url(img/logo.png) center/contain no-repeat;mask:url(img/logo.png) center/contain no-repeat;aspect-ratio:1056/271}
+#hd .brand{display:flex;justify-content:center;align-items:center;height:27px}
+#hd .brand .lgm{width:104px}
 #hd .claim{font-style:italic;white-space:nowrap;text-align:center}
 #hd nav{display:flex;justify-content:space-between}
 body:not(.r-home) #hd .brand,body:not(.r-home) #hd .claim,body.film #hd .brand,body.film #hd .claim{display:none}
@@ -101,8 +105,7 @@ body.r-archive #arch{display:block}
 /* contact */
 /* contact (white, two looping columns) */
 #p-contact{overflow:hidden}
-.clogo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;grid-template-columns:repeat(2,145px);grid-auto-rows:145px;place-items:center;font-size:64px;line-height:1;pointer-events:none}
-.clogo span{transition:opacity .5s,filter .5s}
+.clogo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(520px,34vw);pointer-events:none}
 .ccard{position:absolute;left:0;top:0;width:var(--cw);display:flex;flex-direction:column;align-items:center;text-align:center;will-change:transform}
 .ccard .r{font-size:var(--f2);line-height:24px}
 .ccard .f,.ccard .l{font-style:italic;font-size:clamp(30px,2.8vw,40px);line-height:1.1}
@@ -137,9 +140,8 @@ body.r-contact #hd .copy{display:block}
 .pcard:hover::after{opacity:0}.pcard:hover .n,.pcard:hover .cl{opacity:0}.pcard:hover .hv{opacity:1}
 
 /* small logo mark */
-.mark{display:grid;grid-template-columns:repeat(2,14px);grid-auto-rows:14px;gap:2px 10px;font-size:11px;line-height:14px;text-align:center;letter-spacing:0}
-.mark span{transition:opacity .4s}
-#amark{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:5}
+#amark{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:5;pointer-events:none}
+#amark .lgm{width:72px}
 
 /* ---------- player ---------- */
 #player{position:fixed;inset:0;z-index:7;color:#fff;visibility:hidden;transition:visibility 0s .9s}
@@ -176,13 +178,20 @@ body.film #hd .hold{pointer-events:none}
 /* ---------- veil + loader ---------- */
 #veil{position:fixed;inset:0;z-index:20;background:#000;opacity:0;pointer-events:none;transition:opacity .45s var(--eio)}
 #veil.on{opacity:1;pointer-events:auto}
-#loader{position:fixed;inset:0;z-index:30;background:#fff;display:flex;align-items:center;justify-content:center;transition:opacity 1s var(--eo),filter 1s var(--eo)}
-#loader.out{opacity:0;filter:blur(12px);pointer-events:none}
-#loader .lg{display:grid;grid-template-columns:repeat(2,100px);grid-auto-rows:100px;place-items:center}
-#loader .lg span{font-size:42px;line-height:1;transition:color .15s}
-.s1{font-family:var(--serif);font-style:normal}
-.s2{font-family:var(--serif);font-style:italic}
-.s3{font-family:Inter,Arial,sans-serif;font-weight:800}
+/* loader: a letterbox opens on the logo, the logo racks into focus, then the frame opens onto the site */
+#loader{position:fixed;inset:0;z-index:30;color:#d9f663;--lw:min(520px,62vw);--g:calc(var(--lw) * 271 / 1056 / 2 + 64px)}
+#loader .win{position:absolute;inset:0;background:#000;display:flex;align-items:center;justify-content:center;transition:opacity .9s var(--eio)}
+#loader .lgm{width:var(--lw);opacity:0;filter:blur(18px);transform:scale(1.07);transition:opacity 1.4s var(--eo),filter 2s var(--eo),transform 2.6s var(--eo)}
+#loader .bar{position:absolute;left:0;right:0;height:50%;background:#000;transition:transform 1.3s var(--eio)}
+#loader .bar.t{top:0}#loader .bar.b{bottom:0}
+#loader.open .bar.t{transform:translateY(calc(var(--g) * -1))}
+#loader.open .bar.b{transform:translateY(var(--g))}
+#loader.open .lgm{opacity:1;filter:blur(0);transform:none}
+#loader.reveal .lgm{opacity:0;filter:blur(10px);transform:scale(.985);transition:opacity .8s var(--eio),filter .8s var(--eio),transform 1s var(--eio)}
+#loader.reveal .win{opacity:0}
+#loader.out{pointer-events:none}
+#loader.out .bar.t{transform:translateY(-101%)}
+#loader.out .bar.b{transform:translateY(101%)}
 
 @media (max-width:760px){
   #info .ttl{padding:0 40px}
@@ -191,7 +200,7 @@ body.film #hd .hold{pointer-events:none}
   .tal .it:nth-child(3n+2){top:0}
   .tal .it{height:260px}
   .col0{left:12px}.col1{right:12px}
-  .clogo{grid-template-columns:repeat(2,70px);grid-auto-rows:70px;font-size:34px}
+  .clogo{width:56vw}
 }
 @media (hover:none){.u::before{display:none}}
 </style>
@@ -212,7 +221,7 @@ body.film #hd .hold{pointer-events:none}
 
 <header id="hd">
   <div class="hold">
-    <a class="brand" href="#featured"><span>PINK</span><span>MOON</span></a>
+    <a class="brand" href="#featured" aria-label="PINKMOON"><i class="lgm"></i></a>
     <p class="claim">A story studio with a cinematic eye</p>
     <nav>
       <a class="u" data-r="home" href="#featured">Featured</a>
@@ -225,7 +234,7 @@ body.film #hd .hold{pointer-events:none}
   </div>
 </header>
 
-<div id="arch"><div id="arows"></div><div id="amark" class="mark"></div></div>
+<div id="arch"><div id="arows"></div><div id="amark"><i class="lgm"></i></div></div>
 
 <section class="page white" id="p-talent">
   <div class="tal" id="tal"></div>
@@ -245,7 +254,7 @@ body.film #hd .hold{pointer-events:none}
 
 <section class="page white" id="p-contact">
   <div class="cols" id="ccols"></div>
-  <div class="clogo" id="clogo"><span>P</span><span>I</span><span>N</span><span>K</span></div>
+  <div class="clogo" id="clogo"><i class="lgm"></i></div>
   <div class="foot"><div><a class="u sl-ig" href="#">Instagram</a><a class="u sl-vm" href="#">Vimeo</a><a class="u sl-li" href="#">LinkedIn</a></div></div>
 </section>
 
@@ -272,7 +281,7 @@ body.film #hd .hold{pointer-events:none}
 </section>
 
 <div id="veil"></div>
-<div id="loader"><div class="lg"><span></span><span></span><span></span><span></span></div></div>
+<div id="loader" aria-label="PINKMOON"><div class="win"><i class="lgm"></i></div><i class="bar t"></i><i class="bar b"></i></div>
 
 <script>
 /* =========================================================
@@ -626,9 +635,6 @@ const ccols=Columns($("#ccols"),{
   fill(d,item){const m=TEAM[item];d.querySelector(".r").textContent=m.role;d.querySelector(".f").textContent=m.first;d.querySelector(".l").textContent=m.last;const a=d.querySelector(".m");a.textContent=m.email;a.href="mailto:"+m.email;still(d.querySelector("canvas"),(item*2+5)%N,6+item*3)}
 });
 const colsFor=r=>r==="person"?pcols:(r==="contact"?ccols:null);
-/* big contact logo */
-let clA=true;setInterval(()=>{if(route!=="contact")return;const sp=[...$("#clogo").children];const w=(clA=!clA)?"PINK":"MOON";
-  sp.forEach((s,k)=>setTimeout(()=>{s.style.opacity=0;s.style.filter="blur(6px)";setTimeout(()=>{s.textContent=w[k];s.style.opacity=1;s.style.filter="none"},380)},k*110))},3600);
 
 /* ---------- routing ---------- */
 const ROUTES=["archive","talent","approach","contact"];
@@ -677,8 +683,6 @@ function paintTalent(){
     const iw=SW,ih=SH,k=Math.max(360/iw,240/ih),cw=360/k,ch=240/k;x.drawImage(s.sc.canvas,(iw-cw)/2,(ih-ch)/2,cw,ch,0,0,360,240)});
 }
 /* logo mark */
-const mark=$("#amark");mark.innerHTML="<span>P</span><span>I</span><span>N</span><span>K</span>";
-let markA=true;setInterval(()=>{const sp=mark.children;[...sp].forEach(s=>s.style.opacity=0);setTimeout(()=>{const w=(markA=!markA)?"PINK":"MOON";[...sp].forEach((s,k)=>{s.textContent=w[k];s.style.opacity=1})},420)},2600);
 
 /* ---------- main loop ---------- */
 let prev=performance.now();
@@ -781,20 +785,15 @@ async function boot(){
   applyHash(true);
   setInfo(0);
   requestAnimationFrame(frame);
-  const cells=$$("#loader .lg span"),letters="PINKMOON",styles=["s1","s2","s3"];
-  const greys=["#e6e6e6","#cfcfcf","#b0b0b0","#8a8a8a","#666"];
-  const t0=performance.now();
-  const shuffle=setInterval(()=>{const c=cells[(Math.random()*4)|0];if(Math.random()<.2){c.textContent="";return}c.textContent=letters[(Math.random()*8)|0];c.className=styles[(Math.random()*3)|0];c.style.color=greys[(Math.random()*5)|0]},70);
+  const LD=$("#loader"),t0=performance.now();
+  await wait(260);LD.classList.add("open");
   try{await Promise.race([document.fonts.ready,wait(2500)])}catch(_){}
   paintTalent();
-  await wait(Math.max(0,1300-(performance.now()-t0)));
-  clearInterval(shuffle);
-  const set=w=>cells.forEach((c,k)=>{c.className="s1";c.style.color="#000";c.textContent=w[k]});
-  set("PINK");await wait(520);set("MOON");await wait(620);
   sources.forEach(s=>{if(s.v)s.v.play().catch(()=>{})});
-  started=true;
-  $("#loader").classList.add("out");
-  setTimeout(()=>$("#loader").remove(),1100);
+  await wait(Math.max(0,2500-(performance.now()-t0)));
+  LD.classList.add("reveal");await wait(950);
+  started=true;LD.classList.add("out");
+  setTimeout(()=>LD.remove(),1400);
   if(route!=="home"&&route!=="archive"){const pg=$("#p-"+route);if(pg)reveal(pg)}
 }
 boot();
