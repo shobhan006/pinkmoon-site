@@ -557,6 +557,8 @@ $("#hit").addEventListener("click",ev=>{
   if(tmoved){tmoved=false;return}
   let i=-1;if(e>.5)i=hitTile(ev.clientX,ev.clientY);
   if(i<0)i=mod(Math.round(pos),N);
+  // in the Archive a series opens its episode list instead of the player
+  if(route==="archive"&&PROJECTS[i].series){location.hash=PROJECTS[i].series;return}
   location.hash="film-"+(i+1);
 });
 addEventListener("keydown",ev=>{
