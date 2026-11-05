@@ -44,7 +44,7 @@ body.r-home #bg,body.r-archive #bg{display:block}
 #info{--cardmax:44vw}
 #info .ttl img{display:inline-block;height:clamp(64px,8.5vw,120px);width:auto;vertical-align:middle}
 #info.carded .ttl{top:calc(50% - 26px)}
-#info.carded .dir{top:calc(50% + 62px)}
+#info.carded .dir{top:calc(50% - 26px + var(--ch,120px) / 2 + 26px)}
 #info .ttl{position:absolute;left:0;right:0;top:calc(50% - 7px);transform:translateY(-50%);text-align:center;font-style:italic;font-size:var(--f3);line-height:1.1;padding:0 90px}
 #info .dir{position:absolute;left:0;right:0;top:calc(50% + 53px);transform:translateY(-50%);text-align:center;font-size:var(--f2);line-height:24px}
 #info .cli{position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:var(--f2);line-height:24px;text-align:right}
@@ -248,6 +248,7 @@ body.film #hd .hold{pointer-events:none}
 @media (max-width:760px){
   #info .ttl{padding:0 40px}
   #info{--cardmax:72vw}
+  #info.same .cli{display:none}
   #info .cli{right:auto;left:0;width:100%;text-align:center;top:calc(50% + 82px)}
   .tal{grid-template-columns:1fr;padding-top:170px}
   .tal .it:nth-child(3n+2){top:0}
@@ -568,10 +569,10 @@ const info=$("#info"),iT=$("#info .ttl"),iD=$("#info .dir"),iC=$("#info .cli"),i
 let infoIdx=-1;
 function setInfo(i){infoIdx=i;const p=PROJECTS[i];
   // films with a homeCard show their title card instead of the text title
-  if(p.homeCard){iT.textContent="";const im=new Image();im.src=p.homeCard;im.alt=p.title;const hh=`calc(clamp(64px,8.5vw,120px) * ${p.homeScale||1})`;im.style.height=hh;
+  if(p.homeCard){iT.textContent="";const im=new Image();im.src=p.homeCard;im.alt=p.title;const hh=`calc(clamp(64px,8.5vw,120px) * ${p.homeScale||1})`;im.style.height=hh;info.style.setProperty("--ch",hh);
     // never squeeze: a wide card that hits the width limit shrinks as a whole, keeping its shape
-    const fit=()=>{if(im.naturalWidth)im.style.height=`min(${hh}, calc(var(--cardmax) * ${(im.naturalHeight/im.naturalWidth).toFixed(4)}))`};im.complete?fit():im.onload=fit;iT.appendChild(im)}else iT.textContent="“"+p.title+"”";
-  info.classList.toggle("carded",!!p.homeCard);iD.textContent=p.director;iC.textContent=p.client;iN.textContent=ROMAN(i+1)}
+    const fit=()=>{if(!im.naturalWidth||infoIdx!==i)return;const v=`min(${hh}, calc(var(--cardmax) * ${(im.naturalHeight/im.naturalWidth).toFixed(4)}))`;im.style.height=v;info.style.setProperty("--ch",v)};im.complete?fit():im.onload=fit;iT.appendChild(im)}else iT.textContent="“"+p.title+"”";
+  info.classList.toggle("carded",!!p.homeCard);info.classList.toggle("same",p.director===p.client);iD.textContent=p.director;iC.textContent=p.client;iN.textContent=ROMAN(i+1)}
 
 /* ---------- state ---------- */
 let route=null,filmIdx=-1;
