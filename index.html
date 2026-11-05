@@ -192,6 +192,7 @@ body.film #hd .hold{pointer-events:none}
 #loader.reveal .lgm{opacity:0;filter:blur(10px);transform:scale(.985);transition:opacity .8s var(--eio),filter .8s var(--eio),transform 1s var(--eio)}
 #loader.reveal .win{opacity:0}
 #loader.out{pointer-events:none}
+#loader.out .bar{transition-duration:.91s}
 #loader.out .bar.t{transform:translateY(-101%)}
 #loader.out .bar.b{transform:translateY(101%)}
 
@@ -795,7 +796,7 @@ async function boot(){
   await wait(Math.max(0,2000-(performance.now()-t0)));
   LD.classList.add("reveal");await wait(950);
   started=true;LD.classList.add("out");
-  setTimeout(()=>LD.remove(),1400);
+  setTimeout(()=>LD.remove(),1000);
   if(route!=="home"&&route!=="archive"){const pg=$("#p-"+route);if(pg)reveal(pg)}
 }
 boot();
