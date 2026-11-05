@@ -177,17 +177,19 @@ body.r-contact #hd .copy{display:block}
 .p-play{left:24px;top:50%;transform:translateY(-50%)}
 .p-snd{left:24px;bottom:23px}
 .p-close{right:24px;top:50%;transform:translateY(-50%)}
-/* studio ident: K and M lock together, then the camera dives into the notch */
+/* studio ident: K and M lock together, then the camera dives into the notch.
+   K and M are separate GPU layers; only transform and opacity animate. */
 #ident{position:absolute;inset:0;z-index:6;background:#000;display:none;align-items:center;justify-content:center;cursor:pointer}
-#player.ident #ident{display:flex;animation:idFade 2.2s linear both}
-#ident svg{width:min(300px,42vw);overflow:visible;fill:#d9f663;transform-origin:32.7% 47.9%}
-#player.ident #ident svg{animation:idZoom 2.2s both}
-#player.ident #ident .k{animation:idK .8s cubic-bezier(.19,1,.22,1) .12s both}
-#player.ident #ident .m{animation:idM .8s cubic-bezier(.19,1,.22,1) .12s both}
-@keyframes idFade{0%{opacity:0}8%{opacity:1}90%{opacity:1}100%{opacity:0}}
-@keyframes idK{from{transform:translateX(-150px);opacity:0}to{transform:none;opacity:1}}
-@keyframes idM{from{transform:translateX(150px);opacity:0}to{transform:none;opacity:1}}
-@keyframes idZoom{0%{transform:scale(.96);animation-timing-function:cubic-bezier(.19,1,.22,1)}50%{transform:scale(1);animation-timing-function:cubic-bezier(.7,0,.84,0)}100%{transform:scale(70)}}
+#player.ident #ident{display:flex;animation:idFade 1.6s linear both}
+#ident .idw{position:relative;width:min(300px,42vw);aspect-ratio:1540/835;transform-origin:32.7% 47.9%;will-change:transform}
+#ident .idw svg{position:absolute;inset:0;width:100%;height:100%;fill:#d9f663;overflow:visible;will-change:transform,opacity}
+#player.ident #ident .idw{animation:idZoom 1.6s both}
+#player.ident #ident .k{animation:idK .62s cubic-bezier(.16,1,.3,1) both}
+#player.ident #ident .m{animation:idM .62s cubic-bezier(.16,1,.3,1) both}
+@keyframes idFade{0%{opacity:0}6%{opacity:1}92%{opacity:1}100%{opacity:0}}
+@keyframes idK{from{transform:translate3d(-18%,0,0);opacity:0}to{transform:translate3d(0,0,0);opacity:1}}
+@keyframes idM{from{transform:translate3d(18%,0,0);opacity:0}to{transform:translate3d(0,0,0);opacity:1}}
+@keyframes idZoom{0%{transform:scale(.97) translateZ(0);animation-timing-function:cubic-bezier(.16,1,.3,1)}46%{transform:scale(1) translateZ(0);animation-timing-function:cubic-bezier(.7,0,.84,0)}100%{transform:scale(28) translateZ(0)}}
 #hd{transition:opacity .35s}
 body.film #hd{opacity:0;pointer-events:none}
 body.film #hd .hold{pointer-events:none}
@@ -282,7 +284,7 @@ body.film #hd .hold{pointer-events:none}
 </section>
 
 <section id="player" aria-hidden="true">
-  <div id="ident" aria-hidden="true"><svg viewBox="220 575 1540 835"><polygon class="k" points="455,586 854,586 461,950 857,1389 857,1398 588,1398 231,1018 231,874"/><polygon class="m" points="858,586 904,586 1260,996 1622,586 1748,586 1748,1398 1526,1398 1526,1046 1260,1333 1037,1082 1037,1398 858,1398"/></svg></div>
+  <div id="ident" aria-hidden="true"><div class="idw"><svg class="k" viewBox="220 575 1540 835"><polygon points="455,586 854,586 461,950 857,1389 857,1398 588,1398 231,1018 231,874"/></svg><svg class="m" viewBox="220 575 1540 835"><polygon points="858,586 904,586 1260,996 1622,586 1748,586 1748,1398 1526,1398 1526,1046 1260,1333 1037,1082 1037,1398 858,1398"/></svg></div></div>
   <div class="p-in">
     <canvas id="pc"></canvas>
     <video id="pvid" playsinline preload="auto"></video>
@@ -574,7 +576,7 @@ function endIdent(i){clearTimeout(identTimer);if(!PL.el.classList.contains("iden
 function playIdent(i){
   plSetPlaying(false);
   PL.el.classList.remove("ident");void PL.el.offsetWidth;PL.el.classList.add("ident");
-  identTimer=setTimeout(()=>endIdent(i),2150);
+  identTimer=setTimeout(()=>endIdent(i),1560);
   $("#ident").onclick=()=>endIdent(i);
 }
 let baseHash="featured";
