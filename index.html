@@ -492,6 +492,13 @@ const sources=PROJECTS.map((p,i)=>{
     vprog(){return ready()&&v.duration?v.currentTime/v.duration:null}};
 });
 // in the Archive every film starts from its first frame when it comes up
+// Featured: a slide picked by hand (scroll, keys, hover, swipe) plays from its first frame on the big screen,
+// using its own video so the tiles keep running; the auto advance keeps the shared one as before
+const mains=[];let curOwn=false,prevOwn=false,autoStep=false;
+function mainV(i){if(!PROJECTS[i].video)return null;let v=mains[i];
+  if(!v){v=document.createElement("video");v.src=PROJECTS[i].video;v.muted=true;v.loop=true;v.playsInline=true;v.setAttribute("playsinline","");v.preload="auto";mains[i]=v}return v}
+function mainSrc(i,own){const v=own&&mains[i];if(v&&v.readyState>=2&&v.videoWidth>0)return{w:()=>v.videoWidth,h:()=>v.videoHeight,el:v,update(){}};return sources[i]}
+function pauseMains(keep){mains.forEach((v,k)=>{if(v&&!keep.includes(k)&&!v.paused)v.pause()})}
 function restartSrc(i){const v=sources[i]&&sources[i].v;if(v){try{v.currentTime=0;v.play().catch(()=>{})}catch(_){}}}
 function drawCover(ctx,src,r){
   const iw=src.w(),ih=src.h(),s=Math.max(r.w/iw,r.h/ih),cw=r.w/s,ch=r.h/s;
@@ -606,7 +613,7 @@ function openFilm(i){openItem(PROJECTS[i],i)}
 function openEpisode(s,n){openItem(epItem(s,n),SERIES[s].film)}
 function openItem(p,i){
   const key=p.series?p.series+"-"+p.ep:"film-"+i;
-  const fresh=!PL.el.classList.contains("on");const same=PL.key===key&&!fresh;filmIdx=i;PL.item=p;PL.key=key;
+  pauseMains([]);const fresh=!PL.el.classList.contains("on");const same=PL.key===key&&!fresh;filmIdx=i;PL.item=p;PL.key=key;
   const S=p.series&&SERIES[p.series];PL.el.classList.toggle("last-ep",!!S&&p.ep>=S.count);PL.el.classList.remove("ending");PL.el.classList.toggle("is-ep",!!p.series);
   // inside the player an episode always reads "Episode N" under the title
   $(".p-ttl .c").textContent=p.series?"Now Playing":p.client;$(".p-ttl .d").textContent=p.series?"Episode "+p.ep:p.director;
@@ -632,7 +639,7 @@ function openItem(p,i){
 }
 function closeFilm(){
   if(filmIdx<0&&!PL.el.classList.contains("on"))return;
-  filmIdx=-1;clearTimeout(identTimer);PL.el.classList.remove("on","show","ident");PL.el.setAttribute("aria-hidden","true");document.body.classList.remove("film");
+  filmIdx=-1;if(curOwn&&mains[fCur])mains[fCur].play().catch(()=>{});clearTimeout(identTimer);PL.el.classList.remove("on","show","ident");PL.el.setAttribute("aria-hidden","true");document.body.classList.remove("film");
   if(PL.video)PL.vid.pause();
   if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});
 }
@@ -871,22 +878,26 @@ function frame(now){
   // which film fills the screen: hovered tile in index, otherwise the target slide
   const want=hoverIdx>=0?hoverIdx:mod(Math.round(posT),N);
   if(fCur<0){fCur=want;fMix=1}
-  if(want!==fCur){fPrev=fCur;fCur=want;fMix=0;if(route==="archive")restartSrc(fCur)}
+  if(want!==fCur){fPrev=fCur;fCur=want;fMix=0;if(route==="archive")restartSrc(fCur);
+    prevOwn=curOwn;curOwn=route==="home"&&!autoStep;autoStep=false;
+    if(curOwn){const v=mainV(fCur);if(v){try{v.currentTime=0}catch(_){}v.play().catch(()=>{})}}
+    pauseMains([curOwn?fCur:-1,prevOwn?fPrev:-1])}
+  if(fMix<1&&fMix+dt/.8>=1)pauseMains([curOwn?fCur:-1]);
   fMix=Math.min(1,fMix+dt/.8);const fm=fMix*fMix*(3-2*fMix);
   if(fCur!==infoIdx&&(fm>=.5||fPrev<0)){setInfo(fCur);progress=0}
   const fi=fCur;
 
   // auto advance on the featured view
   if(route==="home"&&filmIdx<0&&started&&t<.01&&Math.abs(pos-posT)<.01&&fMix>=1&&!document.hidden){
-    progress+=dt/CONFIG.slideSeconds;if(progress>=1){posT=Math.round(pos)+1;progress=0}
+    progress+=dt/CONFIG.slideSeconds;if(progress>=1){posT=Math.round(pos)+1;progress=0;autoStep=true}
   }
 
   // full screen film layer: stays full size, only blurs in index mode
   if(live&&filmIdx<0){
     const R={x:0,y:0,w:full.width,h:full.height};
     fl.setTransform(1,0,0,1,0,0);fl.globalAlpha=1;
-    if(fPrev>=0&&fMix<1){sources[fPrev].update(T);drawCover(fl,sources[fPrev],R)}
-    sources[fCur].update(T);fl.globalAlpha=(fPrev>=0&&fMix<1)?fm:1;drawCover(fl,sources[fCur],R);fl.globalAlpha=1;
+    if(fPrev>=0&&fMix<1){const sp=mainSrc(fPrev,prevOwn);sp.update(T);drawCover(fl,sp,R)}
+    const sc=mainSrc(fCur,curOwn);sc.update(T);fl.globalAlpha=(fPrev>=0&&fMix<1)?fm:1;drawCover(fl,sc,R);fl.globalAlpha=1;
     const blur=route==="contact"?100:(route==="home"?e*100:0);
     const fs=blur>.5?`blur(${blur.toFixed(1)}px)`:"none";
     if(full.style.filter!==fs)full.style.filter=fs;
