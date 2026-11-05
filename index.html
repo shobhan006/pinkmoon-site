@@ -162,7 +162,7 @@ body.r-contact #hd .copy{display:block}
 .p-ui>*{position:absolute;opacity:0;pointer-events:none;transition:opacity .5s}
 #player.show .p-ui>*,#player.show:not(.capping) .p-ttl{opacity:1}
 .p-cap{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font-size:var(--f1);line-height:27px;letter-spacing:.06em;pointer-events:none;opacity:0}
-#player.capping .p-cap{opacity:1}
+#player.capping.worded .p-cap{opacity:1}
 #player.show .p-ui>*{pointer-events:auto}
 .p-fs{left:24px;top:23px}
 .p-prog{left:0;top:63px;bottom:65px;width:64px;cursor:pointer;touch-action:none}
@@ -580,10 +580,12 @@ function playerFrame(now,dt){
     plx.drawImage(s.sc.canvas,(PL.pc.width-w)/2,(PL.pc.height-hh)/2,w,hh);
   }
   // timed words over the film, only while it plays
-  const caps=PROJECTS[filmIdx].captions;let word="";
-  if(caps&&PL.playing){const ct=PL.video?PL.vid.currentTime:PL.t;for(const c of caps){if(ct>=c[0]&&ct<c[1]){word=c[2];break}}}
+  // the whole span from the first word to the end of the last one counts as word time,
+  // so the title never slips in during the short blank beats between words
+  const caps=PROJECTS[filmIdx].captions;let word="",zone=false;
+  if(caps&&PL.playing){const ct=PL.video?PL.vid.currentTime:PL.t;zone=ct>=caps[0][0]&&ct<caps[caps.length-1][1];for(const c of caps){if(ct>=c[0]&&ct<c[1]){word=c[2];break}}}
   if(PL.cap!==word){PL.cap=word;if(word)$(".p-cap").textContent=word}
-  PL.el.classList.toggle("capping",!!word);
+  PL.el.classList.toggle("capping",zone);PL.el.classList.toggle("worded",!!word);
   $(".p-line .th").style.transform=`scaleY(${clamp(plProgress(),0,1).toFixed(4)})`;
 }
 
