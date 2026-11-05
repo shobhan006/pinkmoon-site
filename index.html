@@ -515,22 +515,48 @@ function layout(){
   const S={};S[0]={x:0,y:H-Hf,w:Wf,h:Hf};
   for(let k=1;k<=8;k++){const p=S[k-1],h=Hf*Math.pow(.5,k);S[k]={x:p.x+p.w,y:H-h,w:h,h}}
   for(let k=-1;k>=-6;k--){const n=S[k+1],w=Wf*Math.pow(.55,-k),h=Hf*.84*Math.pow(.62,-k-1);S[k]={x:0,y:n.y-h,w,h}}
-  L={Hf,Wf,S};
+  L={Hf,Wf,S,i:Math.max(.3*W,.35*H),min:W>500?-4:-3,max:W>500?5:2};
 }
 function resize(){
   DPR=Math.min(window.devicePixelRatio||1,2);W=innerWidth;H=innerHeight;
   stage.width=Math.round(W*DPR);stage.height=Math.round(H*DPR);stage.style.width=W+"px";stage.style.height=H+"px";
   const FD=Math.min(DPR,1.5);full.width=Math.round(W*FD);full.height=Math.round(H*FD);
-  layout();sizePlayer();sizeCols();
+  layout();sizePlayer();sizeCols();if(!open&&!TW.length){G.x=-W;G.y=H}
 }
+// Featured index tiles, same geometry as depoluxe: one continuous value per tile (e), base size i halves per step.
+// Upcoming tiles sit along the bottom as squares; the next one stretches left to the edge (wide rectangle)
+// and grows into the full i x i square, then rises into the left column, shrinking back to squares.
+// The tile in [-1,0) is the one on the big screen.
 function idxRect(d){
-  const a=Math.floor(d),f=d-a,A=L.S[a],B=L.S[a+1];if(!A||!B)return null;
-  return{x:lerp(A.x,B.x,f),y:lerp(A.y,B.y,f),w:lerp(A.w,B.w,f),h:lerp(A.h,B.h,f)};
+  const e=-d-.5;if(e<L.min||e>L.max)return null;
+  const i=L.i,r=i*Math.pow(.5,Math.abs(e));let x,y,w=r,h=r;
+  if(e>=0){x=0;y=H-i-(i-r);if(e<=1)h=(H-i*Math.pow(.5,1-e))-y}
+  else{x=2*(i-r);y=H-r;if(e>=-1){w=r+x;x=0}}
+  return{x,y,w,h};
 }
+// every copy of every film that falls in the visible range (the list loops), drawn back to front
+function tileList(p){const out=[];
+  for(let k=0;k<N;k++){const d0=wrapD(k-p);for(let n=-3;n<=3;n++){const d=d0+n*N,e=-d-.5;if(e>=L.min&&e<=L.max)out.push({k,d})}}
+  return out.sort((a,b)=>a.d-b.d)}
+/* tiny tweens (open/close of the index) */
+const TW=[];
+const EI=p=>p*p, EOq=p=>1-(1-p)*(1-p), EX=p=>p>=1?1:1-Math.pow(2,-10*p);
+function tw(o,k,to,dur,delay,ease){for(let j=TW.length-1;j>=0;j--)if(TW[j].o===o&&TW[j].k===k)TW.splice(j,1);TW.push({o,k,from:null,to,dur,delay:delay||0,ease,t:0})}
+function runTw(dt){for(let j=TW.length-1;j>=0;j--){const w=TW[j];w.t+=dt;if(w.t<w.delay)continue;if(w.from===null)w.from=w.o[w.k];
+  const q=Math.min(1,(w.t-w.delay)/w.dur);w.o[w.k]=w.from+(w.to-w.from)*w.ease(q);if(q>=1)TW.splice(j,1)}}
+const G={x:-2000,y:2000,op:0},BG={b:0,s:1,o:0},HOLD={a:1};let open=false;
+function focusOn(){if(open)return;open=true;
+  tw(HOLD,"a",0,.2,0,EI);tw(BG,"b",100,.2,0,EI);tw(BG,"s",2,.2,0,EI);tw(BG,"o",.25,.2,0,EI);
+  tw(G,"op",1,.4,.2,EOq);tw(G,"y",0,.8,0,EX);tw(G,"x",0,1,0,EX)}
+function focusOff(){if(!open)return;open=false;
+  tw(HOLD,"a",1,.2,.2,EI);tw(BG,"b",0,.2,.2,EI);tw(BG,"s",1,.2,.2,EI);tw(BG,"o",0,.2,.2,EI);
+  tw(G,"op",0,.1,.2,EI);tw(G,"y",H,.4,0,EI);tw(G,"x",-W,.5,0,EI)}
 
 /* labels */
 const labWrap=$("#labels");
-const labs=PROJECTS.map((p,i)=>{const a=document.createElement("a");a.className="lab";a.href="#film-"+(i+1);a.innerHTML=`<span class="n">${ROMAN(i+1)}</span><span class="c"></span>`;a.querySelector(".c").textContent=p.client;labWrap.appendChild(a);return a});
+const labs=[];
+function labAt(j){while(labs.length<=j){const a=document.createElement("a");a.className="lab";a.innerHTML=`<span class="n"></span><span class="c"></span>`;a._k=-1;labWrap.appendChild(a);labs.push(a)}return labs[j]}
+function labSet(a,k){if(a._k===k)return;a._k=k;a.href="#film-"+(k+1);a.querySelector(".n").textContent=ROMAN(k+1);a.querySelector(".c").textContent=PROJECTS[k].client}
 
 /* archive rows */
 const arows=PROJECTS.map((p,i)=>{const b=document.createElement("button");b.className="arow";b.innerHTML=`<span class="n">${ROMAN(i+1)}</span><span class="c"></span>`;b.querySelector(".c").textContent=p.client;b.addEventListener("click",()=>{posT=pos+wrapD(i-pos);lastScroll=performance.now()-400});$("#arows").appendChild(b);return b});
@@ -555,7 +581,8 @@ addEventListener("pointermove",ev=>{if(ev.pointerType==="mouse"){mx=ev.clientX;m
 document.documentElement.addEventListener("mouseleave",()=>{mx=my=-1});
 function hitTile(x,y){
   if(x<0)return -1;
-  for(let i=0;i<N;i++){const d=wrapD(i-pos);if(d<-5||d>7)continue;const r=idxRect(d);if(r&&x>=r.x&&x<=r.x+r.w&&y>=r.y&&y<=r.y+r.h)return i}
+  // topmost copy wins (the list is drawn back to front)
+  const tl=tileList(pos);for(let j=tl.length-1;j>=0;j--){const r=idxRect(tl[j].d);if(r&&x>=r.x&&x<=r.x+r.w&&y>=r.y&&y<=r.y+r.h)return tl[j].k}
   return -1;
 }
 const scrollable=()=>(route==="home"||route==="archive")&&filmIdx<0&&started;
@@ -564,7 +591,7 @@ addEventListener("wheel",ev=>{
   if(filmIdx<0&&started&&colsFor(route)){ev.preventDefault();colsFor(route).push(dy*.9);return}
   if(filmIdx<0&&started&&isSeries(route)){ev.preventDefault();epsMove(dy*.004);return}
   if(!scrollable())return;ev.preventDefault();
-  posT+=dy*.0038;lastScroll=performance.now();
+  posT+=dy/H;lastScroll=performance.now();
 },{passive:false});
 let ty=null,tmoved=false;
 $("#hit").addEventListener("touchstart",ev=>{ty=ev.touches[0].clientY;tmoved=false},{passive:true});
@@ -572,13 +599,13 @@ addEventListener("touchmove",ev=>{
   if(ty!=null&&filmIdx<0&&isSeries(route)){const y=ev.touches[0].clientY;epsMove((ty-y)*.008);ty=y;ev.preventDefault();return}
   if(ty!=null&&filmIdx<0&&colsFor(route)){const y=ev.touches[0].clientY;colsFor(route).push((ty-y)*1.2);ty=y;ev.preventDefault();return}
   if(ty==null||!scrollable())return;const y=ev.touches[0].clientY,dy=ty-y;
-  if(Math.abs(dy)>3)tmoved=true;posT+=dy*.006;ty=y;lastScroll=performance.now();ev.preventDefault();
+  if(Math.abs(dy)>3)tmoved=true;posT+=dy/H*1.4;ty=y;lastScroll=performance.now();ev.preventDefault();
 },{passive:false});
 addEventListener("touchstart",ev=>{if(colsFor(route)||isSeries(route))ty=ev.touches[0].clientY},{passive:true});
 addEventListener("touchend",()=>{ty=null});
 $("#hit").addEventListener("click",ev=>{
   if(tmoved){tmoved=false;return}
-  let i=-1;if(e>.5)i=hitTile(ev.clientX,ev.clientY);
+  let i=-1;if(G.op>.5)i=hitTile(ev.clientX,ev.clientY);
   if(i<0)i=mod(Math.round(pos),N);
   // in the Archive a series opens its episode list instead of the player
   if(route==="archive"&&PROJECTS[i].series){location.hash=PROJECTS[i].series;return}
@@ -868,11 +895,10 @@ function frame(now){
     else if(inIndex){if(!outSince)outSince=now;if(now-outSince>200){inIndex=false;if(hoverIdx>=0){posT=pos+wrapD(hoverIdx-pos);lastScroll=-1e4}hoverIdx=-1}}
   }else if(inIndex){inIndex=false;hoverIdx=-1}
 
-  if(now-lastScroll>170&&ty==null)posT=Math.round(posT);
   const scrolling=now-lastScroll<450;
-  const tT=route==="home"&&filmIdx<0&&(inIndex||scrolling)?1:0;
-  t=damp(t,tT,tT>t?8:6.5,dt);if(Math.abs(t-tT)<.001)t=tT;
-  e=t*t*(3-2*t);
+  // the index scrolls freely like depoluxe; it settles on a slide only once it closes
+  if(route==="home"&&filmIdx<0&&(inIndex||scrolling))focusOn();else{focusOff();if(now-lastScroll>170&&ty==null)posT=Math.round(posT)}
+  runTw(dt);e=G.op;
   pos=damp(pos,posT,6.5,dt);if(Math.abs(pos-posT)<.0005)pos=posT;
 
   // which film fills the screen: hovered tile in index, otherwise the target slide
@@ -888,7 +914,7 @@ function frame(now){
   const fi=fCur;
 
   // auto advance on the featured view
-  if(route==="home"&&filmIdx<0&&started&&t<.01&&Math.abs(pos-posT)<.01&&fMix>=1&&!document.hidden){
+  if(route==="home"&&filmIdx<0&&started&&!open&&G.op<.01&&Math.abs(pos-posT)<.01&&fMix>=1&&!document.hidden){
     progress+=dt/CONFIG.slideSeconds;if(progress>=1){posT=Math.round(pos)+1;progress=0;autoStep=true}
   }
 
@@ -898,34 +924,32 @@ function frame(now){
     fl.setTransform(1,0,0,1,0,0);fl.globalAlpha=1;
     if(fPrev>=0&&fMix<1){const sp=mainSrc(fPrev,prevOwn);sp.update(T);drawCover(fl,sp,R)}
     const sc=mainSrc(fCur,curOwn);sc.update(T);fl.globalAlpha=(fPrev>=0&&fMix<1)?fm:1;drawCover(fl,sc,R);fl.globalAlpha=1;
-    const blur=route==="contact"?100:(route==="home"?e*100:0);
+    const blur=route==="contact"?100:(route==="home"?BG.b:0);
     const fs=blur>.5?`blur(${blur.toFixed(1)}px)`:"none";
     if(full.style.filter!==fs)full.style.filter=fs;
-    full.style.transform=`scale(${(1+.14*Math.min(1,blur/100)).toFixed(4)})`;
-    dim.style.opacity=route==="contact"?.35:(route==="home"?(.18*e).toFixed(3):0);
+    full.style.transform=`scale(${(route==="contact"?1.14:route==="home"?BG.s:1).toFixed(4)})`;
+    dim.style.opacity=route==="contact"?.35:(route==="home"?BG.o.toFixed(3):0);
   }
 
   if(live&&filmIdx<0){
     sx.setTransform(DPR,0,0,DPR,0,0);sx.clearRect(0,0,W,H);
     sx.imageSmoothingEnabled=true;sx.imageSmoothingQuality="high";
-    const showTiles=route==="home"&&e>.002;
-    for(let i=0;i<N;i++){
-      const d=wrapD(i-pos),lab=labs[i];
-      const ir=(showTiles&&d>=-5&&d<=7)?idxRect(d):null;
-      if(!ir){lab.style.opacity=0;lab.style.pointerEvents="none";continue}
-      // tiles rise out of the bottom left corner, nearest first
-      let s=clamp(e*1.3-Math.abs(d)*.06,0,1);s=s*s*(3-2*s);
-      const r={x:ir.x*s,y:H-(H-ir.y)*s,w:ir.w*s,h:ir.h*s};
-      const vis=!(r.x>=W||r.y>=H||r.x+r.w<=0||r.y+r.h<=0||r.w<1||r.h<1);
-      if(vis){sources[i].update(T);drawCover(sx,sources[i],r)}
-      const lo=s*clamp(1-(Math.abs(d<0?d:0)-3),0,1)*clamp(5.6-d,0,1);
-      lab.style.opacity=vis?lo.toFixed(3):0;
+    const showTiles=route==="home"&&G.op>.002;
+    const tl=showTiles?tileList(pos):[];let used=0;
+    for(const tk of tl){
+      const ir=idxRect(tk.d);if(!ir)continue;
+      const r={x:ir.x+G.x,y:ir.y+G.y,w:ir.w,h:ir.h};
+      if(r.x>=W||r.y>=H||r.x+r.w<=0||r.y+r.h<=0||r.w<1||r.h<1)continue;
+      sx.globalAlpha=G.op;sources[tk.k].update(T);drawCover(sx,sources[tk.k],r);sx.globalAlpha=1;
+      const lab=labAt(used++);labSet(lab,tk.k);
+      lab.style.opacity=G.op.toFixed(3);
       lab.style.transform=`translate(${(r.x+r.w+24).toFixed(1)}px,${(r.y+5).toFixed(1)}px)`;
-      lab.style.pointerEvents=lo>.5?"auto":"none";
+      lab.style.pointerEvents=G.op>.5?"auto":"none";
     }
+    for(let j=used;j<labs.length;j++){labs[j].style.opacity=0;labs[j].style.pointerEvents="none"}
     // info fades out and back in across a film change
     const xf=fPrev>=0&&fMix<1?Math.abs(1-2*fm):1;
-    const io_=route==="archive"?xf:(1-e)*xf;
+    const io_=route==="archive"?xf:HOLD.a*xf;
     info.style.opacity=io_.toFixed(3);
     const ny=H*.1+clamp(progress,0,1)*H*.8,nh=24;
     iN.style.top=ny+"px";iL1.style.height=Math.max(0,ny-16)+"px";iL2.style.height=Math.max(0,H-(ny+nh+16))+"px";
