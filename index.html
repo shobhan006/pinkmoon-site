@@ -610,7 +610,7 @@ function openItem(p,i){
   const fresh=!PL.el.classList.contains("on");const same=PL.key===key&&!fresh;filmIdx=i;PL.item=p;PL.key=key;
   const S=p.series&&SERIES[p.series];PL.el.classList.toggle("last-ep",!!S&&p.ep>=S.count);PL.el.classList.remove("ending");PL.el.classList.toggle("is-ep",!!p.series);
   // inside the player an episode always reads "Episode N" under the title
-  $(".p-ttl .c").textContent=p.client;$(".p-ttl .d").textContent=p.series?"Episode "+p.ep:p.director;
+  $(".p-ttl .c").textContent=p.series?"Now Playing":p.client;$(".p-ttl .d").textContent=p.series?"Episode "+p.ep:p.director;
   // a film can carry its own title card image; those sit at the top of the player instead of the middle
   // before cardAfter seconds the film shows its own title, so the player keeps the plain text title;
   // after that the card replaces it, aligned to the top
