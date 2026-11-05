@@ -349,7 +349,7 @@ const PROJECTS = [
   {title:"Introducing PINKMOON", director:"PINKMOON", client:"Storystudio", year:"2026", scene:"moon", pal:["#12060c","#3a0f22","#fff1f4","#f08aa8"], video:"films/pinkmoon-intro.mp4", text:"Culture, community and the stories in between.",
    captions:[[0,24.75,"CULTURE"],[25.042,49.383,"COMMUNITY"],[49.967,62.375,"CONTENT"]]},
   {title:"WAKEUP", director:"A PINKMOON ORIGINAL", client:"Series", year:"2026", scene:"silk", pal:["#0b0a10","#000000","#f6d7c8","#c86b8a"], video:"films/wakeup-trailer.mp4", text:"A cinematic microfiction universe where every night, ordinary people confront the one thought they could not silence before falling asleep."},
-  {title:"JustMates", director:"Episode 1", client:"TV Sitcom", year:"2026", scene:"bloom", pal:["#07040a","#ff4f8b","#7b3cff","#ffb36b"], video:"films/justmates-ep1.mp4", full:"films/justmates-ep1-full.mp4", titleCard:"img/justmates-title.png", cardAfter:4, series:"justmates", ep:1, text:"A sitcom about friends, bad timing and the third date that ends everything."},
+  {title:"JustMates", director:"TV Sitcom", client:"TV Sitcom", year:"2026", scene:"bloom", pal:["#07040a","#ff4f8b","#7b3cff","#ffb36b"], video:"films/justmates-ep1.mp4", full:"films/justmates-ep1-full.mp4", titleCard:"img/justmates-title.png", cardAfter:4, series:"justmates", ep:1, text:"A sitcom about friends, bad timing and the third date that ends everything."},
   {title:"Monsoon",     director:"PINKMOON", client:"Short Film",     year:"2025", scene:"rain",    pal:["#04070c","#0d1b2a","#5d7fa8","#cfe3ff"], video:"", text:"Two people, one window, the first rain of the year."},
   {title:"Afterglow",   director:"PINKMOON", client:"Brand Film",     year:"2025", scene:"horizon", pal:["#2b1030","#f07a63","#ffe1b0","#14081a"], video:"", text:"The ten minutes after sunset, stretched into a story about staying."},
   {title:"Paper Moon",  director:"PINKMOON", client:"Editorial",      year:"2025", scene:"noir",    pal:["#0e0e0e","#2b2b2b","#ffffff","#050505"], video:"", text:"Black and white, hard light, soft people."},
@@ -590,7 +590,8 @@ function openItem(p,i){
   const key=p.series?p.series+"-"+p.ep:"film-"+i;
   const fresh=!PL.el.classList.contains("on");const same=PL.key===key&&!fresh;filmIdx=i;PL.item=p;PL.key=key;
   const S=p.series&&SERIES[p.series];PL.el.classList.toggle("last-ep",!!S&&p.ep>=S.count);PL.el.classList.remove("ending");
-  $(".p-ttl .c").textContent=p.client;$(".p-ttl .d").textContent=p.director;
+  // inside the player an episode always reads "Episode N" under the title
+  $(".p-ttl .c").textContent=p.client;$(".p-ttl .d").textContent=p.series?"Episode "+p.ep:p.director;
   // a film can carry its own title card image; those sit at the top of the player instead of the middle
   // before cardAfter seconds the film shows its own title, so the player keeps the plain text title;
   // after that the card replaces it, aligned to the top
