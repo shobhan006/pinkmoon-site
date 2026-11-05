@@ -447,6 +447,8 @@ const sources=PROJECTS.map((p,i)=>{
     w(){return ready()?v.videoWidth:SW},h(){return ready()?v.videoHeight:SH},
     vprog(){return ready()&&v.duration?v.currentTime/v.duration:null}};
 });
+// in the Archive every film starts from its first frame when it comes up
+function restartSrc(i){const v=sources[i]&&sources[i].v;if(v){try{v.currentTime=0;v.play().catch(()=>{})}catch(_){}}}
 function drawCover(ctx,src,r){
   const iw=src.w(),ih=src.h(),s=Math.max(r.w/iw,r.h/ih),cw=r.w/s,ch=r.h/s;
   ctx.drawImage(src.el,(iw-cw)/2,(ih-ch)/2,cw,ch,Math.round(r.x),Math.round(r.y),Math.round(r.x+r.w)-Math.round(r.x),Math.round(r.y+r.h)-Math.round(r.y));
@@ -691,6 +693,7 @@ function setRoute(r){
   b.classList.remove("r-home","r-archive","r-talent","r-approach","r-contact","r-person","light");
   b.classList.add("r-"+r);if(r==="talent"||r==="approach"||r==="contact")b.classList.add("light");
   if(r==="contact")ccols.reset();
+  if(r==="archive"&&fCur>=0)restartSrc(fCur);
   $$(".page").forEach(p=>{const on=p.id==="p-"+r;p.classList.toggle("on",on);if(on){p.scrollTop=0;p.querySelectorAll(".rv").forEach(el=>el.classList.remove("in"))}});
   $$("#hd nav a").forEach(a=>a.classList.toggle("active",a.dataset.r===r||(r==="person"&&a.dataset.r==="talent")));
   inIndex=false;hoverIdx=-1;
@@ -753,7 +756,7 @@ function frame(now){
   // which film fills the screen: hovered tile in index, otherwise the target slide
   const want=hoverIdx>=0?hoverIdx:mod(Math.round(posT),N);
   if(fCur<0){fCur=want;fMix=1}
-  if(want!==fCur){fPrev=fCur;fCur=want;fMix=0}
+  if(want!==fCur){fPrev=fCur;fCur=want;fMix=0;if(route==="archive")restartSrc(fCur)}
   fMix=Math.min(1,fMix+dt/.8);const fm=fMix*fMix*(3-2*fMix);
   if(fCur!==infoIdx&&(fm>=.5||fPrev<0)){setInfo(fCur);progress=0}
   const fi=fCur;
