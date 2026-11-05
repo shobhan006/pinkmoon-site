@@ -182,14 +182,14 @@ body.film #hd .hold{pointer-events:none}
 #veil.on{opacity:1;pointer-events:auto}
 /* loader: a letterbox opens on the logo, the logo racks into focus, then the frame opens onto the site */
 #loader{position:fixed;inset:0;z-index:30;color:#d9f663;--lw:min(520px,62vw);--g:calc(var(--lw) * 271 / 1056 / 2 + 64px)}
-#loader .win{position:absolute;inset:0;background:#000;display:flex;align-items:center;justify-content:center;transition:opacity .9s var(--eio)}
+#loader .win{position:absolute;inset:0;background:#000;display:flex;align-items:center;justify-content:center;transition:opacity .45s var(--eio)}
 #loader .lgm{width:var(--lw);opacity:0;filter:blur(18px);transform:scale(1.07);transition:opacity 1.4s var(--eo),filter 2s var(--eo),transform 2.6s var(--eo)}
 #loader .bar{position:absolute;left:0;right:0;height:50%;background:#000;transition:transform .91s var(--eio)}
 #loader .bar.t{top:0}#loader .bar.b{bottom:0}
 #loader.open .bar.t{transform:translateY(calc(var(--g) * -1))}
 #loader.open .bar.b{transform:translateY(var(--g))}
 #loader.open .lgm{opacity:1;filter:blur(0);transform:none}
-#loader.reveal .lgm{opacity:0;filter:blur(10px);transform:scale(.985);transition:opacity .8s var(--eio),filter .8s var(--eio),transform 1s var(--eio)}
+#loader.reveal .lgm{opacity:0;filter:blur(10px);transform:scale(.985);transition:opacity .4s var(--eio),filter .4s var(--eio),transform .5s var(--eio)}
 #loader.reveal .win{opacity:0}
 #loader.out{pointer-events:none}
 #loader.out .bar{transition-duration:.91s}
@@ -794,7 +794,7 @@ async function boot(){
   paintTalent();
   sources.forEach(s=>{if(s.v)s.v.play().catch(()=>{})});
   await wait(Math.max(0,2000-(performance.now()-t0)));
-  LD.classList.add("reveal");await wait(950);
+  LD.classList.add("reveal");await wait(475);
   started=true;LD.classList.add("out");
   setTimeout(()=>LD.remove(),1000);
   if(route!=="home"&&route!=="archive"){const pg=$("#p-"+route);if(pg)reveal(pg)}
