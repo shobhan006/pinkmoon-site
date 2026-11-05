@@ -32,7 +32,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;letter
 
 /* ---------- layers ---------- */
 #bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;display:none;background:#000}
-#bg canvas{position:absolute;inset:0;width:100%;height:100%;will-change:filter,transform}
+#bg .fx{position:absolute;inset:0;will-change:filter,transform}
+#bg canvas,#bg video{position:absolute;inset:0;width:100%;height:100%}
+#bg video{object-fit:cover;opacity:0}
+#bg #soft{opacity:0;filter:blur(8px);z-index:3}
 #bg .dim{position:absolute;inset:0;background:#000;opacity:0}
 body.r-home #bg,body.r-archive #bg{display:block}
 #stage{position:fixed;inset:0;z-index:1;display:none}
@@ -261,7 +264,7 @@ body.film #hd .hold{pointer-events:none}
 </head>
 <body class="r-home">
 
-<div id="bg"><canvas id="full"></canvas><i class="dim"></i></div>
+<div id="bg"><div class="fx"><canvas id="full"></canvas><div class="vl"></div><canvas id="soft"></canvas></div><i class="dim"></i></div>
 <canvas id="stage" aria-hidden="true"></canvas>
 <div id="hit" aria-hidden="true"></div>
 <div id="labels"></div>
@@ -363,9 +366,9 @@ const CONFIG = {
   filmSeconds: 45
 };
 const PROJECTS = [
-  {title:"Introducing PINKMOON", director:"PINKMOON", client:"Storystudio", year:"2026", scene:"moon", pal:["#12060c","#3a0f22","#fff1f4","#f08aa8"], video:"films/pinkmoon-intro.mp4", text:"Culture, community and the stories in between.",
+  {title:"Introducing PINKMOON", director:"PINKMOON", client:"Storystudio", year:"2026", scene:"moon", pal:["#12060c","#3a0f22","#fff1f4","#f08aa8"], video:"films/pinkmoon-intro.mp4", videoM:"films/m/pinkmoon-intro.mp4", text:"Culture, community and the stories in between.",
    captions:[[0,24.75,"CULTURE"],[25.042,49.383,"COMMUNITY"],[49.967,62.375,"CONTENT"]]},
-  {title:"WAKEUP", director:"A PINKMOON ORIGINAL", client:"Series", year:"2026", scene:"silk", pal:["#0b0a10","#000000","#f6d7c8","#c86b8a"], video:"films/wakeup-trailer.mp4", homeCard:"img/wakeup-title.png", text:"A cinematic microfiction universe where every night, ordinary people confront the one thought they could not silence before falling asleep."},
+  {title:"WAKEUP", director:"A PINKMOON ORIGINAL", client:"Series", year:"2026", scene:"silk", pal:["#0b0a10","#000000","#f6d7c8","#c86b8a"], video:"films/wakeup-trailer.mp4", videoM:"films/m/wakeup-trailer.mp4", homeCard:"img/wakeup-title.png", text:"A cinematic microfiction universe where every night, ordinary people confront the one thought they could not silence before falling asleep."},
   {title:"JustMates", director:"TV Sitcom", client:"TV Sitcom", year:"2026", scene:"bloom", pal:["#07040a","#ff4f8b","#7b3cff","#ffb36b"], video:"films/justmates-ep1.mp4", full:"films/justmates-ep1-full.mp4", titleCard:"img/justmates-title.png", homeCard:"img/justmates-title.png", cardW:130, cardAfter:4, series:"justmates", ep:1, text:"A sitcom about friends, bad timing and the third date that ends everything."},
   {title:"MEN IN PINK", director:"Series", client:"Series", year:"2026", scene:"rain", pal:["#04070c","#0d1b2a","#5d7fa8","#cfe3ff"], video:"films/meninpink-ep1.mp4", full:"films/meninpink-ep1-full.mp4", titleCard:"img/meninpink-title.png", homeCard:"img/meninpink-title.png", homeScale:.42, cardW:300, cardAfter:3.2, series:"meninpink", ep:1, text:"The newest PINKMOON series."},
 ];
@@ -486,9 +489,12 @@ function makeScene(p,i){
   const fn=SC[p.scene]||SC.moon, seed=i*17.3;let last=-1;
   return {canvas:c,render(T,force){if(!force&&Math.abs(T-last)<1/30&&last>=0)return;last=T;fn(x,T+seed,p.pal);post(x,T+seed)}};
 }
+// phones: lighter preview files, a cheap blur, and only the videos on screen decode
+const MOB=!matchMedia("(hover:hover) and (pointer:fine)").matches;
+const pv=p=>MOB&&p.videoM?p.videoM:p.video;
 const sources=PROJECTS.map((p,i)=>{
   const sc=makeScene(p,i);let v=null;
-  if(p.video){v=document.createElement("video");v.src=p.video;v.muted=true;v.loop=true;v.playsInline=true;v.setAttribute("playsinline","");v.preload="auto"}
+  if(p.video){v=document.createElement("video");v.src=pv(p);v.muted=true;v.loop=true;v.playsInline=true;v.setAttribute("playsinline","");v.preload="auto"}
   const ready=()=>v&&v.readyState>=2&&v.videoWidth>0;
   return{sc,v,get el(){return ready()?v:sc.canvas},update(T,f){if(!ready())sc.render(T,f)},
     w(){return ready()?v.videoWidth:SW},h(){return ready()?v.videoHeight:SH},
@@ -499,10 +505,20 @@ const sources=PROJECTS.map((p,i)=>{
 // using its own video so the tiles keep running; the auto advance keeps the shared one as before
 const mains=[];let curOwn=false,prevOwn=false,autoStep=false;
 function mainV(i){if(!PROJECTS[i].video)return null;let v=mains[i];
-  if(!v){v=document.createElement("video");v.src=PROJECTS[i].video;v.muted=true;v.loop=true;v.playsInline=true;v.setAttribute("playsinline","");v.preload="auto";mains[i]=v}return v}
+  if(!v){v=document.createElement("video");v.src=pv(PROJECTS[i]);v.muted=true;v.loop=true;v.playsInline=true;v.setAttribute("playsinline","");v.preload="auto";mains[i]=v}return v}
 function mainSrc(i,own){const v=own&&mains[i];if(v&&v.readyState>=2&&v.videoWidth>0)return{w:()=>v.videoWidth,h:()=>v.videoHeight,el:v,update(){}};return sources[i]}
 function pauseMains(keep){mains.forEach((v,k)=>{if(v&&!keep.includes(k)&&!v.paused)v.pause()})}
 function restartSrc(i){const v=sources[i]&&sources[i].v;if(v){try{v.currentTime=0;v.play().catch(()=>{})}catch(_){}}}
+const allV=()=>{const a=[];sources.forEach(x=>{if(x.v)a.push(x.v)});mains.forEach(v=>{if(v)a.push(v)});return a};
+const NEED=new Set();
+function needV(v){if(v)NEED.add(v)}
+// play what is needed this frame (and anything that has no picture yet), pause the rest after a short grace
+function syncPlay(now){for(const v of allV()){
+  const want=NEED.has(v)||v.readyState<2;
+  if(want){v._seen=now;if(v.paused&&!document.hidden&&now-(v._try||0)>400){v._try=now;v.play().catch(()=>{})}}
+  else if(!v.paused&&now-(v._seen||0)>1200)v.pause()}
+  NEED.clear()}
+const vReady=v=>v&&v.readyState>=2&&v.videoWidth>0;
 function drawCover(ctx,src,r){
   const iw=src.w(),ih=src.h(),s=Math.max(r.w/iw,r.h/ih),cw=r.w/s,ch=r.h/s;
   ctx.drawImage(src.el,(iw-cw)/2,(ih-ch)/2,cw,ch,Math.round(r.x),Math.round(r.y),Math.round(r.x+r.w)-Math.round(r.x),Math.round(r.y+r.h)-Math.round(r.y));
@@ -510,7 +526,7 @@ function drawCover(ctx,src,r){
 
 /* ---------- stage / staircase layout ---------- */
 const stage=$("#stage"),sx=stage.getContext("2d");
-const full=$("#full"),fl=full.getContext("2d"),dim=$("#bg .dim");
+const full=$("#full"),fl=full.getContext("2d"),dim=$("#bg .dim"),fxEl=$("#bg .fx"),vl=$("#bg .vl"),soft=$("#soft"),sfx=soft.getContext("2d"),tiny=document.createElement("canvas"),tfx=tiny.getContext("2d");if(!MOB)soft.style.display="none";
 let W=0,H=0,DPR=1,L={};
 function layout(){
   const portrait=W<H*.9;
@@ -521,7 +537,7 @@ function layout(){
   L={Hf,Wf,S,i:Math.max(.3*W,.35*H),min:W>500?-4:-3,max:W>500?5:2};
 }
 function resize(){
-  DPR=Math.min(window.devicePixelRatio||1,2);W=innerWidth;H=innerHeight;
+  DPR=Math.min(window.devicePixelRatio||1,MOB?1.5:2);W=innerWidth;H=innerHeight;
   stage.width=Math.round(W*DPR);stage.height=Math.round(H*DPR);stage.style.width=W+"px";stage.style.height=H+"px";
   const FD=Math.min(DPR,1.5);full.width=Math.round(W*FD);full.height=Math.round(H*FD);
   layout();sizePlayer();sizeCols();if(!open&&!TW.length){G.x=-W;G.y=H}
@@ -604,10 +620,11 @@ addEventListener("touchmove",ev=>{
   if(ty!=null&&filmIdx<0&&isSeries(route)){const y=ev.touches[0].clientY;epsMove((ty-y)*.008);ty=y;ev.preventDefault();return}
   if(ty!=null&&filmIdx<0&&colsFor(route)){const y=ev.touches[0].clientY;colsFor(route).push((ty-y)*1.2);ty=y;ev.preventDefault();return}
   if(ty==null||!scrollable())return;const y=ev.touches[0].clientY,dy=ty-y;
-  if(Math.abs(dy)>3)tmoved=true;posT+=dy/H*1.4;ty=y;lastScroll=performance.now();ev.preventDefault();
+  if(Math.abs(dy)>3)tmoved=true;const tn=performance.now(),st=dy*4/H;posT+=st;tvel=lerp(tvel,st/Math.max(8,tn-(tlast||tn-16))*16,.5);tlast=tn;ty=y;lastScroll=tn;ev.preventDefault();
 },{passive:false});
 addEventListener("touchstart",ev=>{if(colsFor(route)||isSeries(route))ty=ev.touches[0].clientY},{passive:true});
-addEventListener("touchend",()=>{ty=null});
+let tvel=0,tlast=0;
+addEventListener("touchend",()=>{if(ty!=null&&scrollable()&&tmoved&&performance.now()-tlast<80){posT+=clamp(tvel*9,-2.5,2.5);lastScroll=performance.now()}tvel=0;ty=null});
 $("#hit").addEventListener("click",ev=>{
   if(tmoved){tmoved=false;return}
   let i=-1;if(G.op>.5)i=hitTile(ev.clientX,ev.clientY);
@@ -904,7 +921,7 @@ function frame(now){
   // the index scrolls freely like depoluxe; it settles on a slide only once it closes
   if(route==="home"&&filmIdx<0&&(inIndex||scrolling))focusOn();else{focusOff();if(now-lastScroll>170&&ty==null)posT=Math.round(posT)}
   runTw(dt);e=G.op;
-  pos=damp(pos,posT,6.5,dt);if(Math.abs(pos-posT)<.0005)pos=posT;
+  pos=damp(pos,posT,ty!=null?16:6.5,dt);if(Math.abs(pos-posT)<.0005)pos=posT;
 
   // which film fills the screen: hovered tile in index, otherwise the target slide
   const want=hoverIdx>=0?hoverIdx:mod(Math.round(posT),N);
@@ -925,14 +942,43 @@ function frame(now){
 
   // full screen film layer: stays full size, only blurs in index mode
   if(live&&filmIdx<0){
-    const R={x:0,y:0,w:full.width,h:full.height};
-    fl.setTransform(1,0,0,1,0,0);fl.globalAlpha=1;
-    if(fPrev>=0&&fMix<1){const sp=mainSrc(fPrev,prevOwn);sp.update(T);drawCover(fl,sp,R)}
-    const sc=mainSrc(fCur,curOwn);sc.update(T);fl.globalAlpha=(fPrev>=0&&fMix<1)?fm:1;drawCover(fl,sc,R);fl.globalAlpha=1;
+    const mixing=fPrev>=0&&fMix<1;
+    const vOf=(i,own)=>own&&mains[i]?mains[i]:sources[i].v;
+    const cv=vOf(fCur,curOwn),pvv=mixing?vOf(fPrev,prevOwn):null;
+    needV(cv);needV(pvv);
+    // the big screen is the video element itself (no per frame copy); a hand picked slide whose own copy
+    // is still loading shows the shared one meanwhile
+    const ce=vReady(cv)?cv:(vReady(sources[fCur].v)?sources[fCur].v:null);
+    const pe=mixing?(vReady(pvv)?pvv:(vReady(sources[fPrev].v)?sources[fPrev].v:null)):null;
+    const useCanvas=!ce||(mixing&&!pe);
+    if(useCanvas){
+      const R={x:0,y:0,w:full.width,h:full.height};
+      fl.setTransform(1,0,0,1,0,0);fl.globalAlpha=1;
+      if(mixing){const sp=mainSrc(fPrev,prevOwn);sp.update(T);drawCover(fl,sp,R)}
+      const sc=mainSrc(fCur,curOwn);sc.update(T);fl.globalAlpha=mixing?fm:1;drawCover(fl,sc,R);fl.globalAlpha=1;
+    }
+    for(const v of [ce,pe])if(v&&v.parentNode!==vl)vl.appendChild(v);
+    for(const v of vl.children){
+      const o=useCanvas?"0":v===ce?(mixing?fm.toFixed(3):"1"):v===pe?"1":"0",z=v===ce?"2":v===pe?"1":"0";
+      if(v.style.opacity!==o)v.style.opacity=o;if(v.style.zIndex!==z)v.style.zIndex=z}
     const blur=route==="contact"?100:(route==="home"?BG.b:0);
-    const fs=blur>.5?`blur(${blur.toFixed(1)}px)`:"none";
-    if(full.style.filter!==fs)full.style.filter=fs;
-    full.style.transform=`scale(${(route==="contact"?1.14:route==="home"?BG.s:1).toFixed(4)})`;
+    const tf=`scale(${(route==="contact"?1.14:route==="home"?BG.s:1).toFixed(4)})`;
+    if(fxEl.style.transform!==tf)fxEl.style.transform=tf;
+    if(!MOB){
+      const fs=blur>.5?`blur(${blur.toFixed(1)}px)`:"none";
+      if(fxEl.style.filter!==fs)fxEl.style.filter=fs;
+    }else{
+      // phones: draw the frame tiny and stretch it, with a light blur on top; looks the same, costs almost nothing
+      const so=blur>.5?Math.min(1,blur/60):0,sos=so.toFixed(3);
+      if(soft.style.opacity!==sos)soft.style.opacity=sos;
+      if(so>0){const sw=48,sh=Math.max(8,Math.round(48*H/W)),tw_=12,th_=Math.max(3,Math.round(12*H/W));
+        if(soft.width!==sw||soft.height!==sh){soft.width=sw;soft.height=sh;tiny.width=tw_;tiny.height=th_}
+        const SR={x:0,y:0,w:tw_,h:th_};
+        if(useCanvas)tfx.drawImage(full,0,0,tw_,th_);
+        else{if(mixing&&pe){tfx.globalAlpha=1;drawCover(tfx,{w:()=>pe.videoWidth,h:()=>pe.videoHeight,el:pe},SR)}
+          tfx.globalAlpha=mixing?fm:1;drawCover(tfx,{w:()=>ce.videoWidth,h:()=>ce.videoHeight,el:ce},SR);tfx.globalAlpha=1}
+        sfx.imageSmoothingEnabled=true;sfx.imageSmoothingQuality="high";sfx.drawImage(tiny,0,0,sw,sh)}
+    }
     dim.style.opacity=route==="contact"?.35:(route==="home"?BG.o.toFixed(3):0);
   }
 
@@ -945,7 +991,7 @@ function frame(now){
       const ir=idxRect(tk.d);if(!ir)continue;
       const r={x:ir.x+G.x,y:ir.y+G.y,w:ir.w,h:ir.h};
       if(r.x>=W||r.y>=H||r.x+r.w<=0||r.y+r.h<=0||r.w<1||r.h<1)continue;
-      sx.globalAlpha=G.op;sources[tk.k].update(T);drawCover(sx,sources[tk.k],r);sx.globalAlpha=1;
+      needV(sources[tk.k].v);sx.globalAlpha=G.op;sources[tk.k].update(T);drawCover(sx,sources[tk.k],r);sx.globalAlpha=1;
       const lab=labAt(used++);labSet(lab,tk.k);
       lab.style.opacity=G.op.toFixed(3);
       lab.style.transform=`translate(${(r.x+r.w+24).toFixed(1)}px,${(r.y+5).toFixed(1)}px)`;
@@ -977,8 +1023,9 @@ function frame(now){
   const cl=colsFor(route);
   if(cl&&filmIdx<0&&!document.hidden){
     cl.update(dt);
-    if(route==="person")pcols.slots().forEach(s=>{if(s.y>-CH&&s.y<H){const fi=+s.e.dataset.f;sources[fi].update(T);const c=s.e.querySelector("canvas");drawCover(c.getContext("2d"),sources[fi],{x:0,y:0,w:c.width,h:c.height})}});
+    if(route==="person")pcols.slots().forEach(s=>{if(s.y>-CH&&s.y<H){const fi=+s.e.dataset.f;needV(sources[fi].v);sources[fi].update(T);const c=s.e.querySelector("canvas");drawCover(c.getContext("2d"),sources[fi],{x:0,y:0,w:c.width,h:c.height})}});
   }
+  syncPlay(now);
 }
 
 /* ---------- loader ---------- */
@@ -991,7 +1038,6 @@ async function boot(){
   await wait(260);LD.classList.add("open");
   try{await Promise.race([document.fonts.ready,wait(2500)])}catch(_){}
   paintTalent();
-  sources.forEach(s=>{if(s.v)s.v.play().catch(()=>{})});
   await wait(Math.max(0,2000-(performance.now()-t0)));
   LD.classList.add("reveal");await wait(475);
   started=true;LD.classList.add("out");
