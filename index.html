@@ -209,18 +209,18 @@ body.r-contact #hd .copy{display:block}
 #player.ending .p-end .nx i{opacity:1}
 #player.last-ep .p-end .nx{display:none}
 /* episodes page (archive style) */
-#p-justmates{background:#000;color:#fff;overflow:hidden}
-#p-justmates video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s var(--eo)}
-#p-justmates video.on{opacity:1}
-#p-justmates .shade{position:absolute;inset:0;background:rgba(0,0,0,.3);pointer-events:none}
-#p-justmates .ehit{position:absolute;inset:0;cursor:pointer}
-#p-justmates .einfo{position:absolute;inset:0;pointer-events:none}
-#p-justmates .eti{position:absolute;left:0;right:0;top:calc(50% - 7px);transform:translateY(-50%);text-align:center;font-style:italic;font-size:var(--f3);line-height:1.1}
-#p-justmates .esu{position:absolute;left:0;right:0;top:calc(50% + 53px);transform:translateY(-50%);text-align:center;font-size:var(--f2);line-height:24px}
-#p-justmates .enu{position:absolute;left:24px;top:50%;transform:translateY(-50%);font-size:var(--f2)}
-#p-justmates .ecl{position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:var(--f2)}
-#p-justmates .erows{position:absolute;inset:0;pointer-events:none}
-#p-justmates .emark{position:absolute;left:24px;bottom:20px;width:84px;pointer-events:none}
+#p-series{background:#000;color:#fff;overflow:hidden}
+#p-series video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s var(--eo)}
+#p-series video.on{opacity:1}
+#p-series .shade{position:absolute;inset:0;background:rgba(0,0,0,.3);pointer-events:none}
+#p-series .ehit{position:absolute;inset:0;cursor:pointer}
+#p-series .einfo{position:absolute;inset:0;pointer-events:none}
+#p-series .eti{position:absolute;left:0;right:0;top:calc(50% - 7px);transform:translateY(-50%);text-align:center;font-style:italic;font-size:var(--f3);line-height:1.1}
+#p-series .esu{position:absolute;left:0;right:0;top:calc(50% + 53px);transform:translateY(-50%);text-align:center;font-size:var(--f2);line-height:24px}
+#p-series .enu{position:absolute;left:24px;top:50%;transform:translateY(-50%);font-size:var(--f2)}
+#p-series .ecl{position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:var(--f2)}
+#p-series .erows{position:absolute;inset:0;pointer-events:none}
+#p-series .emark{position:absolute;left:24px;bottom:20px;width:84px;pointer-events:none}
 #hd{transition:opacity .35s}
 body.film #hd{opacity:0;pointer-events:none}
 body.film #hd .hold{pointer-events:none}
@@ -314,13 +314,13 @@ body.film #hd .hold{pointer-events:none}
   <div class="cols" id="pcols"></div>
 </section>
 
-<section class="page" id="p-justmates">
+<section class="page" id="p-series">
   <video muted playsinline preload="auto"></video><video muted playsinline preload="auto"></video>
   <div class="shade"></div>
   <div class="ehit"></div>
   <div class="erows"></div>
   <div class="einfo"><div class="enu"></div><div class="eti"></div><div class="esu"></div><div class="ecl"></div></div>
-  <img class="emark" src="img/justmates-title.png" alt="JustMates">
+  <img class="emark" src="" alt="">
 </section>
 
 <section id="player" aria-hidden="true">
@@ -363,8 +363,8 @@ const PROJECTS = [
   {title:"Introducing PINKMOON", director:"PINKMOON", client:"Storystudio", year:"2026", scene:"moon", pal:["#12060c","#3a0f22","#fff1f4","#f08aa8"], video:"films/pinkmoon-intro.mp4", text:"Culture, community and the stories in between.",
    captions:[[0,24.75,"CULTURE"],[25.042,49.383,"COMMUNITY"],[49.967,62.375,"CONTENT"]]},
   {title:"WAKEUP", director:"A PINKMOON ORIGINAL", client:"Series", year:"2026", scene:"silk", pal:["#0b0a10","#000000","#f6d7c8","#c86b8a"], video:"films/wakeup-trailer.mp4", homeCard:"img/wakeup-title.png", text:"A cinematic microfiction universe where every night, ordinary people confront the one thought they could not silence before falling asleep."},
-  {title:"JustMates", director:"TV Sitcom", client:"TV Sitcom", year:"2026", scene:"bloom", pal:["#07040a","#ff4f8b","#7b3cff","#ffb36b"], video:"films/justmates-ep1.mp4", full:"films/justmates-ep1-full.mp4", titleCard:"img/justmates-title.png", homeCard:"img/justmates-title.png", cardAfter:4, series:"justmates", ep:1, text:"A sitcom about friends, bad timing and the third date that ends everything."},
-  {title:"Monsoon",     director:"PINKMOON", client:"Short Film",     year:"2025", scene:"rain",    pal:["#04070c","#0d1b2a","#5d7fa8","#cfe3ff"], video:"", text:"Two people, one window, the first rain of the year."},
+  {title:"JustMates", director:"TV Sitcom", client:"TV Sitcom", year:"2026", scene:"bloom", pal:["#07040a","#ff4f8b","#7b3cff","#ffb36b"], video:"films/justmates-ep1.mp4", full:"films/justmates-ep1-full.mp4", titleCard:"img/justmates-title.png", homeCard:"img/justmates-title.png", cardW:130, cardAfter:4, series:"justmates", ep:1, text:"A sitcom about friends, bad timing and the third date that ends everything."},
+  {title:"MEN IN PINK", director:"Series", client:"Series", year:"2026", scene:"rain", pal:["#04070c","#0d1b2a","#5d7fa8","#cfe3ff"], video:"films/meninpink-ep1.mp4", full:"films/meninpink-ep1-full.mp4", titleCard:"img/meninpink-title.png", homeCard:"img/meninpink-title.png", homeScale:.42, cardW:300, cardAfter:3.2, series:"meninpink", ep:1, text:"The newest PINKMOON series."},
   {title:"Afterglow",   director:"PINKMOON", client:"Brand Film",     year:"2025", scene:"horizon", pal:["#2b1030","#f07a63","#ffe1b0","#14081a"], video:"", text:"The ten minutes after sunset, stretched into a story about staying."},
   {title:"Paper Moon",  director:"PINKMOON", client:"Editorial",      year:"2025", scene:"noir",    pal:["#0e0e0e","#2b2b2b","#ffffff","#050505"], video:"", text:"Black and white, hard light, soft people."},
   {title:"Velvet Room", director:"PINKMOON", client:"Music Video",    year:"2025", scene:"neon",    pal:["#06020a","#200a1c","#ff2e88","#4a6bff"], video:"", text:"A club that only exists after two. Neon, sweat and a single take."},
@@ -372,7 +372,10 @@ const PROJECTS = [
 ];
 // series: each episode has a short silent preview (after the title card) and a full cut for the player
 const SERIES = {
-  justmates: {name:"JustMates", type:"TV Sitcom", count:39, film:2, titleCard:"img/justmates-title.png", cardAfter:4}
+  // cardW: card width in the player; homeScale: card height on Featured/Archive (wide wordmarks sit lower);
+  // markW: small card width on the episode list
+  justmates: {name:"JustMates", type:"TV Sitcom", count:39, film:2, titleCard:"img/justmates-title.png", cardAfter:4, cardW:130, homeScale:1, markW:84},
+  meninpink: {name:"MEN IN PINK", type:"Series", count:1, film:3, titleCard:"img/meninpink-title.png", cardAfter:3.2, cardW:300, homeScale:.42, markW:210}
 };
 const TEAM = [
   {role:"New projects",   first:"Say",  last:"Hello",     email:"hello@pinkmoon.studio"},
@@ -534,7 +537,7 @@ const info=$("#info"),iT=$("#info .ttl"),iD=$("#info .dir"),iC=$("#info .cli"),i
 let infoIdx=-1;
 function setInfo(i){infoIdx=i;const p=PROJECTS[i];
   // films with a homeCard show their title card instead of the text title
-  if(p.homeCard){iT.textContent="";const im=new Image();im.src=p.homeCard;im.alt=p.title;iT.appendChild(im)}else iT.textContent="“"+p.title+"”";
+  if(p.homeCard){iT.textContent="";const im=new Image();im.src=p.homeCard;im.alt=p.title;im.style.height=`calc(clamp(64px,8.5vw,120px) * ${p.homeScale||1})`;iT.appendChild(im)}else iT.textContent="“"+p.title+"”";
   info.classList.toggle("carded",!!p.homeCard);iD.textContent=p.director;iC.textContent=p.client;iN.textContent=ROMAN(i+1)}
 
 /* ---------- state ---------- */
@@ -556,19 +559,19 @@ const scrollable=()=>(route==="home"||route==="archive")&&filmIdx<0&&started;
 addEventListener("wheel",ev=>{
   let dy=ev.deltaMode===1?ev.deltaY*33:ev.deltaY;dy=clamp(dy,-140,140);
   if(filmIdx<0&&started&&colsFor(route)){ev.preventDefault();colsFor(route).push(dy*.9);return}
-  if(filmIdx<0&&started&&route==="justmates"){ev.preventDefault();EP.posT=clamp(EP.posT+dy*.004,0,SERIES.justmates.count-1);EP.last=performance.now();return}
+  if(filmIdx<0&&started&&isSeries(route)){ev.preventDefault();epsMove(dy*.004);return}
   if(!scrollable())return;ev.preventDefault();
   posT+=dy*.0038;lastScroll=performance.now();
 },{passive:false});
 let ty=null,tmoved=false;
 $("#hit").addEventListener("touchstart",ev=>{ty=ev.touches[0].clientY;tmoved=false},{passive:true});
 addEventListener("touchmove",ev=>{
-  if(ty!=null&&filmIdx<0&&route==="justmates"){const y=ev.touches[0].clientY;EP.posT=clamp(EP.posT+(ty-y)*.008,0,SERIES.justmates.count-1);EP.last=performance.now();ty=y;ev.preventDefault();return}
+  if(ty!=null&&filmIdx<0&&isSeries(route)){const y=ev.touches[0].clientY;epsMove((ty-y)*.008);ty=y;ev.preventDefault();return}
   if(ty!=null&&filmIdx<0&&colsFor(route)){const y=ev.touches[0].clientY;colsFor(route).push((ty-y)*1.2);ty=y;ev.preventDefault();return}
   if(ty==null||!scrollable())return;const y=ev.touches[0].clientY,dy=ty-y;
   if(Math.abs(dy)>3)tmoved=true;posT+=dy*.006;ty=y;lastScroll=performance.now();ev.preventDefault();
 },{passive:false});
-addEventListener("touchstart",ev=>{if(colsFor(route)||route==="justmates")ty=ev.touches[0].clientY},{passive:true});
+addEventListener("touchstart",ev=>{if(colsFor(route)||isSeries(route))ty=ev.touches[0].clientY},{passive:true});
 addEventListener("touchend",()=>{ty=null});
 $("#hit").addEventListener("click",ev=>{
   if(tmoved){tmoved=false;return}
@@ -580,10 +583,10 @@ $("#hit").addEventListener("click",ev=>{
 });
 addEventListener("keydown",ev=>{
   if(filmIdx>=0){playerKey(ev);return}
-  if(route==="justmates"&&started){const C=SERIES.justmates.count;
-    if(["ArrowDown","ArrowRight","PageDown"].includes(ev.key)){EP.posT=clamp(Math.round(EP.posT)+1,0,C-1);EP.last=performance.now();ev.preventDefault()}
-    if(["ArrowUp","ArrowLeft","PageUp"].includes(ev.key)){EP.posT=clamp(Math.round(EP.posT)-1,0,C-1);EP.last=performance.now();ev.preventDefault()}
-    if(ev.key==="Enter")location.hash="justmates-"+(Math.round(EP.pos)+1);return}
+  if(isSeries(route)&&started){
+    if(["ArrowDown","ArrowRight","PageDown"].includes(ev.key)){EP.posT=Math.round(EP.posT);epsMove(1);ev.preventDefault()}
+    if(["ArrowUp","ArrowLeft","PageUp"].includes(ev.key)){EP.posT=Math.round(EP.posT);epsMove(-1);ev.preventDefault()}
+    if(ev.key==="Enter")location.hash=EP.key+"-"+(Math.round(EP.pos)+1);return}
   if(!scrollable())return;
   if(["ArrowDown","ArrowRight","PageDown"].includes(ev.key)){posT=Math.round(posT)+1;lastScroll=performance.now();ev.preventDefault()}
   if(["ArrowUp","ArrowLeft","PageUp"].includes(ev.key)){posT=Math.round(posT)-1;lastScroll=performance.now();ev.preventDefault()}
@@ -602,7 +605,7 @@ function plSetPlaying(v){
   PL.lastMove=performance.now();
 }
 function plSetSound(v){PL.sound=v;PL.vid.muted=!v;$(".p-snd span").textContent=v?"On":"Off"}
-function epItem(s,n){const S=SERIES[s];return{title:S.name,client:S.type,director:"Episode "+n,video:`films/${s}-ep${n}.mp4`,full:`films/${s}-ep${n}-full.mp4`,titleCard:S.titleCard,cardAfter:S.cardAfter,series:s,ep:n}}
+function epItem(s,n){const S=SERIES[s];return{title:S.name,client:S.type,director:"Episode "+n,video:`films/${s}-ep${n}.mp4`,full:`films/${s}-ep${n}-full.mp4`,titleCard:S.titleCard,cardAfter:S.cardAfter,cardW:S.cardW,series:s,ep:n}}
 function openFilm(i){openItem(PROJECTS[i],i)}
 function openEpisode(s,n){openItem(epItem(s,n),SERIES[s].film)}
 function openItem(p,i){
@@ -615,7 +618,8 @@ function openItem(p,i){
   // before cardAfter seconds the film shows its own title, so the player keeps the plain text title;
   // after that the card replaces it, aligned to the top
   const tt=$(".p-ttl .t");tt.textContent="";const sp=document.createElement("span");sp.textContent=p.title;tt.appendChild(sp);
-  if(p.titleCard){const im=new Image();im.src=p.titleCard;im.alt=p.title;tt.appendChild(im)}
+  if(p.titleCard){const im=new Image();im.src=p.titleCard;im.alt=p.title;if(p.cardW)im.style.width=`min(${p.cardW}px,60vw)`;tt.appendChild(im)}
+  if(p.series)$(".p-end .al").href="#"+p.series;
   PL.el.classList.toggle("ttl-top",!!p.titleCard);PL.el.classList.remove("card-on");
   if(!same){
     // "full" is the complete cut for the player; "video" is the loop used on Featured
@@ -703,32 +707,36 @@ function playerFrame(now,dt){
   $(".p-line .th").style.transform=`scaleY(${clamp(plProgress(),0,1).toFixed(4)})`;
 }
 
-/* ---------- episodes page ---------- */
-let lastEp=1;
-const EP={pos:0,posT:0,last:-1e4,cur:-1,vids:[...document.querySelectorAll("#p-justmates video")],front:0,rows:[],built:false};
-function epsBuild(){
-  if(EP.built)return;EP.built=true;const C=SERIES.justmates.count,wrap=$("#p-justmates .erows");
-  for(let k=0;k<C;k++){const b=document.createElement("button");b.className="arow";b.innerHTML=`<span class="n">${ROMAN(k+1)}</span><span class="c">Episode ${k+1}</span>`;
+/* ---------- series episode list (one page for every series) ---------- */
+const lastEp={};
+const isSeries=r=>!!(r&&SERIES[r]);
+const EP={key:null,pos:0,posT:0,last:-1e4,cur:-1,vids:[...document.querySelectorAll("#p-series video")],front:0,rows:[]};
+$("#p-series .ehit").addEventListener("click",()=>{location.hash=EP.key+"-"+(Math.round(EP.pos)+1)});
+function epsBuild(key){
+  if(EP.key===key)return;EP.key=key;const S=SERIES[key],wrap=$("#p-series .erows");
+  wrap.textContent="";EP.rows=[];
+  for(let k=0;k<S.count;k++){const b=document.createElement("button");b.className="arow";b.innerHTML=`<span class="n">${ROMAN(k+1)}</span><span class="c">Episode ${k+1}</span>`;
     b.addEventListener("click",()=>{EP.posT=k;EP.last=performance.now()-400});wrap.appendChild(b);EP.rows.push(b)}
-  $("#p-justmates .ehit").addEventListener("click",()=>{location.hash="justmates-"+(Math.round(EP.pos)+1)});
-  $("#p-justmates .ecl").textContent=SERIES.justmates.type;
+  $("#p-series .ecl").textContent=S.type;
+  const mk=$("#p-series .emark");mk.src=S.titleCard;mk.alt=S.name;mk.style.width=(S.markW||84)+"px";
 }
 function epsShow(k){
   // crossfade to episode k's preview, always from its first frame
   const n=k+1,next=EP.vids[1-EP.front],cur=EP.vids[EP.front];
-  next.src=`films/justmates-ep${n}.mp4`;next.currentTime=0;next.loop=true;next.play().catch(()=>{});
+  next.src=`films/${EP.key}-ep${n}.mp4`;next.currentTime=0;next.loop=true;next.play().catch(()=>{});
   next.classList.add("on");cur.classList.remove("on");EP.front=1-EP.front;
   setTimeout(()=>{if(!cur.classList.contains("on"))cur.pause()},950);
-  $("#p-justmates .eti").textContent="Episode "+n;$("#p-justmates .esu").textContent=SERIES.justmates.name;$("#p-justmates .enu").textContent=ROMAN(n);
+  $("#p-series .eti").textContent="Episode "+n;$("#p-series .esu").textContent=SERIES[EP.key].name;$("#p-series .enu").textContent=ROMAN(n);
 }
-function epsEnter(){epsBuild();EP.pos=EP.posT=clamp(lastEp-1,0,SERIES.justmates.count-1);EP.cur=-1}
+function epsEnter(key){epsBuild(key);EP.pos=EP.posT=clamp((lastEp[key]||1)-1,0,SERIES[key].count-1);EP.cur=-1}
 function epsLeave(){EP.vids.forEach(v=>{v.pause();v.classList.remove("on")});EP.cur=-1}
+function epsMove(d){if(!EP.key)return;EP.posT=clamp(EP.posT+d,0,SERIES[EP.key].count-1);EP.last=performance.now()}
 function epsFrame(now,dt){
-  if(route!=="justmates"||filmIdx>=0)return;
+  if(!isSeries(route)||filmIdx>=0)return;
   if(now-EP.last>170)EP.posT=Math.round(EP.posT);
   EP.pos=damp(EP.pos,EP.posT,7,dt);if(Math.abs(EP.pos-EP.posT)<.0005)EP.pos=EP.posT;
-  const k=Math.round(EP.pos);if(k!==EP.cur){EP.cur=k;lastEp=k+1;epsShow(k)}
-  const frac=Math.abs(EP.pos-k);$("#p-justmates .einfo").style.opacity=clamp(1-frac*3,0,1).toFixed(3);
+  const k=Math.round(EP.pos);if(k!==EP.cur){EP.cur=k;lastEp[EP.key]=k+1;epsShow(k)}
+  const frac=Math.abs(EP.pos-k);$("#p-series .einfo").style.opacity=clamp(1-frac*3,0,1).toFixed(3);
   const cy=H/2;
   EP.rows.forEach((b,i)=>{
     const d=i-EP.pos,ad=Math.abs(d);let y,o;
@@ -791,28 +799,29 @@ const ccols=Columns($("#ccols"),{
 const colsFor=r=>r==="person"?pcols:(r==="contact"?ccols:null);
 
 /* ---------- routing ---------- */
-const ROUTES=["archive","talent","approach","contact","justmates"];
+const ROUTES=["archive","talent","approach","contact",...Object.keys(SERIES)];
+const pageOf=r=>$("#p-"+(isSeries(r)?"series":r));
 const veil=$("#veil");
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
 function parseHash(){const h=location.hash.replace("#","");if(ROUTES.includes(h))return{r:h,f:-1};let m=h.match(/^film-(\d+)$/);if(m)return{r:null,f:clamp(+m[1]-1,0,N-1)};
 m=h.match(/^([a-z]+)-(\d+)$/);if(m&&SERIES[m[1]])return{r:null,f:-1,s:m[1],e:clamp(+m[2],1,SERIES[m[1]].count)};m=h.match(/^talent-(\d+)$/);if(m)return{r:"person",f:-1,p:clamp(+m[1]-1,0,TALENT.length-1)};return{r:"home",f:-1}}
 function setRoute(r){
   route=r;const b=document.body;
-  b.classList.remove("r-home","r-archive","r-talent","r-approach","r-contact","r-person","r-justmates","light");
-  if(r==="justmates")epsEnter();else epsLeave();
+  b.className=b.className.split(" ").filter(c=>!c.startsWith("r-")&&c!=="light").join(" ");
+  if(isSeries(r)){epsEnter(r);b.classList.add("r-series")}else epsLeave();
   b.classList.add("r-"+r);if(r==="talent"||r==="approach"||r==="contact")b.classList.add("light");
   if(r==="contact")ccols.reset();
   if(r==="archive"&&fCur>=0)restartSrc(fCur);
-  $$(".page").forEach(p=>{const on=p.id==="p-"+r;p.classList.toggle("on",on);if(on){p.scrollTop=0;p.querySelectorAll(".rv").forEach(el=>el.classList.remove("in"))}});
+  const pg0=pageOf(r);$$(".page").forEach(p=>{const on=p===pg0;p.classList.toggle("on",on);if(on){p.scrollTop=0;p.querySelectorAll(".rv").forEach(el=>el.classList.remove("in"))}});
   $$("#hd nav a").forEach(a=>a.classList.toggle("active",a.dataset.r===r||(r==="person"&&a.dataset.r==="talent")));
   inIndex=false;hoverIdx=-1;
-  if(r!=="home"&&r!=="archive"){const pg=$("#p-"+r);requestAnimationFrame(()=>reveal(pg))}
+  if(r!=="home"&&r!=="archive"&&pg0)requestAnimationFrame(()=>reveal(pg0))
 }
 let busy=false;
 async function applyHash(first){
   const{r,f,p,s,e}=parseHash();
   if(f>=0){if(!route)setRoute("home");openFilm(f);return}
-  if(s){if(!route)setRoute("home");lastEp=e;openEpisode(s,e);return}
+  if(s){if(!route)setRoute("home");lastEp[s]=e;openEpisode(s,e);return}
   const key=r==="person"?"talent-"+(p+1):r;
   baseHash=r==="home"?"featured":key;
   const wasFilm=filmIdx>=0;
