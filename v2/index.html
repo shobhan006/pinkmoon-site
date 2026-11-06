@@ -115,26 +115,17 @@ body.abt-light{color:#17243F}
 html,body{overscroll-behavior-y:none}
 /* ---------- v2 Featured: one IP per screen, scrolls like a page, soft dissolve between ---------- */
 #arch{display:none!important}
-/* ---------- v2 Services (cred deck: What we make with brands) ---------- */
-#p-services{background:#B4C2DF;color:#17243F;overflow-x:hidden}
-body.r-services{color:#17243F;background:#B4C2DF}
-#p-services .svbg{position:absolute;inset:0;background:url(../img/services-bg.jpg) center/cover no-repeat}
-#p-services .svin{position:absolute;left:clamp(40px,12vw,200px);top:50%;transform:translateY(-46%);width:min(440px,42vw)}
-#p-services .svh{font-weight:700;font-size:clamp(20px,2.4vw,40px);line-height:1.1;margin-bottom:clamp(30px,5vh,52px);white-space:nowrap}
+/* ---------- v2 Services (cred deck: What we make with brands), styled like About ---------- */
+#p-services{background:#F7F3E6;color:#17243F;overflow-y:auto;overflow-x:hidden;-webkit-mask-image:linear-gradient(transparent 52px,#000 124px);mask-image:linear-gradient(transparent 52px,#000 124px)}
+body.r-services{color:#17243F;background:#F7F3E6}
+#p-services .svin{max-width:800px;margin:0 auto;padding:clamp(150px,22vh,230px) 24px clamp(120px,18vh,180px);text-align:center}
+#p-services .svh{font-weight:700;font-size:clamp(13.2px,1.32vw,26.4px);line-height:1.15;margin-bottom:clamp(70px,11vh,120px)}
 #p-services .svl{list-style:none;margin:0;padding:0}
-#p-services .svl li+li{margin-top:clamp(20px,3.6vh,36px)}
-#p-services h3{font-weight:700;font-size:12px;letter-spacing:.04em}
-#p-services .svl p{margin-top:6px;font-size:12px;line-height:19px;max-width:270px;opacity:.82}
-#p-services .svsig{position:absolute;right:28px;bottom:24px;display:flex;gap:18px;font-size:10px;letter-spacing:.06em;opacity:.7}
-#p-services .rv{transform:translateY(12px);filter:blur(3px);transition:opacity .6s var(--eo),transform .6s var(--eo),filter .6s var(--eo)}
+#p-services .svl li+li{margin-top:clamp(70px,11vh,120px)}
+#p-services h3{font-weight:700;font-size:clamp(14.04px,1.728vw,30.24px);line-height:1;letter-spacing:.01em}
+#p-services .svl p{max-width:420px;margin:20px auto 0;font-size:11.7px;line-height:21.6px}
+#p-services .rv{transform:translateY(12px);filter:blur(3px);transition:opacity .55s var(--eo),transform .55s var(--eo),filter .55s var(--eo)}
 #p-services.on .rv.in{opacity:1;transform:none;filter:none}
-@media (max-width:760px){
-  #p-services{overflow-y:auto;-webkit-mask-image:linear-gradient(transparent 52px,#000 124px);mask-image:linear-gradient(transparent 52px,#000 124px)}
-  #p-services .svbg{bottom:auto;height:52vh;background-position:64% center;-webkit-mask-image:linear-gradient(#000 70%,transparent);mask-image:linear-gradient(#000 70%,transparent)}
-  #p-services .svin{position:relative;left:auto;top:auto;transform:none;width:auto;padding:44vh 24px 0}
-  #p-services .svh{white-space:normal;font-size:22px}
-  #p-services .svl p{max-width:none}
-  #p-services .svsig{position:relative;right:auto;bottom:auto;padding:46px 24px 28px;justify-content:flex-end}
 }
 #feat{position:fixed;inset:0;z-index:5;display:none;background:#000;overflow:hidden;touch-action:none}
 body.r-archive #feat{display:block}
@@ -497,7 +488,6 @@ body.film #hd .hold{pointer-events:none}
 <div id="feat"><div class="fpanes"></div><div class="fseam"></div><div class="fscroll"><span>Scroll</span><i></i></div></div>
 <section class="page" id="p-ip"></section>
 <section class="page" id="p-services">
-  <div class="svbg"></div>
   <div class="svin">
     <h2 class="svh rv">WHAT WE MAKE WITH BRANDS.</h2>
     <ul class="svl">
@@ -508,7 +498,6 @@ body.film #hd .hold{pointer-events:none}
       <li class="rv"><h3>CONTENT IP</h3><p>Original worlds, characters and ideas with a life of their own.</p></li>
     </ul>
   </div>
-  <div class="svsig"><span>Storystudio.</span><span>ESTD. 2026</span></div>
 </section>
 <div id="fly"><i class="lgm"></i></div>
 <div id="veil"></div>
@@ -1079,7 +1068,7 @@ async function applyHash(first){
   if(changed){
     if(first||!started){closeFilm();if(r==="person")setPerson(p);if(r==="ip")setIP(ip);setRoute(r);if(r==="home")aboutSet(ab,false);return}
     if(wasFilm){closeFilm();await wait(380)}
-    busy=true;veil.style.background=r==="home"&&ab?"#F7F3E6":r==="services"?"#B4C2DF":(r==="talent"||r==="approach"||r==="contact")?"#fff":"#000";veil.classList.add("on");await wait(460);
+    busy=true;veil.style.background=(r==="home"&&ab)||r==="services"?"#F7F3E6":(r==="talent"||r==="approach"||r==="contact")?"#fff":"#000";veil.classList.add("on");await wait(460);
     if(r==="person")setPerson(p);if(r==="ip")setIP(ip);setRoute(r);if(r==="home")aboutSet(ab,false);await wait(60);veil.classList.remove("on");busy=false;
   }else if(wasFilm)closeFilm();
   if(r==="home"&&!changed)aboutSet(ab,homeBefore&&!wasFilm);
