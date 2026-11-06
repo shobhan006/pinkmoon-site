@@ -114,9 +114,12 @@ body.r-archive #arch{display:block}
 body.abt-light{color:#17243F}
 #p-approach .foot{display:flex;justify-content:center;gap:14px 60px;flex-wrap:wrap;padding:clamp(120px,18vh,180px) 24px 22px}
 #p-approach .foot div{display:flex;gap:14px}
-/* the menu keeps a soft Silky White band behind it while About scrolls underneath */
-#hd::before{content:"";position:absolute;left:0;right:0;top:0;height:112px;background:linear-gradient(#F7F3E6 62%,rgba(247,243,230,0));opacity:0;transition:opacity .35s;pointer-events:none}
+/* while About scrolls, copy blurs and fades out as it rises into the menu area */
+#hd::before{content:"";position:absolute;left:0;right:0;top:0;height:120px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);background:linear-gradient(rgba(247,243,230,.85),rgba(247,243,230,0));-webkit-mask-image:linear-gradient(#000 45%,transparent);mask-image:linear-gradient(#000 45%,transparent);opacity:0;transition:opacity .35s;pointer-events:none}
 body.abt-done #hd::before{opacity:1}
+body.abt-done{background:#F7F3E6}
+body.abt-done #bg{visibility:hidden}
+body.abt-done #p-approach{-webkit-mask-image:linear-gradient(transparent 52px,#000 124px);mask-image:linear-gradient(transparent 52px,#000 124px)}
 body.abt-done .alogo{visibility:visible}
 #fly{position:fixed;left:0;top:0;z-index:7;pointer-events:none;display:none;transform-origin:0 0;will-change:transform}
 #fly .lgm{width:100%}
