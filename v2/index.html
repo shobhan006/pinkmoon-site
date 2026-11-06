@@ -112,6 +112,7 @@ body.r-archive #arch{display:block}
 .aseg h3{font-weight:700;font-size:clamp(14.04px,1.728vw,30.24px);line-height:1;letter-spacing:.01em}
 .aseg p{max-width:560px;margin:22px auto 0;font-size:11.7px;line-height:21.6px}
 body.abt-light{color:#17243F}
+html,body{overscroll-behavior-y:none}
 #p-approach .rv{transform:translateY(12px);filter:blur(3px);transition:opacity .55s var(--eo),transform .55s var(--eo),filter .55s var(--eo)}
 #p-approach .foot{display:flex;justify-content:center;gap:14px 60px;flex-wrap:wrap;padding:clamp(120px,18vh,180px) 24px 22px}
 #p-approach .foot div{display:flex;gap:14px}
@@ -975,7 +976,8 @@ addEventListener("touchmove",ev=>{
   const y=ev.touches[0].clientY,d=ABT.ty-y;
   if(abMoving()){ev.preventDefault();return}
   if(ABT.t===0){ev.preventDefault();if(d>40){ABT.ty=null;goAbout(true)}return}
-  if(abEl.scrollTop<=0&&d<-60){ABT.ty=null;goAbout(false)}
+  // pulling down at the top of About goes back to the film (and never triggers the browser refresh)
+  if(abEl.scrollTop<=0&&d<0){ev.preventDefault();if(d<-40){ABT.ty=null;goAbout(false)}}
 },{passive:false});
 addEventListener("touchend",()=>{ABT.ty=null});
 let abLast=-1;
