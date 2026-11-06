@@ -113,6 +113,80 @@ body.r-archive #arch{display:block}
 .aseg p{max-width:560px;margin:22px auto 0;font-size:11.7px;line-height:21.6px}
 body.abt-light{color:#17243F}
 html,body{overscroll-behavior-y:none}
+/* ---------- v2 Featured: one IP per screen, scrolls like a page, soft dissolve between ---------- */
+#arch{display:none!important}
+#feat{position:fixed;inset:0;z-index:5;display:none;background:#000;overflow:hidden;touch-action:none}
+body.r-archive #feat{display:block}
+body.r-archive #bg,body.r-archive #hit,body.r-archive #stage{display:none!important}
+.fp{position:absolute;left:0;top:0;width:100%;height:100%;display:block;color:#fff;will-change:transform;visibility:hidden}
+.fp video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fp .fsh{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,.12),rgba(0,0,0,.5))}
+.fp .fc{position:absolute;left:24px;right:24px;top:50%;transform:translateY(-50%);text-align:center}
+.fp .fc img{display:block;margin:0 auto;height:calc(clamp(64px,8.5vw,120px) * var(--hs,1));width:auto;max-width:min(72vw,640px);object-fit:contain}
+.fp .fc h2{font-weight:700;font-size:var(--f3);line-height:1.1}
+.fp .fcat{display:block;margin-top:24px;font-size:var(--f2);letter-spacing:.02em}
+.fseam{position:absolute;left:0;right:0;top:0;height:0;pointer-events:none;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);-webkit-mask-image:linear-gradient(transparent,#000 50%,transparent);mask-image:linear-gradient(transparent,#000 50%,transparent);opacity:0}
+.fscroll{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;pointer-events:none;transition:opacity .45s}
+.fscroll i{position:relative;width:1px;height:40px;background:rgba(255,255,255,.22);overflow:hidden}
+.fscroll i::after{content:"";position:absolute;left:0;top:0;width:1px;height:16px;background:#fff;animation:fsc 1.9s cubic-bezier(.65,0,.35,1) infinite}
+@keyframes fsc{0%{transform:translateY(-16px)}100%{transform:translateY(40px)}}
+#feat.last .fscroll{opacity:0}
+
+/* ---------- v2 IP page ---------- */
+#p-ip{background:#05080f;color:#F7F3E6;overflow:hidden}
+#p-ip .iph{position:absolute;inset:0;overflow:hidden}
+#p-ip .ipbg{position:absolute;inset:-8%;background-size:cover;background-position:center;filter:blur(42px) brightness(.5);display:none}
+#p-ip.tall .ipbg{display:block}
+#p-ip .ipimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#p-ip.tall .ipimg{left:auto;right:calc(clamp(260px,22vw,340px) + 3vw);width:auto;height:100%;-webkit-mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent)}
+#p-ip .ipsh{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,8,15,.93) 0%,rgba(5,8,15,.66) 34%,rgba(5,8,15,.18) 66%,rgba(5,8,15,.35) 100%),linear-gradient(0deg,rgba(5,8,15,.7),transparent 40%)}
+#p-ip .ipback{position:absolute;left:24px;top:23px;z-index:2;font-size:var(--f1)}
+#p-ip .ipdots{position:absolute;left:30px;top:24vh;bottom:24vh;width:1px;background:rgba(247,243,230,.2)}
+#p-ip .ipdots a{position:absolute;left:-6px;width:13px;height:13px;transform:translateY(-50%);display:block}
+#p-ip .ipdots a::after{content:"";position:absolute;left:4px;top:4px;width:5px;height:5px;border-radius:50%;background:rgba(247,243,230,.45);transition:background .3s,transform .3s}
+#p-ip .ipdots a.on::after{background:#DFF478;transform:scale(1.4)}
+#p-ip .ipl{position:absolute;left:clamp(70px,9vw,150px);top:50%;transform:translateY(-50%);width:min(420px,calc(100vw - 140px - clamp(260px,22vw,340px)));z-index:1}
+#p-ip .ipcat{display:block;font-weight:700;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#DFF478;margin-bottom:22px}
+#p-ip .iptitle img{display:block;height:calc(clamp(56px,6.6vw,104px) * var(--hs,1));width:auto;max-width:100%;object-fit:contain;object-position:left center}
+#p-ip .iptitle h1{font-weight:700;font-size:clamp(26px,2.8vw,48px);line-height:1.08}
+#p-ip .iplog{margin-top:26px;font-size:12px;line-height:21px;max-width:360px;opacity:.86}
+#p-ip .ipcta{display:flex;align-items:center;gap:30px;margin-top:34px;flex-wrap:wrap}
+#p-ip .ipwatch{display:inline-flex;align-items:center;gap:16px;font-weight:700;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase}
+#p-ip .ipwatch i{position:relative;display:block;width:64px;height:1px;background:currentColor;transition:width .45s var(--eo)}
+#p-ip .ipwatch i::after{content:"";position:absolute;right:0;top:-3px;width:7px;height:7px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:rotate(45deg)}
+#p-ip .ipwatch:hover i{width:92px}
+#p-ip .ipmore{font-size:var(--f1);opacity:.8}
+#p-ip .ipfoot{position:absolute;left:clamp(70px,9vw,150px);bottom:26px;display:flex;gap:26px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;z-index:1}
+#p-ip .ipfoot b{font-weight:700}
+#p-ip .ipfoot span{opacity:.6}
+#p-ip .ipr{position:absolute;right:0;top:0;bottom:0;width:clamp(260px,22vw,340px);border-left:1px solid rgba(247,243,230,.14);background:rgba(5,8,15,.38);padding:96px 32px 32px;display:flex;flex-direction:column;z-index:1}
+#p-ip .ipfollow{display:flex;align-items:center;gap:14px;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+#p-ip .ipfollow span{font-weight:700;margin-right:auto;opacity:.6}
+#p-ip dl{margin-top:44px}
+#p-ip dt{font-weight:700;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;opacity:.55}
+#p-ip dd{margin:7px 0 28px;font-size:12px}
+#p-ip .ipthumb{position:relative;display:block;margin-top:auto;aspect-ratio:16/10;overflow:hidden;background:#000}
+#p-ip .ipthumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--eo);opacity:.8}
+#p-ip .ipthumb:hover img{transform:scale(1.05)}
+#p-ip .ipthumb .pl{position:absolute;left:50%;top:50%;width:42px;height:42px;margin:-21px 0 0 -21px;border:1px solid #DFF478;border-radius:50%}
+#p-ip .ipthumb .pl::after{content:"";position:absolute;left:16px;top:13px;border-left:12px solid #DFF478;border-top:8px solid transparent;border-bottom:8px solid transparent}
+#p-ip .ipthumb .tl{position:absolute;left:14px;bottom:12px;font-weight:700;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase}
+#p-ip .rv{transform:translateY(14px);filter:blur(3px);transition:opacity .7s var(--eo),transform .7s var(--eo),filter .7s var(--eo)}
+#p-ip.on .rv.in{opacity:1;transform:none;filter:none}
+#p-ip.on .iplog.rv.in{opacity:.86}
+@media (max-width:760px){
+  #p-ip{overflow-y:auto}
+  #p-ip .iph{position:absolute;left:0;right:0;top:0;bottom:auto;height:82vh}
+  #p-ip.tall .ipimg{right:0;left:0;width:100%;-webkit-mask-image:none;mask-image:none}
+  #p-ip .ipsh{background:linear-gradient(0deg,#05080f 4%,rgba(5,8,15,.55) 45%,rgba(5,8,15,.2) 75%,rgba(5,8,15,.5))}
+  #p-ip .ipdots{display:none}
+  #p-ip .ipback{top:64px}
+  #p-ip .ipl{position:relative;left:auto;top:auto;transform:none;width:auto;padding:46vh 24px 0}
+  #p-ip .ipfoot{position:relative;left:auto;bottom:auto;padding:30px 24px 0}
+  #p-ip .ipr{position:relative;width:auto;border-left:0;border-top:1px solid rgba(247,243,230,.14);margin-top:34px;background:none;padding:28px 24px 40px}
+  #p-ip dl{margin-top:30px;display:grid;grid-template-columns:1fr 1fr;column-gap:20px}
+  #p-ip .ipthumb{margin-top:10px}
+}
 #p-approach .rv{transform:translateY(12px);filter:blur(3px);transition:opacity .55s var(--eo),transform .55s var(--eo),filter .55s var(--eo)}
 #p-approach .foot{display:flex;justify-content:center;gap:14px 60px;flex-wrap:wrap;padding:clamp(120px,18vh,180px) 24px 22px}
 #p-approach .foot div{display:flex;gap:14px}
@@ -399,6 +473,8 @@ body.film #hd .hold{pointer-events:none}
   </div>
 </section>
 
+<div id="feat"><div class="fpanes"></div><div class="fseam"></div><div class="fscroll"><span>Scroll</span><i></i></div></div>
+<section class="page" id="p-ip"></section>
 <div id="fly"><i class="lgm"></i></div>
 <div id="veil"></div>
 <div id="loader" aria-label="PINKMOON"><div class="win"><i class="lgm"></i></div><i class="bar t"></i><i class="bar b"></i></div>
@@ -425,6 +501,26 @@ const PROJECTS = [
   {title:"MEN IN PINK", director:"Series", client:"Series", year:"2026", scene:"rain", pal:["#04070c","#0d1b2a","#5d7fa8","#cfe3ff"], video:"../films/meninpink-ep1.mp4", full:"../films/meninpink-ep1-full.mp4", titleCard:"../img/meninpink-title.png", homeCard:"../img/meninpink-title.png", homeScale:.42, cardW:300, cardAfter:3.2, series:"meninpink", ep:1, text:"The newest PINKMOON series."},
 ];
 // series: each episode has a short silent preview (after the title card) and a full cut for the player
+/* IP pages (v2). One entry per project, same order as PROJECTS.
+   cat: shown under the title on Featured and on the IP page. logline: the short paragraph.
+   facts: label/value rows on the right ("auto" = episode count from SERIES).
+   hero / thumb: still images for now (placeholders until final key art).
+   watch / more: where the buttons go. */
+const IPS = [
+  {slug:"introducing-pinkmoon", cat:"Studio Film", logline:"The film that introduces PINKMOON. Culture to find the idea, content to give it form, community to give it a life.",
+   facts:[["Format","Short film"],["Runtime","1 min"],["Year","2026"],["Made by","PINKMOON"]],
+   hero:"../img/ip/pinkmoon-hero.jpg", thumb:"../img/ip/pinkmoon-thumb.jpg", watch:"film-1", watchLabel:"Watch the film", thumbLabel:"Play film"},
+  {slug:"wakeup", cat:"Series", logline:"A PINKMOON original series. The trailer is out now and the full story is on its way.",
+   facts:[["Format","Series"],["Status","Trailer out"],["Year","2026"],["Created by","PINKMOON"]],
+   hero:"../img/ip/wakeup-hero.jpg", thumb:"../img/ip/wakeup-thumb.jpg", watch:"film-2", watchLabel:"Watch trailer", thumbLabel:"Watch trailer"},
+  {slug:"justmates", cat:"Sitcom", logline:"Two flatmates, one small apartment and all the little things that go wrong when you share a life with your friends.",
+   facts:[["Format","Sitcom"],["Episodes","auto"],["Year","2026"],["Created by","PINKMOON"]],
+   hero:"../img/ip/justmates-hero.jpg", thumb:"../img/ip/justmates-thumb.jpg", watch:"justmates-1", watchLabel:"Watch Episode 1", more:"justmates", moreLabel:"All episodes", thumbLabel:"Episode 1"},
+  {slug:"men-in-pink", cat:"Series", logline:"A new PINKMOON series. Episode 1 is out now, with more on the way.",
+   facts:[["Format","Series"],["Episodes","auto"],["Year","2026"],["Created by","PINKMOON"]],
+   hero:"../img/ip/meninpink-hero.jpg", thumb:"../img/ip/meninpink-thumb.jpg", watch:"meninpink-1", watchLabel:"Watch Episode 1", more:"meninpink", moreLabel:"All episodes", thumbLabel:"Episode 1"}
+];
+
 const SERIES = {
   // cardW: card width in the player; homeScale: card height on Featured/Archive (wide wordmarks sit lower);
   // markW: small card width on the episode list
@@ -664,6 +760,7 @@ addEventListener("wheel",ev=>{
   if(filmIdx<0&&started&&colsFor(route)){ev.preventDefault();colsFor(route).push(dy*.9);return}
   if(filmIdx<0&&started&&isSeries(route)){ev.preventDefault();epsMove(dy*.004);return}
   if(route==="home"&&filmIdx<0&&started){aboutWheel(dy,ev);return}
+  if(route==="archive"&&filmIdx<0&&started){ev.preventDefault();featWheel(dy);return}
   if(!scrollable())return;ev.preventDefault();
   posT+=dy/H;lastScroll=performance.now();
 },{passive:false});
@@ -696,6 +793,10 @@ addEventListener("keydown",ev=>{
     if(ABT.t===0&&["ArrowDown","PageDown"," "].includes(ev.key)){goAbout(true);ev.preventDefault()}
     else if(ABT.t===1&&abEl.scrollTop<=0&&["ArrowUp","PageUp"].includes(ev.key)){goAbout(false);ev.preventDefault()}
     if(ev.key==="Enter"&&ABT.t===0)location.hash="film-1";return}
+  if(route==="archive"&&started){
+    if(["ArrowDown","ArrowRight","PageDown"," "].includes(ev.key)){FT.t=FT.base=clamp(FT.base+1,0,N-1);ev.preventDefault()}
+    if(["ArrowUp","ArrowLeft","PageUp"].includes(ev.key)){FT.t=FT.base=clamp(FT.base-1,0,N-1);ev.preventDefault()}
+    if(ev.key==="Enter")location.hash="ip-"+IPS[clamp(Math.round(FT.pos),0,N-1)].slug;return}
   if(!scrollable())return;
   if(["ArrowDown","ArrowRight","PageDown"].includes(ev.key)){posT=Math.round(posT)+1;lastScroll=performance.now();ev.preventDefault()}
   if(["ArrowUp","ArrowLeft","PageUp"].includes(ev.key)){posT=Math.round(posT)-1;lastScroll=performance.now();ev.preventDefault()}
@@ -913,6 +1014,7 @@ const pageOf=r=>$("#p-"+(isSeries(r)?"series":r));
 const veil=$("#veil");
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
 function parseHash(){const h=location.hash.replace("#","");if(h==="about"||h==="services")return{r:"home",f:-1,ab:h};if(ROUTES.includes(h))return{r:h,f:-1};let m=h.match(/^film-(\d+)$/);if(m)return{r:null,f:clamp(+m[1]-1,0,N-1)};
+m=h.match(/^ip-([a-z0-9-]+)$/);if(m){const k=IPS.findIndex(x=>x.slug===m[1]);if(k>=0)return{r:"ip",f:-1,ip:k}}
 m=h.match(/^([a-z]+)-(\d+)$/);if(m&&SERIES[m[1]])return{r:null,f:-1,s:m[1],e:clamp(+m[2],1,SERIES[m[1]].count)};m=h.match(/^talent-(\d+)$/);if(m)return{r:"person",f:-1,p:clamp(+m[1]-1,0,TALENT.length-1)};return{r:"home",f:-1}}
 function setRoute(r){
   route=r;const b=document.body;
@@ -928,19 +1030,19 @@ function setRoute(r){
 }
 let busy=false;
 async function applyHash(first){
-  const{r,f,p,s,e,ab}=parseHash();
+  const{r,f,p,s,e,ab,ip}=parseHash();
   if(f>=0){if(!route)setRoute("home");openFilm(f);return}
   if(s){if(!route)setRoute("home");lastEp[s]=e;openEpisode(s,e);return}
-  const key=r==="person"?"talent-"+(p+1):r;
+  const key=r==="person"?"talent-"+(p+1):r==="ip"?"ip-"+IPS[ip].slug:r;
   baseHash=r==="home"?(ab||""):key;
   const homeBefore=route==="home"&&started&&!first;
   const wasFilm=filmIdx>=0;
-  const changed=r!==route||(r==="person"&&p!==personIdx);
+  const changed=r!==route||(r==="person"&&p!==personIdx)||(r==="ip"&&ip!==ipIdx);
   if(changed){
-    if(first||!started){closeFilm();if(r==="person")setPerson(p);setRoute(r);if(r==="home")aboutSet(ab,false);return}
+    if(first||!started){closeFilm();if(r==="person")setPerson(p);if(r==="ip")setIP(ip);setRoute(r);if(r==="home")aboutSet(ab,false);return}
     if(wasFilm){closeFilm();await wait(380)}
     busy=true;veil.style.background=r==="home"&&ab?"#F7F3E6":(r==="talent"||r==="approach"||r==="contact")?"#fff":"#000";veil.classList.add("on");await wait(460);
-    if(r==="person")setPerson(p);setRoute(r);if(r==="home")aboutSet(ab,false);await wait(60);veil.classList.remove("on");busy=false;
+    if(r==="person")setPerson(p);if(r==="ip")setIP(ip);setRoute(r);if(r==="home")aboutSet(ab,false);await wait(60);veil.classList.remove("on");busy=false;
   }else if(wasFilm)closeFilm();
   if(r==="home"&&!changed)aboutSet(ab,homeBefore&&!wasFilm);
 }
@@ -953,7 +1055,7 @@ const abEl=$("#p-approach"),fly=$("#fly"),flyM=fly.querySelector(".lgm"),aLogo=$
 const ABT={p:0,t:0,acc:0,accT:0,ty:null};
 const EIO=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
 function navActive(){$$("#hd nav a").forEach(a=>{const d=a.dataset.r;
-  a.classList.toggle("active",route==="home"?(ABT.t===1&&d===(location.hash==="#services"?"services":"about")):(d===route||(route==="person"&&d==="talent")))})}
+  a.classList.toggle("active",route==="home"?(ABT.t===1&&d===(location.hash==="#services"?"services":"about")):(d===route||(route==="person"&&d==="talent")||(route==="ip"&&d==="archive")))})}
 function aboutSet(ab,animate){
   const t=ab?1:0,was=ABT.t;ABT.t=t;navActive();
   if(!animate){for(let j=TW.length-1;j>=0;j--)if(TW[j].o===ABT)TW.splice(j,1);ABT.p=t}
@@ -1012,6 +1114,62 @@ function aboutFrame(){
   }else fly.style.display="none";
 }
 
+/* ---------- v2 Featured ----------
+   One IP per screen. The list scrolls like a page; while two IPs share the screen their meeting edge
+   dissolves (both fade into each other with a soft blur band), at rest each IP is full and sharp. */
+const featEl=$("#feat"),fpanes=featEl.querySelector(".fpanes"),fseam=featEl.querySelector(".fseam");
+const FT={pos:0,t:0,base:0,last:0,ty:null,moved:0,vel:0,lt:0};
+const fps=PROJECTS.map((p,i)=>{const a=document.createElement("a");a.className="fp";a.href="#ip-"+IPS[i].slug;
+  const card=p.homeCard?`<img alt="" src="${p.homeCard}" style="--hs:${p.homeScale||1}">`:`<h2></h2>`;
+  a.innerHTML=`<video muted loop playsinline preload="none"></video><div class="fsh"></div><div class="fc">${card}<span class="fcat"></span></div>`;
+  if(!p.homeCard)a.querySelector("h2").textContent=p.title;
+  a.querySelector(".fcat").textContent=IPS[i].cat;
+  const v=a.querySelector("video");v.muted=true;v.setAttribute("playsinline","");
+  a.addEventListener("click",ev=>{if(FT.moved>8){ev.preventDefault();FT.moved=0}});
+  fpanes.appendChild(a);return{a,v,src:pv(p),on:false}});
+function featWheel(dy){FT.t=clamp(FT.t+dy/H*.9,-.12,N-1+.12);FT.last=performance.now()}
+featEl.addEventListener("touchstart",ev=>{FT.ty=ev.touches[0].clientY;FT.moved=0;FT.vel=0;FT.lt=performance.now()},{passive:true});
+featEl.addEventListener("touchmove",ev=>{if(FT.ty==null)return;ev.preventDefault();
+  const y=ev.touches[0].clientY,d=FT.ty-y,n=performance.now();FT.moved+=Math.abs(d);
+  FT.t=clamp(FT.t+d/H*1.15,-.15,N-1+.15);FT.vel=lerp(FT.vel,(d/H)/Math.max(8,n-FT.lt)*16,.5);FT.lt=n;FT.ty=y;FT.last=n},{passive:false});
+featEl.addEventListener("touchend",()=>{if(FT.ty==null)return;FT.ty=null;
+  const n=performance.now(),fl=n-FT.lt<90?FT.vel*7:0;const dd=FT.t+clamp(fl,-.6,.6)-FT.base;FT.t=clamp(Math.abs(dd)>.12?FT.base+Math.sign(dd)*Math.max(1,Math.round(Math.abs(dd))):FT.base,0,N-1);FT.base=FT.t;FT.last=1e15});
+function featFrame(dt){
+  if(route!=="archive"||filmIdx>=0){fps.forEach(x=>{if(x.on){x.v.pause();x.on=false}});return}
+  const now=performance.now();
+  if(FT.ty==null&&now-FT.last>140){const dd=FT.t-FT.base;FT.t=clamp(Math.abs(dd)>.08?FT.base+Math.sign(dd)*Math.max(1,Math.round(Math.abs(dd))):FT.base,0,N-1);FT.base=FT.t}
+  FT.pos=damp(FT.pos,FT.t,FT.ty!=null?20:6.5,dt);if(Math.abs(FT.pos-FT.t)<.0004)FT.pos=FT.t;
+  const pc=clamp(FT.pos,0,N-1),f=pc-Math.floor(pc),m=FT.pos<0||FT.pos>N-1?0:Math.sin(Math.PI*f),O=.24*H*m,S=H-O;
+  fps.forEach((x,k)=>{const d=k-FT.pos,vis=Math.abs(d)<1.02;
+    x.a.style.visibility=vis?"visible":"hidden";
+    if(vis){x.a.style.transform=`translate3d(0,${(d*S).toFixed(2)}px,0)`;
+      const mk=O>.5?`linear-gradient(transparent 0,#000 ${O.toFixed(1)}px,#000 ${(H-O).toFixed(1)}px,transparent ${H}px)`:"";
+      x.a.style.webkitMaskImage=mk;x.a.style.maskImage=mk;
+      if(!x.v.src)x.v.src=x.src;if(!x.on){x.on=true;x.v.play().catch(()=>{})}
+    }else if(x.on){x.v.pause();x.on=false}});
+  if(!MOB&&O>1){const yb=(Math.floor(pc)+1-FT.pos)*S;fseam.style.top=yb.toFixed(1)+"px";fseam.style.height=O.toFixed(1)+"px";fseam.style.opacity=m.toFixed(3)}
+  else fseam.style.opacity=0;
+  featEl.classList.toggle("last",Math.round(FT.pos)>=N-1);
+}
+
+/* ---------- v2 IP page ---------- */
+const ipEl=$("#p-ip");let ipIdx=-1;
+function setIP(k){ipIdx=k;const P=PROJECTS[k],I=IPS[k],sk=P.series,esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const facts=I.facts.map(([l,v])=>`<dt>${esc(l)}</dt><dd>${esc(v==="auto"&&sk?SERIES[sk].count:v)}</dd>`).join("");
+  const title=P.homeCard?`<img alt="${esc(P.title)}" src="${P.homeCard}" style="--hs:${P.homeScale||1}">`:`<h1>${esc(P.title)}</h1>`;
+  const nx=(k+1)%N,dots=PROJECTS.map((q,j)=>`<a href="#ip-${IPS[j].slug}" class="${j===k?"on":""}" style="top:${N>1?j/(N-1)*100:50}%" aria-label="${esc(q.title)}"></a>`).join("");
+  ipEl.innerHTML=`<div class="iph"><div class="ipbg" style="background-image:url('${I.hero}')"></div><img class="ipimg" alt="" src="${I.hero}"><div class="ipsh"></div></div>
+  <a class="u ipback" href="#archive">← Featured</a>
+  <div class="ipdots">${dots}</div>
+  <div class="ipl"><span class="ipcat rv">${esc(I.cat)}</span><div class="iptitle rv">${title}</div><p class="iplog rv">${esc(I.logline)}</p>
+    <div class="ipcta rv"><a class="ipwatch" href="#${I.watch}">${esc(I.watchLabel)}<i></i></a>${I.more?`<a class="u ipmore" href="#${I.more}">${esc(I.moreLabel)}</a>`:""}</div></div>
+  <div class="ipfoot rv"><b>${String(k+1).padStart(2,"0")} / ${String(N).padStart(2,"0")}</b><span>Next</span><a class="u" href="#ip-${IPS[nx].slug}">${esc(PROJECTS[nx].title)}</a></div>
+  <aside class="ipr"><div class="ipfollow"><span>Follow</span><a class="u" href="${CONFIG.instagram||"#"}">Instagram</a><a class="u" href="${CONFIG.vimeo||"#"}">Vimeo</a></div>
+    <dl>${facts}</dl><a class="ipthumb" href="#${I.watch}"><img alt="" src="${I.thumb}"><span class="pl"></span><span class="tl">${esc(I.thumbLabel)}</span></a></aside>`;
+  const im=ipEl.querySelector(".ipimg"),tallChk=()=>ipEl.classList.toggle("tall",im.naturalHeight>im.naturalWidth);im.complete?tallChk():im.onload=tallChk;
+  ipEl.scrollTop=0;
+}
+
 /* reveal on scroll inside pages */
 const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting)en.target.classList.add("in")}),{threshold:.12});
 function reveal(pg){const els=[...pg.querySelectorAll(".rv")];els.forEach((el,k)=>{el.style.transitionDelay=Math.min(k,6)*90+"ms";io.observe(el)})}
@@ -1033,7 +1191,7 @@ let prev=performance.now();
 function frame(now){
   requestAnimationFrame(frame);
   const dt=Math.min(.05,(now-prev)/1000);prev=now;const T=now/1000;
-  const live=route==="home"||route==="archive";
+  const live=route==="home";
 
   // index mode from cursor over the staircase
   if(route==="home"&&filmIdx<0&&started&&!busy){
@@ -1150,7 +1308,7 @@ function frame(now){
     cl.update(dt);
     if(route==="person")pcols.slots().forEach(s=>{if(s.y>-CH&&s.y<H){const fi=+s.e.dataset.f;needV(sources[fi].v);sources[fi].update(T);const c=s.e.querySelector("canvas");drawCover(c.getContext("2d"),sources[fi],{x:0,y:0,w:c.width,h:c.height})}});
   }
-  aboutFrame();
+  aboutFrame();featFrame(dt);
   syncPlay(now);
 }
 
