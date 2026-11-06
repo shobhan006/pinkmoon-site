@@ -112,6 +112,7 @@ body.r-archive #arch{display:block}
 .aseg h3{font-weight:700;font-size:clamp(26px,3.2vw,56px);line-height:1;letter-spacing:.01em}
 .aseg p{max-width:560px;margin:22px auto 0;font-size:var(--f2);line-height:24px}
 body.abt-light{color:#17243F}
+#p-approach .rv{transform:translateY(12px);filter:blur(3px);transition:opacity .55s var(--eo),transform .55s var(--eo),filter .55s var(--eo)}
 #p-approach .foot{display:flex;justify-content:center;gap:14px 60px;flex-wrap:wrap;padding:clamp(120px,18vh,180px) 24px 22px}
 #p-approach .foot div{display:flex;gap:14px}
 /* while About scrolls, copy blurs and fades out as it rises into the menu area */
@@ -978,6 +979,10 @@ addEventListener("touchmove",ev=>{
 },{passive:false});
 addEventListener("touchend",()=>{ABT.ty=null});
 let abLast=-1;
+// About copy arrives with the panel; further down, each section shows the moment it enters the screen
+const abIO=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting)en.target.classList.add("in")}),{root:abEl,threshold:0,rootMargin:"0px 0px 6% 0px"});
+function revealAbout(){abEl.querySelectorAll(".app .rv").forEach((el,k)=>{el.style.transitionDelay=Math.min(k,4)*45+"ms";abIO.unobserve(el);abIO.observe(el)});
+  abEl.querySelectorAll(".aseg.rv").forEach(el=>{el.style.transitionDelay="0ms";abIO.unobserve(el);abIO.observe(el)})}
 function aboutFrame(){
   const home=route==="home",p=home?ABT.p:0;
   if(p===abLast&&!(p>0&&p<1))return;abLast=p;
@@ -995,7 +1000,7 @@ function aboutFrame(){
   b.classList.toggle("abt-done",home&&p>=1);
   if(home)b.classList.toggle("light",p>.55);b.classList.toggle("abt-light",home&&p>.55);
   abEl.style.pointerEvents=p>=1?"auto":"none";
-  if(home&&p>=1&&!abEl.classList.contains("on")){abEl.classList.add("on");reveal(abEl)}
+  if(home&&p>0&&!abEl.classList.contains("on")){abEl.classList.add("on");revealAbout()}
   if(home&&p>0&&p<1){
     // aim at where the logo will sit once the panel has landed, so it travels one way only
     const s=$("#hd .brand .lgm").getBoundingClientRect(),t=aLogo.getBoundingClientRect(),tTop=t.top-off;
