@@ -955,7 +955,7 @@ function navActive(){$$("#hd nav a").forEach(a=>{const d=a.dataset.r;
 function aboutSet(ab,animate){
   const t=ab?1:0,was=ABT.t;ABT.t=t;navActive();
   if(!animate){for(let j=TW.length-1;j>=0;j--)if(TW[j].o===ABT)TW.splice(j,1);ABT.p=t}
-  else if(t!==was||ABT.p!==t)tw(ABT,"p",t,1.25,0,EIO);
+  else if(t!==was||ABT.p!==t)tw(ABT,"p",t,.85,0,EIO);
   if(t===0){abEl.classList.remove("on");abEl.querySelectorAll(".rv").forEach(el=>el.classList.remove("in"))}
   if(ab==="services"){const go=()=>{const sv=$("#asegs");if(sv)abEl.scrollTo({top:sv.offsetTop-110,behavior:"smooth"})};setTimeout(go,animate?1300:120)}
   else if(t===1&&!animate)abEl.scrollTop=0;
@@ -983,16 +983,23 @@ function aboutFrame(){
   if(p===abLast&&!(p>0&&p<1))return;abLast=p;
   const b=document.body;
   abEl.style.visibility=p>0?"visible":"hidden";
-  abEl.style.transform=`translate3d(0,${((1-p)*100).toFixed(3)}%,0)`;
-  bgEl.style.transform=p>0?`translate3d(0,${(-p*22).toFixed(3)}vh,0)`:"";
+  // no hard edge: the panel's top dissolves into the film (a soft colour gradient that tightens as it arrives)
+  // while the film behind drifts up, grows a touch and goes out of focus
+  const Hh=innerHeight,fea=.45*Hh*(1-p),off=(1-p)*(Hh+.45*Hh);
+  abEl.style.transform=`translate3d(0,${off.toFixed(2)}px,0)`;
+  const mk=p>0&&p<1?`linear-gradient(transparent 0,#000 ${fea.toFixed(1)}px)`:"";
+  abEl.style.webkitMaskImage=mk;abEl.style.maskImage=mk;
+  bgEl.style.transform=p>0?`translate3d(0,${(-p*14).toFixed(3)}vh,0) scale(${(1+p*.08).toFixed(4)})`:"";
+  bgEl.style.filter=!MOB&&p>0&&p<1?`blur(${(p*28).toFixed(1)}px)`:"";
   b.classList.toggle("abt",home&&p>0);
   b.classList.toggle("abt-done",home&&p>=1);
   if(home)b.classList.toggle("light",p>.55);b.classList.toggle("abt-light",home&&p>.55);
   abEl.style.pointerEvents=p>=1?"auto":"none";
   if(home&&p>=1&&!abEl.classList.contains("on")){abEl.classList.add("on");reveal(abEl)}
   if(home&&p>0&&p<1){
-    const s=$("#hd .brand .lgm").getBoundingClientRect(),t=aLogo.getBoundingClientRect();
-    const x=lerp(s.left,t.left,p),y=lerp(s.top,t.top,p),w=lerp(s.width,t.width,p);
+    // aim at where the logo will sit once the panel has landed, so it travels one way only
+    const s=$("#hd .brand .lgm").getBoundingClientRect(),t=aLogo.getBoundingClientRect(),tTop=t.top-off;
+    const x=lerp(s.left,t.left,p),y=lerp(s.top,tTop,p),w=lerp(s.width,t.width,p);
     fly.style.display="block";fly.style.width=w.toFixed(2)+"px";fly.style.transform=`translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0)`;
     const c=[217,246,99].map((v,k)=>Math.round(lerp(v,[23,36,63][k],p)));flyM.style.background=`rgb(${c})`;
   }else fly.style.display="none";
