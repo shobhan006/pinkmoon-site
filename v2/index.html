@@ -100,10 +100,23 @@ body.r-archive #arch{display:block}
 .page.on .rv.in,#p-approach.on .rv.in{opacity:1;transform:none;filter:none}
 /* v2 landing: only the film, the logo and the menu */
 #info{display:none!important}
-#p-approach{position:fixed;inset:0;z-index:6;overflow-y:auto;overflow-x:hidden;background:#fff;color:#000;visibility:hidden;transform:translate3d(0,100%,0);will-change:transform;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+#p-approach{position:fixed;inset:0;z-index:6;overflow-y:auto;overflow-x:hidden;background:#F7F3E6;color:#17243F;visibility:hidden;transform:translate3d(0,100%,0);will-change:transform;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 #p-approach .app{padding-top:clamp(120px,17vh,190px)}
 .alogo{width:clamp(200px,24vw,340px);margin:0 auto clamp(40px,6vh,64px);visibility:hidden}
-.alogo .lgm{background:#000}
+.alogo .lgm{background:#17243F}
+#p-approach .ah{font-weight:700;font-size:var(--f3);line-height:1.15;margin-bottom:28px}
+#p-approach .app p{max-width:640px;margin-left:auto;margin-right:auto}
+.atri{display:flex;flex-direction:column;gap:6px;margin-top:40px;font-weight:700;font-size:var(--f1);letter-spacing:.08em}
+.asegs{max-width:800px;margin:0 auto;padding:30px 24px 0;text-align:center}
+.aseg+.aseg{margin-top:clamp(90px,14vh,150px)}
+.aseg h3{font-weight:700;font-size:clamp(26px,3.2vw,56px);line-height:1;letter-spacing:.01em}
+.aseg p{max-width:560px;margin:22px auto 0;font-size:var(--f2);line-height:24px}
+body.abt-light{color:#17243F}
+#p-approach .foot{display:flex;justify-content:center;gap:14px 60px;flex-wrap:wrap;padding:clamp(120px,18vh,180px) 24px 22px}
+#p-approach .foot div{display:flex;gap:14px}
+/* the menu keeps a soft Silky White band behind it while About scrolls underneath */
+#hd::before{content:"";position:absolute;left:0;right:0;top:0;height:112px;background:linear-gradient(#F7F3E6 62%,rgba(247,243,230,0));opacity:0;transition:opacity .35s;pointer-events:none}
+body.abt-done #hd::before{opacity:1}
 body.abt-done .alogo{visibility:visible}
 #fly{position:fixed;left:0;top:0;z-index:7;pointer-events:none;display:none;transform-origin:0 0;will-change:transform}
 #fly .lgm{width:100%}
@@ -329,12 +342,16 @@ body.film #hd .hold{pointer-events:none}
 <section class="about" id="p-approach">
   <div class="app">
     <div class="alogo"><i class="lgm"></i></div>
-    <p class="rv">PINKMOON is a story studio. We make films for brands, artists and people with something to say.</p>
-    <p class="rv">We start with the feeling we want you to leave with, then build everything around it. Script, look, light, sound, edit. Some of it is shot, some of it is made with AI, all of it is directed.</p>
-    <p class="rv">A small team, close collaboration and a lot of care for the frame.</p>
+    <h2 class="ah rv">WE ARE A STORYSTUDIO.</h2>
+    <p class="rv">A story can start as a film. It can become a conversation, a character, a community, a format, a fandom or something nobody planned for. That's the space we're interested in. We find ideas in culture, turn them into content and build the world around them so people can see themselves in it, talk about it and make it their own.</p>
+    <div class="atri rv"><span>CULTURE TO FIND THE IDEA</span><span>CONTENT TO GIVE IT FORM</span><span>COMMUNITY TO GIVE IT A LIFE</span><span>THAT IS PINKMOON</span></div>
     <div class="vline rv"></div>
   </div>
-  <div id="svcs"></div>
+  <div class="asegs" id="asegs">
+    <div class="aseg rv"><h3>CULTURE</h3><p>Culture is everywhere, in music, fashion, technology, the internet, food, language, relationships and the way we live. We're interested in all of it because that's where the interesting stories usually begin.</p></div>
+    <div class="aseg rv"><h3>COMMUNITY</h3><p>Community isn't about gathering an audience around something. It's about creating something people recognise themselves in, and want to come back to because it feels a little like theirs.</p></div>
+    <div class="aseg rv"><h3>CONTENT</h3><p>We shape stories for the world. Films, series, formats, IP, branded entertainment, digital and new forms of storytelling. The format can change, the platform can change. What doesn't change is the idea at the centre of it. We start there and build outwards.</p></div>
+  </div>
   <div class="foot"><div><a class="u sl-ig" href="#">Instagram</a><a class="u sl-vm" href="#">Vimeo</a><a class="u sl-li" href="#">LinkedIn</a></div><div><span>All work © PINKMOON, 2026</span></div></div>
 </section>
 
@@ -917,7 +934,7 @@ async function applyHash(first){
   if(changed){
     if(first||!started){closeFilm();if(r==="person")setPerson(p);setRoute(r);if(r==="home")aboutSet(ab,false);return}
     if(wasFilm){closeFilm();await wait(380)}
-    busy=true;veil.style.background=(r==="talent"||r==="approach"||r==="contact"||(r==="home"&&ab))?"#fff":"#000";veil.classList.add("on");await wait(460);
+    busy=true;veil.style.background=r==="home"&&ab?"#F7F3E6":(r==="talent"||r==="approach"||r==="contact")?"#fff":"#000";veil.classList.add("on");await wait(460);
     if(r==="person")setPerson(p);setRoute(r);if(r==="home")aboutSet(ab,false);await wait(60);veil.classList.remove("on");busy=false;
   }else if(wasFilm)closeFilm();
   if(r==="home"&&!changed)aboutSet(ab,homeBefore&&!wasFilm);
@@ -937,7 +954,7 @@ function aboutSet(ab,animate){
   if(!animate){for(let j=TW.length-1;j>=0;j--)if(TW[j].o===ABT)TW.splice(j,1);ABT.p=t}
   else if(t!==was||ABT.p!==t)tw(ABT,"p",t,1.25,0,EIO);
   if(t===0){abEl.classList.remove("on");abEl.querySelectorAll(".rv").forEach(el=>el.classList.remove("in"))}
-  if(ab==="services"){const go=()=>{const sv=$("#svcs");if(sv)abEl.scrollTo({top:sv.offsetTop-110,behavior:"smooth"})};setTimeout(go,animate?1300:120)}
+  if(ab==="services"){const go=()=>{const sv=$("#asegs");if(sv)abEl.scrollTo({top:sv.offsetTop-110,behavior:"smooth"})};setTimeout(go,animate?1300:120)}
   else if(t===1&&!animate)abEl.scrollTop=0;
 }
 function goAbout(v){if(busy)return;location.hash=v?"about":"";if(!v&&location.hash==="")history.replaceState(null,"",location.pathname+location.search)}
@@ -967,14 +984,14 @@ function aboutFrame(){
   bgEl.style.transform=p>0?`translate3d(0,${(-p*22).toFixed(3)}vh,0)`:"";
   b.classList.toggle("abt",home&&p>0);
   b.classList.toggle("abt-done",home&&p>=1);
-  if(home)b.classList.toggle("light",p>.55);
+  if(home)b.classList.toggle("light",p>.55);b.classList.toggle("abt-light",home&&p>.55);
   abEl.style.pointerEvents=p>=1?"auto":"none";
   if(home&&p>=1&&!abEl.classList.contains("on")){abEl.classList.add("on");reveal(abEl)}
   if(home&&p>0&&p<1){
     const s=$("#hd .brand .lgm").getBoundingClientRect(),t=aLogo.getBoundingClientRect();
     const x=lerp(s.left,t.left,p),y=lerp(s.top,t.top,p),w=lerp(s.width,t.width,p);
     fly.style.display="block";fly.style.width=w.toFixed(2)+"px";fly.style.transform=`translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0)`;
-    const c=[217,246,99].map(v=>Math.round(v*(1-p)));flyM.style.background=`rgb(${c})`;
+    const c=[217,246,99].map((v,k)=>Math.round(lerp(v,[23,36,63][k],p)));flyM.style.background=`rgb(${c})`;
   }else fly.style.display="none";
 }
 
@@ -984,7 +1001,7 @@ function reveal(pg){const els=[...pg.querySelectorAll(".rv")];els.forEach((el,k)
 
 /* ---------- static pages ---------- */
 $$(".sl-ig").forEach(a=>a.href=CONFIG.instagram);$$(".sl-vm").forEach(a=>a.href=CONFIG.vimeo);$$(".sl-li").forEach(a=>a.href=CONFIG.linkedin);
-$("#svcs").innerHTML=SERVICES.map((s,i)=>`<div class="svc rv"><div class="n">${ROMAN(i+1)}</div><h3></h3><p></p></div>`).join("");
+if($("#svcs"))$("#svcs").innerHTML=SERVICES.map((s,i)=>`<div class="svc rv"><div class="n">${ROMAN(i+1)}</div><h3></h3><p></p></div>`).join("");
 $$("#svcs .svc").forEach((el,i)=>{el.querySelector("h3").textContent=SERVICES[i].t;el.querySelector("p").textContent=SERVICES[i].d});
 const tal=$("#tal");
 TALENT.forEach((p,i)=>{const d=document.createElement("a");d.href="#talent-"+(i+1);d.className="it rv";d.innerHTML=`<span class="n">${ROMAN(i+1)}</span><canvas width="360" height="240"></canvas><span class="nm"></span><span class="rl"></span>`;d.querySelector(".nm").textContent=p.name;d.querySelector(".rl").textContent=p.role;tal.appendChild(d)});
