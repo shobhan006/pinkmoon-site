@@ -521,6 +521,9 @@ const IPS = [
    hero:"../img/ip/meninpink-hero.jpg", thumb:"../img/ip/meninpink-thumb.jpg", watch:"meninpink-1", watchLabel:"Watch Episode 1", more:"meninpink", moreLabel:"All episodes", thumbLabel:"Episode 1"}
 ];
 
+// Featured order (indexes into PROJECTS): JustMates, MEN IN PINK, WAKEUP
+const FEAT = [2, 3, 1];
+
 const SERIES = {
   // cardW: card width in the player; homeScale: card height on Featured/Archive (wide wordmarks sit lower);
   // markW: small card width on the episode list
@@ -794,9 +797,9 @@ addEventListener("keydown",ev=>{
     else if(ABT.t===1&&abEl.scrollTop<=0&&["ArrowUp","PageUp"].includes(ev.key)){goAbout(false);ev.preventDefault()}
     if(ev.key==="Enter"&&ABT.t===0)location.hash="film-1";return}
   if(route==="archive"&&started){
-    if(["ArrowDown","ArrowRight","PageDown"," "].includes(ev.key)){FT.t=FT.base=clamp(FT.base+1,0,N-1);ev.preventDefault()}
-    if(["ArrowUp","ArrowLeft","PageUp"].includes(ev.key)){FT.t=FT.base=clamp(FT.base-1,0,N-1);ev.preventDefault()}
-    if(ev.key==="Enter")location.hash="ip-"+IPS[clamp(Math.round(FT.pos),0,N-1)].slug;return}
+    if(["ArrowDown","ArrowRight","PageDown"," "].includes(ev.key)){FT.t=FT.base=clamp(FT.base+1,0,NF-1);ev.preventDefault()}
+    if(["ArrowUp","ArrowLeft","PageUp"].includes(ev.key)){FT.t=FT.base=clamp(FT.base-1,0,NF-1);ev.preventDefault()}
+    if(ev.key==="Enter")location.hash="ip-"+IPS[FEAT[clamp(Math.round(FT.pos),0,NF-1)]].slug;return}
   if(!scrollable())return;
   if(["ArrowDown","ArrowRight","PageDown"].includes(ev.key)){posT=Math.round(posT)+1;lastScroll=performance.now();ev.preventDefault()}
   if(["ArrowUp","ArrowLeft","PageUp"].includes(ev.key)){posT=Math.round(posT)-1;lastScroll=performance.now();ev.preventDefault()}
@@ -1119,7 +1122,8 @@ function aboutFrame(){
    dissolves (both fade into each other with a soft blur band), at rest each IP is full and sharp. */
 const featEl=$("#feat"),fpanes=featEl.querySelector(".fpanes"),fseam=featEl.querySelector(".fseam");
 const FT={pos:0,t:0,base:0,last:0,ty:null,moved:0,vel:0,lt:0};
-const fps=PROJECTS.map((p,i)=>{const a=document.createElement("a");a.className="fp";a.href="#ip-"+IPS[i].slug;
+const NF=FEAT.length;
+const fps=FEAT.map(i=>{const p=PROJECTS[i];const a=document.createElement("a");a.className="fp";a.href="#ip-"+IPS[i].slug;
   const card=p.homeCard?`<img alt="" src="${p.homeCard}" style="--hs:${p.homeScale||1}">`:`<h2></h2>`;
   a.innerHTML=`<video muted loop playsinline preload="none"></video><div class="fsh"></div><div class="fc">${card}<span class="fcat"></span></div>`;
   if(!p.homeCard)a.querySelector("h2").textContent=p.title;
@@ -1157,13 +1161,13 @@ const ipEl=$("#p-ip");let ipIdx=-1;
 function setIP(k){ipIdx=k;const P=PROJECTS[k],I=IPS[k],sk=P.series,esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const facts=I.facts.map(([l,v])=>`<dt>${esc(l)}</dt><dd>${esc(v==="auto"&&sk?SERIES[sk].count:v)}</dd>`).join("");
   const title=P.homeCard?`<img alt="${esc(P.title)}" src="${P.homeCard}" style="--hs:${P.homeScale||1}">`:`<h1>${esc(P.title)}</h1>`;
-  const nx=(k+1)%N,dots=PROJECTS.map((q,j)=>`<a href="#ip-${IPS[j].slug}" class="${j===k?"on":""}" style="top:${N>1?j/(N-1)*100:50}%" aria-label="${esc(q.title)}"></a>`).join("");
+  const fi=FEAT.indexOf(k),nx=FEAT[(Math.max(fi,0)+1)%NF],dots=FEAT.map((j,o)=>`<a href="#ip-${IPS[j].slug}" class="${j===k?"on":""}" style="top:${NF>1?o/(NF-1)*100:50}%" aria-label="${esc(PROJECTS[j].title)}"></a>`).join("");
   ipEl.innerHTML=`<div class="iph"><div class="ipbg" style="background-image:url('${I.hero}')"></div><img class="ipimg" alt="" src="${I.hero}"><div class="ipsh"></div></div>
   <a class="u ipback" href="#archive">← Featured</a>
   <div class="ipdots">${dots}</div>
   <div class="ipl"><span class="ipcat rv">${esc(I.cat)}</span><div class="iptitle rv">${title}</div><p class="iplog rv">${esc(I.logline)}</p>
     <div class="ipcta rv"><a class="ipwatch" href="#${I.watch}">${esc(I.watchLabel)}<i></i></a>${I.more?`<a class="u ipmore" href="#${I.more}">${esc(I.moreLabel)}</a>`:""}</div></div>
-  <div class="ipfoot rv"><b>${String(k+1).padStart(2,"0")} / ${String(N).padStart(2,"0")}</b><span>Next</span><a class="u" href="#ip-${IPS[nx].slug}">${esc(PROJECTS[nx].title)}</a></div>
+  <div class="ipfoot rv"><b>${String(Math.max(fi,0)+1).padStart(2,"0")} / ${String(NF).padStart(2,"0")}</b><span>Next</span><a class="u" href="#ip-${IPS[nx].slug}">${esc(PROJECTS[nx].title)}</a></div>
   <aside class="ipr"><div class="ipfollow"><span>Follow</span><a class="u" href="${CONFIG.instagram||"#"}">Instagram</a><a class="u" href="${CONFIG.vimeo||"#"}">Vimeo</a></div>
     <dl>${facts}</dl><a class="ipthumb" href="#${I.watch}"><img alt="" src="${I.thumb}"><span class="pl"></span><span class="tl">${esc(I.thumbLabel)}</span></a></aside>`;
   const im=ipEl.querySelector(".ipimg"),tallChk=()=>ipEl.classList.toggle("tall",im.naturalHeight>im.naturalWidth);im.complete?tallChk():im.onload=tallChk;
