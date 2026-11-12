@@ -115,6 +115,31 @@ body.abt-light{color:#17243F}
 html,body{overscroll-behavior-y:none}
 /* ---------- v2 Featured: one IP per screen, scrolls like a page, soft dissolve between ---------- */
 #arch{display:none!important}
+/* ---------- v2 Contact (cred deck last page) ---------- */
+#p-contact{background:#17243F;color:#F7F3E6;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;align-items:center;text-align:center}
+body.r-contact{background:#17243F}
+body.r-contact #hd .copy{display:none!important}
+#p-contact .ctin{margin-top:auto;padding:150px 24px 0;display:flex;flex-direction:column;align-items:center}
+#p-contact .cth{font-weight:700;font-size:clamp(16px,1.6vw,28px);line-height:1.1}
+#p-contact .ctl{display:block;margin-top:10px;font-size:12px;letter-spacing:.04em;opacity:.88;transition:color .3s,opacity .3s}
+#p-contact .cth+.ctl{margin-top:16px}
+#p-contact .ctl:hover{color:#DFF478;opacity:1}
+#p-contact .ctgo{margin-top:clamp(30px,5vh,46px);font-weight:700;font-size:clamp(12px,1.05vw,17px);letter-spacing:.02em}
+#p-contact .ctfoot{margin-top:auto;width:100%;padding:clamp(70px,12vh,130px) 24px 22px;display:flex;flex-direction:column;align-items:center}
+#p-contact .ctmark{width:min(56vw,820px);color:#DFF478}
+#p-contact .ctmark .lgm{width:100%;background:#DFF478}
+#p-contact .cttag{margin-top:clamp(14px,2vh,22px);font-weight:700;font-size:10px;letter-spacing:.2em;color:#DFF478}
+#p-contact .cttag span{margin:0 .5em;font-weight:400}
+#p-contact .ctsig{margin-top:clamp(36px,6vh,60px);display:flex;gap:18px;font-size:9.5px;letter-spacing:.06em;opacity:.6}
+#p-contact .rv{transform:translateY(14px);filter:blur(3px);transition:opacity .7s var(--eo),transform .7s var(--eo),filter .7s var(--eo)}
+#p-contact .ctmark.rv{transform:translateY(30px) scale(.98);filter:blur(10px);transition-duration:1.2s}
+#p-contact.on .rv.in{opacity:1;transform:none;filter:none}
+#p-contact.on .ctl.rv.in{opacity:.88}
+@media (max-width:760px){
+  #p-contact .ctin{padding-top:130px}
+  #p-contact .ctmark{width:calc(100vw - 48px)}
+  #p-contact .cttag{font-size:8.5px;letter-spacing:.14em}
+}
 /* ---------- v2 Team: Nautical Navy, Silky White type, names in Soothing Lime ---------- */
 #p-team{background:#17243F;color:#F7F3E6;overflow-y:auto;overflow-x:hidden;-webkit-mask-image:linear-gradient(transparent 52px,#000 124px);mask-image:linear-gradient(transparent 52px,#000 124px)}
 body.r-team{background:#17243F}
@@ -483,10 +508,20 @@ body.film #hd .hold{pointer-events:none}
   <div class="foot"><div><a class="u sl-ig" href="#">Instagram</a><a class="u sl-vm" href="#">Vimeo</a><a class="u sl-li" href="#">LinkedIn</a></div><div><span>All work © PINKMOON, 2026</span></div></div>
 </section>
 
-<section class="page white" id="p-contact">
-  <div class="cols" id="ccols"></div>
-  <div class="clogo" id="clogo"><i class="lgm"></i></div>
-  <div class="foot"><div><a class="u sl-ig" href="#">Instagram</a><a class="u sl-vm" href="#">Vimeo</a><a class="u sl-li" href="#">LinkedIn</a></div></div>
+<!-- v1 contact columns, kept only so the shared script has its element -->
+<div hidden><div class="cols" id="ccols"></div><div id="clogo"><i class="lgm"></i></div></div>
+<section class="page" id="p-contact">
+  <div class="ctin">
+    <h2 class="cth rv">CONTACT INFORMATION</h2>
+    <a class="ctl rv" href="mailto:hello@pinkmoonhouse.com">HELLO@PINKMOONHOUSE.COM</a>
+    <a class="ctl rv" href="tel:+919953428841">+919953428841</a>
+    <p class="ctgo rv">LET'S MAKE STORIES.</p>
+  </div>
+  <div class="ctfoot">
+    <div class="ctmark rv"><i class="lgm"></i></div>
+    <p class="cttag rv">CULTURE <span>I</span> COMMUNITY <span>I</span> CONTENT</p>
+    <p class="ctsig rv"><span>Storystudio.</span><span>ESTD. 2026</span></p>
+  </div>
 </section>
 
 <section class="page" id="p-person">
@@ -615,7 +650,7 @@ const SERIES = {
   meninpink: {name:"MEN IN PINK", type:"Series", count:1, film:3, titleCard:"../img/meninpink-title.png", cardAfter:3.2, cardW:300, homeScale:.42, markW:210}
 };
 const TEAM = [
-  {role:"New projects",   first:"Say",  last:"Hello",     email:"hello@pinkmoon.studio"},
+  {role:"New projects",   first:"Say",  last:"Hello",     email:"hello@pinkmoonhouse.com"},
   {role:"Collaborations", first:"Make", last:"Something", email:"collab@pinkmoon.studio"},
   {role:"Press & talks",  first:"Talk", last:"To Us",     email:"press@pinkmoon.studio"}
 ];
@@ -1093,7 +1128,7 @@ const ccols=Columns($("#ccols"),{
   build(){const d=document.createElement("div");d.className="ccard";d.innerHTML='<span class="r"></span><i class="f"></i><canvas width="94" height="114"></canvas><i class="l"></i><a class="m u"></a>';return d},
   fill(d,item){const m=TEAM[item];d.querySelector(".r").textContent=m.role;d.querySelector(".f").textContent=m.first;d.querySelector(".l").textContent=m.last;const a=d.querySelector(".m");a.textContent=m.email;a.href="mailto:"+m.email;still(d.querySelector("canvas"),(item*2+5)%N,6+item*3)}
 });
-const colsFor=r=>r==="person"?pcols:(r==="contact"?ccols:null);
+const colsFor=r=>r==="person"?pcols:null;
 
 /* ---------- routing ---------- */
 const ROUTES=["archive","services","team","talent","approach","contact",...Object.keys(SERIES)];
@@ -1107,7 +1142,7 @@ function setRoute(r){
   route=r;const b=document.body;
   b.className=b.className.split(" ").filter(c=>!c.startsWith("r-")&&c!=="light").join(" ");
   if(isSeries(r)){epsEnter(r);b.classList.add("r-series")}else epsLeave();
-  b.classList.add("r-"+r);if(r==="talent"||r==="approach"||r==="contact"||r==="services")b.classList.add("light");
+  b.classList.add("r-"+r);if(r==="talent"||r==="approach"||r==="services")b.classList.add("light");
   if(r==="contact")ccols.reset();
   if(r==="archive"&&fCur>=0)restartSrc(fCur);
   const pg0=pageOf(r);$$(".page").forEach(p=>{const on=p===pg0;p.classList.toggle("on",on);if(on){p.scrollTop=0;p.querySelectorAll(".rv").forEach(el=>el.classList.remove("in"))}});
@@ -1128,7 +1163,7 @@ async function applyHash(first){
   if(changed){
     if(first||!started){closeFilm();if(r==="person")setPerson(p);if(r==="ip")setIP(ip);setRoute(r);if(r==="home")aboutSet(ab,false);return}
     if(wasFilm){closeFilm();await wait(380)}
-    busy=true;veil.style.background=(r==="home"&&ab)||r==="services"?"#F7F3E6":r==="team"?"#17243F":(r==="talent"||r==="approach"||r==="contact")?"#fff":"#000";veil.classList.add("on");await wait(460);
+    busy=true;veil.style.background=(r==="home"&&ab)||r==="services"?"#F7F3E6":(r==="team"||r==="contact")?"#17243F":(r==="talent"||r==="approach")?"#fff":"#000";veil.classList.add("on");await wait(460);
     if(r==="person")setPerson(p);if(r==="ip")setIP(ip);setRoute(r);if(r==="home")aboutSet(ab,false);await wait(60);veil.classList.remove("on");busy=false;
   }else if(wasFilm)closeFilm();
   if(r==="home"&&!changed)aboutSet(ab,homeBefore&&!wasFilm);
