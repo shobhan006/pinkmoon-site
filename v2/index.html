@@ -115,6 +115,43 @@ body.abt-light{color:#17243F}
 html,body{overscroll-behavior-y:none}
 /* ---------- v2 Featured: one IP per screen, scrolls like a page, soft dissolve between ---------- */
 #arch{display:none!important}
+/* ---------- v2 Team: Nautical Navy, Silky White type, names in Soothing Lime ---------- */
+#p-team{background:#17243F;color:#F7F3E6;overflow-y:auto;overflow-x:hidden;-webkit-mask-image:linear-gradient(transparent 52px,#000 124px);mask-image:linear-gradient(transparent 52px,#000 124px)}
+body.r-team{background:#17243F}
+#p-team .tmhw{margin-top:clamp(110px,15vh,160px);overflow:hidden}
+#p-team .tmh{font-weight:400;font-size:25vw;line-height:.8;white-space:nowrap;width:max-content;margin-left:50%;transform:translateX(-50%);color:#F7F3E6}
+#p-team .tmhero{position:relative;width:min(1180px,calc(100vw - 2*clamp(24px,7vw,120px)));margin:clamp(60px,9vh,100px) auto 0;display:grid;grid-template-columns:62% 1fr;align-items:center}
+#p-team .tmph{margin:0;overflow:hidden;aspect-ratio:16/10}
+#p-team .tmph img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;transform:scale(1.06);transition:transform 1.6s var(--eo)}
+#p-team.on .tmph.in img{transform:none}
+#p-team .tmmeet{margin-left:-7%;position:relative;z-index:1}
+#p-team .tmmeet h2{font-weight:400;font-size:clamp(20px,2.1vw,34px);line-height:1.1;white-space:nowrap}
+#p-team .ov{position:relative;display:inline-block}
+#p-team .ov svg{position:absolute;left:-18%;top:-30%;width:136%;height:160%;overflow:visible}
+#p-team .ov path{fill:none;stroke:#F7F3E6;stroke-width:1;vector-effect:non-scaling-stroke;stroke-dasharray:600;stroke-dashoffset:600;transition:stroke-dashoffset 1.4s var(--eo) .5s}
+#p-team.on .tmmeet.in .ov path{stroke-dashoffset:0}
+#p-team .tmmeet p{margin-top:12px;color:#DFF478;font-size:12px;letter-spacing:.02em}
+#p-team .tmcols{width:min(1180px,calc(100vw - 2*clamp(24px,7vw,120px)));margin:clamp(70px,11vh,120px) auto 0;padding-bottom:clamp(110px,16vh,170px);display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(40px,6vw,110px);row-gap:70px}
+#p-team .tmp{padding-left:34px}
+#p-team .tmp h3{position:relative;font-weight:700;font-size:clamp(14px,1.5vw,22px);line-height:1.15;color:#DFF478}
+#p-team .ar{position:absolute;left:-34px;top:50%;width:20px;height:1px;background:#F7F3E6}
+#p-team .ar::after{content:"";position:absolute;right:0;top:-4px;width:8px;height:8px;border-top:1px solid #F7F3E6;border-right:1px solid #F7F3E6;transform:rotate(45deg)}
+#p-team .tmrole{display:block;margin-top:10px;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;opacity:.72}
+#p-team .tmp p{margin-top:24px;font-size:11.7px;line-height:21.6px;max-width:440px;opacity:.9}
+#p-team .tmp p+p{margin-top:14px}
+#p-team .tmln{display:flex;gap:14px;margin-top:30px}
+#p-team .tmln a{display:inline-flex;align-items:center;height:34px;padding:0 20px;border:1px solid rgba(247,243,230,.5);border-radius:40px;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s,border-color .3s}
+#p-team .tmln a:hover{background:#DFF478;color:#17243F;border-color:#DFF478}
+#p-team .rv{transform:translateY(14px);filter:blur(3px);transition:opacity .7s var(--eo),transform .7s var(--eo),filter .7s var(--eo)}
+#p-team.on .rv.in{opacity:1;transform:none;filter:none}
+@media (max-width:760px){
+  #p-team .tmhw{margin-top:120px}
+  #p-team .tmhero{grid-template-columns:1fr;width:calc(100vw - 48px);margin-top:40px}
+  #p-team .tmmeet{margin:26px 0 0}
+  #p-team .tmcols{grid-template-columns:1fr;width:calc(100vw - 48px);margin-top:56px;row-gap:56px}
+  #p-team .tmp{padding-left:30px}
+  #p-team .ar{left:-30px;width:18px}
+}
 /* ---------- v2 Services (cred deck: What we make with brands), styled like About ---------- */
 #p-services{background:#F7F3E6;color:#17243F;overflow-y:auto;overflow-x:hidden;-webkit-mask-image:linear-gradient(transparent 52px,#000 124px);mask-image:linear-gradient(transparent 52px,#000 124px)}
 body.r-services{color:#17243F;background:#F7F3E6}
@@ -416,7 +453,7 @@ body.film #hd .hold{pointer-events:none}
       <a class="u" data-r="about" href="#about">About</a>
       <a class="u" data-r="archive" href="#archive">Featured</a>
       <a class="u" data-r="services" href="#services">Services</a>
-      <a class="u" data-r="talent" href="#talent">Team</a>
+      <a class="u" data-r="team" href="#team">Team</a>
       <a class="u" data-r="contact" href="#contact">Contact</a>
     </nav>
     <p class="copy">All work © PINKMOON (and respective owners), 2026</p>
@@ -487,6 +524,29 @@ body.film #hd .hold{pointer-events:none}
 
 <div id="feat"><div class="fpanes"></div><div class="fseam"></div><div class="fscroll"><span>Scroll</span><i></i></div></div>
 <section class="page" id="p-ip"></section>
+<section class="page" id="p-team">
+  <div class="tmhw rv"><h1 class="tmh">TEAM</h1></div>
+  <div class="tmhero">
+    <figure class="tmph rv"><img src="../img/team.jpg" alt="Kanishak Rajpal and Shobhan Sharma"></figure>
+    <div class="tmmeet rv"><h2><span class="ov">Meet<svg viewBox="0 0 200 80" preserveAspectRatio="none" aria-hidden="true"><path d="M150 14C112 2 34 6 12 28c-16 18 26 40 92 38 62-2 96-22 82-40C176 12 140 6 104 8"/></svg></span> the Team</h2><p>Culture. Community. Content.</p></div>
+  </div>
+  <div class="tmcols">
+    <article class="tmp rv">
+      <h3><i class="ar"></i>Kanishak Rajpal</h3>
+      <span class="tmrole">Founder &amp; Creative Director</span>
+      <p>Kanishak is a creative and communications leader with 13+ years of building brands, content ecosystems and digital narratives across media, entertainment, FMCG, technology and Web3. At PINKMOON he sets the creative direction, shaping the ideas, the stories and the systems that carry them across culture, content and community.</p>
+      <p>He believes creativity should live inside culture, not interrupt it. Lately his focus is AI-led storytelling, using AI to scale ideas faster without losing the human thinking behind them. If you think creativity should solve real problems and still feel human, you'll probably get along.</p>
+      <div class="tmln"><a href="#" target="_blank" rel="noopener">LinkedIn</a><a href="#" target="_blank" rel="noopener">Instagram</a></div>
+    </article>
+    <article class="tmp rv">
+      <h3><i class="ar"></i>Shobhan Sharma</h3>
+      <span class="tmrole">Co-Founder &amp; Filmmaker</span>
+      <p>Shobhan is a filmmaker who builds stories for the screens people actually live on. At PINKMOON he leads the making, taking an idea from a single spark to a finished series and shaping the look, the performances and the rhythm of every frame.</p>
+      <p>His work lives in short-form episodic storytelling: sitcoms, micro dramas, branded entertainment and original IP. Every project starts with a character, a world and a feeling. When he isn't on set or in the edit, he's writing the next episode.</p>
+      <div class="tmln"><a href="#" target="_blank" rel="noopener">LinkedIn</a><a href="#" target="_blank" rel="noopener">Instagram</a></div>
+    </article>
+  </div>
+</section>
 <section class="page" id="p-services">
   <div class="svin">
     <h2 class="svh rv">WHAT WE MAKE WITH BRANDS.</h2>
@@ -1036,7 +1096,7 @@ const ccols=Columns($("#ccols"),{
 const colsFor=r=>r==="person"?pcols:(r==="contact"?ccols:null);
 
 /* ---------- routing ---------- */
-const ROUTES=["archive","services","talent","approach","contact",...Object.keys(SERIES)];
+const ROUTES=["archive","services","team","talent","approach","contact",...Object.keys(SERIES)];
 const pageOf=r=>$("#p-"+(isSeries(r)?"series":r));
 const veil=$("#veil");
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
@@ -1068,7 +1128,7 @@ async function applyHash(first){
   if(changed){
     if(first||!started){closeFilm();if(r==="person")setPerson(p);if(r==="ip")setIP(ip);setRoute(r);if(r==="home")aboutSet(ab,false);return}
     if(wasFilm){closeFilm();await wait(380)}
-    busy=true;veil.style.background=(r==="home"&&ab)||r==="services"?"#F7F3E6":(r==="talent"||r==="approach"||r==="contact")?"#fff":"#000";veil.classList.add("on");await wait(460);
+    busy=true;veil.style.background=(r==="home"&&ab)||r==="services"?"#F7F3E6":r==="team"?"#17243F":(r==="talent"||r==="approach"||r==="contact")?"#fff":"#000";veil.classList.add("on");await wait(460);
     if(r==="person")setPerson(p);if(r==="ip")setIP(ip);setRoute(r);if(r==="home")aboutSet(ab,false);await wait(60);veil.classList.remove("on");busy=false;
   }else if(wasFilm)closeFilm();
   if(r==="home"&&!changed)aboutSet(ab,homeBefore&&!wasFilm);
@@ -1082,7 +1142,7 @@ const abEl=$("#p-approach"),fly=$("#fly"),flyM=fly.querySelector(".lgm"),aLogo=$
 const ABT={p:0,t:0,acc:0,accT:0,ty:null};
 const EIO=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
 function navActive(){$$("#hd nav a").forEach(a=>{const d=a.dataset.r;
-  a.classList.toggle("active",route==="home"?(ABT.t===1&&d==="about"):(d===route||(route==="person"&&d==="talent")||(route==="ip"&&d==="archive")))})}
+  a.classList.toggle("active",route==="home"?(ABT.t===1&&d==="about"):(d===route||(route==="person"&&d==="talent")||(route==="ip"&&d==="archive")||(route==="person"&&d==="team")))})}
 function aboutSet(ab,animate){
   const t=ab?1:0,was=ABT.t;ABT.t=t;navActive();
   if(!animate){for(let j=TW.length-1;j>=0;j--)if(TW[j].o===ABT)TW.splice(j,1);ABT.p=t}
