@@ -1294,7 +1294,9 @@ function setIP(k){ipIdx=k;const P=PROJECTS[k],I=IPS[k],sk=P.series,esc=t=>String
 
 /* reveal on scroll inside pages */
 const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting)en.target.classList.add("in")}),{threshold:.12});
-function reveal(pg){const els=[...pg.querySelectorAll(".rv")];els.forEach((el,k)=>{el.style.transitionDelay=Math.min(k,6)*90+"ms";io.observe(el)})}
+// pages show everything as soon as they land (a short top-to-bottom stagger), not on scroll
+function reveal(pg){const els=[...pg.querySelectorAll(".rv")];els.forEach((el,k)=>{el.classList.remove("in");el.style.transitionDelay=Math.min(k,8)*55+"ms"});
+  void pg.offsetWidth;requestAnimationFrame(()=>els.forEach(el=>el.classList.add("in")))}
 
 /* ---------- static pages ---------- */
 $$(".sl-ig").forEach(a=>a.href=CONFIG.instagram);$$(".sl-vm").forEach(a=>a.href=CONFIG.vimeo);$$(".sl-li").forEach(a=>a.href=CONFIG.linkedin);
