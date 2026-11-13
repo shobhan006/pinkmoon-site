@@ -617,6 +617,8 @@ const PROJECTS = [
   {title:"WAKEUP", director:"A PINKMOON ORIGINAL", client:"Series", year:"2026", scene:"silk", pal:["#0b0a10","#000000","#f6d7c8","#c86b8a"], video:"../films/wakeup-trailer.mp4", videoM:"../films/m/wakeup-trailer.mp4", homeCard:"../img/wakeup-title.png", text:"A cinematic microfiction universe where every night, ordinary people confront the one thought they could not silence before falling asleep."},
   {title:"JustMates", director:"TV Sitcom", client:"TV Sitcom", year:"2026", scene:"bloom", pal:["#07040a","#ff4f8b","#7b3cff","#ffb36b"], video:"../films/justmates-ep1.mp4", full:"../films/justmates-ep1-full.mp4", titleCard:"../img/justmates-title.png", homeCard:"../img/justmates-title.png", cardW:130, cardAfter:4, series:"justmates", ep:1, text:"A sitcom about friends, bad timing and the third date that ends everything."},
   {title:"MEN IN PINK", director:"Series", client:"Series", year:"2026", scene:"rain", pal:["#04070c","#0d1b2a","#5d7fa8","#cfe3ff"], video:"../films/meninpink-ep1.mp4", full:"../films/meninpink-ep1-full.mp4", titleCard:"../img/meninpink-title.png", homeCard:"../img/meninpink-title.png", homeScale:.42, cardW:300, cardAfter:3.2, series:"meninpink", ep:1, text:"The newest PINKMOON series."},
+  {title:"JadeBlue", director:"TVC AD", client:"TVC AD", year:"", scene:"rain", pal:["#06080c","#1a1410","#8a6a4a","#f0dcc0"], video:"../films/jadeblue-preview.mp4", videoM:"../films/m/jadeblue-preview.mp4", full:"../films/jadeblue-wedding-story.mp4", titleCard:"../img/jadeblue-logo.png", homeCard:"../img/jadeblue-logo.png", homeScale:1.15, cardW:84, cardAfter:3, text:"A Wedding Story, a TVC for JadeBlue."},
+  {title:"TECNO Mobile", director:"TVC AD", client:"TVC AD", year:"", scene:"rain", pal:["#06080c","#10202a","#3aa0c8","#e0f6ff"], video:"../films/tecno-preview.mp4", full:"../films/tecno-spark-go.mp4", titleCard:"../img/tecno-logo.png", homeCard:"../img/tecno-logo.png", homeScale:.75, cardW:130, cardAfter:1, text:"Spark GO 2021, a TVC for TECNO Mobile."},
 ];
 // series: each episode has a short silent preview (after the title card) and a full cut for the player
 /* IP pages (v2). One entry per project, same order as PROJECTS.
@@ -636,11 +638,17 @@ const IPS = [
    hero:"../img/ip/justmates-hero.jpg", thumb:"../img/ip/justmates-thumb.jpg", watch:"justmates-1", watchLabel:"Watch Episode 1", more:"justmates", moreLabel:"All episodes", thumbLabel:"Episode 1"},
   {slug:"men-in-pink", cat:"Series", logline:"A new PINKMOON series. Episode 1 is out now, with more on the way.",
    facts:[["Format","Series"],["Episodes","auto"],["Year","2026"],["Created by","PINKMOON"]],
-   hero:"../img/ip/meninpink-hero.jpg", thumb:"../img/ip/meninpink-thumb.jpg", watch:"meninpink-1", watchLabel:"Watch Episode 1", more:"meninpink", moreLabel:"All episodes", thumbLabel:"Episode 1"}
+   hero:"../img/ip/meninpink-hero.jpg", thumb:"../img/ip/meninpink-thumb.jpg", watch:"meninpink-1", watchLabel:"Watch Episode 1", more:"meninpink", moreLabel:"All episodes", thumbLabel:"Episode 1"},
+  {slug:"jadeblue", cat:"TVC AD", logline:"A Wedding Story for JadeBlue. A groom, his people and every celebration around the big day, told through what he wears to each of them.",
+   facts:[["Format","TVC Ad"],["Client","JadeBlue"],["Film","A Wedding Story"],["Runtime","1 min"]],
+   hero:"../img/ip/jadeblue-hero.jpg", thumb:"../img/ip/jadeblue-thumb.jpg", watch:"film-5", watchLabel:"Watch the ad", thumbLabel:"Play ad"},
+  {slug:"tecno-mobile", cat:"TVC AD", logline:"A TVC for the TECNO Spark GO 2021. Friends, music and a phone that keeps up all day, with a 5000mAh battery and a 13MP AI camera.",
+   facts:[["Format","TVC Ad"],["Client","TECNO Mobile"],["Product","Spark GO 2021"],["Runtime","1 min"]],
+   hero:"../img/ip/tecno-hero.jpg", thumb:"../img/ip/tecno-thumb.jpg", watch:"film-6", watchLabel:"Watch the ad", thumbLabel:"Play ad"}
 ];
 
-// Featured order (indexes into PROJECTS): JustMates, MEN IN PINK, WAKEUP
-const FEAT = [2, 3, 1];
+// Featured order (indexes into PROJECTS): JustMates, JadeBlue, TECNO Mobile, MEN IN PINK, WAKEUP
+const FEAT = [2, 4, 5, 3, 1];
 
 const SERIES = {
   // cardW: card width in the player; homeScale: card height on Featured/Archive (wide wordmarks sit lower);
