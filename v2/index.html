@@ -1344,7 +1344,7 @@ const fps=FEAT.map(i=>{const p=PROJECTS[i];const a=document.createElement("a");a
   const v=a.querySelector("video");v.muted=true;v.setAttribute("playsinline","");
   a.addEventListener("click",ev=>{if(FT.moved>8){ev.preventDefault();FT.moved=0}});
   fpanes.appendChild(a);return{a,v,src:pv(p),on:false}});
-function featWheel(dy){FT.t=clamp(FT.t+dy/H*.9,-.12,N-1+.12);FT.last=performance.now()}
+function featWheel(dy){FT.t=clamp(FT.t+dy/H*.9,-.12,NF-1+.12);FT.last=performance.now()}
 featEl.addEventListener("touchstart",ev=>{FT.ty=ev.touches[0].clientY;FT.moved=0;FT.vel=0;FT.lt=performance.now()},{passive:true});
 featEl.addEventListener("touchmove",ev=>{if(FT.ty==null)return;
   const y=ev.touches[0].clientY,d=FT.ty-y,n=performance.now();
@@ -1352,13 +1352,13 @@ featEl.addEventListener("touchmove",ev=>{if(FT.ty==null)return;
   ev.preventDefault();FT.moved+=Math.abs(d);
   FT.t=clamp(FT.t+d/H*1.15,-.15,NF-1+.15);FT.vel=lerp(FT.vel,(d/H)/Math.max(8,n-FT.lt)*16,.5);FT.lt=n;FT.ty=y;FT.last=n},{passive:false});
 featEl.addEventListener("touchend",()=>{if(FT.ty==null)return;FT.ty=null;
-  const n=performance.now(),fl=n-FT.lt<90?FT.vel*7:0;const dd=FT.t+clamp(fl,-.6,.6)-FT.base;FT.t=clamp(Math.abs(dd)>.12?FT.base+Math.sign(dd)*Math.max(1,Math.round(Math.abs(dd))):FT.base,0,N-1);FT.base=FT.t;FT.last=1e15});
+  const n=performance.now(),fl=n-FT.lt<90?FT.vel*7:0;const dd=FT.t+clamp(fl,-.6,.6)-FT.base;FT.t=clamp(Math.abs(dd)>.12?FT.base+Math.sign(dd)*Math.max(1,Math.round(Math.abs(dd))):FT.base,0,NF-1);FT.base=FT.t;FT.last=1e15});
 function featFrame(dt){
   if(route!=="archive"||filmIdx>=0){fps.forEach(x=>{if(x.on){x.v.pause();x.on=false}});return}
   const now=performance.now();
-  if(FT.ty==null&&now-FT.last>140){const dd=FT.t-FT.base;FT.t=clamp(Math.abs(dd)>.08?FT.base+Math.sign(dd)*Math.max(1,Math.round(Math.abs(dd))):FT.base,0,N-1);FT.base=FT.t}
+  if(FT.ty==null&&now-FT.last>140){const dd=FT.t-FT.base;FT.t=clamp(Math.abs(dd)>.08?FT.base+Math.sign(dd)*Math.max(1,Math.round(Math.abs(dd))):FT.base,0,NF-1);FT.base=FT.t}
   FT.pos=damp(FT.pos,FT.t,FT.ty!=null?20:6.5,dt);if(Math.abs(FT.pos-FT.t)<.0004)FT.pos=FT.t;
-  const pc=clamp(FT.pos,0,N-1),f=pc-Math.floor(pc),m=FT.pos<0||FT.pos>N-1?0:Math.sin(Math.PI*f),O=.24*H*m,S=H-O;
+  const pc=clamp(FT.pos,0,NF-1),f=pc-Math.floor(pc),m=FT.pos<0||FT.pos>NF-1?0:Math.sin(Math.PI*f),O=.24*H*m,S=H-O;
   fps.forEach((x,k)=>{const d=k-FT.pos,vis=Math.abs(d)<1.02;
     x.a.style.visibility=vis?"visible":"hidden";
     if(vis){x.a.style.transform=`translate3d(0,${(d*S).toFixed(2)}px,0)`;
@@ -1368,7 +1368,7 @@ function featFrame(dt){
     }else if(x.on){x.v.pause();x.on=false}});
   if(!MOB&&O>1){const yb=(Math.floor(pc)+1-FT.pos)*S;fseam.style.top=yb.toFixed(1)+"px";fseam.style.height=O.toFixed(1)+"px";fseam.style.opacity=m.toFixed(3)}
   else fseam.style.opacity=0;
-  featEl.classList.toggle("last",Math.round(FT.pos)>=N-1);
+  featEl.classList.toggle("last",Math.round(FT.pos)>=NF-1);
 }
 
 /* ---------- v2 IP page ---------- */
