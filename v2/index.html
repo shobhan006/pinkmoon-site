@@ -1249,12 +1249,24 @@ function aboutFrame(){
 }
 
 /* landing words, timed to the looping film (same timings as the player) */
-const lcapEl=$("#lcap");let lcapW=null;
+const lcapEl=$("#lcap");let lcapW=null,lcapOff=null,lcapKey="";
+// sit the words exactly halfway between the bottom of the menu and the bottom of the screen,
+// measured on the letters themselves (cap height), not on the text box
+function lcapPlace(){
+  const nb=$("#hd nav").getBoundingClientRect().bottom,mid=(nb+innerHeight)/2;
+  if(lcapOff==null){const cs=getComputedStyle(lcapEl),c=document.createElement("canvas").getContext("2d");
+    c.font=`${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;const m=c.measureText(lcapEl.textContent||"C");
+    const fa=m.fontBoundingBoxAscent,fd=m.fontBoundingBoxDescent,ca=m.actualBoundingBoxAscent,cd=m.actualBoundingBoxDescent;
+    lcapOff=(fa-fd)/2-(ca-cd)/2}
+  const k=(mid-lcapOff).toFixed(1)+"px";if(k!==lcapKey){lcapKey=k;lcapEl.style.top=k}}
+addEventListener("resize",()=>{lcapOff=null;lcapKey=""});
+document.fonts&&document.fonts.ready.then(()=>{lcapOff=null});
 function landCap(){
   let word="",op=0;const v=sources[0]&&sources[0].v,caps=PROJECTS[0].captions;
   if(route==="home"&&filmIdx<0&&started&&caps&&v&&!v.paused&&v.readyState>=2&&fCur===0){
     const t=v.currentTime;for(const c of caps){if(t>=c[0]&&t<c[1]){word=c[2];break}}op=word?1-ABT.p:0}
-  if(word&&word!==lcapW){lcapW=word;lcapEl.textContent=word}
+  if(word&&word!==lcapW){lcapW=word;lcapEl.textContent=word;lcapOff=null}
+  if(op>0)lcapPlace();
   const o=op.toFixed(3);if(lcapEl.style.opacity!==o)lcapEl.style.opacity=o;
 }
 
