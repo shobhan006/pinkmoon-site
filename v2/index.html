@@ -138,7 +138,7 @@ body.r-contact #hd .copy{display:none!important}
 #p-contact .ctmark.rv{transform:translateY(30px) scale(.98);filter:blur(10px);transition-duration:1.2s}
 #p-contact.on .rv.in{opacity:1;transform:none;filter:none}
 #p-contact.on .ctl.rv.in{opacity:.88}
-@media (max-width:760px){
+@media (max-width:600px){
   #p-contact .ctin{padding-top:130px}
   #p-contact .ctmark{width:calc(100vw - 48px)}
   #p-contact .cttag{font-size:8.5px;letter-spacing:.14em}
@@ -159,8 +159,8 @@ body.r-team{background:#17243F}
 #p-team .ov path{fill:none;stroke:#F7F3E6;stroke-width:1;vector-effect:non-scaling-stroke;stroke-dasharray:600;stroke-dashoffset:600;transition:stroke-dashoffset 1.4s var(--eo) .5s}
 #p-team.on .tmmeet.in .ov path{stroke-dashoffset:0}
 #p-team .tmmeet p{margin-top:12px;color:#DFF478;font-size:12px;letter-spacing:.02em}
-#p-team .tmcols{width:min(1180px,calc(100vw - 2*clamp(24px,7vw,120px)));margin:clamp(70px,11vh,120px) auto 0;padding-bottom:clamp(110px,16vh,170px);display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(40px,6vw,110px);row-gap:70px}
-#p-team .tmp{padding-left:34px}
+#p-team .tmcols{width:min(1180px,calc(100vw - 2*clamp(24px,7vw,120px)));grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;margin:clamp(70px,11vh,120px) auto 0;padding-bottom:clamp(110px,16vh,170px);display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(40px,6vw,110px);row-gap:70px}
+#p-team .tmp{padding-left:34px;min-width:0}
 #p-team .tmp h3{position:relative;font-weight:700;font-size:clamp(14px,1.5vw,22px);line-height:1.15;color:#DFF478}
 #p-team .ar{position:absolute;left:-34px;top:50%;width:20px;height:1px;background:#F7F3E6}
 #p-team .ar::after{content:"";position:absolute;right:0;top:-4px;width:8px;height:8px;border-top:1px solid #F7F3E6;border-right:1px solid #F7F3E6;transform:rotate(45deg)}
@@ -172,11 +172,11 @@ body.r-team{background:#17243F}
 #p-team .tmln a:hover{background:#DFF478;color:#17243F;border-color:#DFF478}
 #p-team .rv{transform:translateY(14px);filter:blur(3px);transition:opacity .7s var(--eo),transform .7s var(--eo),filter .7s var(--eo)}
 #p-team.on .rv.in{opacity:1;transform:none;filter:none}
-@media (max-width:760px){
+@media (max-width:600px){
   #p-team .tmhw{margin-top:120px}
   #p-team .tmhero{grid-template-columns:1fr;width:calc(100vw - 48px);margin-top:40px}
   #p-team .tmmeet{margin:26px 0 0}
-  #p-team .tmcols{grid-template-columns:1fr;width:calc(100vw - 48px);margin-top:56px;row-gap:56px}
+  #p-team .tmcols{grid-template-columns:minmax(0,1fr)!important;width:calc(100vw - 48px);margin-top:56px;row-gap:56px}
   #p-team .tmp{padding-left:30px}
   #p-team .ar{left:-30px;width:18px}
 }
@@ -227,7 +227,7 @@ body.r-archive #bg,body.r-archive #hit,body.r-archive #stage{display:none!import
 #p-ip .iptitle h1{font-weight:700;font-size:clamp(26px,2.8vw,48px);line-height:1.08}
 #p-ip .iplog{margin-top:26px;font-size:12px;line-height:21px;max-width:360px;opacity:.86}
 #p-ip .ipcta{display:flex;align-items:center;gap:30px;margin-top:34px;flex-wrap:wrap}
-#p-ip .ipwatch{display:inline-flex;align-items:center;gap:16px;font-weight:700;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase}
+#p-ip .ipwatch{display:inline-flex;align-items:center;gap:16px;white-space:nowrap;font-weight:700;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase}
 #p-ip .ipwatch i{position:relative;display:block;width:64px;height:1px;background:currentColor;transition:width .45s var(--eo)}
 #p-ip .ipwatch i::after{content:"";position:absolute;right:0;top:-3px;width:7px;height:7px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:rotate(45deg)}
 #p-ip .ipwatch:hover i{width:92px}
@@ -236,8 +236,8 @@ body.r-archive #bg,body.r-archive #hit,body.r-archive #stage{display:none!import
 #p-ip .ipfoot b{font-weight:700}
 #p-ip .ipfoot span{opacity:.6}
 #p-ip .ipr{position:absolute;right:0;top:0;bottom:0;width:clamp(260px,22vw,340px);border-left:1px solid rgba(247,243,230,.14);background:rgba(5,8,15,.38);padding:96px 32px 32px;display:flex;flex-direction:column;z-index:1}
-#p-ip .ipfollow{display:flex;align-items:center;gap:14px;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
-#p-ip .ipfollow span{font-weight:700;margin-right:auto;opacity:.6}
+#p-ip .ipfollow{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+#p-ip .ipfollow span{font-weight:700;flex-basis:100%;opacity:.6}
 #p-ip dl{margin-top:44px}
 #p-ip dt{font-weight:700;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;opacity:.55}
 #p-ip dd{margin:7px 0 28px;font-size:12px}
@@ -250,7 +250,7 @@ body.r-archive #bg,body.r-archive #hit,body.r-archive #stage{display:none!import
 #p-ip .rv{transform:translateY(14px);filter:blur(3px);transition:opacity .7s var(--eo),transform .7s var(--eo),filter .7s var(--eo)}
 #p-ip.on .rv.in{opacity:1;transform:none;filter:none}
 #p-ip.on .iplog.rv.in{opacity:.86}
-@media (max-width:760px){
+@media (max-width:600px),(max-height:520px){
   #p-ip{overflow-y:auto}
   #p-ip .iph{position:absolute;left:0;right:0;top:0;bottom:auto;height:82vh}
   #p-ip.tall .ipimg{right:0;left:0;width:100%;-webkit-mask-image:none;mask-image:none}
@@ -434,7 +434,7 @@ body.film #hd .hold{pointer-events:none}
 #loader.out .bar.t{transform:translateY(-101%)}
 #loader.out .bar.b{transform:translateY(101%)}
 
-@media (max-width:760px){
+@media (max-width:600px){
   #info .ttl{padding:0 40px}
   #info{--cardmax:72vw}
   #info .cli{display:none}
@@ -456,6 +456,17 @@ body.film #hd .hold{pointer-events:none}
   .clogo{width:56vw}
 }
 @media (max-width:380px){#hd nav{gap:9px}#hd .hold{font-size:10px}}
+/* very narrow screens (folded phones, cover screens) */
+@media (max-width:360px){
+  #p-contact .cth{font-size:13px}
+  #p-contact .ctl{font-size:10px;letter-spacing:0}
+  #p-contact .cttag{font-size:8.5px;letter-spacing:.04em}
+  #p-team .tmrole{letter-spacing:.12em}
+  #p-team .tmp h3{font-size:13px}
+  #p-ip .ipwatch{gap:10px;letter-spacing:.1em}
+  #p-ip .ipwatch i{width:36px}
+  #p-series .emark{display:none}
+}
 @media (hover:none){.u::before{display:none}}
 </style>
 </head>
