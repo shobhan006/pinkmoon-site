@@ -114,6 +114,10 @@ body.r-archive #arch{display:block}
 .aseg p{max-width:560px;margin:22px auto 0;font-family:"Archivo","Helvetica Neue",Arial,sans-serif;font-stretch:125%;font-weight:500;font-size:11.7px;line-height:19.44px}
 body.abt-light{color:#17243F}
 html,body{overscroll-behavior-y:none}
+/* pull to refresh (touch screens): the site's pages are fixed layers, so it draws its own */
+#ptr{position:fixed;left:50%;top:0;z-index:25;width:30px;height:30px;margin-left:-15px;border-radius:50%;border:1.5px solid rgba(223,244,120,.25);border-top-color:#DFF478;opacity:0;pointer-events:none;transform:translateY(-40px)}
+#ptr.go{animation:ptrs .7s linear infinite}
+@keyframes ptrs{to{rotate:360deg}}
 /* ---------- v2 Featured: one IP per screen, scrolls like a page, soft dissolve between ---------- */
 #arch{display:none!important}
 /* landing: the film loops on its own (no player); its words sit in the centre like in the player */
@@ -199,7 +203,7 @@ body.r-services{color:#17243F;background:#F7F3E6}
 #p-services .svl p{max-width:420px;margin:20px auto 0;font-size:11.7px;line-height:21.6px}
 #p-services .rv{transform:translateY(12px);filter:blur(3px);transition:opacity .55s var(--eo),transform .55s var(--eo),filter .55s var(--eo)}
 #p-services.on .rv.in{opacity:1;transform:none;filter:none}
-#feat{position:fixed;inset:0;z-index:5;display:none;background:#000;overflow:hidden;touch-action:none}
+#feat{position:fixed;inset:0;z-index:5;display:none;background:#000;overflow:hidden;touch-action:pan-y}
 body.r-archive #feat{display:block}
 body.r-archive #bg,body.r-archive #hit,body.r-archive #stage{display:none!important}
 .fp{position:absolute;left:0;top:0;width:100%;height:100%;display:block;color:#fff;will-change:transform;visibility:hidden}
@@ -630,6 +634,7 @@ body.film #hd .hold{pointer-events:none}
   </div>
 </section>
 <div id="lcap" aria-hidden="true"></div>
+<div id="ptr" aria-hidden="true"></div>
 <div id="fly"><i class="lgm"></i></div>
 <div id="veil"></div>
 <div id="loader" aria-label="PINKMOON"><div class="win"><i class="lgm"></i></div></div>
@@ -934,12 +939,12 @@ addEventListener("wheel",ev=>{
 let ty=null,tmoved=false;
 $("#hit").addEventListener("touchstart",ev=>{ty=ev.touches[0].clientY;tmoved=false},{passive:true});
 addEventListener("touchmove",ev=>{
-  if(ty!=null&&filmIdx<0&&isSeries(route)){const y=ev.touches[0].clientY;epsMove((ty-y)*.008);ty=y;ev.preventDefault();return}
+  if(ty!=null&&filmIdx<0&&isSeries(route)){const y=ev.touches[0].clientY;if(!tmoved&&y>ty&&Math.round(EP.posT)<=0){ty=null;return}tmoved=true;epsMove((ty-y)*.008);ty=y;ev.preventDefault();return}
   if(ty!=null&&filmIdx<0&&colsFor(route)){const y=ev.touches[0].clientY;colsFor(route).push((ty-y)*1.2);ty=y;ev.preventDefault();return}
   if(ty==null||!scrollable())return;const y=ev.touches[0].clientY,dy=ty-y;
   if(Math.abs(dy)>3)tmoved=true;const tn=performance.now(),st=dy*4/H;posT+=st;tvel=lerp(tvel,st/Math.max(8,tn-(tlast||tn-16))*16,.5);tlast=tn;ty=y;lastScroll=tn;ev.preventDefault();
 },{passive:false});
-addEventListener("touchstart",ev=>{if(colsFor(route)||isSeries(route))ty=ev.touches[0].clientY},{passive:true});
+addEventListener("touchstart",ev=>{if(colsFor(route)||isSeries(route)){ty=ev.touches[0].clientY;tmoved=false}},{passive:true});
 let tvel=0,tlast=0;
 addEventListener("touchend",()=>{if(ty!=null&&scrollable()&&tmoved&&performance.now()-tlast<80){posT+=clamp(tvel*9,-2.5,2.5);lastScroll=performance.now()}tvel=0;ty=null});
 $("#hit").addEventListener("click",ev=>{
@@ -1245,7 +1250,7 @@ addEventListener("touchmove",ev=>{
   if(ABT.ty==null||route!=="home"||filmIdx>=0||!started)return;
   const y=ev.touches[0].clientY,d=ABT.ty-y;
   if(abMoving()){ev.preventDefault();return}
-  if(ABT.t===0){ev.preventDefault();if(d>40){ABT.ty=null;goAbout(true)}return}
+  if(ABT.t===0){if(d<0){ABT.ty=null;return}ev.preventDefault();if(d>40){ABT.ty=null;goAbout(true)}return}
   // pulling down at the top of About goes back to the film (and never triggers the browser refresh)
   if(abEl.scrollTop<=0&&d<0){ev.preventDefault();if(d<-40){ABT.ty=null;goAbout(false)}}
 },{passive:false});
@@ -1307,6 +1312,26 @@ function landCap(){
   const o=op.toFixed(3);if(lcapEl.style.opacity!==o)lcapEl.style.opacity=o;
 }
 
+/* ---------- pull to refresh ----------
+   On touch screens, pulling down from the top of whatever is showing reloads the page,
+   like the browser's own pull to refresh (which can't reach the site's fixed layers). */
+const ptrEl=$("#ptr"),PTR={y0:null,d:0,busy:false};
+function ptrTop(){if(filmIdx>=0||!started)return false;
+  if(route==="home")return ABT.t===0&&ABT.p<=0;
+  if(route==="archive")return FT.base<=0&&Math.abs(FT.pos)<.02;
+  if(isSeries(route))return Math.round(EP.posT)<=0;
+  const pg=$("#p-"+route);return !!pg&&pg.scrollTop<=0}
+addEventListener("touchstart",ev=>{if(PTR.busy||ev.touches.length>1){PTR.y0=null;return}PTR.y0=ptrTop()?ev.touches[0].clientY:null;PTR.d=0},{passive:true,capture:true});
+addEventListener("touchmove",ev=>{if(PTR.y0==null||PTR.busy)return;
+  const d=ev.touches[0].clientY-PTR.y0;
+  if(d<=0&&PTR.d<=0){PTR.y0=null;return}
+  if(ev.cancelable)ev.preventDefault();PTR.d=Math.max(0,d);
+  const pull=Math.min(PTR.d*.5,96),k=Math.min(1,pull/64);
+  ptrEl.style.opacity=k.toFixed(3);ptrEl.style.transform=`translateY(${(pull-40).toFixed(1)}px) rotate(${(pull*4).toFixed(0)}deg)`},{passive:false,capture:true});
+addEventListener("touchend",()=>{if(PTR.y0==null||PTR.busy)return;PTR.y0=null;
+  if(PTR.d*.5>=64){PTR.busy=true;ptrEl.style.transition="transform .2s";ptrEl.style.transform="translateY(24px)";ptrEl.classList.add("go");setTimeout(()=>location.reload(),350)}
+  else{ptrEl.style.transition="opacity .25s,transform .25s";ptrEl.style.opacity=0;ptrEl.style.transform="translateY(-40px)";setTimeout(()=>ptrEl.style.transition="",260)}},{capture:true});
+
 /* ---------- v2 Featured ----------
    One IP per screen. The list scrolls like a page; while two IPs share the screen their meeting edge
    dissolves (both fade into each other with a soft blur band), at rest each IP is full and sharp. */
@@ -1323,9 +1348,11 @@ const fps=FEAT.map(i=>{const p=PROJECTS[i];const a=document.createElement("a");a
   fpanes.appendChild(a);return{a,v,src:pv(p),on:false}});
 function featWheel(dy){FT.t=clamp(FT.t+dy/H*.9,-.12,N-1+.12);FT.last=performance.now()}
 featEl.addEventListener("touchstart",ev=>{FT.ty=ev.touches[0].clientY;FT.moved=0;FT.vel=0;FT.lt=performance.now()},{passive:true});
-featEl.addEventListener("touchmove",ev=>{if(FT.ty==null)return;ev.preventDefault();
-  const y=ev.touches[0].clientY,d=FT.ty-y,n=performance.now();FT.moved+=Math.abs(d);
-  FT.t=clamp(FT.t+d/H*1.15,-.15,N-1+.15);FT.vel=lerp(FT.vel,(d/H)/Math.max(8,n-FT.lt)*16,.5);FT.lt=n;FT.ty=y;FT.last=n},{passive:false});
+featEl.addEventListener("touchmove",ev=>{if(FT.ty==null)return;
+  const y=ev.touches[0].clientY,d=FT.ty-y,n=performance.now();
+  if(FT.moved===0&&d<0&&FT.base<=0){FT.ty=null;return}
+  ev.preventDefault();FT.moved+=Math.abs(d);
+  FT.t=clamp(FT.t+d/H*1.15,-.15,NF-1+.15);FT.vel=lerp(FT.vel,(d/H)/Math.max(8,n-FT.lt)*16,.5);FT.lt=n;FT.ty=y;FT.last=n},{passive:false});
 featEl.addEventListener("touchend",()=>{if(FT.ty==null)return;FT.ty=null;
   const n=performance.now(),fl=n-FT.lt<90?FT.vel*7:0;const dd=FT.t+clamp(fl,-.6,.6)-FT.base;FT.t=clamp(Math.abs(dd)>.12?FT.base+Math.sign(dd)*Math.max(1,Math.round(Math.abs(dd))):FT.base,0,N-1);FT.base=FT.t;FT.last=1e15});
 function featFrame(dt){
