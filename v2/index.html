@@ -275,6 +275,18 @@ body.r-archive #bg,body.r-archive #hit,body.r-archive #stage{display:none!import
 }
 #p-approach .rv{transform:translateY(12px);filter:blur(3px);transition:opacity .55s var(--eo),transform .55s var(--eo),filter .55s var(--eo)}
 /* About footer: social icons bottom left, credit bottom right, a lighter navy */
+/* team portraits, square, above each name */
+#p-team .tmcols{margin-top:clamp(130px,19vh,190px)!important}
+#p-team .tmpic{margin:0 0 30px;width:min(100%,400px);aspect-ratio:1/1;overflow:hidden;background:#0d1626}
+#p-team .tmpic img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.04);transition:transform 1.4s var(--eo)}
+#p-team.on .tmp.in .tmpic img{transform:none}
+/* LinkedIn: plain text link with the same arrow as the names, after the word */
+#p-team .tmln a{height:auto;padding:0;border:0!important;border-radius:0;background:none!important;color:inherit!important;display:inline-flex;align-items:center;gap:14px}
+#p-team .lar{position:relative;display:block;width:20px;height:1px;background:currentColor;transition:width .4s var(--eo)}
+#p-team .lar::after{content:"";position:absolute;right:0;top:-4px;width:8px;height:8px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:rotate(45deg)}
+#p-team .tmln a:hover{color:#DFF478!important}
+#p-team .tmln a:hover .lar{width:30px}
+@media (max-width:600px){#p-team .tmcols{margin-top:110px!important}#p-team .tmpic{width:100%}}
 /* site footer: socials bottom left, credit bottom right, on every page; colour follows the page */
 .afoot{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:clamp(120px,18vh,180px) 28px 24px;color:var(--fc,#495983)}
 .asoc{display:flex;align-items:center;gap:18px}
@@ -616,25 +628,22 @@ body.film #hd .hold{pointer-events:none}
 <div id="feat"><div class="fpanes"></div><div class="fseam"></div><div class="fscroll"><span>Scroll</span><i></i></div></div>
 <section class="page" id="p-ip"></section>
 <section class="page" id="p-team">
-  <div class="tmhw rv"><h1 class="tmh">TEAM</h1></div>
-  <div class="tmhero">
-    <figure class="tmph rv"><img src="../img/team.jpg" alt="Kanishak Rajpal and Shobhan Sharma"></figure>
-    <div class="tmmeet rv"><h2><span class="ov">Meet<svg viewBox="0 0 200 80" preserveAspectRatio="none" aria-hidden="true"><path d="M150 14C112 2 34 6 12 28c-16 18 26 40 92 38 62-2 96-22 82-40C176 12 140 6 104 8"/></svg></span> the Team</h2><p>Culture. Community. Content.</p></div>
-  </div>
   <div class="tmcols">
     <article class="tmp rv">
-      <h3><i class="ar"></i>Shobhan Sharma</h3>
-      <span class="tmrole">Co-Founder &amp; Filmmaker</span>
-      <p>Shobhan is a filmmaker who builds stories for the screens people actually live on. At PINKMOON he leads the making, taking an idea from a single spark to a finished series and shaping the look, the performances and the rhythm of every frame.</p>
-      <p>His work lives in short-form episodic storytelling: sitcoms, micro dramas, branded entertainment and original IP. Every project starts with a character, a world and a feeling. When he isn't on set or in the edit, he's writing the next episode.</p>
-      <div class="tmln"><a href="https://www.linkedin.com/in/shobhansharma/" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.instagram.com/shobhan06" target="_blank" rel="noopener">Instagram</a></div>
-    </article>
-    <article class="tmp rv">
+      <figure class="tmpic"><img src="../img/team-kanishak.jpg" alt="Kanishak Rajpal" loading="lazy"></figure>
       <h3><i class="ar"></i>Kanishak Rajpal</h3>
       <span class="tmrole">Founder &amp; Creative Director</span>
       <p>Kanishak is a creative and communications leader with 13+ years of building brands, content ecosystems and digital narratives across media, entertainment, FMCG, technology and Web3. At PINKMOON he sets the creative direction, shaping the ideas, the stories and the systems that carry them across culture, content and community.</p>
       <p>He believes creativity should live inside culture, not interrupt it. Lately his focus is AI-led storytelling, using AI to scale ideas faster without losing the human thinking behind them. If you think creativity should solve real problems and still feel human, you'll probably get along.</p>
-      <div class="tmln"><a href="https://www.linkedin.com/in/kanishak-rajpal-4098b322/" target="_blank" rel="noopener">LinkedIn</a></div>
+      <div class="tmln"><a href="https://www.linkedin.com/in/kanishak-rajpal-4098b322/" target="_blank" rel="noopener">LinkedIn<i class="lar" aria-hidden="true"></i></a></div>
+    </article>
+    <article class="tmp rv">
+      <figure class="tmpic"><img src="../img/team-shobhan.jpg" alt="Shobhan Sharma" loading="lazy"></figure>
+      <h3><i class="ar"></i>Shobhan Sharma</h3>
+      <span class="tmrole">Co-Founder &amp; Filmmaker</span>
+      <p>Shobhan is a filmmaker who builds stories for the screens people actually live on. At PINKMOON he leads the making, taking an idea from a single spark to a finished series and shaping the look, the performances and the rhythm of every frame.</p>
+      <p>His work lives in short-form episodic storytelling: sitcoms, micro dramas, branded entertainment and original IP. Every project starts with a character, a world and a feeling. When he isn't on set or in the edit, he's writing the next episode.</p>
+      <div class="tmln"><a href="https://www.linkedin.com/in/shobhansharma/" target="_blank" rel="noopener">LinkedIn<i class="lar" aria-hidden="true"></i></a></div>
     </article>
   </div>
 </section>
