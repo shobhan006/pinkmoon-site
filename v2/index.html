@@ -174,8 +174,8 @@ body.r-team{background:#17243F}
 #p-team .tmp h3{position:relative;font-weight:700;font-size:clamp(14px,1.5vw,22px);line-height:1.15;color:#DFF478}
 #p-team .ar{position:absolute;left:-34px;top:50%;width:20px;height:1px;background:#F7F3E6}
 #p-team .ar::after{content:"";position:absolute;right:0;top:-4px;width:8px;height:8px;border-top:1px solid #F7F3E6;border-right:1px solid #F7F3E6;transform:rotate(45deg)}
-#p-team .tmrole{display:block;margin-top:8px;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;opacity:.72}
-#p-team .tmp p{margin-top:24px;font-size:11.7px;line-height:21.6px;max-width:440px;opacity:.9}
+#p-team .tmrole{display:block;margin-top:4px;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;opacity:.72}
+#p-team .tmp p{margin-top:24px;font-family:"Archivo","Helvetica Neue",Arial,sans-serif;font-stretch:125%;font-weight:500;font-size:11.7px;line-height:19.44px;max-width:440px;opacity:.9}
 #p-team .tmp p+p{margin-top:14px}
 #p-team .tmln{display:flex;gap:14px;margin-top:30px}
 #p-team .tmln a{display:inline-flex;align-items:center;height:34px;padding:0 20px;border:1px solid rgba(247,243,230,.5);border-radius:40px;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s,border-color .3s}
@@ -276,7 +276,9 @@ body.r-archive #bg,body.r-archive #hit,body.r-archive #stage{display:none!import
 #p-approach .rv{transform:translateY(12px);filter:blur(3px);transition:opacity .55s var(--eo),transform .55s var(--eo),filter .55s var(--eo)}
 /* About footer: social icons bottom left, credit bottom right, a lighter navy */
 /* team portraits, square, above each name */
-#p-team .tmcols{margin-top:clamp(130px,19vh,190px)!important}
+#p-team .tmcols{margin-top:clamp(180px,26vh,250px)!important}
+#p-team .ar{display:none!important}
+#p-team .tmp{padding-left:0!important}
 #p-team .tmpic{margin:0 0 30px;width:min(100%,280px);aspect-ratio:1/1;overflow:hidden;background:#0d1626}
 #p-team .tmpic img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.04);transition:transform 1.4s var(--eo)}
 #p-team.on .tmp.in .tmpic img{transform:none}
@@ -286,7 +288,7 @@ body.r-archive #bg,body.r-archive #hit,body.r-archive #stage{display:none!import
 #p-team .lar::after{content:"";position:absolute;right:0;top:-4px;width:8px;height:8px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:rotate(45deg)}
 #p-team .tmln a:hover{color:#DFF478!important}
 #p-team .tmln a:hover .lar{width:30px}
-@media (max-width:600px){#p-team .tmcols{margin-top:110px!important}#p-team .tmpic{width:70%}}
+@media (max-width:600px){#p-team .tmcols{margin-top:150px!important}#p-team .tmpic{width:70%}}
 /* site footer: socials bottom left, credit bottom right, on every page; colour follows the page */
 .afoot{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:clamp(120px,18vh,180px) 28px 24px;color:var(--fc,#495983)}
 .asoc{display:flex;align-items:center;gap:18px}
