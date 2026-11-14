@@ -1444,9 +1444,15 @@ const ipEl=$("#p-ip");let ipIdx=-1;
     let ok=true;rows.forEach(r=>{const el=r.querySelector("input,textarea");if(!el.value.trim()){r.classList.add("bad");ok=false}});
     if(!ok){note.textContent="Please fill in all three.";return}
     const d=Object.fromEntries(new FormData(f));
-    const body=`Name: ${d.name}\nPhone: ${d.phone}\n\n${d.message}`;
-    location.href=`mailto:hello@pinkmoonhouse.com?subject=${encodeURIComponent("Hello from "+d.name)}&body=${encodeURIComponent(body)}`;
-    note.textContent="Thanks. Your email app should open with your message ready to send."});
+    // sent straight to the studio inbox through FormSubmit (no account needed; the first message asks hello@ to confirm once)
+    const btn=f.querySelector(".cfs");btn.disabled=true;note.textContent="Sending...";
+    const mail=()=>{location.href=`mailto:hello@pinkmoonhouse.com?subject=${encodeURIComponent("Hello from "+d.name)}&body=${encodeURIComponent(`Name: ${d.name}\nPhone: ${d.phone}\n\n${d.message}`)}`};
+    fetch("https://formsubmit.co/ajax/hello@pinkmoonhouse.com",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},
+      body:JSON.stringify({name:d.name,phone:d.phone,message:d.message,_subject:"New message from the PINKMOON website",_template:"table"})})
+    .then(r=>r.json().catch(()=>({})).then(j=>({ok:r.ok&&String(j.success)!=="false",j})))
+    .then(({ok})=>{if(!ok)throw 0;f.reset();rows.forEach(r=>r.classList.remove("has"));note.textContent="Thank you. We'll be in touch soon.";btn.disabled=false})
+    .catch(()=>{btn.disabled=false;note.textContent="Couldn't send just now, opening your email app instead.";mail()});
+  });
 })();
 function footHTML(){return document.querySelector("#p-approach .afoot").innerHTML}
 ["#p-services","#p-team","#p-contact"].forEach(sel=>{const pg=$(sel);if(pg){const f=document.createElement("div");f.className="afoot";f.innerHTML=footHTML();pg.appendChild(f)}});
