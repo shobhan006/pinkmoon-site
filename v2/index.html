@@ -12,6 +12,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,400;125,500;125,800&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="../img/landing-poster.jpg" media="(min-aspect-ratio:1/1.15)">
+<link rel="preload" as="image" href="../img/landing-poster-portrait.jpg" media="(max-aspect-ratio:1/1.15)">
 <link rel="preload" href="../fonts/heading-now-regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../fonts/heading-now-bold.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -119,6 +121,8 @@ html,body{overscroll-behavior-y:none}
 #lcap{position:fixed;left:0;right:0;top:50%;transform:translateY(-50%);z-index:3;text-align:center;font-size:var(--f1);line-height:27px;letter-spacing:.06em;color:#DFF478;font-family:"Heading Now","Archivo",sans-serif;font-weight:700;pointer-events:none;opacity:0;transition:opacity .35s}
 body.r-home #hit{cursor:default}
 body.r-home #stage{display:none!important}
+#bg .fx{background:#000 url(../img/landing-poster.jpg) center/cover no-repeat}
+@media (max-aspect-ratio:1/1.15){#bg .fx{background-image:url(../img/landing-poster-portrait.jpg)}}
 /* ---------- v2 Contact (cred deck last page) ---------- */
 #p-contact{background:#17243F;color:#F7F3E6;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;align-items:center;text-align:center}
 body.r-contact{background:#17243F}
@@ -642,7 +646,7 @@ const CONFIG = {
   filmSeconds: 45
 };
 const PROJECTS = [
-  {title:"Introducing PINKMOON", director:"PINKMOON", client:"Storystudio", year:"2026", scene:"moon", pal:["#12060c","#3a0f22","#fff1f4","#f08aa8"], video:"../films/pinkmoon-loop.mp4", videoM:"../films/m/pinkmoon-loop.mp4", text:"Culture, community and the stories in between.",
+  {title:"Introducing PINKMOON", director:"PINKMOON", client:"Storystudio", year:"2026", scene:"moon", pal:["#12060c","#3a0f22","#fff1f4","#f08aa8"], video:"../films/pinkmoon-loop.mp4", videoM:"../films/m/pinkmoon-loop.mp4", videoP:"../films/m/pinkmoon-loop-portrait.mp4", text:"Culture, community and the stories in between.",
    captions:[[0,24.75,"CULTURE"],[25.042,49.383,"COMMUNITY"],[49.967,62.375,"CONTENT"]]},
   {title:"WAKEUP", director:"A PINKMOON ORIGINAL", client:"Series", year:"2026", scene:"silk", pal:["#0b0a10","#000000","#f6d7c8","#c86b8a"], video:"../films/wakeup-trailer.mp4", videoM:"../films/m/wakeup-trailer.mp4", homeCard:"../img/wakeup-title.png", text:"A cinematic microfiction universe where every night, ordinary people confront the one thought they could not silence before falling asleep."},
   {title:"JustMates", director:"TV Sitcom", client:"TV Sitcom", year:"2026", scene:"bloom", pal:["#07040a","#ff4f8b","#7b3cff","#ffb36b"], video:"../films/justmates-ep1.mp4", full:"../films/justmates-ep1-full.mp4", titleCard:"../img/justmates-title.png", homeCard:"../img/justmates-title.png", cardW:130, cardAfter:4, series:"justmates", ep:1, text:"A sitcom about friends, bad timing and the third date that ends everything."},
@@ -798,7 +802,8 @@ function makeScene(p,i){
 }
 // phones: lighter preview files, a cheap blur, and only the videos on screen decode
 const MOB=!matchMedia("(hover:hover) and (pointer:fine)").matches;
-const pv=p=>MOB&&p.videoM?p.videoM:p.video;
+const PORT=()=>innerHeight>innerWidth*1.15;
+const pv=p=>PORT()&&p.videoP?p.videoP:(MOB&&p.videoM?p.videoM:p.video);
 const sources=PROJECTS.map((p,i)=>{
   const sc=makeScene(p,i);let v=null;
   if(p.video){v=document.createElement("video");v.muted=true;v.loop=true;v.playsInline=true;v.setAttribute("playsinline","");v.preload=i===0?"auto":"none";v.src=pv(p)}
@@ -1286,7 +1291,9 @@ function lcapPlace(){
     const fa=m.fontBoundingBoxAscent,fd=m.fontBoundingBoxDescent,ca=m.actualBoundingBoxAscent,cd=m.actualBoundingBoxDescent;
     lcapOff=(fa-fd)/2-(ca-cd)/2}
   const k=(mid-lcapOff).toFixed(1)+"px";if(k!==lcapKey){lcapKey=k;lcapEl.style.top=k}}
-addEventListener("resize",()=>{lcapOff=null;lcapKey="";lcapNav=null});
+addEventListener("resize",()=>{lcapOff=null;lcapKey="";lcapNav=null;
+  const v=sources[0]&&sources[0].v,want=pv(PROJECTS[0]);
+  if(v&&!v.src.endsWith(want.replace("../",""))){const t=v.currentTime||0,pl=!v.paused;v.src=want;v.addEventListener("loadedmetadata",()=>{try{v.currentTime=t}catch(_){}if(pl)v.play().catch(()=>{})},{once:true})}});
 document.fonts&&document.fonts.ready.then(()=>{lcapOff=null;lcapNav=null});
 function landCap(){
   let word="",op=0;const v=sources[0]&&sources[0].v,caps=PROJECTS[0].captions;
@@ -1420,7 +1427,8 @@ function frame(now){
     const ce=vReady(cv)?cv:(vReady(sources[fCur].v)?sources[fCur].v:null);
     const pe=mixing?(vReady(pvv)?pvv:(vReady(sources[fPrev].v)?sources[fPrev].v:null)):null;
     const useCanvas=!ce||(mixing&&!pe);
-    if(useCanvas){
+    if(useCanvas&&!ce&&!vReady(sources[fCur].v)){fl.setTransform(1,0,0,1,0,0);fl.clearRect(0,0,full.width,full.height)}
+    else if(useCanvas){
       const R={x:0,y:0,w:full.width,h:full.height};
       fl.setTransform(1,0,0,1,0,0);fl.globalAlpha=1;
       if(mixing){const sp=mainSrc(fPrev,prevOwn);sp.update(T);drawCover(fl,sp,R)}
