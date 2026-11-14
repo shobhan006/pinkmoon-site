@@ -289,6 +289,20 @@ body.r-archive #bg,body.r-archive #hit,body.r-archive #stage{display:none!import
 #p-team .tmln a:hover{color:#DFF478!important}
 #p-team .tmln a:hover .lar{width:30px}
 @media (max-width:600px){#p-team .tmcols{margin-top:150px!important}#p-team .tmpic{width:70%}}
+/* Team, desktop: the two columns as one centred block, everything 20% smaller */
+@media (min-width:601px){
+  #p-team .tmcols{width:auto!important;max-width:calc(100vw - 48px);grid-template-columns:minmax(0,352px) minmax(0,352px)!important;justify-content:center;column-gap:clamp(64px,9vw,150px)!important}
+  #p-team .tmpic{width:224px!important;margin-bottom:24px}
+  #p-team .tmp h3{font-size:clamp(11.2px,1.2vw,17.6px)}
+  #p-team .tmrole{font-size:7.6px}
+  #p-team .tmp p{font-size:9.36px;line-height:15.55px;margin-top:19px;max-width:352px}
+  #p-team .tmp p+p{margin-top:11px}
+  #p-team .tmln{margin-top:24px}
+  #p-team .tmln a{font-size:7.6px}
+}
+/* name and role sit tight together */
+#p-team .tmp h3{line-height:1}
+#p-team .tmrole{margin-top:2px!important}
 /* site footer: socials bottom left, credit bottom right, on every page; colour follows the page */
 .afoot{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:clamp(120px,18vh,180px) 28px 24px;color:var(--fc,#495983)}
 .asoc{display:flex;align-items:center;gap:18px}
