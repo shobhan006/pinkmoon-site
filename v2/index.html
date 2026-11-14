@@ -339,6 +339,13 @@ body.r-contact{background:#F7F3E6!important}
 #p-contact .rv{transform:translateY(14px);filter:blur(3px);transition:opacity .7s var(--eo),transform .7s var(--eo),filter .7s var(--eo)}
 #p-contact.on .rv.in{opacity:1;transform:none;filter:none}
 @media (max-width:600px){#p-contact .cfr{padding:0 20px;gap:14px}#p-contact .cfd{left:calc(20px + var(--lw,64px) + 26px);right:30px}#p-contact .cfm{padding:22px 20px}#p-contact .cfm .cfd{left:20px!important;right:20px!important}#p-contact .cfw{padding-top:130px}}
+/* phone: country code first, then the number formatted the way that country writes it */
+#p-contact .cfcw{position:relative;flex:none;display:flex;align-items:center;gap:6px;z-index:2}
+#p-contact .cfcv{pointer-events:none;color:#17243F}
+#p-contact .cfcw::after{content:"";width:5px;height:5px;margin-left:2px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:translateY(-2px) rotate(45deg);opacity:.6;pointer-events:none}
+#p-contact .cfcc{position:absolute;inset:-12px -6px;width:calc(100% + 12px);opacity:0;cursor:pointer;font:inherit;-webkit-appearance:none;appearance:none}
+#p-contact .cfr input::placeholder{color:rgba(23,36,63,0);transition:color .25s}
+#p-contact .cfr input:focus::placeholder{color:rgba(23,36,63,.35)}
 /* site footer: socials bottom left, credit bottom right, on every page; colour follows the page */
 .afoot{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:clamp(120px,18vh,180px) 28px 24px;color:var(--fc,#495983)}
 .asoc{display:flex;align-items:center;gap:18px}
@@ -635,7 +642,7 @@ body.film #hd .hold{pointer-events:none}
     <h2 class="cfh rv">Allow us to get in touch</h2>
     <form class="cform" id="cform" novalidate autocomplete="on">
       <label class="cfr rv"><span class="cfl">Name</span><input name="name" type="text" autocomplete="name" required aria-label="Name"><i class="cfd" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b><b></b></i></label>
-      <label class="cfr rv"><span class="cfl">Phone</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" required aria-label="Phone"><i class="cfd" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b><b></b></i></label>
+      <label class="cfr rv"><span class="cfl">Phone</span><span class="cfcw"><select class="cfcc" name="cc" aria-label="Country code"></select><span class="cfcv" aria-hidden="true">+91</span></span><input name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" required aria-label="Phone number"><i class="cfd" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b><b></b></i></label>
       <label class="cfr cfm rv"><span class="cfl">Message</span><textarea name="message" rows="1" required aria-label="Message"></textarea><i class="cfd" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b><b></b></i></label>
       <button class="cfs rv" type="submit">Submit<i class="lar" aria-hidden="true"></i></button>
       <p class="cfn" aria-live="polite"></p>
@@ -1437,7 +1444,31 @@ const ipEl=$("#p-ip");let ipIdx=-1;
 /* contact form */
 (()=>{const f=$("#cform");if(!f)return;
   const rows=[...f.querySelectorAll(".cfr")];
-  const fit=()=>rows.forEach(r=>r.style.setProperty("--lw",r.querySelector(".cfl").offsetWidth+"px"));
+  const fit=()=>rows.forEach(r=>{const c=r.querySelector(".cfcw");r.style.setProperty("--lw",(r.querySelector(".cfl").offsetWidth+(c?c.offsetWidth+18:0))+"px")});
+  /* country codes and how each country writes its numbers (# = digit) */
+  const CC=[["IN","India","91","##### #####"],["US","United States","1","(###) ###-####"],["CA","Canada","1","(###) ###-####"],["GB","United Kingdom","44","#### ######"],
+    ["AE","UAE","971","## ### ####"],["SA","Saudi Arabia","966","## ### ####"],["QA","Qatar","974","#### ####"],["KW","Kuwait","965","#### ####"],["OM","Oman","968","#### ####"],["BH","Bahrain","973","#### ####"],
+    ["SG","Singapore","65","#### ####"],["MY","Malaysia","60","##-### ####"],["TH","Thailand","66","## ### ####"],["ID","Indonesia","62","###-####-####"],["HK","Hong Kong","852","#### ####"],
+    ["JP","Japan","81","##-####-####"],["KR","South Korea","82","##-####-####"],["CN","China","86","### #### ####"],["AU","Australia","61","### ### ###"],["NZ","New Zealand","64","## ### ####"],
+    ["NP","Nepal","977","### #######"],["BD","Bangladesh","880","####-######"],["LK","Sri Lanka","94","## ### ####"],["PK","Pakistan","92","### #######"],
+    ["DE","Germany","49","#### #######"],["FR","France","33","# ## ## ## ##"],["IT","Italy","39","### ### ####"],["ES","Spain","34","### ## ## ##"],["NL","Netherlands","31","# ########"],
+    ["CH","Switzerland","41","## ### ## ##"],["SE","Sweden","46","##-### ## ##"],["IE","Ireland","353","## ### ####"],["ZA","South Africa","27","## ### ####"],["NG","Nigeria","234","### ### ####"],
+    ["KE","Kenya","254","### ######"],["BR","Brazil","55","(##) #####-####"],["MX","Mexico","52","## #### ####"]];
+  const sel=f.querySelector(".cfcc"),ccv=f.querySelector(".cfcv"),ph=f.querySelector('input[name="phone"]');
+  if(sel){sel.innerHTML=CC.map(([k,n,c])=>`<option value="${k}">${n} (+${c})</option>`).join("");sel.value="IN";
+    const cur=()=>CC.find(x=>x[0]===sel.value)||CC[0],need=m=>(m.match(/#/g)||[]).length;
+    const fmt=(dg,m)=>{let o="",i=0;for(const ch of m){if(i>=dg.length)break;if(ch==="#")o+=dg[i++];else o+=ch}return o};
+    const sample="9876543210987";
+    const apply=()=>{const [,,c,m]=cur();ccv.textContent="+"+c;ph.placeholder=fmt(sample,m);
+      const dg=ph.value.replace(/\D/g,"").slice(0,need(m));ph.value=fmt(dg,m);ph.closest(".cfr").classList.toggle("has",!!dg);fit()};
+    sel.addEventListener("change",()=>{apply();ph.focus()});
+    ph.addEventListener("input",()=>{const m=cur()[3],pos=ph.selectionStart,before=ph.value.slice(0,pos).replace(/\D/g,"").length;
+      const dg=ph.value.replace(/\D/g,"").slice(0,need(m));ph.value=fmt(dg,m);
+      let k=0,p=0;while(p<ph.value.length&&k<before){if(/\d/.test(ph.value[p]))k++;p++}try{ph.setSelectionRange(p,p)}catch(_){}});
+    ph.addEventListener("keydown",ev=>{if(ev.key.length===1&&!/[0-9]/.test(ev.key)&&!ev.metaKey&&!ev.ctrlKey)ev.preventDefault()});
+    apply();
+    f.phoneFull=()=>{const [,,c,m]=cur(),dg=ph.value.replace(/\D/g,"");return dg.length===need(m)?`+${c} ${ph.value}`:null};
+  }
   fit();addEventListener("resize",fit);document.fonts&&document.fonts.ready.then(fit);
   rows.forEach(r=>{const el=r.querySelector("input,textarea");
     const upd=()=>{r.classList.toggle("has",!!el.value.trim());r.classList.remove("bad");
@@ -1447,7 +1478,8 @@ const ipEl=$("#p-ip");let ipIdx=-1;
   f.addEventListener("submit",ev=>{ev.preventDefault();
     let ok=true;rows.forEach(r=>{const el=r.querySelector("input,textarea");if(!el.value.trim()){r.classList.add("bad");ok=false}});
     if(!ok){note.textContent="Please fill in all three.";return}
-    const d=Object.fromEntries(new FormData(f));
+    if(f.phoneFull&&!f.phoneFull()){ph.closest(".cfr").classList.add("bad");note.textContent="Please check the phone number for the country code you picked.";return}
+    const d=Object.fromEntries(new FormData(f));if(f.phoneFull)d.phone=f.phoneFull();
     // sent straight to the studio inbox through FormSubmit (no account needed; the first message asks hello@ to confirm once)
     const btn=f.querySelector(".cfs");btn.disabled=true;note.textContent="Sending...";
     const mail=()=>{location.href=`mailto:hello@pinkmoonhouse.com?subject=${encodeURIComponent("Hello from "+d.name)}&body=${encodeURIComponent(`Name: ${d.name}\nPhone: ${d.phone}\n\n${d.message}`)}`};
