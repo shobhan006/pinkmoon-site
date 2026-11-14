@@ -118,6 +118,7 @@ html,body{overscroll-behavior-y:none}
 /* landing: the film loops on its own (no player); its words sit in the centre like in the player */
 #lcap{position:fixed;left:0;right:0;top:50%;transform:translateY(-50%);z-index:3;text-align:center;font-size:var(--f1);line-height:27px;letter-spacing:.06em;color:#DFF478;font-family:"Heading Now","Archivo",sans-serif;font-weight:700;pointer-events:none;opacity:0;transition:opacity .35s}
 body.r-home #hit{cursor:default}
+body.r-home #stage{display:none!important}
 /* ---------- v2 Contact (cred deck last page) ---------- */
 #p-contact{background:#17243F;color:#F7F3E6;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;align-items:center;text-align:center}
 body.r-contact{background:#17243F}
@@ -800,7 +801,7 @@ const MOB=!matchMedia("(hover:hover) and (pointer:fine)").matches;
 const pv=p=>MOB&&p.videoM?p.videoM:p.video;
 const sources=PROJECTS.map((p,i)=>{
   const sc=makeScene(p,i);let v=null;
-  if(p.video){v=document.createElement("video");v.src=pv(p);v.muted=true;v.loop=true;v.playsInline=true;v.setAttribute("playsinline","");v.preload="auto"}
+  if(p.video){v=document.createElement("video");v.muted=true;v.loop=true;v.playsInline=true;v.setAttribute("playsinline","");v.preload=i===0?"auto":"none";v.src=pv(p)}
   const ready=()=>v&&v.readyState>=2&&v.videoWidth>0;
   return{sc,v,get el(){return ready()?v:sc.canvas},update(T,f){if(!ready())sc.render(T,f)},
     w(){return ready()?v.videoWidth:SW},h(){return ready()?v.videoHeight:SH},
@@ -820,7 +821,7 @@ const NEED=new Set();
 function needV(v){if(v)NEED.add(v)}
 // play what is needed this frame (and anything that has no picture yet), pause the rest after a short grace
 function syncPlay(now){for(const v of allV()){
-  const want=NEED.has(v)||v.readyState<2;
+  const want=NEED.has(v);
   if(want){v._seen=now;if(v.paused&&!document.hidden&&now-(v._try||0)>400){v._try=now;v.play().catch(()=>{})}}
   else if(!v.paused&&now-(v._seen||0)>1200)v.pause()}
   NEED.clear()}
@@ -1274,18 +1275,19 @@ function aboutFrame(){
 }
 
 /* landing words, timed to the looping film (same timings as the player) */
-const lcapEl=$("#lcap");let lcapW=null,lcapOff=null,lcapKey="";
+let stageDirty=true;
+const lcapEl=$("#lcap");let lcapW=null,lcapOff=null,lcapKey="",lcapNav=null;
 // sit the words exactly halfway between the bottom of the menu and the bottom of the screen,
 // measured on the letters themselves (cap height), not on the text box
 function lcapPlace(){
-  const nb=$("#hd nav").getBoundingClientRect().bottom,mid=(nb+innerHeight)/2;
+  if(lcapNav==null)lcapNav=$("#hd nav").getBoundingClientRect().bottom;const mid=(lcapNav+innerHeight)/2;
   if(lcapOff==null){const cs=getComputedStyle(lcapEl),c=document.createElement("canvas").getContext("2d");
     c.font=`${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;const m=c.measureText(lcapEl.textContent||"C");
     const fa=m.fontBoundingBoxAscent,fd=m.fontBoundingBoxDescent,ca=m.actualBoundingBoxAscent,cd=m.actualBoundingBoxDescent;
     lcapOff=(fa-fd)/2-(ca-cd)/2}
   const k=(mid-lcapOff).toFixed(1)+"px";if(k!==lcapKey){lcapKey=k;lcapEl.style.top=k}}
-addEventListener("resize",()=>{lcapOff=null;lcapKey=""});
-document.fonts&&document.fonts.ready.then(()=>{lcapOff=null});
+addEventListener("resize",()=>{lcapOff=null;lcapKey="";lcapNav=null});
+document.fonts&&document.fonts.ready.then(()=>{lcapOff=null;lcapNav=null});
 function landCap(){
   let word="",op=0;const v=sources[0]&&sources[0].v,caps=PROJECTS[0].captions;
   if(route==="home"&&filmIdx<0&&started&&caps&&v&&!v.paused&&v.readyState>=2&&fCur===0){
@@ -1394,7 +1396,7 @@ function frame(now){
   const want=hoverIdx>=0?hoverIdx:mod(Math.round(posT),N);
   if(fCur<0){fCur=want;fMix=1}
   if(want!==fCur){fPrev=fCur;fCur=want;fMix=0;if(route==="archive")restartSrc(fCur);
-    prevOwn=curOwn;curOwn=route==="home"&&!autoStep;autoStep=false;
+    prevOwn=curOwn;curOwn=false;// v2: one landing film, no restart copyautoStep=false;
     if(curOwn){const v=mainV(fCur);if(v){try{v.currentTime=0}catch(_){}v.play().catch(()=>{})}}
     pauseMains([curOwn?fCur:-1,prevOwn?fPrev:-1])}
   if(fMix<1&&fMix+dt/.8>=1)pauseMains([curOwn?fCur:-1]);
@@ -1450,7 +1452,7 @@ function frame(now){
   }
 
   if(live&&filmIdx<0){
-    sx.setTransform(DPR,0,0,DPR,0,0);sx.clearRect(0,0,W,H);
+    if(stageDirty||route!=="home"){stageDirty=route!=="home";sx.setTransform(DPR,0,0,DPR,0,0);sx.clearRect(0,0,W,H)}
     sx.imageSmoothingEnabled=true;sx.imageSmoothingQuality="high";
     const showTiles=route==="home"&&G.op>.002;
     const tl=showTiles?tileList(pos):[];let used=0;
