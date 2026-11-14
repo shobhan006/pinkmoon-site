@@ -320,10 +320,10 @@ body.r-contact{background:#F7F3E6!important}
 #p-contact .cfd{position:absolute;left:calc(26px + var(--lw,64px) + 34px);right:40px;top:50%;height:4px;margin-top:-2px;display:flex;justify-content:space-between;align-items:center;pointer-events:none;transition:opacity .25s}
 #p-contact .cfd b{width:3.2px;height:3.2px;border-radius:50%;background:rgba(23,36,63,.32)}
 #p-contact .cfr.has .cfd,#p-contact .cfr:focus-within .cfd{opacity:0}
-#p-contact .cfm{width:100%;aspect-ratio:1/1;flex-direction:column;align-items:stretch;gap:0;padding:24px 26px;border-radius:28px}
+#p-contact .cfm{width:100%;aspect-ratio:4/1;min-height:140px;flex-direction:column;align-items:stretch;gap:0;padding:24px 26px;border-radius:28px}
 #p-contact .cfm .cfl{align-self:flex-start;margin-top:0!important}
 #p-contact .cfm .cfd{left:26px!important;right:26px!important;top:62px!important;margin-top:0}
-#p-contact .cfm textarea{flex:1;height:auto!important;max-height:none!important;margin-top:30px;padding:0;overflow-y:auto}
+#p-contact .cfm textarea{flex:1;height:auto!important;max-height:none!important;margin-top:46px;padding:0;overflow-y:auto}
 #p-contact .cfm .cfl{margin-top:20px}
 #p-contact .cfm .cfd{top:28px}
 #p-contact .cfr.bad{border-color:#c4524a}
@@ -343,7 +343,8 @@ body.r-contact{background:#F7F3E6!important}
 #p-contact .cfcw{position:relative;flex:none;display:flex;align-items:center;gap:6px;z-index:2}
 #p-contact .cfcv{pointer-events:none;color:#17243F}
 #p-contact .cfcw::after{content:"";width:5px;height:5px;margin-left:2px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:translateY(-2px) rotate(45deg);opacity:.6;pointer-events:none}
-#p-contact .cfcc{position:absolute;inset:-12px -6px;width:calc(100% + 12px);opacity:0;cursor:pointer;font:inherit;-webkit-appearance:none;appearance:none}
+#p-contact .cfsv{pointer-events:none;color:#17243F}
+#p-contact .cfsal,#p-contact .cfcc{position:absolute;inset:-12px -6px;width:calc(100% + 12px);opacity:0;cursor:pointer;font:inherit;-webkit-appearance:none;appearance:none}
 #p-contact .cfr input::placeholder{color:rgba(23,36,63,0);transition:color .25s}
 #p-contact .cfr input:focus::placeholder{color:rgba(23,36,63,.35)}
 /* site footer: socials bottom left, credit bottom right, on every page; colour follows the page */
@@ -641,7 +642,7 @@ body.film #hd .hold{pointer-events:none}
   <div class="cfw">
     <h2 class="cfh rv">Allow us to get in touch</h2>
     <form class="cform" id="cform" novalidate autocomplete="on">
-      <label class="cfr rv"><span class="cfl">Name</span><input name="name" type="text" autocomplete="name" required aria-label="Name"><i class="cfd" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b><b></b></i></label>
+      <label class="cfr rv"><span class="cfl">Name</span><span class="cfcw"><select class="cfsal" name="sal" aria-label="Salutation"><option>Mr.</option><option>Ms.</option></select><span class="cfsv" aria-hidden="true">Mr.</span></span><input name="name" type="text" autocomplete="name" required aria-label="Name"><i class="cfd" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b><b></b></i></label>
       <label class="cfr rv"><span class="cfl">Phone</span><span class="cfcw"><select class="cfcc" name="cc" aria-label="Country code"></select><span class="cfcv" aria-hidden="true">+91</span></span><input name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" required aria-label="Phone number"><i class="cfd" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b><b></b></i></label>
       <label class="cfr cfm rv"><span class="cfl">Message</span><textarea name="message" rows="1" required aria-label="Message"></textarea><i class="cfd" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b><b></b></i></label>
       <button class="cfs rv" type="submit">Submit<i class="lar" aria-hidden="true"></i></button>
@@ -1454,6 +1455,8 @@ const ipEl=$("#p-ip");let ipIdx=-1;
     ["DE","Germany","49","#### #######"],["FR","France","33","# ## ## ## ##"],["IT","Italy","39","### ### ####"],["ES","Spain","34","### ## ## ##"],["NL","Netherlands","31","# ########"],
     ["CH","Switzerland","41","## ### ## ##"],["SE","Sweden","46","##-### ## ##"],["IE","Ireland","353","## ### ####"],["ZA","South Africa","27","## ### ####"],["NG","Nigeria","234","### ### ####"],
     ["KE","Kenya","254","### ######"],["BR","Brazil","55","(##) #####-####"],["MX","Mexico","52","## #### ####"]];
+  const sal=f.querySelector(".cfsal"),salv=f.querySelector(".cfsv");
+  if(sal)sal.addEventListener("change",()=>{salv.textContent=sal.value;fit();f.querySelector('input[name="name"]').focus()});
   const sel=f.querySelector(".cfcc"),ccv=f.querySelector(".cfcv"),ph=f.querySelector('input[name="phone"]');
   if(sel){sel.innerHTML=CC.map(([k,n,c])=>`<option value="${k}">${n} (+${c})</option>`).join("");sel.value="IN";
     const cur=()=>CC.find(x=>x[0]===sel.value)||CC[0],need=m=>(m.match(/#/g)||[]).length;
@@ -1479,7 +1482,7 @@ const ipEl=$("#p-ip");let ipIdx=-1;
     let ok=true;rows.forEach(r=>{const el=r.querySelector("input,textarea");if(!el.value.trim()){r.classList.add("bad");ok=false}});
     if(!ok){note.textContent="Please fill in all three.";return}
     if(f.phoneFull&&!f.phoneFull()){ph.closest(".cfr").classList.add("bad");note.textContent="Please check the phone number for the country code you picked.";return}
-    const d=Object.fromEntries(new FormData(f));if(f.phoneFull)d.phone=f.phoneFull();
+    const d=Object.fromEntries(new FormData(f));if(f.phoneFull)d.phone=f.phoneFull();if(d.sal)d.name=d.sal+" "+d.name;
     // sent straight to the studio inbox through FormSubmit (no account needed; the first message asks hello@ to confirm once)
     const btn=f.querySelector(".cfs");btn.disabled=true;note.textContent="Sending...";
     const mail=()=>{location.href=`mailto:hello@pinkmoonhouse.com?subject=${encodeURIComponent("Hello from "+d.name)}&body=${encodeURIComponent(`Name: ${d.name}\nPhone: ${d.phone}\n\n${d.message}`)}`};
