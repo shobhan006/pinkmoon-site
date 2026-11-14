@@ -275,14 +275,33 @@ body.r-archive #bg,body.r-archive #hit,body.r-archive #stage{display:none!import
 }
 #p-approach .rv{transform:translateY(12px);filter:blur(3px);transition:opacity .55s var(--eo),transform .55s var(--eo),filter .55s var(--eo)}
 /* About footer: social icons bottom left, credit bottom right, a lighter navy */
-#p-approach .afoot{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:clamp(120px,18vh,180px) 28px 24px;color:#495983}
-#p-approach .asoc{display:flex;align-items:center;gap:18px}
-#p-approach .asoc a,#p-approach .asoc span{display:flex;align-items:center;justify-content:center;width:22px;height:22px;color:inherit}
-#p-approach .asoc svg{display:block;width:100%;height:100%}
-#p-approach .asoc a{transition:color .3s,transform .3s}
-#p-approach .asoc a:hover{color:#17243F;transform:translateY(-1px)}
-#p-approach .asoc .off{cursor:default}
-#p-approach .acopy{font-family:"Archivo","Helvetica Neue",Arial,sans-serif;font-stretch:125%;font-weight:500;font-size:10px;letter-spacing:.02em}
+/* site footer: socials bottom left, credit bottom right, on every page; colour follows the page */
+.afoot{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:clamp(120px,18vh,180px) 28px 24px;color:var(--fc,#495983)}
+.asoc{display:flex;align-items:center;gap:18px}
+.asoc a,.asoc span{display:flex;align-items:center;justify-content:center;width:22px;height:22px;color:inherit}
+.asoc svg{display:block;width:100%;height:100%}
+.asoc a{transition:color .3s,transform .3s}
+.asoc a:hover{color:var(--fch,#17243F);transform:translateY(-1px)}
+.asoc .off{cursor:default}
+.acopy{font-family:"Archivo","Helvetica Neue",Arial,sans-serif;font-stretch:125%;font-weight:500;font-size:10px;letter-spacing:.02em;white-space:nowrap}
+#p-approach,#p-services{--fc:#495983;--fch:#17243F}
+#p-team,#p-contact,#p-ip,#gfoot{--fc:rgba(247,243,230,.6);--fch:#F7F3E6}
+#p-contact .afoot{padding-top:28px;align-self:stretch}
+/* full-screen views (landing, Featured, episode lists, IP pages on wide screens) keep it pinned to the bottom */
+#gfoot{position:fixed;left:0;right:0;bottom:0;z-index:7;padding:24px 28px calc(24px + env(safe-area-inset-bottom));display:none;pointer-events:none}
+#gfoot>*{pointer-events:auto}
+body.r-home:not(.abt) #gfoot,body.r-archive #gfoot,body.r-series #gfoot{display:flex}
+body.film #gfoot{display:none!important}
+#p-ip .afoot.ipf{position:absolute;left:0;right:0;bottom:0;padding:24px 28px;z-index:2}
+#p-ip .ipfoot{bottom:72px}
+#p-ip .ipr{padding-bottom:72px}
+#p-series .emark{bottom:66px!important}
+@media (max-width:600px),(max-height:520px){
+  #p-ip .afoot.ipf{position:relative;padding:40px 24px 24px}
+  #p-ip .ipfoot{bottom:auto}
+  #p-ip{-webkit-mask-image:linear-gradient(transparent 52px,#000 124px);mask-image:linear-gradient(transparent 52px,#000 124px)}
+  #p-ip .ipr{padding-bottom:20px}
+}
 /* while About scrolls, copy blurs and fades out as it rises into the menu area */
 #hd::before{content:"";position:absolute;left:0;right:0;top:0;height:120px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);background:linear-gradient(rgba(247,243,230,.85),rgba(247,243,230,0));-webkit-mask-image:linear-gradient(#000 45%,transparent);mask-image:linear-gradient(#000 45%,transparent);opacity:0;transition:opacity .35s;pointer-events:none}
 body.abt-done #hd::before{opacity:1}
@@ -633,6 +652,7 @@ body.film #hd .hold{pointer-events:none}
   </div>
 </section>
 <div id="lcap" aria-hidden="true"></div>
+<div id="gfoot" class="afoot"></div>
 <div id="fly"><i class="lgm"></i></div>
 <div id="veil"></div>
 <div id="loader" aria-label="PINKMOON"><div class="win"><i class="lgm"></i></div></div>
@@ -1353,6 +1373,9 @@ function featFrame(dt){
 
 /* ---------- v2 IP page ---------- */
 const ipEl=$("#p-ip");let ipIdx=-1;
+function footHTML(){return document.querySelector("#p-approach .afoot").innerHTML}
+["#p-services","#p-team","#p-contact"].forEach(sel=>{const pg=$(sel);if(pg){const f=document.createElement("div");f.className="afoot";f.innerHTML=footHTML();pg.appendChild(f)}});
+$("#gfoot").innerHTML=footHTML();
 function setIP(k){ipIdx=k;const P=PROJECTS[k],I=IPS[k],sk=P.series,esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const facts=I.facts.map(([l,v])=>`<dt>${esc(l)}</dt><dd>${esc(v==="auto"&&sk?SERIES[sk].count:v)}</dd>`).join("");
   const title=P.homeCard?`<img alt="${esc(P.title)}" src="${P.homeCard}" style="--hs:${P.homeScale||1}">`:`<h1>${esc(P.title)}</h1>`;
@@ -1363,8 +1386,9 @@ function setIP(k){ipIdx=k;const P=PROJECTS[k],I=IPS[k],sk=P.series,esc=t=>String
   <div class="ipl"><span class="ipcat rv">${esc(I.cat)}</span><div class="iptitle rv">${title}</div><p class="iplog rv">${esc(I.logline)}</p>
     <div class="ipcta rv"><a class="ipwatch" href="#${I.watch}">${esc(I.watchLabel)}<i></i></a>${I.more?`<a class="u ipmore" href="#${I.more}">${esc(I.moreLabel)}</a>`:""}</div></div>
   <div class="ipfoot rv"><b>${String(Math.max(fi,0)+1).padStart(2,"0")} / ${String(NF).padStart(2,"0")}</b><span>Next</span><a class="u" href="#ip-${IPS[nx].slug}">${esc(PROJECTS[nx].title)}</a></div>
-  <aside class="ipr"><div class="ipfollow"><span>Follow</span><a class="u" href="${CONFIG.instagram||"#"}">Instagram</a><a class="u" href="${CONFIG.vimeo||"#"}">Vimeo</a></div>
-    <dl>${facts}</dl><a class="ipthumb" href="#${I.watch}"><img alt="" src="${I.thumb}"><span class="pl"></span><span class="tl">${esc(I.thumbLabel)}</span></a></aside>`;
+  <aside class="ipr">
+    <dl>${facts}</dl><a class="ipthumb" href="#${I.watch}"><img alt="" src="${I.thumb}"><span class="pl"></span><span class="tl">${esc(I.thumbLabel)}</span></a></aside>
+  <div class="afoot ipf">${footHTML()}</div>`;
   const im=ipEl.querySelector(".ipimg"),tallChk=()=>ipEl.classList.toggle("tall",im.naturalHeight>im.naturalWidth);im.complete?tallChk():im.onload=tallChk;
   ipEl.scrollTop=0;
 }
