@@ -332,7 +332,11 @@ body.r-contact{background:#F7F3E6!important}
 #p-contact .cfs .lar::after{content:"";position:absolute;right:0;top:-4px;width:8px;height:8px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:rotate(45deg)}
 #p-contact .cfs:hover .lar{width:30px}
 #p-contact .cfn{min-height:20px;margin:10px 0 0 27px;font-size:10px;opacity:.7}
-#p-contact .cfc{margin-top:clamp(44px,8vh,70px);text-align:center;font-family:"Archivo","Helvetica Neue",Arial,sans-serif;font-stretch:125%;font-weight:500;font-size:10px;letter-spacing:.02em;color:#495983}
+#p-contact .cflogo{width:clamp(128px,15.36vw,217.6px);margin:0 auto clamp(28px,4.5vh,44px)}
+#p-contact .cflogo .lgm{width:100%;background:#17243F}
+#p-contact .cfc a{white-space:nowrap}
+@media (max-width:600px){#p-contact .cfc a{display:block}#p-contact .cfc span{display:none}}
+#p-contact .cfc{margin:0 0 clamp(54px,9vh,84px);text-align:center;font-family:"Heading Now","Archivo",sans-serif;font-weight:700;font-size:11.7px;line-height:19.44px;letter-spacing:.02em;color:#17243F}
 #p-contact .cfc span{margin:0 10px}
 #p-contact .cfc a:hover{color:#17243F}
 #p-contact .afoot{padding-top:24px!important;align-self:stretch}
@@ -640,6 +644,8 @@ body.film #hd .hold{pointer-events:none}
 <div hidden><div class="cols" id="ccols"></div><div id="clogo"><i class="lgm"></i></div></div>
 <section class="page" id="p-contact">
   <div class="cfw">
+    <div class="cflogo rv"><i class="lgm"></i></div>
+    <p class="cfc rv"><a href="mailto:hello@pinkmoonhouse.com">hello@pinkmoonhouse.com</a><span>·</span><a href="tel:+919953428841">+91 99534 28841</a></p>
     <h2 class="cfh rv">Allow us to get in touch</h2>
     <form class="cform" id="cform" novalidate autocomplete="on">
       <label class="cfr rv"><span class="cfl">Name</span><span class="cfcw"><select class="cfsal" name="sal" aria-label="Salutation"><option>Mr.</option><option>Ms.</option></select><span class="cfsv" aria-hidden="true">Mr.</span></span><input name="name" type="text" autocomplete="name" required aria-label="Name"><i class="cfd" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b><b></b></i></label>
@@ -648,7 +654,6 @@ body.film #hd .hold{pointer-events:none}
       <button class="cfs rv" type="submit">Submit<i class="lar" aria-hidden="true"></i></button>
       <p class="cfn" aria-live="polite"></p>
     </form>
-    <p class="cfc rv"><a href="mailto:hello@pinkmoonhouse.com">hello@pinkmoonhouse.com</a><span>·</span><a href="tel:+919953428841">+91 99534 28841</a></p>
   </div>
 </section>
 
