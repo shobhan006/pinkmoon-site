@@ -102,15 +102,15 @@ body.r-archive #arch{display:block}
 #info{display:none!important}
 #p-approach{position:fixed;inset:0;z-index:6;overflow-y:auto;overflow-x:hidden;background:#F7F3E6;color:#17243F;visibility:hidden;transform:translate3d(0,100%,0);will-change:transform;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 #p-approach .app{padding-top:clamp(120px,17vh,190px)}
-.alogo{width:clamp(160px,19.2vw,272px);margin:0 auto clamp(40px,6vh,64px);visibility:hidden}
+.alogo{width:clamp(128px,15.36vw,217.6px);margin:0 auto clamp(40px,6vh,64px);visibility:hidden}
 .alogo .lgm{background:#17243F}
 #p-approach .ah{font-weight:700;font-size:clamp(13.2px,1.32vw,26.4px);line-height:1.15;margin-bottom:28px}
-#p-approach .app p{font-size:11.7px;line-height:21.6px;max-width:640px;margin-left:auto;margin-right:auto}
+#p-approach .app p{font-family:"Archivo","Helvetica Neue",Arial,sans-serif;font-stretch:125%;font-weight:500;font-size:11.7px;line-height:19.44px;max-width:640px;margin-left:auto;margin-right:auto}
 .atri{display:flex;flex-direction:column;gap:6px;margin-top:40px;font-weight:700;font-size:10.35px;letter-spacing:.08em}
 .asegs{max-width:800px;margin:0 auto;padding:30px 24px 0;text-align:center}
 .aseg+.aseg{margin-top:clamp(90px,14vh,150px)}
 .aseg h3{font-weight:700;font-size:clamp(14.04px,1.728vw,30.24px);line-height:1;letter-spacing:.01em}
-.aseg p{max-width:560px;margin:22px auto 0;font-size:11.7px;line-height:21.6px}
+.aseg p{max-width:560px;margin:22px auto 0;font-family:"Archivo","Helvetica Neue",Arial,sans-serif;font-stretch:125%;font-weight:500;font-size:11.7px;line-height:19.44px}
 body.abt-light{color:#17243F}
 html,body{overscroll-behavior-y:none}
 /* ---------- v2 Featured: one IP per screen, scrolls like a page, soft dissolve between ---------- */
@@ -264,8 +264,15 @@ body.r-archive #bg,body.r-archive #hit,body.r-archive #stage{display:none!import
   #p-ip .ipthumb{margin-top:10px}
 }
 #p-approach .rv{transform:translateY(12px);filter:blur(3px);transition:opacity .55s var(--eo),transform .55s var(--eo),filter .55s var(--eo)}
-#p-approach .foot{display:flex;justify-content:center;gap:14px 60px;flex-wrap:wrap;padding:clamp(120px,18vh,180px) 24px 22px}
-#p-approach .foot div{display:flex;gap:14px}
+/* About footer: social icons bottom left, credit bottom right, a lighter navy */
+#p-approach .afoot{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:clamp(120px,18vh,180px) 28px 24px;color:#495983}
+#p-approach .asoc{display:flex;align-items:center;gap:18px}
+#p-approach .asoc a,#p-approach .asoc span{display:block;width:18px;height:18px;color:inherit}
+#p-approach .asoc svg{display:block;width:100%;height:100%}
+#p-approach .asoc a{transition:color .3s,transform .3s}
+#p-approach .asoc a:hover{color:#17243F;transform:translateY(-1px)}
+#p-approach .asoc .off{opacity:.4;cursor:default}
+#p-approach .acopy{font-family:"Archivo","Helvetica Neue",Arial,sans-serif;font-stretch:125%;font-weight:500;font-size:10px;letter-spacing:.02em}
 /* while About scrolls, copy blurs and fades out as it rises into the menu area */
 #hd::before{content:"";position:absolute;left:0;right:0;top:0;height:120px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);background:linear-gradient(rgba(247,243,230,.85),rgba(247,243,230,0));-webkit-mask-image:linear-gradient(#000 45%,transparent);mask-image:linear-gradient(#000 45%,transparent);opacity:0;transition:opacity .35s;pointer-events:none}
 body.abt-done #hd::before{opacity:1}
@@ -508,7 +515,7 @@ body.film #hd .hold{pointer-events:none}
 <section class="about" id="p-approach">
   <div class="app">
     <div class="alogo"><i class="lgm"></i></div>
-    <h2 class="ah rv">WE ARE A STORYSTUDIO.</h2>
+    <h2 class="ah rv">WE ARE A STORYSTUDIO</h2>
     <p class="rv">A story can start as a film. It can become a conversation, a character, a community, a format, a fandom or something nobody planned for. That's the space we're interested in. We find ideas in culture, turn them into content and build the world around them so people can see themselves in it, talk about it and make it their own.</p>
     <div class="atri rv"><span>CULTURE TO FIND THE IDEA</span><span>CONTENT TO GIVE IT FORM</span><span>COMMUNITY TO GIVE IT A LIFE</span><span>THAT IS PINKMOON</span></div>
     <div class="vline rv"></div>
@@ -518,7 +525,14 @@ body.film #hd .hold{pointer-events:none}
     <div class="aseg rv"><h3>COMMUNITY</h3><p>Community isn't about gathering an audience around something. It's about creating something people recognise themselves in, and want to come back to because it feels a little like theirs.</p></div>
     <div class="aseg rv"><h3>CONTENT</h3><p>We shape stories for the world. Films, series, formats, IP, branded entertainment, digital and new forms of storytelling. The format can change, the platform can change. What doesn't change is the idea at the centre of it. We start there and build outwards.</p></div>
   </div>
-  <div class="foot"><div><a class="u sl-ig" href="#">Instagram</a><a class="u sl-vm" href="#">Vimeo</a><a class="u sl-li" href="#">LinkedIn</a></div><div><span>All work © PINKMOON, 2026</span></div></div>
+  <div class="afoot">
+    <div class="asoc">
+      <a href="https://www.instagram.com/yourspinkmoon" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.05" fill="currentColor" stroke="none"/></svg></a>
+      <a href="https://www.youtube.com/@Pinkmoonhouse" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M21.6 7.2a2.6 2.6 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.6 2.6 0 0 0 2.4 7.2 27 27 0 0 0 2 12a27 27 0 0 0 .4 4.8 2.6 2.6 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.6 2.6 0 0 0 1.8-1.8A27 27 0 0 0 22 12a27 27 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg></a>
+      <span class="off" aria-label="LinkedIn (coming soon)" aria-disabled="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></svg></span>
+    </div>
+    <span class="acopy">All work © PINKMOON, 2026</span>
+  </div>
 </section>
 
 <!-- v1 contact columns, kept only so the shared script has its element -->
@@ -1204,7 +1218,7 @@ function navActive(){$$("#hd nav a").forEach(a=>{const d=a.dataset.r;
 function aboutSet(ab,animate){
   const t=ab?1:0,was=ABT.t;ABT.t=t;navActive();
   if(!animate){for(let j=TW.length-1;j>=0;j--)if(TW[j].o===ABT)TW.splice(j,1);ABT.p=t}
-  else if(t!==was||ABT.p!==t)tw(ABT,"p",t,.85,0,EIO);
+  else if(t!==was||ABT.p!==t)tw(ABT,"p",t,.57,0,EIO);
   if(t===0){abEl.classList.remove("on");abEl.querySelectorAll(".rv").forEach(el=>el.classList.remove("in"))}
   if(ab==="services"){const go=()=>{const sv=$("#asegs");if(sv)abEl.scrollTo({top:sv.offsetTop-110,behavior:"smooth"})};setTimeout(go,animate?1300:120)}
   else if(t===1&&!animate)abEl.scrollTop=0;
