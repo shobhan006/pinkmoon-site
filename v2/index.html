@@ -317,9 +317,13 @@ body.r-contact{background:#F7F3E6!important}
 #p-contact .cfr input,#p-contact .cfr textarea{position:relative;z-index:1;flex:1;min-width:0;border:0;outline:0;background:none;color:#17243F;font:inherit;font-stretch:125%;letter-spacing:.01em;padding:18px 0;caret-color:#17243F;resize:none}
 #p-contact .cfr textarea{line-height:19.44px;max-height:180px;overflow-y:auto}
 /* the dot leader (like the reference's "Theme · · · · ·") waits in the empty field */
-#p-contact .cfd{position:absolute;left:calc(26px + var(--lw,64px) + 30px);right:26px;top:50%;height:4px;margin-top:-2px;background:radial-gradient(circle,rgba(23,36,63,.32) 1.6px,transparent 2px) 0 50%/30px 4px repeat-x;pointer-events:none;transition:opacity .25s}
+#p-contact .cfd{position:absolute;left:calc(26px + var(--lw,64px) + 34px);right:40px;top:50%;height:4px;margin-top:-2px;display:flex;justify-content:space-between;align-items:center;pointer-events:none;transition:opacity .25s}
+#p-contact .cfd b{width:3.2px;height:3.2px;border-radius:50%;background:rgba(23,36,63,.32)}
 #p-contact .cfr.has .cfd,#p-contact .cfr:focus-within .cfd{opacity:0}
-#p-contact .cfm{align-items:flex-start;border-radius:28px}
+#p-contact .cfm{width:min(300px,100%);aspect-ratio:1/1;flex-direction:column;align-items:stretch;gap:0;padding:24px 26px;border-radius:28px}
+#p-contact .cfm .cfl{align-self:flex-start;margin-top:0!important}
+#p-contact .cfm .cfd{left:26px!important;right:26px!important;top:62px!important;margin-top:0}
+#p-contact .cfm textarea{flex:1;height:auto!important;max-height:none!important;margin-top:30px;padding:0;overflow-y:auto}
 #p-contact .cfm .cfl{margin-top:20px}
 #p-contact .cfm .cfd{top:28px}
 #p-contact .cfr.bad{border-color:#c4524a}
@@ -334,7 +338,7 @@ body.r-contact{background:#F7F3E6!important}
 #p-contact .afoot{padding-top:24px!important;align-self:stretch}
 #p-contact .rv{transform:translateY(14px);filter:blur(3px);transition:opacity .7s var(--eo),transform .7s var(--eo),filter .7s var(--eo)}
 #p-contact.on .rv.in{opacity:1;transform:none;filter:none}
-@media (max-width:600px){#p-contact .cfr{padding:0 20px;gap:14px}#p-contact .cfd{left:calc(20px + var(--lw,64px) + 24px);right:20px;background-size:24px 4px}#p-contact .cfw{padding-top:130px}}
+@media (max-width:600px){#p-contact .cfr{padding:0 20px;gap:14px}#p-contact .cfd{left:calc(20px + var(--lw,64px) + 26px);right:30px}#p-contact .cfm{padding:22px 20px}#p-contact .cfm .cfd{left:20px!important;right:20px!important}#p-contact .cfw{padding-top:130px}}
 /* site footer: socials bottom left, credit bottom right, on every page; colour follows the page */
 .afoot{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:clamp(120px,18vh,180px) 28px 24px;color:var(--fc,#495983)}
 .asoc{display:flex;align-items:center;gap:18px}
@@ -630,9 +634,9 @@ body.film #hd .hold{pointer-events:none}
   <div class="cfw">
     <h2 class="cfh rv">Allow us to get in touch</h2>
     <form class="cform" id="cform" novalidate autocomplete="on">
-      <label class="cfr rv"><span class="cfl">Name</span><input name="name" type="text" autocomplete="name" required aria-label="Name"><i class="cfd" aria-hidden="true"></i></label>
-      <label class="cfr rv"><span class="cfl">Phone</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" required aria-label="Phone"><i class="cfd" aria-hidden="true"></i></label>
-      <label class="cfr cfm rv"><span class="cfl">Message</span><textarea name="message" rows="1" required aria-label="Message"></textarea><i class="cfd" aria-hidden="true"></i></label>
+      <label class="cfr rv"><span class="cfl">Name</span><input name="name" type="text" autocomplete="name" required aria-label="Name"><i class="cfd" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b><b></b></i></label>
+      <label class="cfr rv"><span class="cfl">Phone</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" required aria-label="Phone"><i class="cfd" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b><b></b></i></label>
+      <label class="cfr cfm rv"><span class="cfl">Message</span><textarea name="message" rows="1" required aria-label="Message"></textarea><i class="cfd" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b><b></b></i></label>
       <button class="cfs rv" type="submit">Submit<i class="lar" aria-hidden="true"></i></button>
       <p class="cfn" aria-live="polite"></p>
     </form>
