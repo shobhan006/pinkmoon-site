@@ -669,7 +669,7 @@ const plx=PL.pc.getContext("2d");
 function sizePlayer(){PL.pc.width=Math.round(W*DPR);PL.pc.height=Math.round(H*DPR)}
 function plSetPlaying(v){
   // JustMates episodes always start playing with sound on
-  if(v&&PL.item)plSetSound(true);
+  if(v&&PL.item&&PL.item.series)plSetSound(true);
   PL.playing=v;$(".p-play").textContent=v?"Pause":"Play";
   if(PL.video){if(v)PL.vid.play().catch(()=>{if(!PL.vid.muted){plSetSound(false);PL.vid.play().catch(()=>{})}});else PL.vid.pause()}
   PL.lastMove=performance.now();
