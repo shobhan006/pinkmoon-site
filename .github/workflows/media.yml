@@ -14,6 +14,7 @@ jobs:
       - name: tools
         run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg jq >/dev/null && pip install -q gdown awscli
       - name: download
+        if: ${{ !contains(github.event.head_commit.message, 'check') }}
         run: |
           DRIVE=$(jq -r .drive job.json)
           mkdir -p /tmp/src
@@ -28,7 +29,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: auto
           R2: ${{ secrets.R2_ENDPOINT }}
-        run: bash work.sh
+        run: if [ "$(jq -r .mode job.json)" = check ]; then bash check.sh > report.txt 2>&1; else bash work.sh; fi
       - name: report
         if: always()
         run: |
