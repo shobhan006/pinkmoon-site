@@ -17,7 +17,9 @@ jobs:
         run: |
           DRIVE=$(jq -r .drive job.json)
           mkdir -p /tmp/src
-          gdown --folder "$DRIVE" -O /tmp/src > dl.log 2>&1 || echo "GDOWN FAILED $?" >> dl.log
+          if jq -e .files job.json >/dev/null; then : > dl.log
+            jq -r '.files|to_entries[]|"\(.key) \(.value)"' job.json | while read -r n id; do gdown "$id" -O "/tmp/src/JustMates Ep$n.mp4" >> dl.log 2>&1 || echo "GDOWN FAILED ep$n" >> dl.log; done
+          else gdown --folder "$DRIVE" -O /tmp/src > dl.log 2>&1 || echo "GDOWN FAILED $?" >> dl.log; fi
           find /tmp/src -type f | sort >> dl.log
           cat dl.log
       - name: work

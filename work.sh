@@ -4,7 +4,7 @@
 set -u
 P=$(jq -r .prefix job.json); FROM=$(jq -r '.previewsFrom // 41' job.json)
 mkdir -p hls previews
-aws s3 rm s3://pinkmoon/$P/ --recursive --endpoint-url $R2 --only-show-errors
+jq -e .files job.json >/dev/null || aws s3 rm s3://pinkmoon/$P/ --recursive --endpoint-url $R2 --only-show-errors
 : > report.txt
 for f in /tmp/src/*; do
   n=$(basename "$f" | sed -n 's/.*[Ee][Pp] *\([0-9][0-9]*\).*/\1/p'); [ -z "$n" ] && continue
