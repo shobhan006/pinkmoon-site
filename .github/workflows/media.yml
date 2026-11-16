@@ -16,8 +16,10 @@ jobs:
       - name: download
         run: |
           DRIVE=$(jq -r .drive job.json)
-          mkdir -p /tmp/src && gdown --folder "$DRIVE" -O /tmp/src --remaining-ok -q || gdown --folder "$DRIVE" -O /tmp/src --remaining-ok
-          find /tmp/src -type f | sort
+          mkdir -p /tmp/src
+          gdown --folder "$DRIVE" -O /tmp/src --remaining-ok > dl.log 2>&1 || echo "GDOWN FAILED $?" >> dl.log
+          find /tmp/src -type f | sort >> dl.log
+          cat dl.log
       - name: work
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
@@ -29,5 +31,5 @@ jobs:
         if: always()
         run: |
           git config user.name PINKMOON; git config user.email noreply@anthropic.com
-          git add -f report.txt 2>/dev/null || true
+          cat dl.log report.txt > out.txt 2>/dev/null; git add -f out.txt
           git commit -qm "media report" && git push -q || true
