@@ -695,7 +695,7 @@ body.film #hd .hold{pointer-events:none}
       <div class="p-prog"><div class="p-line"><i class="tr"></i><i class="th"></i></div></div>
       <button class="u p-play">Pause</button>
       <button class="u p-snd">Sound <span>On</span></button>
-      <button class="u p-q">Quality <span>Auto</span></button>
+      <button class="u p-q">Quality <span>HD</span></button>
       <div class="p-qm"></div>
       <button class="u p-close">Close</button>
     </div>
@@ -1100,17 +1100,19 @@ const MEDIA="https://media.pinkmoonhouse.com";let HLS=null,hlsLib=null;
 function loadHlsLib(){return hlsLib||(hlsLib=new Promise((ok,no)=>{const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/hls.js@1.5.20/dist/hls.min.js";s.onload=()=>ok(window.Hls);s.onerror=no;document.head.appendChild(s)}))}
 /* quality: "auto" or a chosen height; remembered for the next episode */
 PL.q="auto";
-const qLabel=l=>Math.min(l.width,l.height)+"p";
+/* quality menu shows just HD and SD: HD is the top version, SD the lightest. Until one is picked the player adapts on its own,
+   starting on HD. A pick is remembered for the next episode. */
+const qIdx=q=>q==="hd"?HLS.levels.length-1:0;
 function qRender(){
   const b=$(".p-q"),m=$(".p-qm"),on=!!(HLS&&HLS.levels&&HLS.levels.length>1);
   PL.el.classList.toggle("has-q",on);const sd=$(".p-snd");if(sd.offsetWidth)PL.el.style.setProperty("--qx",sd.offsetLeft+sd.offsetWidth+28+"px");if(!on){PL.el.classList.remove("q-open");return}
-  const L=HLS.levels,cur=HLS.currentLevel>=0?HLS.currentLevel:HLS.loadLevel;
-  b.querySelector("span").textContent=PL.q==="auto"?"Auto"+(L[cur]?" "+qLabel(L[cur]):""):qLabel(L[HLS.currentLevel]||L[L.length-1]);
-  m.innerHTML=[`<button class="u${PL.q==="auto"?" on":""}" data-q="auto">Auto</button>`].concat(L.map((l,i)=>({l,i})).reverse().map(({l,i})=>`<button class="u${PL.q!=="auto"&&HLS.currentLevel===i?" on":""}" data-q="${i}">${qLabel(l)}</button>`)).join("");
+  const top=HLS.levels.length-1,cur=HLS.currentLevel>=0?HLS.currentLevel:HLS.loadLevel,now=PL.q!=="auto"?PL.q:(cur===top?"hd":"sd");
+  b.querySelector("span").textContent=now.toUpperCase();
+  m.innerHTML=["hd","sd"].map(q=>`<button class="u${now===q?" on":""}" data-q="${q}">${q.toUpperCase()}</button>`).join("");
 }
 function qSet(q){
   if(!HLS)return;
-  if(q==="auto"){PL.q="auto";HLS.currentLevel=-1}else{const i=+q;PL.q=Math.min(HLS.levels[i].width,HLS.levels[i].height);HLS.currentLevel=i}
+  PL.q=q;HLS.currentLevel=qIdx(q);
   PL.el.classList.remove("q-open");qRender();
 }
 function plSource(p,mp4){
@@ -1125,7 +1127,7 @@ function plSource(p,mp4){
     HLS.on(H.Events.ERROR,(e,d)=>{if(d.fatal)fb()});
     HLS.on(H.Events.MANIFEST_PARSED,(e,d)=>{
       const n=d.levels.length;
-      if(PL.q!=="auto"){let k=n-1;d.levels.forEach((l,i)=>{if(Math.min(l.width,l.height)===PL.q)k=i});HLS.currentLevel=k}
+      if(PL.q!=="auto")HLS.currentLevel=PL.q==="hd"?n-1:0;
       qRender();if(PL.item===p&&PL.playing)v.play().catch(()=>{})});
     HLS.on(H.Events.LEVEL_SWITCHED,qRender);
     HLS.loadSource(p.hls);HLS.attachMedia(v)};
