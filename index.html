@@ -479,6 +479,7 @@ body.r-contact #hd .copy{display:block}
 #player.card-on .p-ttl .t img{opacity:1}
 #player.card-on .p-ttl .t span{opacity:0}
 #player.ttl-top .p-ttl{justify-content:flex-start;padding-top:44px;background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,0) 45%)}
+@media (max-height:500px){#player.ttl-top .p-ttl{padding-top:18px!important}.p-ttl .t{margin:6px 0 4px}.p-ttl .t img{width:84px}.p-ttl .c,.p-ttl .d{line-height:20px}}
 @media (min-width:761px){
   #player.ttl-top .p-ttl{align-items:flex-end;text-align:right;padding:23px 24px 0 0;background:radial-gradient(ellipse at 100% 0,rgba(0,0,0,.5),rgba(0,0,0,0) 45%)}
   #player.ttl-top .p-ttl .t{justify-items:end}
@@ -1151,10 +1152,10 @@ function plSource(p,mp4){
 }
 (window.requestIdleCallback||setTimeout)(()=>loadHlsLib().catch(()=>{}),{timeout:1500});
 function openFilm(i){openItem(PROJECTS[i],i)}
-function openEpisode(s,n){openItem(epItem(s,n),SERIES[s].film)}
+function openEpisode(s,n){lastEp[s]=n;openItem(epItem(s,n),SERIES[s].film)}
 function openItem(p,i){
   const key=p.series?p.series+"-"+p.ep:"film-"+i;
-  pauseMains([]);const fresh=!PL.el.classList.contains("on");const same=PL.key===key&&!fresh;filmIdx=i;PL.item=p;PL.key=key;
+  pauseMains([]);EP.vids.forEach(v=>v.pause());const fresh=!PL.el.classList.contains("on");const same=PL.key===key&&!fresh;filmIdx=i;PL.item=p;PL.key=key;
   const S=p.series&&SERIES[p.series];PL.el.classList.toggle("last-ep",!!S&&p.ep>=S.count);PL.el.classList.remove("ending");PL.el.classList.toggle("is-ep",!!p.series);
   // inside the player an episode always reads "Episode N" under the title
   $(".p-ttl .c").textContent=p.series?"Now Playing":p.client;$(".p-ttl .d").textContent=p.series?"Episode "+p.ep:p.director;
@@ -1180,6 +1181,8 @@ function openItem(p,i){
 }
 function closeFilm(){
   if(filmIdx<0&&!PL.el.classList.contains("on"))return;
+  // back on the episode list: land on the episode just watched (or the next one it rolled into)
+  if(isSeries(route)&&PL.item&&PL.item.series===EP.key){EP.pos=EP.posT=PL.item.ep-1;EP.cur=-1}
   filmIdx=-1;if(curOwn&&mains[fCur])mains[fCur].play().catch(()=>{});clearTimeout(identTimer);PL.el.classList.remove("on","show","ident");PL.el.setAttribute("aria-hidden","true");document.body.classList.remove("film");
   if(PL.video)PL.vid.pause();
   if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});
@@ -1392,7 +1395,7 @@ const abEl=$("#p-approach"),fly=$("#fly"),flyM=fly.querySelector(".lgm"),aLogo=$
 const ABT={p:0,t:0,acc:0,accT:0,ty:null};
 const EIO=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
 function navActive(){$$("#hd nav a").forEach(a=>{const d=a.dataset.r;
-  a.classList.toggle("active",route==="home"?(ABT.t===1&&d==="about"):(d===route||(route==="person"&&d==="talent")||(route==="ip"&&d==="archive")||(route==="person"&&d==="team")))})}
+  a.classList.toggle("active",route==="home"?(ABT.t===1&&d==="about"):(d===route||(route==="person"&&d==="talent")||(route==="ip"&&d==="archive")||(isSeries(route)&&d==="archive")||(route==="person"&&d==="team")))})}
 function aboutSet(ab,animate){
   const t=ab?1:0,was=ABT.t;ABT.t=t;navActive();
   if(!animate){for(let j=TW.length-1;j>=0;j--)if(TW[j].o===ABT)TW.splice(j,1);ABT.p=t}
@@ -1575,13 +1578,13 @@ $("#gfoot").innerHTML=footHTML();
 function setIP(k){ipIdx=k;const P=PROJECTS[k],I=IPS[k],sk=P.series,esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const facts=I.facts.map(([l,v])=>`<dt>${esc(l)}</dt><dd>${esc(v==="auto"&&sk?SERIES[sk].count:v)}</dd>`).join("");
   const title=P.homeCard?`<img alt="${esc(P.title)}" src="${P.homeCard}" style="--hs:${P.homeScale||1}">`:`<h1>${esc(P.title)}</h1>`;
-  const fi=FEAT.indexOf(k),nx=FEAT[(Math.max(fi,0)+1)%NF],dots=FEAT.map((j,o)=>`<a href="#ip-${IPS[j].slug}" class="${j===k?"on":""}" style="top:${NF>1?o/(NF-1)*100:50}%" aria-label="${esc(PROJECTS[j].title)}"></a>`).join("");
+  const fi=FEAT.indexOf(k),nx=FEAT[fi<0?0:(fi+1)%NF],dots=FEAT.map((j,o)=>`<a href="#ip-${IPS[j].slug}" class="${j===k?"on":""}" style="top:${NF>1?o/(NF-1)*100:50}%" aria-label="${esc(PROJECTS[j].title)}"></a>`).join("");
   ipEl.innerHTML=`<div class="iph"><div class="ipbg" style="background-image:url('${I.hero}')"></div><img class="ipimg" alt="" src="${I.hero}"><div class="ipsh"></div></div>
   <a class="u ipback" href="#archive">← Featured</a>
   <div class="ipdots">${dots}</div>
   <div class="ipl"><span class="ipcat rv">${esc(I.cat)}</span><div class="iptitle rv">${title}</div><p class="iplog rv">${esc(I.logline)}</p>
     <div class="ipcta rv"><a class="ipwatch" href="#${I.watch}">${esc(I.watchLabel)}<i></i></a>${I.more?`<a class="u ipmore" href="#${I.more}">${esc(I.moreLabel)}</a>`:""}</div></div>
-  <div class="ipfoot rv"><b>${String(Math.max(fi,0)+1).padStart(2,"0")} / ${String(NF).padStart(2,"0")}</b><span>Next</span><a class="u" href="#ip-${IPS[nx].slug}">${esc(PROJECTS[nx].title)}</a></div>
+  <div class="ipfoot rv">${fi>=0?`<b>${String(fi+1).padStart(2,"0")} / ${String(NF).padStart(2,"0")}</b>`:""}<span>Next</span><a class="u" href="#ip-${IPS[nx].slug}">${esc(PROJECTS[nx].title)}</a></div>
   <aside class="ipr">
     <dl>${facts}</dl><a class="ipthumb" href="#${I.watch}"><img alt="" src="${I.thumb}"><span class="pl"></span><span class="tl">${esc(I.thumbLabel)}</span></a></aside>
   <div class="afoot ipf">${footHTML()}</div>`;
