@@ -4,9 +4,10 @@
 set -u
 P=$(jq -r .prefix job.json); FROM=$(jq -r '.previewsFrom // 41' job.json)
 mkdir -p hls previews
+aws s3 rm s3://pinkmoon/$P/ --recursive --endpoint-url $R2 --only-show-errors
 : > report.txt
 for f in /tmp/src/*; do
-  n=$(basename "$f" | grep -o '[0-9]\+' | tail -1); [ -z "$n" ] && continue
+  n=$(basename "$f" | sed -n 's/.*[Ee][Pp] *\([0-9][0-9]*\).*/\1/p'); [ -z "$n" ] && continue
   W=$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of csv=p=0 "$f"); H=$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of csv=p=0 "$f")
   if [ "$H" -ge 1900 ]; then TW=1080; TH=1920; TB=12000k; else TW=$((W/2*2)); TH=$((H/2*2)); TB=9000k; fi
   o=hls/$P/ep$n; mkdir -p $o
