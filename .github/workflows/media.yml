@@ -34,5 +34,5 @@ jobs:
         if: always()
         run: |
           git config user.name PINKMOON; git config user.email noreply@anthropic.com
-          cat dl.log report.txt > out.txt 2>/dev/null; git add -f out.txt previews 2>/dev/null; true
+          touch dl.log report.txt; cat dl.log report.txt > out.txt; git add -f out.txt previews 2>/dev/null; true
           git commit -qm "media report" && git push -q || true
