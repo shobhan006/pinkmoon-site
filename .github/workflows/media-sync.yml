@@ -1,0 +1,23 @@
+name: media-sync
+# Copies every video in films/ to the Cloudflare bucket that serves media.pinkmoonhouse.com,
+# so the site streams them from Cloudflare (the copies in films/ stay as the fallback).
+on:
+  push:
+    branches: [main]
+    paths: [films/**, .github/workflows/media-sync.yml]
+  workflow_dispatch:
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: upload changed videos
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          pip install -q awscli
+          aws s3 sync films/ s3://pinkmoon/films/ --endpoint-url "${{ secrets.R2_ENDPOINT }}" --only-show-errors \
+            --exclude "*" --include "*.mp4" --content-type video/mp4 --cache-control "public, max-age=86400"
+          aws s3 ls s3://pinkmoon/films/ --recursive --summarize --endpoint-url "${{ secrets.R2_ENDPOINT }}" | tail -2
