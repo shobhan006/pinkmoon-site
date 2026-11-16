@@ -1,5 +1,3 @@
-for n in $(seq 1 50); do c=$(curl -s -o /dev/null -w "%{http_code}" https://media.pinkmoonhouse.com/justmates/ep$n/master.m3u8); [ "$c" = 200 ] || echo "ep$n master $c"; done
-curl -sI -H "Origin: https://pinkmoonhouse.com" https://media.pinkmoonhouse.com/justmates/ep41/master.m3u8 | grep -i "http/\|access-control\|content-type\|cache"
-curl -s https://media.pinkmoonhouse.com/justmates/ep41/master.m3u8
-curl -sI -H "Origin: https://pinkmoonhouse.com" https://media.pinkmoonhouse.com/justmates/ep41/v0/s000.ts | grep -i "http/\|access-control\|content-type\|content-length"
+for u in justmates/ep5/master.m3u8 justmates/ep5/v0/index.m3u8 justmates/ep5/v0/s000.ts; do
+  for k in 1 2 3; do curl -s -o /dev/null -D - -w "time %{time_total}s\n" -H "Origin: https://pinkmoonhouse.com" https://media.pinkmoonhouse.com/$u | grep -i "^http/\|cf-cache-status\|^time\|cache-control"; done; echo "--"; done
 echo checked
