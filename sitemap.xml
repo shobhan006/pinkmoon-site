@@ -1,4 +1,635 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url><loc>https://pinkmoonhouse.com/</loc><lastmod>2026-11-16</lastmod></url>
+  <url><loc>https://pinkmoonhouse.com/about/</loc><lastmod>2026-11-16</lastmod>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/featured/</loc><lastmod>2026-11-16</lastmod>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/services/</loc><lastmod>2026-11-16</lastmod>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/team/</loc><lastmod>2026-11-16</lastmod>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/contact/</loc><lastmod>2026-11-16</lastmod>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/work/introducing-pinkmoon/</loc><lastmod>2026-11-16</lastmod>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/work/wakeup/</loc><lastmod>2026-11-16</lastmod>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/work/justmates/</loc><lastmod>2026-11-16</lastmod>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/work/men-in-pink/</loc><lastmod>2026-11-16</lastmod>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/work/jadeblue/</loc><lastmod>2026-11-16</lastmod>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/work/tecno-mobile/</loc><lastmod>2026-11-16</lastmod>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/watch/introducing-pinkmoon/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ip/pinkmoon-thumb.jpg</video:thumbnail_loc>
+      <video:title>Introducing PINKMOON</video:title>
+      <video:description>Watch the film that introduces PINKMOON: culture to find the idea, content to give it form, community to give it a life.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/pinkmoon-loop.mp4</video:content_loc>
+      <video:duration>62</video:duration>
+      <video:publication_date>2026-11-05T13:08:31+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/watch/wakeup/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ip/wakeup-thumb.jpg</video:thumbnail_loc>
+      <video:title>WAKEUP trailer</video:title>
+      <video:description>Watch the trailer for WAKEUP, a PINKMOON original series and cinematic microfiction universe.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/wakeup-trailer.mp4</video:content_loc>
+      <video:duration>54</video:duration>
+      <video:publication_date>2026-11-05T13:08:31+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/watch/jadeblue/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ip/jadeblue-thumb.jpg</video:thumbnail_loc>
+      <video:title>JadeBlue, A Wedding Story</video:title>
+      <video:description>Watch A Wedding Story, the JadeBlue TVC made by PINKMOON: a groom, his people and every celebration around the big day.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/jadeblue-wedding-story.mp4</video:content_loc>
+      <video:duration>60</video:duration>
+      <video:publication_date>2026-11-05T13:08:31+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/watch/tecno-mobile/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ip/tecno-thumb.jpg</video:thumbnail_loc>
+      <video:title>the TECNO Spark GO TVC</video:title>
+      <video:description>Watch the TECNO Spark GO 2021 TVC made by PINKMOON: friends, music and a phone that keeps up all day.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/tecno-spark-go.mp4</video:content_loc>
+      <video:duration>65</video:duration>
+      <video:publication_date>2026-11-13T08:08:39+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/</loc><lastmod>2026-11-16</lastmod>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-1/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-1.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 1</video:title>
+      <video:description>Watch JustMates Episode 1, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep1-full.mp4</video:content_loc>
+      <video:duration>39</video:duration>
+      <video:publication_date>2026-11-05T17:56:38+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-2/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-2.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 2</video:title>
+      <video:description>Watch JustMates Episode 2, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep2-full.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-11-05T19:21:28+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-3/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-3.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 3</video:title>
+      <video:description>Watch JustMates Episode 3, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep3-full.mp4</video:content_loc>
+      <video:duration>35</video:duration>
+      <video:publication_date>2026-11-05T19:21:28+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-4/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-4.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 4</video:title>
+      <video:description>Watch JustMates Episode 4, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep4-full.mp4</video:content_loc>
+      <video:duration>35</video:duration>
+      <video:publication_date>2026-11-05T19:21:28+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-5/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-5.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 5</video:title>
+      <video:description>Watch JustMates Episode 5, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep5-full.mp4</video:content_loc>
+      <video:duration>34</video:duration>
+      <video:publication_date>2026-11-05T19:21:28+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-6/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-6.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 6</video:title>
+      <video:description>Watch JustMates Episode 6, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep6-full.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-11-05T19:21:28+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-7/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-7.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 7</video:title>
+      <video:description>Watch JustMates Episode 7, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep7-full.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-11-05T19:21:28+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-8/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-8.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 8</video:title>
+      <video:description>Watch JustMates Episode 8, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep8-full.mp4</video:content_loc>
+      <video:duration>32</video:duration>
+      <video:publication_date>2026-11-05T19:21:28+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-9/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-9.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 9</video:title>
+      <video:description>Watch JustMates Episode 9, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep9-full.mp4</video:content_loc>
+      <video:duration>32</video:duration>
+      <video:publication_date>2026-11-05T19:21:28+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-10/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-10.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 10</video:title>
+      <video:description>Watch JustMates Episode 10, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep10-full.mp4</video:content_loc>
+      <video:duration>55</video:duration>
+      <video:publication_date>2026-11-05T19:21:28+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-11/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-11.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 11</video:title>
+      <video:description>Watch JustMates Episode 11, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep11-full.mp4</video:content_loc>
+      <video:duration>30</video:duration>
+      <video:publication_date>2026-11-05T19:21:30+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-12/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-12.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 12</video:title>
+      <video:description>Watch JustMates Episode 12, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep12-full.mp4</video:content_loc>
+      <video:duration>32</video:duration>
+      <video:publication_date>2026-11-05T19:21:30+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-13/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-13.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 13</video:title>
+      <video:description>Watch JustMates Episode 13, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep13-full.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-11-05T19:21:30+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-14/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-14.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 14</video:title>
+      <video:description>Watch JustMates Episode 14, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep14-full.mp4</video:content_loc>
+      <video:duration>30</video:duration>
+      <video:publication_date>2026-11-05T19:21:30+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-15/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-15.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 15</video:title>
+      <video:description>Watch JustMates Episode 15, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep15-full.mp4</video:content_loc>
+      <video:duration>34</video:duration>
+      <video:publication_date>2026-11-05T19:21:30+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-16/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-16.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 16</video:title>
+      <video:description>Watch JustMates Episode 16, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep16-full.mp4</video:content_loc>
+      <video:duration>32</video:duration>
+      <video:publication_date>2026-11-05T19:21:30+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-17/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-17.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 17</video:title>
+      <video:description>Watch JustMates Episode 17, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep17-full.mp4</video:content_loc>
+      <video:duration>38</video:duration>
+      <video:publication_date>2026-11-05T19:21:30+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-18/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-18.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 18</video:title>
+      <video:description>Watch JustMates Episode 18, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep18-full.mp4</video:content_loc>
+      <video:duration>56</video:duration>
+      <video:publication_date>2026-11-05T19:21:30+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-19/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-19.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 19</video:title>
+      <video:description>Watch JustMates Episode 19, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep19-full.mp4</video:content_loc>
+      <video:duration>31</video:duration>
+      <video:publication_date>2026-11-05T19:21:30+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-20/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-20.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 20</video:title>
+      <video:description>Watch JustMates Episode 20, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep20-full.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-11-05T19:21:30+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-21/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-21.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 21</video:title>
+      <video:description>Watch JustMates Episode 21, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep21-full.mp4</video:content_loc>
+      <video:duration>32</video:duration>
+      <video:publication_date>2026-11-05T19:21:32+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-22/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-22.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 22</video:title>
+      <video:description>Watch JustMates Episode 22, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep22-full.mp4</video:content_loc>
+      <video:duration>48</video:duration>
+      <video:publication_date>2026-11-05T19:21:32+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-23/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-23.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 23</video:title>
+      <video:description>Watch JustMates Episode 23, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep23-full.mp4</video:content_loc>
+      <video:duration>34</video:duration>
+      <video:publication_date>2026-11-05T19:21:32+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-24/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-24.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 24</video:title>
+      <video:description>Watch JustMates Episode 24, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep24-full.mp4</video:content_loc>
+      <video:duration>32</video:duration>
+      <video:publication_date>2026-11-05T19:21:32+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-25/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-25.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 25</video:title>
+      <video:description>Watch JustMates Episode 25, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep25-full.mp4</video:content_loc>
+      <video:duration>66</video:duration>
+      <video:publication_date>2026-11-05T19:21:32+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-26/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-26.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 26</video:title>
+      <video:description>Watch JustMates Episode 26, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep26-full.mp4</video:content_loc>
+      <video:duration>32</video:duration>
+      <video:publication_date>2026-11-05T19:21:32+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-27/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-27.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 27</video:title>
+      <video:description>Watch JustMates Episode 27, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep27-full.mp4</video:content_loc>
+      <video:duration>60</video:duration>
+      <video:publication_date>2026-11-05T19:21:32+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-28/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-28.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 28</video:title>
+      <video:description>Watch JustMates Episode 28, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep28-full.mp4</video:content_loc>
+      <video:duration>32</video:duration>
+      <video:publication_date>2026-11-05T19:21:32+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-29/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-29.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 29</video:title>
+      <video:description>Watch JustMates Episode 29, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep29-full.mp4</video:content_loc>
+      <video:duration>39</video:duration>
+      <video:publication_date>2026-11-05T19:21:32+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-30/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-30.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 30</video:title>
+      <video:description>Watch JustMates Episode 30, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep30-full.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-11-05T19:21:32+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-31/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-31.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 31</video:title>
+      <video:description>Watch JustMates Episode 31, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep31-full.mp4</video:content_loc>
+      <video:duration>42</video:duration>
+      <video:publication_date>2026-11-05T19:21:33+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-32/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-32.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 32</video:title>
+      <video:description>Watch JustMates Episode 32, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep32-full.mp4</video:content_loc>
+      <video:duration>32</video:duration>
+      <video:publication_date>2026-11-05T19:21:33+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-33/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-33.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 33</video:title>
+      <video:description>Watch JustMates Episode 33, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep33-full.mp4</video:content_loc>
+      <video:duration>36</video:duration>
+      <video:publication_date>2026-11-05T19:21:33+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-34/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-34.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 34</video:title>
+      <video:description>Watch JustMates Episode 34, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep34-full.mp4</video:content_loc>
+      <video:duration>36</video:duration>
+      <video:publication_date>2026-11-05T19:21:33+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-35/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-35.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 35</video:title>
+      <video:description>Watch JustMates Episode 35, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep35-full.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-11-05T19:21:33+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-36/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-36.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 36</video:title>
+      <video:description>Watch JustMates Episode 36, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep36-full.mp4</video:content_loc>
+      <video:duration>34</video:duration>
+      <video:publication_date>2026-11-05T19:21:33+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-37/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-37.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 37</video:title>
+      <video:description>Watch JustMates Episode 37, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep37-full.mp4</video:content_loc>
+      <video:duration>32</video:duration>
+      <video:publication_date>2026-11-05T19:21:33+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-38/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-38.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 38</video:title>
+      <video:description>Watch JustMates Episode 38, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep38-full.mp4</video:content_loc>
+      <video:duration>32</video:duration>
+      <video:publication_date>2026-11-05T19:21:33+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-39/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-39.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 39</video:title>
+      <video:description>Watch JustMates Episode 39, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep39-full.mp4</video:content_loc>
+      <video:duration>32</video:duration>
+      <video:publication_date>2026-11-05T19:21:33+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-40/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-40.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 40</video:title>
+      <video:description>Watch JustMates Episode 40, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/justmates-ep40-full.mp4</video:content_loc>
+      <video:duration>30</video:duration>
+      <video:publication_date>2026-11-05T23:13:29+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-41/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-41.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 41</video:title>
+      <video:description>Watch JustMates Episode 41, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://media.pinkmoonhouse.com/justmates/ep41/master.m3u8</video:content_loc>
+      <video:duration>35</video:duration>
+      <video:publication_date>2026-11-16T12:12:03+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-42/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-42.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 42</video:title>
+      <video:description>Watch JustMates Episode 42, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://media.pinkmoonhouse.com/justmates/ep42/master.m3u8</video:content_loc>
+      <video:duration>64</video:duration>
+      <video:publication_date>2026-11-16T12:12:03+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-43/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-43.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 43</video:title>
+      <video:description>Watch JustMates Episode 43, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://media.pinkmoonhouse.com/justmates/ep43/master.m3u8</video:content_loc>
+      <video:duration>44</video:duration>
+      <video:publication_date>2026-11-16T12:12:03+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-44/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-44.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 44</video:title>
+      <video:description>Watch JustMates Episode 44, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://media.pinkmoonhouse.com/justmates/ep44/master.m3u8</video:content_loc>
+      <video:duration>36</video:duration>
+      <video:publication_date>2026-11-16T12:12:03+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-45/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-45.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 45</video:title>
+      <video:description>Watch JustMates Episode 45, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://media.pinkmoonhouse.com/justmates/ep45/master.m3u8</video:content_loc>
+      <video:duration>31</video:duration>
+      <video:publication_date>2026-11-16T12:12:03+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-46/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-46.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 46</video:title>
+      <video:description>Watch JustMates Episode 46, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://media.pinkmoonhouse.com/justmates/ep46/master.m3u8</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-11-16T12:12:03+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-47/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-47.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 47</video:title>
+      <video:description>Watch JustMates Episode 47, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://media.pinkmoonhouse.com/justmates/ep47/master.m3u8</video:content_loc>
+      <video:duration>31</video:duration>
+      <video:publication_date>2026-11-16T12:12:03+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-48/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-48.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 48</video:title>
+      <video:description>Watch JustMates Episode 48, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://media.pinkmoonhouse.com/justmates/ep48/master.m3u8</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-11-16T12:12:03+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-49/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-49.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 49</video:title>
+      <video:description>Watch JustMates Episode 49, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://media.pinkmoonhouse.com/justmates/ep49/master.m3u8</video:content_loc>
+      <video:duration>32</video:duration>
+      <video:publication_date>2026-11-16T12:12:03+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/justmates/episode-50/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/justmates-50.jpg</video:thumbnail_loc>
+      <video:title>JustMates Episode 50</video:title>
+      <video:description>Watch JustMates Episode 50, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.</video:description>
+      <video:content_loc>https://media.pinkmoonhouse.com/justmates/ep50/master.m3u8</video:content_loc>
+      <video:duration>78</video:duration>
+      <video:publication_date>2026-11-16T12:12:03+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/men-in-pink/</loc><lastmod>2026-11-16</lastmod>
+  </url>
+  <url><loc>https://pinkmoonhouse.com/men-in-pink/episode-1/</loc><lastmod>2026-11-16</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://pinkmoonhouse.com/img/ep/meninpink-1.jpg</video:thumbnail_loc>
+      <video:title>MEN IN PINK Episode 1</video:title>
+      <video:description>Watch MEN IN PINK Episode 1, a new series from PINKMOON.</video:description>
+      <video:content_loc>https://pinkmoonhouse.com/films/meninpink-ep1-full.mp4</video:content_loc>
+      <video:duration>49</video:duration>
+      <video:publication_date>2026-11-05T20:26:51+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
 </urlset>

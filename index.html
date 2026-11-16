@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>/* iPhone/iPad zoom the whole page in when a form field's text is under 16px, and stay zoomed. Capping the scale stops that; iOS still lets people pinch to zoom. */
 if(/iP(hone|ad|od)/.test(navigator.userAgent)||(/Macintosh/.test(navigator.userAgent)&&navigator.maxTouchPoints>1))document.querySelector('meta[name="viewport"]').setAttribute("content","width=device-width, initial-scale=1, maximum-scale=1");</script>
@@ -20,7 +21,7 @@ if(/iP(hone|ad|od)/.test(navigator.userAgent)||(/Macintosh/.test(navigator.userA
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://pinkmoonhouse.com/img/landing-poster.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"PINKMOON","alternateName":"PINKMOON House","url":"https://pinkmoonhouse.com/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"PINKMOON","url":"https://pinkmoonhouse.com/"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"PINKMOON","url":"https://pinkmoonhouse.com/","logo":"https://pinkmoonhouse.com/img/favicon-192.png","sameAs":["https://www.instagram.com/yourspinkmoon","https://www.youtube.com/@Pinkmoonhouse"]}</script>
 <link rel="preconnect" href="https://media.pinkmoonhouse.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -608,6 +609,7 @@ body.film #hd .hold{pointer-events:none}
   #p-series .emark{display:none}
 }
 @media (hover:none){.u:not(.active):hover::before{opacity:0}}
+.sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 /* Scrolling pages: no CSS mask on the scrolling box itself (iPad/iPhone Safari and Chrome repaint masked scrollers badly,
    so content jumped and the footer popped in and out while scrolling). The fade under the menu is a fixed layer instead. */
 #p-team,#p-services,#p-contact,#p-ip,body.abt-done #p-approach{-webkit-mask-image:none!important;mask-image:none!important}
@@ -768,6 +770,8 @@ body.film #hd::before{opacity:0!important}
 <div id="veil"></div>
 <div id="loader" aria-label="PINKMOON"><div class="win"><i class="lgm"></i></div></div>
 
+<h1 id="seo-h1" class="sr">PINKMOON, an IP-led entertainment company and story studio</h1>
+<script type="application/json" id="seo-data">{"pages": {"": {"title": "PINKMOON | Original IPs, Entertainment &amp; Experiences", "description": "PINKMOON is an IP-led entertainment company creating original stories, characters and content universes. From digital series and interactive experiences to ticketed IP specials, we turn audiences into communities and entertainment into experiences.", "h1": "PINKMOON, an IP-led entertainment company and story studio"}, "about": {"title": "About PINKMOON | A Story Studio Building Original IP", "description": "PINKMOON is a story studio. We find ideas in culture, turn them into films, series and formats, and build communities around them. Culture to find the idea, content to give it form, community to give it a life.", "h1": "About PINKMOON"}, "archive": {"title": "Featured Work | JustMates, MEN IN PINK, WAKEUP | PINKMOON", "description": "Original IPs and brand films from PINKMOON: the JustMates sitcom, the MEN IN PINK and WAKEUP series, and TVCs for JadeBlue and TECNO Mobile.", "h1": "Featured work by PINKMOON"}, "services": {"title": "Services | Brand Films, Micro Series &amp; AI Films | PINKMOON", "description": "We build ideas that move culture and make brands matter: brand films, micro series, AI films and series, communities for brands, content IP and PLAYROOM, our in-house app.", "h1": "PINKMOON services"}, "team": {"title": "Team | Kanishak Rajpal &amp; Shobhan Sharma | PINKMOON", "description": "Meet the founders of PINKMOON: Kanishak Rajpal, Founder and Creative Director, and Shobhan Sharma, Co-Founder and Filmmaker.", "h1": "The PINKMOON team"}, "contact": {"title": "Contact PINKMOON | Work With Our Story Studio", "description": "Talk to PINKMOON about brand films, series, original IP and collaborations. Call +91 99534 28841 or write to hello@pinkmoonhouse.com.", "h1": "Contact PINKMOON"}, "ip-justmates": {"title": "JustMates | A PINKMOON Sitcom | Watch All Episodes", "description": "JustMates is a PINKMOON sitcom about two flatmates, one small apartment and all the little things that go wrong when you share a life with your friends. Watch every episode free.", "h1": "JustMates, a PINKMOON sitcom"}, "ip-men-in-pink": {"title": "MEN IN PINK | A PINKMOON Original Series", "description": "MEN IN PINK is a new PINKMOON series. Episode 1 is out now, with more on the way.", "h1": "MEN IN PINK, a PINKMOON series"}, "ip-wakeup": {"title": "WAKEUP | A PINKMOON Original Series | Trailer", "description": "WAKEUP is a PINKMOON original series, a cinematic microfiction universe. Watch the trailer now.", "h1": "WAKEUP, a PINKMOON original series"}, "ip-introducing-pinkmoon": {"title": "Introducing PINKMOON | Studio Film", "description": "The film that introduces PINKMOON. Culture to find the idea, content to give it form, community to give it a life.", "h1": "Introducing PINKMOON"}, "ip-jadeblue": {"title": "JadeBlue A Wedding Story | TVC by PINKMOON", "description": "A Wedding Story for JadeBlue. A groom, his people and every celebration around the big day, told through what he wears to each of them. A TVC made by PINKMOON.", "h1": "JadeBlue, A Wedding Story"}, "ip-tecno-mobile": {"title": "TECNO Spark GO TVC | Made by PINKMOON", "description": "A TVC for the TECNO Spark GO 2021. Friends, music and a phone that keeps up all day, with a 5000mAh battery and a 13MP AI camera. Made by PINKMOON.", "h1": "TECNO Spark GO, a TVC by PINKMOON"}, "justmates": {"title": "JustMates Episodes | Watch the Sitcom Online | PINKMOON", "description": "Watch every episode of JustMates, the PINKMOON sitcom about two flatmates, one small apartment and all the little things that go wrong in between.", "h1": "JustMates, all episodes"}, "meninpink": {"title": "MEN IN PINK Episodes | Watch Online | PINKMOON", "description": "Watch MEN IN PINK, a new PINKMOON series. Episode 1 is out now.", "h1": "MEN IN PINK, all episodes"}}, "series": {"justmates": {"episode": "Watch JustMates Episode {n}, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between."}, "meninpink": {"episode": "Watch MEN IN PINK Episode {n}, a new series from PINKMOON."}}, "films": {"introducing-pinkmoon": {"title": "Watch Introducing PINKMOON | Studio Film", "description": "Watch the film that introduces PINKMOON: culture to find the idea, content to give it form, community to give it a life.", "h1": "Watch Introducing PINKMOON"}, "wakeup": {"title": "WAKEUP Trailer | A PINKMOON Original Series", "description": "Watch the trailer for WAKEUP, a PINKMOON original series and cinematic microfiction universe.", "h1": "WAKEUP trailer"}, "jadeblue": {"title": "Watch JadeBlue A Wedding Story | TVC by PINKMOON", "description": "Watch A Wedding Story, the JadeBlue TVC made by PINKMOON: a groom, his people and every celebration around the big day.", "h1": "Watch JadeBlue, A Wedding Story"}, "tecno-mobile": {"title": "Watch the TECNO Spark GO TVC | PINKMOON", "description": "Watch the TECNO Spark GO 2021 TVC made by PINKMOON: friends, music and a phone that keeps up all day.", "h1": "Watch the TECNO Spark GO TVC"}}}</script>
 <script>
 /* =========================================================
    EDIT HERE. Everything below this block runs from it.
@@ -1082,15 +1086,15 @@ $("#hit").addEventListener("click",ev=>{
   let i=-1;if(G.op>.5)i=hitTile(ev.clientX,ev.clientY);
   if(i<0)i=mod(Math.round(pos),N);
   // in the Archive a series opens its episode list instead of the player
-  if(route==="archive"&&PROJECTS[i].series){location.hash=PROJECTS[i].series;return}
-  location.hash="film-"+(i+1);
+  if(route==="archive"&&PROJECTS[i].series){go(PROJECTS[i].series);return}
+  go("film-"+(i+1));
 });
 addEventListener("keydown",ev=>{
   if(filmIdx>=0){playerKey(ev);return}
   if(isSeries(route)&&started){
     if(["ArrowDown","ArrowRight","PageDown"].includes(ev.key)){EP.posT=Math.round(EP.posT);epsMove(1);ev.preventDefault()}
     if(["ArrowUp","ArrowLeft","PageUp"].includes(ev.key)){EP.posT=Math.round(EP.posT);epsMove(-1);ev.preventDefault()}
-    if(ev.key==="Enter")location.hash=EP.key+"-"+(Math.round(EP.pos)+1);return}
+    if(ev.key==="Enter")go(EP.key+"-"+(Math.round(EP.pos)+1));return}
   if(route==="home"&&started&&!busy){
     if(ABT.t===0&&["ArrowDown","PageDown"," "].includes(ev.key)){goAbout(true);ev.preventDefault()}
     else if(ABT.t===1&&abEl.scrollTop<=0&&["ArrowUp","PageUp"].includes(ev.key)){goAbout(false);ev.preventDefault()}
@@ -1098,11 +1102,11 @@ addEventListener("keydown",ev=>{
   if(route==="archive"&&started){
     if(["ArrowDown","ArrowRight","PageDown"," "].includes(ev.key)){FT.t=FT.base=FT.base+1;ev.preventDefault()}
     if(["ArrowUp","ArrowLeft","PageUp"].includes(ev.key)){FT.t=FT.base=FT.base-1;ev.preventDefault()}
-    if(ev.key==="Enter")location.hash="ip-"+IPS[FEAT[wrapF(Math.round(FT.pos))]].slug;return}
+    if(ev.key==="Enter")go("ip-"+IPS[FEAT[wrapF(Math.round(FT.pos))]].slug);return}
   if(!scrollable())return;
   if(["ArrowDown","ArrowRight","PageDown"].includes(ev.key)){posT=Math.round(posT)+1;lastScroll=performance.now();ev.preventDefault()}
   if(["ArrowUp","ArrowLeft","PageUp"].includes(ev.key)){posT=Math.round(posT)-1;lastScroll=performance.now();ev.preventDefault()}
-  if(ev.key==="Enter"){location.hash="film-"+(mod(Math.round(pos),N)+1)}
+  if(ev.key==="Enter"){go("film-"+(mod(Math.round(pos),N)+1))}
 });
 
 /* ---------- player ---------- */
@@ -1217,13 +1221,13 @@ function playIdent(i){
   $("#ident").onclick=()=>endIdent(i);
 }
 let baseHash="featured";
-function closeFilmNav(){location.hash=PL.item&&PL.item.series&&filmIdx>=0?PL.item.series:baseHash}
+function closeFilmNav(){go(PL.item&&PL.item.series&&filmIdx>=0?PL.item.series:baseHash)}
 function plProgress(){return PL.video?(PL.vid.duration?PL.vid.currentTime/PL.vid.duration:0):PL.t/PL.dur}
 function plSeek(p){p=clamp(p,0,.999);if(PL.video){if(PL.vid.duration)PL.vid.currentTime=p*PL.vid.duration}else PL.t=p*PL.dur;PL.lastMove=performance.now()}
 function plNext(){
   const p=PL.item;
-  if(p&&p.series){const S=SERIES[p.series];location.hash=p.ep<S.count?p.series+"-"+(p.ep+1):p.series;return}
-  location.hash="film-"+(mod(filmIdx+1,N)+1);
+  if(p&&p.series){const S=SERIES[p.series];go(p.ep<S.count?p.series+"-"+(p.ep+1):p.series);return}
+  go("film-"+(mod(filmIdx+1,N)+1));
 }
 $(".p-end .nx").addEventListener("click",plNext);
 $(".p-scr").addEventListener("click",()=>{if(!fine){PL.lastMove=performance.now();return}plSetPlaying(!PL.playing)});
@@ -1281,7 +1285,7 @@ function playerFrame(now,dt){
 const lastEp={};
 const isSeries=r=>!!(r&&SERIES[r]);
 const EP={key:null,pos:0,posT:0,last:-1e4,cur:-1,vids:[...document.querySelectorAll("#p-series video")],front:0,rows:[]};
-$("#p-series .ehit").addEventListener("click",()=>{location.hash=EP.key+"-"+(Math.round(EP.pos)+1)});
+$("#p-series .ehit").addEventListener("click",()=>{go(EP.key+"-"+(Math.round(EP.pos)+1))});
 function epsBuild(key){
   if(EP.key===key)return;EP.key=key;const S=SERIES[key],wrap=$("#p-series .erows");
   wrap.textContent="";EP.rows=[];
@@ -1369,11 +1373,68 @@ const ccols=Columns($("#ccols"),{
 const colsFor=r=>r==="person"?pcols:null;
 
 /* ---------- routing ---------- */
+/* ---------- real addresses (History API) ----------
+   Every view has its own URL (/about/, /work/justmates/, /justmates/episode-3/ ...) so search engines can index each one.
+   Inside the app views keep their short keys ("about", "ip-justmates", "justmates-3"); old #links still work and are
+   turned into the clean address. */
+const SPATH={justmates:"justmates",meninpink:"men-in-pink"};
+function keyToPath(k){k=(k||"").replace(/^#/,"");
+  if(!k)return "/";
+  if(k==="featured")return "/";
+  if(k==="archive")return "/featured/";
+  if(["about","services","team","contact"].includes(k))return "/"+k+"/";
+  let m=k.match(/^ip-([a-z0-9-]+)$/);if(m)return "/work/"+m[1]+"/";
+  if(SERIES[k])return "/"+(SPATH[k]||k)+"/";
+  m=k.match(/^([a-z]+)-(\d+)$/);if(m&&SERIES[m[1]])return "/"+(SPATH[m[1]]||m[1])+"/episode-"+m[2]+"/";
+  m=k.match(/^film-(\d+)$/);if(m&&IPS[+m[1]-1])return "/watch/"+IPS[+m[1]-1].slug+"/";
+  return null}
+function pathToKey(p){p=p.replace(/index\.html$/,"").replace(/\/+$/,"")+"/";
+  if(p==="/")return "";
+  let m=p.match(/^\/(about|services|team|contact)\/$/);if(m)return m[1];
+  if(p==="/featured/")return "archive";
+  m=p.match(/^\/work\/([a-z0-9-]+)\/$/);if(m)return "ip-"+m[1];
+  m=p.match(/^\/watch\/([a-z0-9-]+)\/$/);if(m){const i=IPS.findIndex(x=>x.slug===m[1]);if(i>=0)return "film-"+(i+1)}
+  for(const s in SERIES){const sp=SPATH[s]||s;if(p==="/"+sp+"/")return s;m=p.match(new RegExp("^/"+sp+"/episode-(\\d+)/$"));if(m)return s+"-"+m[1]}
+  return ""}
+function curKey(){const h=location.hash.replace("#","");return h||pathToKey(location.pathname)}
+function go(k){const p=keyToPath(k);if(p==null){location.hash=k;return}
+  if(p!==location.pathname||location.hash)history.pushState(null,"",p);
+  seoMeta(k);applyHash(false)}
+/* title, description, canonical and the page heading follow the view (the same table builds the static pages) */
+const SEO=JSON.parse(document.getElementById("seo-data").textContent);
+function seoFor(k){
+  const T=SEO.pages,base="https://pinkmoonhouse.com";let m;
+  if(T[k])return T[k];
+  if((m=k.match(/^([a-z]+)-(\d+)$/))&&SERIES[m[1]]){const S=SERIES[m[1]],n=+m[2];
+    return {title:`${S.name} Episode ${n} | Watch Online | PINKMOON`,description:SEO.series[m[1]].episode.replace("{n}",n),h1:`${S.name} Episode ${n}`}}
+  if((m=k.match(/^film-(\d+)$/))&&SEO.films[IPS[+m[1]-1]?.slug])return SEO.films[IPS[+m[1]-1].slug];
+  return T[""]}
+function seoMeta(k){
+  const d=seoFor(k||"");if(!d)return;const url="https://pinkmoonhouse.com"+(keyToPath(k)||"/");
+  document.title=d.title.replace(/&amp;/g,"&");
+  const set=(sel,attr,v)=>{const el=document.querySelector(sel);if(el)el.setAttribute(attr,v)};
+  set('meta[name="description"]',"content",d.description);set('link[rel="canonical"]',"href",url);
+  set('meta[property="og:url"]',"content",url);set('meta[property="og:title"]',"content",d.title.replace(/&amp;/g,"&"));set('meta[property="og:description"]',"content",d.description);
+  const h=document.getElementById("seo-h1");if(h)h.textContent=d.h1||d.title.split(" | ")[0];
+}
+/* internal links get real hrefs (crawlable) and open inside the app */
+function fixLink(a){const h=a.getAttribute("href");if(!h||h.length<2||h[0]!=="#")return;const p=keyToPath(h);if(p){a.dataset.k=h.slice(1);a.setAttribute("href",p)}}
+function fixLinks(root){(root.querySelectorAll?root:document).querySelectorAll('a[href^="#"]').forEach(fixLink);if(root.matches&&root.matches('a[href^="#"]'))fixLink(root)}
+new MutationObserver(ms=>{for(const m of ms){if(m.type==="attributes")fixLink(m.target);else m.addedNodes.forEach(n=>{if(n.nodeType===1)fixLinks(n)})}}).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:["href"]});
+document.addEventListener("click",ev=>{
+  const a=ev.target.closest&&ev.target.closest("a[href]");if(!a||ev.defaultPrevented||ev.button!==0||ev.metaKey||ev.ctrlKey||ev.shiftKey||ev.altKey||a.target==="_blank")return;
+  const h=a.getAttribute("href");if(h==="#"){ev.preventDefault();return}
+  let k=a.dataset.k;if(k==null&&h[0]==="#")k=h.slice(1);
+  if(k==null&&a.origin===location.origin&&!/\.[a-z0-9]+$/i.test(a.pathname))k=pathToKey(a.pathname);
+  if(k==null)return;ev.preventDefault();go(k)});
+if(location.hash){const p=keyToPath(location.hash);if(p)history.replaceState(null,"",p)}
+fixLinks(document);seoMeta(curKey());
+
 const ROUTES=["archive","services","team","talent","approach","contact",...Object.keys(SERIES)];
 const pageOf=r=>$("#p-"+(isSeries(r)?"series":r));
 const veil=$("#veil");
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
-function parseHash(){const h=location.hash.replace("#","");if(h==="about")return{r:"home",f:-1,ab:h};if(ROUTES.includes(h))return{r:h,f:-1};let m=h.match(/^film-(\d+)$/);if(m)return{r:null,f:clamp(+m[1]-1,0,N-1)};
+function parseHash(){const h=curKey();if(h==="about")return{r:"home",f:-1,ab:h};if(ROUTES.includes(h))return{r:h,f:-1};let m=h.match(/^film-(\d+)$/);if(m)return{r:null,f:clamp(+m[1]-1,0,N-1)};
 m=h.match(/^ip-([a-z0-9-]+)$/);if(m){const k=IPS.findIndex(x=>x.slug===m[1]);if(k>=0)return{r:"ip",f:-1,ip:k}}
 m=h.match(/^([a-z]+)-(\d+)$/);if(m&&SERIES[m[1]])return{r:null,f:-1,s:m[1],e:clamp(+m[2],1,SERIES[m[1]].count)};m=h.match(/^talent-(\d+)$/);if(m)return{r:"person",f:-1,p:clamp(+m[1]-1,0,TALENT.length-1)};return{r:"home",f:-1}}
 function setRoute(r){
@@ -1406,7 +1467,8 @@ async function applyHash(first){
   }else if(wasFilm)closeFilm();
   if(r==="home"&&!changed)aboutSet(ab,homeBefore&&!wasFilm);
 }
-addEventListener("hashchange",()=>applyHash(false));
+addEventListener("hashchange",()=>{const p=keyToPath(location.hash);if(p)history.replaceState(null,"",p);seoMeta(curKey());applyHash(false)});
+addEventListener("popstate",()=>{seoMeta(curKey());applyHash(false)});
 
 /* ---------- v2: landing film -> About ----------
    Scroll on the landing film and the About page slides up over it; the menu logo travels down,
@@ -1424,7 +1486,7 @@ function aboutSet(ab,animate){
   if(ab==="services"){const go=()=>{const sv=$("#asegs");if(sv)abEl.scrollTo({top:sv.offsetTop-110,behavior:"smooth"})};setTimeout(go,animate?1300:120)}
   else if(t===1&&!animate)abEl.scrollTop=0;
 }
-function goAbout(v){if(busy)return;location.hash=v?"about":"";if(!v&&location.hash==="")history.replaceState(null,"",location.pathname+location.search)}
+function goAbout(v){if(busy)return;go(v?"about":"")}
 const abMoving=()=>TW.some(w=>w.o===ABT);
 function aboutWheel(dy,ev){
   const now=performance.now();if(now-ABT.accT>220)ABT.acc=0;ABT.accT=now;

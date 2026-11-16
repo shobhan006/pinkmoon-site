@@ -1,0 +1,32 @@
+name: seo-pages
+# Rebuilds the per-page copies (about/, work/..., justmates/episode-N/ ...), 404.html and sitemap.xml
+# whenever index.html or the SEO tools change, so every address always serves the latest site.
+on:
+  push:
+    branches: [main]
+    paths: [index.html, tools/**, films/**]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: seo-pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null
+      - name: build pages
+        run: python3 tools/build_seo.py
+      - name: commit
+        run: |
+          git config user.name PINKMOON
+          git config user.email noreply@anthropic.com
+          git add -A about featured services team contact work watch justmates men-in-pink img/ep 404.html sitemap.xml
+          if git diff --cached --quiet; then echo "pages already up to date"; exit 0; fi
+          git commit -qm "Rebuild SEO pages and sitemap"
+          for i in 1 2 3; do git pull -q --rebase && git push -q && exit 0; sleep 5; done; exit 1
