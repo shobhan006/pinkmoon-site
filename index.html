@@ -792,7 +792,7 @@ const FEAT = [2, 4, 5, 3, 1];
 const SERIES = {
   // cardW: card width in the player; homeScale: card height on Featured/Archive (wide wordmarks sit lower);
   // markW: small card width on the episode list
-  justmates: {name:"JustMates", type:"TV Sitcom", count:40, film:2, titleCard:"img/justmates-title.png", cardAfter:4, cardW:130, homeScale:1, markW:84},
+  justmates: {name:"JustMates", type:"TV Sitcom", count:50, hls:true, film:2, titleCard:"img/justmates-title.png", cardAfter:4, cardW:130, homeScale:1, markW:84},
   meninpink: {name:"MEN IN PINK", type:"Series", count:1, film:3, titleCard:"img/meninpink-title.png", cardAfter:3.2, cardW:300, homeScale:.42, markW:210}
 };
 const TEAM = [
@@ -1085,7 +1085,26 @@ function plSetPlaying(v){
   PL.lastMove=performance.now();
 }
 function plSetSound(v){PL.sound=v;PL.vid.muted=!v;$(".p-snd span").textContent=v?"On":"Off"}
-function epItem(s,n){const S=SERIES[s];return{title:S.name,client:S.type,director:"Episode "+n,video:`films/${s}-ep${n}.mp4`,full:`films/${s}-ep${n}-full.mp4`,titleCard:S.titleCard,cardAfter:S.cardAfter,cardW:S.cardW,series:s,ep:n}}
+function epItem(s,n){const S=SERIES[s];return{title:S.name,client:S.type,director:"Episode "+n,video:`films/${s}-ep${n}.mp4`,full:`films/${s}-ep${n}-full.mp4`,hls:S.hls?`${MEDIA}/${s}/ep${n}/master.m3u8`:null,titleCard:S.titleCard,cardAfter:S.cardAfter,cardW:S.cardW,series:s,ep:n}}
+/* full-quality episodes stream from Cloudflare (media.pinkmoonhouse.com) as adaptive HLS:
+   Safari/iOS play it natively, other browsers through hls.js; any failure falls back to the mp4 on the site */
+const MEDIA="https://media.pinkmoonhouse.com";let HLS=null,hlsLib=null;
+function loadHlsLib(){return hlsLib||(hlsLib=new Promise((ok,no)=>{const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/hls.js@1.5.20/dist/hls.min.js";s.onload=()=>ok(window.Hls);s.onerror=no;document.head.appendChild(s)}))}
+function plSource(p,mp4){
+  if(HLS){HLS.destroy();HLS=null}
+  if(!p)return;
+  const v=PL.vid,fb=()=>{if(HLS){HLS.destroy();HLS=null}if(PL.item===p){const t=v.currentTime||0;v.src=mp4;v.currentTime=t;if(PL.playing)v.play().catch(()=>{})}};
+  if(!p.hls){v.src=mp4;return}
+  if(v.canPlayType("application/vnd.apple.mpegurl")){v.src=p.hls;v.addEventListener("error",fb,{once:true});return}
+  const go=H=>{if(PL.item!==p)return;if(!H||!H.isSupported())return fb();
+    HLS=new H({capLevelToPlayerSize:false,abrEwmaDefaultEstimate:6e6,maxBufferLength:30,startLevel:-1});
+    HLS.on(H.Events.ERROR,(e,d)=>{if(d.fatal)fb()});
+    HLS.loadSource(p.hls);HLS.attachMedia(v);
+    HLS.on(H.Events.MANIFEST_PARSED,()=>{if(PL.item===p&&PL.playing)v.play().catch(()=>{})})};
+  // the library is fetched ahead of time, so normally this attaches straight away inside the click
+  if(window.Hls)go(window.Hls);else{v.removeAttribute("src");loadHlsLib().then(go).catch(fb)}
+}
+if(!document.createElement("video").canPlayType("application/vnd.apple.mpegurl"))(window.requestIdleCallback||setTimeout)(()=>loadHlsLib().catch(()=>{}),{timeout:4000});
 function openFilm(i){openItem(PROJECTS[i],i)}
 function openEpisode(s,n){openItem(epItem(s,n),SERIES[s].film)}
 function openItem(p,i){
@@ -1105,7 +1124,7 @@ function openItem(p,i){
     // "full" is the complete cut for the player; "video" is the loop used on Featured
     const src=p.full||p.video;
     PL.t=0;PL.video=!!src;PL.el.classList.toggle("has-video",PL.video);
-    if(PL.video){PL.vid.src=src;PL.vid.currentTime=0;PL.vid.muted=!PL.sound}else{PL.vid.removeAttribute("src");PL.vid.load()}
+    if(PL.video){plSource(p,src);PL.vid.currentTime=0;PL.vid.muted=!PL.sound}else{plSource(null);PL.vid.removeAttribute("src");PL.vid.load()}
     plSetPlaying(true);
     if(fresh&&CONFIG.ident!==false)playIdent(i);
   }
