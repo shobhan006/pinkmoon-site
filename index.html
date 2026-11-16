@@ -8,6 +8,7 @@
 <link rel="icon" type="image/png" sizes="256x256" href="img/favicon.png?v=km">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png?v=km">
 <meta name="description" content="PINKMOON. CULTURE. COMMUNITY. CONTENT.">
+<link rel="preconnect" href="https://media.pinkmoonhouse.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,400;125,500;125,700;125,800&display=swap" rel="stylesheet">
@@ -1103,6 +1104,15 @@ PL.q="auto";
 /* quality menu shows just HD and SD: HD is the top version, SD the lightest. Until one is picked the player adapts on its own,
    starting on HD. A pick is remembered for the next episode. */
 const qIdx=q=>q==="hd"?HLS.levels.length-1:0;
+/* warm the browser cache with an episode's playlists and first HD chunk, so pressing play starts at once */
+const warmed=new Set();let warmT=0;
+function prefetchEp(s,n,now){
+  const S=SERIES[s];if(!S||!S.hls||n<1||n>S.count)return;
+  const k=s+n;if(warmed.has(k))return;
+  clearTimeout(warmT);warmT=setTimeout(()=>{if(warmed.has(k))return;warmed.add(k);
+    const b=`${MEDIA}/${s}/ep${n}/`,get=u=>fetch(u,{mode:"cors",credentials:"omit"}).catch(()=>{});
+    get(b+"master.m3u8");get(b+"v0/index.m3u8");get(b+"v0/s000.ts");get(b+"v0/s001.ts")},now?0:450);
+}
 function qRender(){
   const b=$(".p-q"),m=$(".p-qm"),on=!!(HLS&&HLS.levels&&HLS.levels.length>1);
   PL.el.classList.toggle("has-q",on);const sd=$(".p-snd");if(sd.offsetWidth)PL.el.style.setProperty("--qx",sd.offsetLeft+sd.offsetWidth+28+"px");if(!on){PL.el.classList.remove("q-open");return}
@@ -1123,7 +1133,7 @@ function plSource(p,mp4){
   const nat=v.canPlayType("application/vnd.apple.mpegurl");
   const go=H=>{if(PL.item!==p)return;if(!H||!H.isSupported()){if(nat){v.src=p.hls;v.addEventListener("error",fb,{once:true});return}return fb()}
     // start on the best version and only step down if the connection really can't keep up
-    HLS=new H({capLevelToPlayerSize:false,startLevel:2,abrEwmaDefaultEstimate:2e7,abrBandWidthFactor:.95,abrBandWidthUpFactor:.9,maxBufferLength:30,testBandwidth:false});
+    HLS=new H({capLevelToPlayerSize:false,startLevel:2,startFragPrefetch:true,abrEwmaDefaultEstimate:2e7,abrBandWidthFactor:.95,abrBandWidthUpFactor:.9,maxBufferLength:30,testBandwidth:false});
     HLS.on(H.Events.ERROR,(e,d)=>{if(d.fatal)fb()});
     HLS.on(H.Events.MANIFEST_PARSED,(e,d)=>{
       const n=d.levels.length;
@@ -1230,7 +1240,7 @@ function playerFrame(now,dt){
   const pj=PL.item||PROJECTS[filmIdx];
   // Next Episode / All Episodes appear over the last 8 seconds of an episode
   // the countdown line under Next Episode fills over the last 8 seconds; the next episode starts only when this one ends
-  if(pj.series){const d=PL.video&&PL.vid.duration?PL.vid.duration:PL.dur,ct=PL.video?PL.vid.currentTime:PL.t,left=d-ct;PL.el.classList.toggle("ending",left<=8);PL.el.style.setProperty("--cd",clamp(1-left/8,0,1).toFixed(4))}
+  if(pj.series){const d=PL.video&&PL.vid.duration?PL.vid.duration:PL.dur,ct=PL.video?PL.vid.currentTime:PL.t,left=d-ct;PL.el.classList.toggle("ending",left<=8);if(left<=15&&pj.ep)prefetchEp(pj.series,pj.ep+1,1);PL.el.style.setProperty("--cd",clamp(1-left/8,0,1).toFixed(4))}
   if(pj.titleCard){const ct=PL.video?PL.vid.currentTime:PL.t;PL.el.classList.toggle("card-on",ct>=(pj.cardAfter||0))}
   // timed words over the film, only while it plays
   // the whole span from the first word to the end of the last one counts as word time,
@@ -1258,7 +1268,7 @@ function epsBuild(key){
 function epsShow(k){
   // crossfade to episode k's preview, always from its first frame
   const n=k+1,next=EP.vids[1-EP.front],cur=EP.vids[EP.front];
-  next.src=`films/${EP.key}-ep${n}.mp4`;next.currentTime=0;next.loop=true;next.play().catch(()=>{});
+  next.src=`films/${EP.key}-ep${n}.mp4`;next.currentTime=0;next.loop=true;next.play().catch(()=>{});prefetchEp(EP.key,n);
   next.classList.add("on");cur.classList.remove("on");EP.front=1-EP.front;
   setTimeout(()=>{if(!cur.classList.contains("on"))cur.pause()},950);
   $("#p-series .eti").textContent="Episode "+n;$("#p-series .esu").textContent=SERIES[EP.key].name;$("#p-series .enu").textContent=ROMAN(n);
