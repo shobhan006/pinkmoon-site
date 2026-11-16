@@ -4,7 +4,7 @@ name: seo-pages
 on:
   push:
     branches: [main]
-    paths: [index.html, tools/**, films/**]
+    paths: [index.html, tools/**, films/**, .github/workflows/seo-pages.yml]
   workflow_dispatch:
 permissions:
   contents: write
@@ -29,4 +29,11 @@ jobs:
           git add -A about featured services team contact work watch justmates men-in-pink img/ep 404.html sitemap.xml
           if git diff --cached --quiet; then echo "pages already up to date"; exit 0; fi
           git commit -qm "Rebuild SEO pages and sitemap"
-          for i in 1 2 3; do git pull -q --rebase && git push -q && exit 0; sleep 5; done; exit 1
+          for i in 1 2 3; do git pull -q --rebase && git push -q && break; sleep 5; done
+      - name: tell Bing and other IndexNow engines what changed
+        run: |
+          sleep 60
+          KEY=$(ls *.txt | grep -E '^[0-9a-f]{32}\.txt$' | head -1 | sed 's/.txt$//')
+          URLS=$(grep -o '<loc>[^<]*' sitemap.xml | sed 's/<loc>//' | python3 -c "import sys,json;print(json.dumps([l.strip() for l in sys.stdin if l.strip()]))")
+          curl -s -o /dev/null -w "IndexNow %{http_code}\n" -X POST https://api.indexnow.org/indexnow -H "Content-Type: application/json; charset=utf-8" \
+            -d "{\"host\":\"pinkmoonhouse.com\",\"key\":\"$KEY\",\"keyLocation\":\"https://pinkmoonhouse.com/$KEY.txt\",\"urlList\":$URLS}"

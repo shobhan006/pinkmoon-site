@@ -619,7 +619,7 @@ body.r-team #hd::before{background:linear-gradient(#18233f 72px,rgba(24,35,63,0)
 @media (max-width:600px),(max-height:520px){body.r-ip #hd::before{opacity:1;height:132px;-webkit-mask-image:none!important;mask-image:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:linear-gradient(#05080f 72px,rgba(5,8,15,0) 132px)!important}}
 body.film #hd::before{opacity:0!important}
 </style>
-<script type="application/ld+json" id="page-ld">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "PINKMOON", "item": "https://pinkmoonhouse.com/"}, {"@type": "ListItem", "position": 2, "name": "JustMates", "item": "https://pinkmoonhouse.com/justmates/"}, {"@type": "ListItem", "position": 3, "name": "Episode 30", "item": "https://pinkmoonhouse.com/justmates/episode-30/"}]}, {"@type": "TVEpisode", "name": "JustMates Episode 30", "episodeNumber": 30, "url": "https://pinkmoonhouse.com/justmates/episode-30/", "partOfSeries": {"@type": "TVSeries", "name": "JustMates", "url": "https://pinkmoonhouse.com/justmates/"}, "video": {"@type": "VideoObject", "name": "JustMates Episode 30", "description": "Watch JustMates Episode 30, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.", "thumbnailUrl": ["https://pinkmoonhouse.com/img/ep/justmates-30.jpg"], "uploadDate": "2026-11-05T19:21:32Z", "contentUrl": "https://pinkmoonhouse.com/films/justmates-ep30-full.mp4", "embedUrl": "https://pinkmoonhouse.com/justmates/episode-30/", "url": "https://pinkmoonhouse.com/justmates/episode-30/", "publisher": {"@type": "Organization", "@id": "https://pinkmoonhouse.com/#org", "name": "PINKMOON", "url": "https://pinkmoonhouse.com/"}, "duration": "PT33S"}}]}</script>
+<script type="application/ld+json" id="page-ld">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "PINKMOON", "item": "https://pinkmoonhouse.com/"}, {"@type": "ListItem", "position": 2, "name": "JustMates", "item": "https://pinkmoonhouse.com/justmates/"}, {"@type": "ListItem", "position": 3, "name": "Episode 30", "item": "https://pinkmoonhouse.com/justmates/episode-30/"}]}, {"@type": "TVEpisode", "name": "JustMates Episode 30", "episodeNumber": 30, "url": "https://pinkmoonhouse.com/justmates/episode-30/", "partOfSeries": {"@type": "TVSeries", "name": "JustMates", "url": "https://pinkmoonhouse.com/justmates/"}, "video": {"@type": "VideoObject", "name": "JustMates Episode 30", "description": "Watch JustMates Episode 30, the PINKMOON sitcom about two flatmates, one small apartment and everything that goes wrong in between.", "thumbnailUrl": ["https://pinkmoonhouse.com/img/ep/justmates-30.jpg"], "uploadDate": "2026-11-05T19:21:32+00:00", "contentUrl": "https://pinkmoonhouse.com/films/justmates-ep30-full.mp4", "embedUrl": "https://pinkmoonhouse.com/justmates/episode-30/", "url": "https://pinkmoonhouse.com/justmates/episode-30/", "publisher": {"@type": "Organization", "@id": "https://pinkmoonhouse.com/#org", "name": "PINKMOON", "url": "https://pinkmoonhouse.com/"}, "duration": "PT33S"}}]}</script>
 </head>
 <body class="r-home">
 
@@ -1569,7 +1569,7 @@ const featEl=$("#feat"),fpanes=featEl.querySelector(".fpanes"),fseam=featEl.quer
 const FT={pos:0,t:0,base:0,last:0,ty:null,moved:0,vel:0,lt:0};
 const NF=FEAT.length;
 const fps=FEAT.map(i=>{const p=PROJECTS[i];const a=document.createElement("a");a.className="fp";a.href="#ip-"+IPS[i].slug;
-  const card=p.homeCard?`<img alt="" src="${p.homeCard}" style="--hs:${p.homeScale||1}">`:`<h2></h2>`;
+  const card=p.homeCard?`<img alt="${p.title}" src="${p.homeCard}" style="--hs:${p.homeScale||1}">`:`<h2></h2>`;
   a.innerHTML=`<video muted loop playsinline preload="none"></video><div class="fsh"></div><div class="fc">${card}<span class="fcat"></span></div>`;
   if(!p.homeCard)a.querySelector("h2").textContent=p.title;
   a.querySelector(".fcat").textContent=IPS[i].cat;
@@ -1662,14 +1662,14 @@ function setIP(k){ipIdx=k;const P=PROJECTS[k],I=IPS[k],sk=P.series,esc=t=>String
   const facts=I.facts.map(([l,v])=>`<dt>${esc(l)}</dt><dd>${esc(v==="auto"&&sk?SERIES[sk].count:v)}</dd>`).join("");
   const title=P.homeCard?`<img alt="${esc(P.title)}" src="${P.homeCard}" style="--hs:${P.homeScale||1}">`:`<h1>${esc(P.title)}</h1>`;
   const fi=FEAT.indexOf(k),nx=FEAT[fi<0?0:(fi+1)%NF],dots=FEAT.map((j,o)=>`<a href="#ip-${IPS[j].slug}" class="${j===k?"on":""}" style="top:${NF>1?o/(NF-1)*100:50}%" aria-label="${esc(PROJECTS[j].title)}"></a>`).join("");
-  ipEl.innerHTML=`<div class="iph"><div class="ipbg" style="background-image:url('${I.hero}')"></div><img class="ipimg" alt="" src="${I.hero}"><div class="ipsh"></div></div>
+  ipEl.innerHTML=`<div class="iph"><div class="ipbg" style="background-image:url('${I.hero}')"></div><img class="ipimg" alt="${esc(P.title)}, a PINKMOON ${esc(I.cat)}" src="${I.hero}"><div class="ipsh"></div></div>
   <a class="u ipback" href="#archive">← Featured</a>
   <div class="ipdots">${dots}</div>
   <div class="ipl"><span class="ipcat rv">${esc(I.cat)}</span><div class="iptitle rv">${title}</div><p class="iplog rv">${esc(I.logline)}</p>
     <div class="ipcta rv"><a class="ipwatch" href="#${I.watch}">${esc(I.watchLabel)}<i></i></a>${I.more?`<a class="u ipmore" href="#${I.more}">${esc(I.moreLabel)}</a>`:""}</div></div>
   <div class="ipfoot rv">${fi>=0?`<b>${String(fi+1).padStart(2,"0")} / ${String(NF).padStart(2,"0")}</b>`:""}<span>Next</span><a class="u" href="#ip-${IPS[nx].slug}">${esc(PROJECTS[nx].title)}</a></div>
   <aside class="ipr">
-    <dl>${facts}</dl><a class="ipthumb" href="#${I.watch}"><img alt="" src="${I.thumb}"><span class="pl"></span><span class="tl">${esc(I.thumbLabel)}</span></a></aside>
+    <dl>${facts}</dl><a class="ipthumb" href="#${I.watch}"><img alt="${esc(P.title)}, a ${esc(I.cat)} by PINKMOON" src="${I.thumb}"><span class="pl"></span><span class="tl">${esc(I.thumbLabel)}</span></a></aside>
   <div class="afoot ipf">${footHTML()}</div>`;
   const im=ipEl.querySelector(".ipimg"),tallChk=()=>ipEl.classList.toggle("tall",im.naturalHeight>im.naturalWidth);im.complete?tallChk():im.onload=tallChk;
   ipEl.scrollTop=0;
