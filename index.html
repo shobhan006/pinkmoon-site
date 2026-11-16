@@ -493,6 +493,12 @@ body.r-contact #hd .copy{display:block}
 .p-line .th{background:#fff;transform-origin:0 0;transform:scaleY(0)}
 .p-play{left:24px;top:50%;transform:translateY(-50%)}
 .p-snd{left:24px;bottom:23px}
+.p-q{left:var(--qx,130px);bottom:23px}
+#player:not(.has-q) .p-q,#player:not(.has-q) .p-qm{display:none}
+.p-qm{left:var(--qx,130px);bottom:58px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+#player:not(.q-open) .p-qm{opacity:0!important;pointer-events:none!important}
+#player.q-open .p-end{opacity:0!important;pointer-events:none!important}
+.p-qm .u{opacity:.6;transition:opacity .3s;text-shadow:0 0 10px rgba(0,0,0,.55)}.p-qm .u:hover,.p-qm .u.on{opacity:1}
 .p-close{right:24px;top:50%;transform:translateY(-50%)}
 /* studio ident: K and M lock together, then the camera dives into the notch.
    K and M are separate GPU layers; only transform and opacity animate. */
@@ -689,6 +695,8 @@ body.film #hd .hold{pointer-events:none}
       <div class="p-prog"><div class="p-line"><i class="tr"></i><i class="th"></i></div></div>
       <button class="u p-play">Pause</button>
       <button class="u p-snd">Sound <span>On</span></button>
+      <button class="u p-q">Quality <span>Auto</span></button>
+      <div class="p-qm"></div>
       <button class="u p-close">Close</button>
     </div>
     <div class="p-end"><button class="u nx">Next Episode<i><b></b></i></button><a class="u al" href="#justmates">More Episodes</a></div>
@@ -1090,21 +1098,44 @@ function epItem(s,n){const S=SERIES[s];return{title:S.name,client:S.type,directo
    Safari/iOS play it natively, other browsers through hls.js; any failure falls back to the mp4 on the site */
 const MEDIA="https://media.pinkmoonhouse.com";let HLS=null,hlsLib=null;
 function loadHlsLib(){return hlsLib||(hlsLib=new Promise((ok,no)=>{const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/hls.js@1.5.20/dist/hls.min.js";s.onload=()=>ok(window.Hls);s.onerror=no;document.head.appendChild(s)}))}
-function plSource(p,mp4){
-  if(HLS){HLS.destroy();HLS=null}
-  if(!p)return;
-  const v=PL.vid,fb=()=>{if(HLS){HLS.destroy();HLS=null}if(PL.item===p){const t=v.currentTime||0;v.src=mp4;v.currentTime=t;if(PL.playing)v.play().catch(()=>{})}};
-  if(!p.hls){v.src=mp4;return}
-  if(v.canPlayType("application/vnd.apple.mpegurl")){v.src=p.hls;v.addEventListener("error",fb,{once:true});return}
-  const go=H=>{if(PL.item!==p)return;if(!H||!H.isSupported())return fb();
-    HLS=new H({capLevelToPlayerSize:false,abrEwmaDefaultEstimate:6e6,maxBufferLength:30,startLevel:-1});
-    HLS.on(H.Events.ERROR,(e,d)=>{if(d.fatal)fb()});
-    HLS.loadSource(p.hls);HLS.attachMedia(v);
-    HLS.on(H.Events.MANIFEST_PARSED,()=>{if(PL.item===p&&PL.playing)v.play().catch(()=>{})})};
-  // the library is fetched ahead of time, so normally this attaches straight away inside the click
-  if(window.Hls)go(window.Hls);else{v.removeAttribute("src");loadHlsLib().then(go).catch(fb)}
+/* quality: "auto" or a chosen height; remembered for the next episode */
+PL.q="auto";
+const qLabel=l=>Math.min(l.width,l.height)+"p";
+function qRender(){
+  const b=$(".p-q"),m=$(".p-qm"),on=!!(HLS&&HLS.levels&&HLS.levels.length>1);
+  PL.el.classList.toggle("has-q",on);const sd=$(".p-snd");if(sd.offsetWidth)PL.el.style.setProperty("--qx",sd.offsetLeft+sd.offsetWidth+28+"px");if(!on){PL.el.classList.remove("q-open");return}
+  const L=HLS.levels,cur=HLS.currentLevel>=0?HLS.currentLevel:HLS.loadLevel;
+  b.querySelector("span").textContent=PL.q==="auto"?"Auto"+(L[cur]?" "+qLabel(L[cur]):""):qLabel(L[HLS.currentLevel]||L[L.length-1]);
+  m.innerHTML=[`<button class="u${PL.q==="auto"?" on":""}" data-q="auto">Auto</button>`].concat(L.map((l,i)=>({l,i})).reverse().map(({l,i})=>`<button class="u${PL.q!=="auto"&&HLS.currentLevel===i?" on":""}" data-q="${i}">${qLabel(l)}</button>`)).join("");
 }
-if(!document.createElement("video").canPlayType("application/vnd.apple.mpegurl"))(window.requestIdleCallback||setTimeout)(()=>loadHlsLib().catch(()=>{}),{timeout:4000});
+function qSet(q){
+  if(!HLS)return;
+  if(q==="auto"){PL.q="auto";HLS.currentLevel=-1}else{const i=+q;PL.q=Math.min(HLS.levels[i].width,HLS.levels[i].height);HLS.currentLevel=i}
+  PL.el.classList.remove("q-open");qRender();
+}
+function plSource(p,mp4){
+  if(HLS){HLS.destroy();HLS=null}qRender();
+  if(!p)return;
+  const v=PL.vid,fb=()=>{if(HLS){HLS.destroy();HLS=null}qRender();if(PL.item===p){const t=v.currentTime||0;v.src=mp4;v.currentTime=t;if(PL.playing)v.play().catch(()=>{})}};
+  if(!p.hls){v.src=mp4;return}
+  const nat=v.canPlayType("application/vnd.apple.mpegurl");
+  const go=H=>{if(PL.item!==p)return;if(!H||!H.isSupported()){if(nat){v.src=p.hls;v.addEventListener("error",fb,{once:true});return}return fb()}
+    // start on the best version and only step down if the connection really can't keep up
+    HLS=new H({capLevelToPlayerSize:false,startLevel:2,abrEwmaDefaultEstimate:2e7,abrBandWidthFactor:.95,abrBandWidthUpFactor:.9,maxBufferLength:30,testBandwidth:false});
+    HLS.on(H.Events.ERROR,(e,d)=>{if(d.fatal)fb()});
+    HLS.on(H.Events.MANIFEST_PARSED,(e,d)=>{
+      const n=d.levels.length;
+      if(PL.q!=="auto"){let k=n-1;d.levels.forEach((l,i)=>{if(Math.min(l.width,l.height)===PL.q)k=i});HLS.currentLevel=k}
+      qRender();if(PL.item===p&&PL.playing)v.play().catch(()=>{})});
+    HLS.on(H.Events.LEVEL_SWITCHED,qRender);
+    HLS.loadSource(p.hls);HLS.attachMedia(v)};
+  // hls.js gives the quality menu; it is fetched ahead of time so this normally attaches inside the click.
+  // If it isn't ready yet, phones and tablets play the stream natively instead of waiting.
+  if(window.Hls)go(window.Hls);
+  else if(nat&&navigator.maxTouchPoints>1){v.src=p.hls;v.addEventListener("error",fb,{once:true});loadHlsLib().catch(()=>{})}
+  else{v.removeAttribute("src");loadHlsLib().then(go).catch(fb)}
+}
+(window.requestIdleCallback||setTimeout)(()=>loadHlsLib().catch(()=>{}),{timeout:1500});
 function openFilm(i){openItem(PROJECTS[i],i)}
 function openEpisode(s,n){openItem(epItem(s,n),SERIES[s].film)}
 function openItem(p,i){
@@ -1161,6 +1192,9 @@ $(".p-end .nx").addEventListener("click",plNext);
 $(".p-scr").addEventListener("click",()=>{if(!fine){PL.lastMove=performance.now();return}plSetPlaying(!PL.playing)});
 $(".p-play").addEventListener("click",()=>plSetPlaying(!PL.playing));
 $(".p-snd").addEventListener("click",()=>plSetSound(!PL.sound));
+$(".p-q").addEventListener("click",ev=>{ev.stopPropagation();PL.el.classList.toggle("q-open");PL.lastMove=performance.now()});
+PL.el.addEventListener("click",()=>PL.el.classList.remove("q-open"));
+$(".p-qm").addEventListener("click",ev=>{ev.stopPropagation();const b=ev.target.closest("[data-q]");if(b)qSet(b.dataset.q)});
 $(".p-close").addEventListener("click",closeFilmNav);
 $(".p-fs").addEventListener("click",()=>{try{if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});else{const r=PL.el.requestFullscreen&&PL.el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}}catch(_){}});
 const prog=$(".p-prog");
