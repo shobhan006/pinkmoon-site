@@ -1,0 +1,25 @@
+name: Upload media to R2
+on:
+  push:
+    branches: [r2-staging]
+permissions:
+  contents: write
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sync media/ to the pinkmoon bucket
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          set -e
+          E="${{ secrets.R2_ENDPOINT }}"
+          aws s3 cp media/ s3://pinkmoon/ --recursive --endpoint-url "$E" --exclude "*" --include "*.m3u8" --content-type "application/vnd.apple.mpegurl" --cache-control "public, max-age=300"
+          aws s3 cp media/ s3://pinkmoon/ --recursive --endpoint-url "$E" --exclude "*" --include "*.ts" --content-type "video/mp2t" --cache-control "public, max-age=31536000, immutable"
+          aws s3 cp media/ s3://pinkmoon/ --recursive --endpoint-url "$E" --exclude "*.m3u8" --exclude "*.ts" --cache-control "public, max-age=31536000"
+          aws s3 ls s3://pinkmoon/ --recursive --endpoint-url "$E" | tail -20
+      - name: Remove the staging branch
+        run: git push origin --delete r2-staging
