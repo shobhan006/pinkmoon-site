@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>/* iPhone/iPad zoom the whole page in when a form field's text is under 16px, and stay zoomed. Capping the scale stops that; iOS still lets people pinch to zoom. */
+if(/iP(hone|ad|od)/.test(navigator.userAgent)||(/Macintosh/.test(navigator.userAgent)&&navigator.maxTouchPoints>1))document.querySelector('meta[name="viewport"]').setAttribute("content","width=device-width, initial-scale=1, maximum-scale=1");</script>
 <title>PINKMOON</title>
 <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png?v=km">
 <link rel="icon" type="image/png" sizes="256x256" href="img/favicon.png?v=km">
@@ -592,7 +594,7 @@ body.film #hd .hold{pointer-events:none}
   #p-ip .ipwatch i{width:36px}
   #p-series .emark{display:none}
 }
-@media (hover:none){.u::before{display:none}}
+@media (hover:none){.u:not(.active):hover::before{opacity:0}}
 </style>
 </head>
 <body class="r-home">
