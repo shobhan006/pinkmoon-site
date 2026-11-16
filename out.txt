@@ -1,0 +1,376 @@
+warning: `--folder` is no longer required for folder URLs and will be removed in a future release
+Retrieving folder contents
+Retrieving folder contents completed
+Building directory structure
+Building directory structure completed
+Downloading...
+From: https://drive.google.com/uc?id=117GbZXi1M_xi4JGxqch6fq9NUHgVVNDV
+To: /tmp/src/JustMates Ep 3.mp4
+Processing file 117GbZXi1M_xi4JGxqch6fq9NUHgVVNDV JustMates Ep 3.mp4
+Processing file 1fJFZ1DaA5E6P89ALwHkBH-ZgdgliS9PW JustMates Ep 47.mp4
+Processing file 1Wka_pxbgpt4qwthOnYVKbR0XRqkHRVIn JustMates Ep 6.mp4
+Processing file 1dsMNPv-62Em4bp03LgwNMeJJhss-sL8N JustMates Ep1.mp4
+Processing file 167m7hfnBv9zxMJYgZJMWo0feAh7OE5yh JustMates Ep10.mp4
+Processing file 1GdLqHsLqDQO8bFfqC_aH-1TP6ZtXdiEX JustMates Ep11.mp4
+Processing file 1b5aC99ilkVAqYzomFw1Zt1260wne3-OX JustMates Ep12.mp4
+Processing file 1-p-0IZv0u-V1FMe2EqoWeFE3So5-Ko3u JustMates Ep13.mp4
+Processing file 1YvrUFI9XDpM4wG8VLU-ZMH1duD9e-BF9 JustMates Ep14.mp4
+Processing file 13Qg9doIiRpOuBXh6LRw0PpbKEln3iikM JustMates Ep15.mp4
+Processing file 1lWxsqVM-dltFb2H8CyndSVh3x_MA7laW JustMates Ep16.mp4
+Processing file 1R1yssz_8gtGDLd470ctdUFDbBJ6p2HKY JustMates Ep17.mp4
+Processing file 11yPDc9gUI4CoiYqrwO35lV3ML8F_ZQUw JustMates Ep18.mp4
+Processing file 1drQbuYfvShHKTJ971-EtNoPh3YWbVljq JustMates Ep19.mp4
+Processing file 1pE1Qot0jL-QYRVcsCP1Rfbfffg-oDGVD JustMates Ep2.mp4
+Processing file 1jr61nvoY3HBREv4UM8PP7SbNgIDJBJ7o JustMates Ep20.mp4
+Processing file 1lh9oBKasH20MFazngz8Dc8VtfkIiBxY7 JustMates Ep21.mp4
+Processing file 19PmSOKIcgomE-XyWAghmY3dI2xPw4dmk JustMates Ep22.mp4
+Processing file 10ttM4UxXmwLJYviP08f0hE1ufyK3EIt8 JustMates Ep23.mp4
+Processing file 1zEY__rxur6bA66cohdLfp9T-IvZ0eeaJ JustMates Ep24.mp4
+Processing file 1Izg5ZA6i1L4XHf53FkKpL2i7zDS4SNbF JustMates Ep25.mp4
+Processing file 1OpRtSBxIlUZuIoV7BhaoNty-liIQyLn5 JustMates Ep26.mp4
+Processing file 1dAIqE-rLWYNXBM39tBAw--cmmAqfNTWa JustMates Ep27.mp4
+Processing file 1CYMvdenQbyGChRWfxqykShbK4oX8WkX0 JustMates Ep28.mp4
+Processing file 1bovwuKJz21ynG2tIBLzPVlylpbNcLoQX JustMates Ep29.mp4
+Processing file 1VFZRCnYGMGpJRt3jfUskFL3LwP4P5p4u JustMates Ep30.mp4
+Processing file 1muTFkqXNesRSO6I99HkEQe7jTl5u4kiS JustMates Ep31.mp4
+Processing file 1lg3Yot0JFEFQkAbrjr8yeeTakT8qOOz- JustMates Ep32.mp4
+Processing file 1BY31GHe6xGKJR3n70SDk-XY3Hwy2D0UJ JustMates Ep33.mp4
+Processing file 1Qa2ZjhqK76D_ISVvpuXsUtpJmucSGCeL JustMates Ep34.mp4
+Processing file 1yAj0aqvoTwNh0OxfvmLi2DDR5_XcpYiD JustMates Ep35.mp4
+Processing file 1IUZNzbagCcFc6eju7O4maBiB6DD_my57 JustMates Ep36.mp4
+Processing file 1gesugLz7Z8oYdy2zcozk93MGSh4D7MfF JustMates Ep37.mp4
+Processing file 1hg4FtN9tJMi3GcA8H0lRowdgjsy2t5o_ JustMates Ep38.mp4
+Processing file 1yMrSp0YBNuoJW-HRkCg7DlGrizZZXekF JustMates Ep39.mp4
+Processing file 1xa-C46Ie99glGOEZR6j1OAmoo4rVtQ21 JustMates Ep4.mp4
+Processing file 18KrD7-8k0BSKk0zIJIFjoHPcppbtbpJc JustMates Ep40.mp4
+Processing file 1ccRt48YxI6Zf7P9JS5hLEWWjyGSPg82n JustMates Ep41.mp4
+Processing file 1m8kG4dl7Qbq-JBMijcpeu8j293qtd78p JustMates Ep42.mp4
+Processing file 1fBoArWO6wAUbdEacKlKLm5GSkkXAWrVD JustMates Ep43.mp4
+Processing file 1RhkC961xh4cTO3oflwzgla1g24PBlwt4 JustMates Ep44.mp4
+Processing file 1aCocJPT5jIEHOGHIj-OEokrv4hk0BenV JustMates Ep45.mp4
+Processing file 1ZB_eq9xwJgxWShMgl-b167ZZkXeOd2yZ JustMates Ep46.mp4
+Processing file 13qUZb13xUTeuisrDRUKEAx7Pl-jvrxpk JustMates Ep48.mp4
+Processing file 1q7_jU--sU-Qg1UjiXf6r35cNn8xfWncV JustMates Ep49.mp4
+Processing file 1IfUMpas48T0S-NX_SGSzZl0VME6BrLEv JustMates Ep5.mp4
+Processing file 12SjDXuak6L2MCoLga0NXi5jL2V2SN9Oe JustMates Ep50.mp4
+Processing file 1TpriCdr2gv5ZouIfZJGsWgPDKJO9PE3l JustMates Ep7.mp4
+Processing file 1pfR9XXg1j_aut5AsDkjUHC-3_KzxTv6k JustMates Ep8.mp4
+Processing file 1we-vq4g8CLUU_NSywj9tbZzBwiLQYXaT JustMates Ep9.mp4
+  0%|          | 0.00/31.0M [00:00<?, ?B/s]  2%|▏         | 524k/31.0M [00:00<00:07, 4.31MB/s] 22%|██▏       | 6.82M/31.0M [00:00<00:01, 23.9MB/s] 36%|███▌      | 11.0M/31.0M [00:00<00:00, 26.2MB/s] 49%|████▉     | 15.2M/31.0M [00:00<00:00, 24.9MB/s] 63%|██████▎   | 19.4M/31.0M [00:00<00:00, 24.9MB/s] 76%|███████▌  | 23.6M/31.0M [00:00<00:00, 24.7MB/s] 90%|████████▉ | 27.8M/31.0M [00:01<00:00, 26.1MB/s]100%|██████████| 31.0M/31.0M [00:01<00:00, 27.4MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1fJFZ1DaA5E6P89ALwHkBH-ZgdgliS9PW
+To: /tmp/src/JustMates Ep 47.mp4
+  0%|          | 0.00/25.7M [00:00<?, ?B/s]  4%|▍         | 1.05M/25.7M [00:00<00:02, 10.1MB/s] 18%|█▊        | 4.72M/25.7M [00:00<00:01, 17.8MB/s] 27%|██▋       | 6.82M/25.7M [00:00<00:01, 18.3MB/s] 35%|███▍      | 8.91M/25.7M [00:00<00:01, 13.8MB/s] 51%|█████     | 13.1M/25.7M [00:00<00:00, 13.8MB/s] 67%|██████▋   | 17.3M/25.7M [00:01<00:00, 13.6MB/s] 92%|█████████▏| 23.6M/25.7M [00:01<00:00, 18.1MB/s]100%|██████████| 25.7M/25.7M [00:01<00:00, 17.7MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1Wka_pxbgpt4qwthOnYVKbR0XRqkHRVIn
+To: /tmp/src/JustMates Ep 6.mp4
+  0%|          | 0.00/28.5M [00:00<?, ?B/s]  4%|▎         | 1.05M/28.5M [00:00<00:02, 10.1MB/s] 46%|████▌     | 13.1M/28.5M [00:00<00:00, 64.4MB/s] 85%|████████▍ | 24.1M/28.5M [00:00<00:00, 83.4MB/s]100%|██████████| 28.5M/28.5M [00:00<00:00, 81.5MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1dsMNPv-62Em4bp03LgwNMeJJhss-sL8N
+To: /tmp/src/JustMates Ep1.mp4
+  0%|          | 0.00/33.5M [00:00<?, ?B/s]  2%|▏         | 524k/33.5M [00:00<00:07, 4.56MB/s] 27%|██▋       | 8.91M/33.5M [00:00<00:00, 48.2MB/s]100%|██████████| 33.5M/33.5M [00:00<00:00, 111MB/s] 
+Downloading...
+From: https://drive.google.com/uc?id=167m7hfnBv9zxMJYgZJMWo0feAh7OE5yh
+To: /tmp/src/JustMates Ep10.mp4
+  0%|          | 0.00/48.2M [00:00<?, ?B/s]  1%|          | 524k/48.2M [00:00<00:10, 4.49MB/s] 19%|█▊        | 8.91M/48.2M [00:00<00:01, 37.9MB/s] 32%|███▏      | 15.2M/48.2M [00:00<00:00, 44.9MB/s] 56%|█████▌    | 26.7M/48.2M [00:00<00:00, 68.6MB/s] 88%|████████▊ | 42.5M/48.2M [00:00<00:00, 86.9MB/s]100%|██████████| 48.2M/48.2M [00:00<00:00, 73.0MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1GdLqHsLqDQO8bFfqC_aH-1TP6ZtXdiEX
+To: /tmp/src/JustMates Ep11.mp4
+  0%|          | 0.00/26.0M [00:00<?, ?B/s]  4%|▍         | 1.05M/26.0M [00:00<00:02, 10.1MB/s] 62%|██████▏   | 16.3M/26.0M [00:00<00:00, 91.5MB/s]100%|██████████| 26.0M/26.0M [00:00<00:00, 95.9MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1b5aC99ilkVAqYzomFw1Zt1260wne3-OX
+To: /tmp/src/JustMates Ep12.mp4
+  0%|          | 0.00/27.5M [00:00<?, ?B/s]  2%|▏         | 524k/27.5M [00:00<00:05, 5.10MB/s] 17%|█▋        | 4.72M/27.5M [00:00<00:01, 19.7MB/s] 25%|██▍       | 6.82M/27.5M [00:00<00:01, 13.1MB/s] 40%|███▉      | 11.0M/27.5M [00:00<00:01, 15.0MB/s] 55%|█████▌    | 15.2M/27.5M [00:01<00:00, 15.6MB/s] 70%|███████   | 19.4M/27.5M [00:01<00:00, 16.1MB/s] 86%|████████▌ | 23.6M/27.5M [00:01<00:00, 16.1MB/s]100%|██████████| 27.5M/27.5M [00:01<00:00, 18.0MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1-p-0IZv0u-V1FMe2EqoWeFE3So5-Ko3u
+To: /tmp/src/JustMates Ep13.mp4
+  0%|          | 0.00/28.2M [00:00<?, ?B/s]  2%|▏         | 524k/28.2M [00:00<00:06, 4.19MB/s] 26%|██▌       | 7.34M/28.2M [00:00<00:00, 38.1MB/s] 41%|████      | 11.5M/28.2M [00:00<00:00, 39.2MB/s] 56%|█████▌    | 15.7M/28.2M [00:00<00:00, 27.4MB/s] 84%|████████▎ | 23.6M/28.2M [00:00<00:00, 37.9MB/s]100%|██████████| 28.2M/28.2M [00:00<00:00, 39.2MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1YvrUFI9XDpM4wG8VLU-ZMH1duD9e-BF9
+To: /tmp/src/JustMates Ep14.mp4
+  0%|          | 0.00/26.7M [00:00<?, ?B/s]  2%|▏         | 524k/26.7M [00:00<00:05, 5.16MB/s] 10%|▉         | 2.62M/26.7M [00:00<00:02, 10.5MB/s] 26%|██▌       | 6.82M/26.7M [00:00<00:01, 13.8MB/s] 41%|████      | 11.0M/26.7M [00:00<00:00, 15.8MB/s] 57%|█████▋    | 15.2M/26.7M [00:00<00:00, 16.8MB/s] 73%|███████▎  | 19.4M/26.7M [00:01<00:00, 17.4MB/s] 96%|█████████▌| 25.7M/26.7M [00:01<00:00, 22.0MB/s]100%|██████████| 26.7M/26.7M [00:01<00:00, 19.0MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=13Qg9doIiRpOuBXh6LRw0PpbKEln3iikM
+To: /tmp/src/JustMates Ep15.mp4
+  0%|          | 0.00/29.6M [00:00<?, ?B/s]  2%|▏         | 524k/29.6M [00:00<00:06, 4.51MB/s] 16%|█▌        | 4.72M/29.6M [00:00<00:01, 15.9MB/s] 30%|███       | 8.91M/29.6M [00:00<00:01, 11.7MB/s] 44%|████▍     | 13.1M/29.6M [00:01<00:01, 12.1MB/s] 58%|█████▊    | 17.3M/29.6M [00:01<00:00, 13.0MB/s] 73%|███████▎  | 21.5M/29.6M [00:01<00:00, 13.2MB/s]100%|██████████| 29.6M/29.6M [00:01<00:00, 17.0MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1lWxsqVM-dltFb2H8CyndSVh3x_MA7laW
+To: /tmp/src/JustMates Ep16.mp4
+  0%|          | 0.00/27.1M [00:00<?, ?B/s]  2%|▏         | 524k/27.1M [00:00<00:05, 5.22MB/s] 17%|█▋        | 4.72M/27.1M [00:00<00:01, 18.0MB/s] 33%|███▎      | 8.91M/27.1M [00:00<00:01, 16.9MB/s] 48%|████▊     | 13.1M/27.1M [00:00<00:00, 17.6MB/s] 64%|██████▎   | 17.3M/27.1M [00:01<00:00, 17.3MB/s] 87%|████████▋ | 23.6M/27.1M [00:01<00:00, 19.8MB/s]100%|██████████| 27.1M/27.1M [00:01<00:00, 21.0MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1R1yssz_8gtGDLd470ctdUFDbBJ6p2HKY
+To: /tmp/src/JustMates Ep17.mp4
+  0%|          | 0.00/32.9M [00:00<?, ?B/s]  2%|▏         | 524k/32.9M [00:00<00:07, 4.07MB/s] 21%|██        | 6.82M/32.9M [00:00<00:01, 19.7MB/s] 27%|██▋       | 8.91M/32.9M [00:00<00:01, 17.3MB/s] 33%|███▎      | 11.0M/32.9M [00:00<00:01, 15.1MB/s] 46%|████▌     | 15.2M/32.9M [00:00<00:00, 18.6MB/s] 59%|█████▉    | 19.4M/32.9M [00:01<00:00, 21.2MB/s] 72%|███████▏  | 23.6M/32.9M [00:01<00:00, 22.9MB/s] 84%|████████▍ | 27.8M/32.9M [00:01<00:00, 23.0MB/s] 97%|█████████▋| 32.0M/32.9M [00:01<00:00, 26.2MB/s]100%|██████████| 32.9M/32.9M [00:01<00:00, 22.1MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=11yPDc9gUI4CoiYqrwO35lV3ML8F_ZQUw
+To: /tmp/src/JustMates Ep18.mp4
+  0%|          | 0.00/48.9M [00:00<?, ?B/s]  1%|          | 524k/48.9M [00:00<00:10, 4.69MB/s] 18%|█▊        | 8.91M/48.9M [00:00<00:00, 43.7MB/s] 31%|███       | 15.2M/48.9M [00:00<00:00, 41.3MB/s] 44%|████▍     | 21.5M/48.9M [00:00<00:00, 42.2MB/s] 61%|██████    | 29.9M/48.9M [00:00<00:00, 50.9MB/s] 72%|███████▏  | 35.1M/48.9M [00:00<00:00, 51.2MB/s] 86%|████████▌ | 41.9M/48.9M [00:00<00:00, 55.9MB/s] 98%|█████████▊| 47.7M/48.9M [00:00<00:00, 54.5MB/s]100%|██████████| 48.9M/48.9M [00:00<00:00, 49.8MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1drQbuYfvShHKTJ971-EtNoPh3YWbVljq
+To: /tmp/src/JustMates Ep19.mp4
+  0%|          | 0.00/26.5M [00:00<?, ?B/s]  2%|▏         | 524k/26.5M [00:00<00:06, 4.04MB/s] 26%|██▌       | 6.82M/26.5M [00:00<00:00, 23.1MB/s] 34%|███▎      | 8.91M/26.5M [00:00<00:01, 17.2MB/s] 50%|████▉     | 13.1M/26.5M [00:00<00:00, 16.9MB/s] 65%|██████▌   | 17.3M/26.5M [00:00<00:00, 17.5MB/s] 73%|███████▎  | 19.4M/26.5M [00:01<00:00, 17.6MB/s] 81%|████████  | 21.5M/26.5M [00:01<00:00, 17.8MB/s] 89%|████████▉ | 23.6M/26.5M [00:01<00:00, 18.2MB/s]100%|██████████| 26.5M/26.5M [00:01<00:00, 19.5MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1pE1Qot0jL-QYRVcsCP1Rfbfffg-oDGVD
+To: /tmp/src/JustMates Ep2.mp4
+  0%|          | 0.00/29.2M [00:00<?, ?B/s]  2%|▏         | 524k/29.2M [00:00<00:05, 5.22MB/s] 16%|█▌        | 4.72M/29.2M [00:00<00:01, 21.7MB/s] 30%|███       | 8.91M/29.2M [00:00<00:01, 18.3MB/s] 45%|████▍     | 13.1M/29.2M [00:00<00:00, 17.4MB/s] 59%|█████▉    | 17.3M/29.2M [00:01<00:00, 16.8MB/s] 74%|███████▎  | 21.5M/29.2M [00:01<00:00, 16.7MB/s] 95%|█████████▌| 27.8M/29.2M [00:01<00:00, 19.6MB/s]100%|██████████| 29.2M/29.2M [00:01<00:00, 19.2MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1jr61nvoY3HBREv4UM8PP7SbNgIDJBJ7o
+To: /tmp/src/JustMates Ep20.mp4
+  0%|          | 0.00/29.3M [00:00<?, ?B/s]  4%|▎         | 1.05M/29.3M [00:00<00:03, 8.77MB/s] 52%|█████▏    | 15.2M/29.3M [00:00<00:00, 80.8MB/s]100%|██████████| 29.3M/29.3M [00:00<00:00, 101MB/s] 
+Downloading...
+From: https://drive.google.com/uc?id=1lh9oBKasH20MFazngz8Dc8VtfkIiBxY7
+To: /tmp/src/JustMates Ep21.mp4
+  0%|          | 0.00/27.4M [00:00<?, ?B/s]  2%|▏         | 524k/27.4M [00:00<00:05, 4.93MB/s] 17%|█▋        | 4.72M/27.4M [00:00<00:00, 23.7MB/s] 33%|███▎      | 8.91M/27.4M [00:00<00:00, 21.1MB/s] 48%|████▊     | 13.1M/27.4M [00:00<00:00, 20.1MB/s] 63%|██████▎   | 17.3M/27.4M [00:00<00:00, 19.9MB/s] 71%|███████   | 19.4M/27.4M [00:00<00:00, 20.1MB/s] 79%|███████▊  | 21.5M/27.4M [00:01<00:00, 16.6MB/s]100%|██████████| 27.4M/27.4M [00:01<00:00, 22.3MB/s]100%|██████████| 27.4M/27.4M [00:01<00:00, 20.4MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=19PmSOKIcgomE-XyWAghmY3dI2xPw4dmk
+To: /tmp/src/JustMates Ep22.mp4
+  0%|          | 0.00/42.7M [00:00<?, ?B/s]  1%|          | 524k/42.7M [00:00<00:09, 4.55MB/s] 12%|█▏        | 5.24M/42.7M [00:00<00:01, 25.4MB/s] 21%|██        | 8.91M/42.7M [00:00<00:01, 22.9MB/s] 27%|██▋       | 11.5M/42.7M [00:00<00:01, 22.7MB/s] 33%|███▎      | 14.2M/42.7M [00:01<00:02, 11.2MB/s] 41%|████      | 17.3M/42.7M [00:01<00:02, 12.4MB/s] 50%|█████     | 21.5M/42.7M [00:01<00:01, 14.4MB/s] 65%|██████▌   | 27.8M/42.7M [00:01<00:00, 19.1MB/s] 75%|███████▍  | 32.0M/42.7M [00:01<00:00, 22.1MB/s] 85%|████████▍ | 36.2M/42.7M [00:01<00:00, 24.1MB/s] 95%|█████████▍| 40.4M/42.7M [00:02<00:00, 25.1MB/s]100%|██████████| 42.7M/42.7M [00:02<00:00, 20.7MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=10ttM4UxXmwLJYviP08f0hE1ufyK3EIt8
+To: /tmp/src/JustMates Ep23.mp4
+  0%|          | 0.00/29.6M [00:00<?, ?B/s]  2%|▏         | 524k/29.6M [00:00<00:05, 5.17MB/s] 16%|█▌        | 4.72M/29.6M [00:00<00:01, 17.7MB/s] 23%|██▎       | 6.82M/29.6M [00:00<00:01, 17.6MB/s] 30%|███       | 8.91M/29.6M [00:00<00:01, 13.8MB/s] 44%|████▍     | 13.1M/29.6M [00:00<00:01, 13.9MB/s] 57%|█████▋    | 16.8M/29.6M [00:01<00:00, 18.3MB/s] 66%|██████▌   | 19.4M/29.6M [00:01<00:00, 15.0MB/s] 73%|███████▎  | 21.5M/29.6M [00:01<00:00, 12.6MB/s] 87%|████████▋ | 25.7M/29.6M [00:01<00:00, 12.2MB/s]100%|██████████| 29.6M/29.6M [00:01<00:00, 15.5MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1zEY__rxur6bA66cohdLfp9T-IvZ0eeaJ
+To: /tmp/src/JustMates Ep24.mp4
+  0%|          | 0.00/28.2M [00:00<?, ?B/s]  2%|▏         | 524k/28.2M [00:00<00:05, 5.00MB/s] 17%|█▋        | 4.72M/28.2M [00:00<00:01, 22.7MB/s] 28%|██▊       | 7.86M/28.2M [00:00<00:00, 26.2MB/s] 37%|███▋      | 10.5M/28.2M [00:00<00:00, 20.7MB/s] 47%|████▋     | 13.1M/28.2M [00:00<00:00, 16.0MB/s] 56%|█████▌    | 15.7M/28.2M [00:00<00:00, 18.4MB/s] 63%|██████▎   | 17.8M/28.2M [00:01<00:00, 16.1MB/s] 74%|███████▍  | 21.0M/28.2M [00:01<00:00, 19.7MB/s] 84%|████████▍ | 23.6M/28.2M [00:01<00:00, 19.4MB/s]100%|██████████| 28.2M/28.2M [00:01<00:00, 21.1MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1Izg5ZA6i1L4XHf53FkKpL2i7zDS4SNbF
+To: /tmp/src/JustMates Ep25.mp4
+  0%|          | 0.00/57.7M [00:00<?, ?B/s]  1%|          | 524k/57.7M [00:00<00:13, 4.20MB/s] 12%|█▏        | 6.82M/57.7M [00:00<00:02, 22.0MB/s] 19%|█▉        | 11.0M/57.7M [00:00<00:02, 22.0MB/s] 26%|██▋       | 15.2M/57.7M [00:00<00:01, 21.9MB/s] 34%|███▎      | 19.4M/57.7M [00:00<00:01, 23.2MB/s] 41%|████      | 23.6M/57.7M [00:01<00:01, 23.1MB/s] 48%|████▊     | 27.8M/57.7M [00:01<00:01, 18.9MB/s] 59%|█████▉    | 34.1M/57.7M [00:01<00:00, 23.7MB/s] 70%|██████▉   | 40.4M/57.7M [00:01<00:00, 26.4MB/s] 81%|████████  | 46.7M/57.7M [00:01<00:00, 28.3MB/s] 92%|█████████▏| 53.0M/57.7M [00:02<00:00, 31.0MB/s]100%|██████████| 57.7M/57.7M [00:02<00:00, 26.9MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1OpRtSBxIlUZuIoV7BhaoNty-liIQyLn5
+To: /tmp/src/JustMates Ep26.mp4
+  0%|          | 0.00/28.1M [00:00<?, ?B/s]  2%|▏         | 524k/28.1M [00:00<00:06, 4.44MB/s] 32%|███▏      | 8.91M/28.1M [00:00<00:00, 46.9MB/s] 71%|███████   | 19.9M/28.1M [00:00<00:00, 74.0MB/s]100%|██████████| 28.1M/28.1M [00:00<00:00, 69.8MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1dAIqE-rLWYNXBM39tBAw--cmmAqfNTWa
+To: /tmp/src/JustMates Ep27.mp4
+  0%|          | 0.00/52.9M [00:00<?, ?B/s]  1%|          | 524k/52.9M [00:00<00:11, 4.55MB/s]  9%|▉         | 4.72M/52.9M [00:00<00:02, 19.2MB/s] 15%|█▍        | 7.86M/52.9M [00:00<00:01, 23.6MB/s] 20%|█▉        | 10.5M/52.9M [00:00<00:02, 21.1MB/s] 25%|██▍       | 13.1M/52.9M [00:00<00:02, 15.7MB/s] 33%|███▎      | 17.3M/52.9M [00:01<00:02, 15.3MB/s] 41%|████      | 21.5M/52.9M [00:01<00:02, 13.7MB/s] 49%|████▊     | 25.7M/52.9M [00:01<00:01, 14.5MB/s] 60%|██████    | 32.0M/52.9M [00:01<00:01, 17.9MB/s] 72%|███████▏  | 38.3M/52.9M [00:02<00:00, 20.3MB/s] 84%|████████▍ | 44.6M/52.9M [00:02<00:00, 21.3MB/s] 89%|████████▉ | 47.2M/52.9M [00:02<00:00, 21.5MB/s] 96%|█████████▌| 50.9M/52.9M [00:02<00:00, 22.7MB/s]100%|██████████| 52.9M/52.9M [00:02<00:00, 19.7MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1CYMvdenQbyGChRWfxqykShbK4oX8WkX0
+To: /tmp/src/JustMates Ep28.mp4
+  0%|          | 0.00/27.5M [00:00<?, ?B/s]  2%|▏         | 524k/27.5M [00:00<00:05, 5.11MB/s] 17%|█▋        | 4.72M/27.5M [00:00<00:01, 21.7MB/s] 32%|███▏      | 8.91M/27.5M [00:00<00:01, 16.9MB/s] 48%|████▊     | 13.1M/27.5M [00:00<00:00, 15.3MB/s] 63%|██████▎   | 17.3M/27.5M [00:01<00:00, 15.6MB/s] 86%|████████▌ | 23.6M/27.5M [00:01<00:00, 18.7MB/s]100%|██████████| 27.5M/27.5M [00:01<00:00, 20.2MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1bovwuKJz21ynG2tIBLzPVlylpbNcLoQX
+To: /tmp/src/JustMates Ep29.mp4
+  0%|          | 0.00/33.7M [00:00<?, ?B/s]  2%|▏         | 524k/33.7M [00:00<00:07, 4.65MB/s] 17%|█▋        | 5.77M/33.7M [00:00<00:00, 31.1MB/s] 28%|██▊       | 9.44M/33.7M [00:00<00:00, 27.7MB/s] 39%|███▉      | 13.1M/33.7M [00:00<00:00, 25.0MB/s] 51%|█████▏    | 17.3M/33.7M [00:00<00:00, 25.9MB/s] 61%|██████    | 20.4M/33.7M [00:00<00:00, 26.0MB/s] 70%|██████▉   | 23.6M/33.7M [00:00<00:00, 24.5MB/s] 82%|████████▏ | 27.8M/33.7M [00:01<00:00, 25.2MB/s] 95%|█████████▍| 32.0M/33.7M [00:01<00:00, 27.1MB/s]100%|██████████| 33.7M/33.7M [00:01<00:00, 27.1MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1VFZRCnYGMGpJRt3jfUskFL3LwP4P5p4u
+To: /tmp/src/JustMates Ep30.mp4
+  0%|          | 0.00/27.7M [00:00<?, ?B/s]  2%|▏         | 524k/27.7M [00:00<00:05, 5.05MB/s] 32%|███▏      | 8.91M/27.7M [00:00<00:00, 48.6MB/s] 63%|██████▎   | 17.3M/27.7M [00:00<00:00, 62.1MB/s]100%|██████████| 27.7M/27.7M [00:00<00:00, 74.5MB/s]100%|██████████| 27.7M/27.7M [00:00<00:00, 64.2MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1muTFkqXNesRSO6I99HkEQe7jTl5u4kiS
+To: /tmp/src/JustMates Ep31.mp4
+  0%|          | 0.00/35.0M [00:00<?, ?B/s]  1%|▏         | 524k/35.0M [00:00<00:08, 4.10MB/s] 13%|█▎        | 4.72M/35.0M [00:00<00:01, 15.7MB/s] 25%|██▌       | 8.91M/35.0M [00:00<00:01, 16.3MB/s] 31%|███▏      | 11.0M/35.0M [00:00<00:01, 16.5MB/s] 37%|███▋      | 13.1M/35.0M [00:00<00:01, 15.1MB/s] 49%|████▉     | 17.3M/35.0M [00:01<00:01, 14.8MB/s] 61%|██████▏   | 21.5M/35.0M [00:01<00:00, 13.5MB/s] 73%|███████▎  | 25.7M/35.0M [00:01<00:00, 14.6MB/s] 85%|████████▌ | 29.9M/35.0M [00:02<00:00, 15.0MB/s]100%|██████████| 35.0M/35.0M [00:02<00:00, 16.8MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1lg3Yot0JFEFQkAbrjr8yeeTakT8qOOz-
+To: /tmp/src/JustMates Ep32.mp4
+  0%|          | 0.00/27.6M [00:00<?, ?B/s]  2%|▏         | 524k/27.6M [00:00<00:05, 4.63MB/s] 17%|█▋        | 4.72M/27.6M [00:00<00:01, 16.2MB/s] 32%|███▏      | 8.91M/27.6M [00:00<00:01, 15.1MB/s] 48%|████▊     | 13.1M/27.6M [00:00<00:00, 14.8MB/s] 63%|██████▎   | 17.3M/27.6M [00:01<00:00, 14.1MB/s] 78%|███████▊  | 21.5M/27.6M [00:01<00:00, 14.1MB/s]100%|██████████| 27.6M/27.6M [00:01<00:00, 17.8MB/s]100%|██████████| 27.6M/27.6M [00:01<00:00, 15.9MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1BY31GHe6xGKJR3n70SDk-XY3Hwy2D0UJ
+To: /tmp/src/JustMates Ep33.mp4
+  0%|          | 0.00/30.3M [00:00<?, ?B/s]  2%|▏         | 524k/30.3M [00:00<00:06, 4.40MB/s] 29%|██▉       | 8.91M/30.3M [00:00<00:00, 47.7MB/s] 83%|████████▎ | 25.2M/30.3M [00:00<00:00, 97.1MB/s]100%|██████████| 30.3M/30.3M [00:00<00:00, 85.6MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1Qa2ZjhqK76D_ISVvpuXsUtpJmucSGCeL
+To: /tmp/src/JustMates Ep34.mp4
+  0%|          | 0.00/30.0M [00:00<?, ?B/s]  2%|▏         | 524k/30.0M [00:00<00:07, 4.06MB/s] 24%|██▍       | 7.34M/30.0M [00:00<00:00, 37.7MB/s] 51%|█████     | 15.2M/30.0M [00:00<00:00, 53.6MB/s] 79%|███████▊  | 23.6M/30.0M [00:00<00:00, 59.5MB/s]100%|██████████| 30.0M/30.0M [00:00<00:00, 56.5MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1yAj0aqvoTwNh0OxfvmLi2DDR5_XcpYiD
+To: /tmp/src/JustMates Ep35.mp4
+  0%|          | 0.00/28.3M [00:00<?, ?B/s]  2%|▏         | 524k/28.3M [00:00<00:06, 4.62MB/s] 17%|█▋        | 4.72M/28.3M [00:00<00:01, 21.3MB/s] 24%|██▍       | 6.82M/28.3M [00:00<00:01, 19.0MB/s] 32%|███▏      | 8.91M/28.3M [00:00<00:01, 15.9MB/s] 46%|████▋     | 13.1M/28.3M [00:00<00:00, 17.3MB/s] 61%|██████    | 17.3M/28.3M [00:00<00:00, 18.5MB/s] 69%|██████▊   | 19.4M/28.3M [00:01<00:00, 18.3MB/s] 76%|███████▌  | 21.5M/28.3M [00:01<00:00, 18.0MB/s] 83%|████████▎ | 23.6M/28.3M [00:01<00:00, 15.9MB/s]100%|██████████| 28.3M/28.3M [00:01<00:00, 19.2MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1IUZNzbagCcFc6eju7O4maBiB6DD_my57
+To: /tmp/src/JustMates Ep36.mp4
+  0%|          | 0.00/29.0M [00:00<?, ?B/s]  2%|▏         | 524k/29.0M [00:00<00:05, 5.16MB/s] 23%|██▎       | 6.82M/29.0M [00:00<00:00, 27.9MB/s] 38%|███▊      | 11.0M/29.0M [00:00<00:00, 26.9MB/s] 47%|████▋     | 13.6M/29.0M [00:00<00:00, 24.8MB/s] 60%|█████▉    | 17.3M/29.0M [00:00<00:00, 24.2MB/s] 74%|███████▍  | 21.5M/29.0M [00:00<00:00, 22.7MB/s] 96%|█████████▌| 27.8M/29.0M [00:01<00:00, 27.4MB/s]100%|██████████| 29.0M/29.0M [00:01<00:00, 26.1MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1gesugLz7Z8oYdy2zcozk93MGSh4D7MfF
+To: /tmp/src/JustMates Ep37.mp4
+  0%|          | 0.00/27.0M [00:00<?, ?B/s]  2%|▏         | 524k/27.0M [00:00<00:06, 3.96MB/s] 23%|██▎       | 6.29M/27.0M [00:00<00:00, 31.7MB/s] 37%|███▋      | 9.96M/27.0M [00:00<00:00, 24.4MB/s] 49%|████▊     | 13.1M/27.0M [00:00<00:00, 26.2MB/s] 72%|███████▏  | 19.4M/27.0M [00:00<00:00, 19.5MB/s]100%|██████████| 27.0M/27.0M [00:01<00:00, 26.9MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1hg4FtN9tJMi3GcA8H0lRowdgjsy2t5o_
+To: /tmp/src/JustMates Ep38.mp4
+  0%|          | 0.00/40.1M [00:00<?, ?B/s]  3%|▎         | 1.05M/40.1M [00:00<00:03, 10.1MB/s] 22%|██▏       | 8.91M/40.1M [00:00<00:00, 46.9MB/s] 80%|███████▉  | 32.0M/40.1M [00:00<00:00, 127MB/s] 100%|██████████| 40.1M/40.1M [00:00<00:00, 102MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1yMrSp0YBNuoJW-HRkCg7DlGrizZZXekF
+To: /tmp/src/JustMates Ep39.mp4
+  0%|          | 0.00/27.1M [00:00<?, ?B/s]  2%|▏         | 524k/27.1M [00:00<00:05, 5.06MB/s] 17%|█▋        | 4.72M/27.1M [00:00<00:01, 21.9MB/s] 25%|██▌       | 6.82M/27.1M [00:00<00:01, 16.0MB/s] 33%|███▎      | 8.91M/27.1M [00:00<00:01, 17.1MB/s] 41%|████      | 11.0M/27.1M [00:00<00:00, 16.2MB/s] 48%|████▊     | 13.1M/27.1M [00:00<00:00, 15.4MB/s] 56%|█████▌    | 15.2M/27.1M [00:00<00:00, 14.3MB/s] 72%|███████▏  | 19.4M/27.1M [00:01<00:00, 14.3MB/s] 87%|████████▋ | 23.6M/27.1M [00:01<00:00, 13.3MB/s]100%|██████████| 27.1M/27.1M [00:01<00:00, 16.4MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1xa-C46Ie99glGOEZR6j1OAmoo4rVtQ21
+To: /tmp/src/JustMates Ep4.mp4
+  0%|          | 0.00/31.1M [00:00<?, ?B/s]  2%|▏         | 524k/31.1M [00:00<00:06, 4.95MB/s] 15%|█▌        | 4.72M/31.1M [00:00<00:01, 22.2MB/s] 22%|██▏       | 6.82M/31.1M [00:00<00:01, 17.2MB/s] 35%|███▌      | 11.0M/31.1M [00:00<00:01, 17.3MB/s] 49%|████▉     | 15.2M/31.1M [00:00<00:00, 17.8MB/s] 62%|██████▏   | 19.4M/31.1M [00:01<00:00, 15.9MB/s] 83%|████████▎ | 25.7M/31.1M [00:01<00:00, 17.0MB/s]100%|██████████| 31.1M/31.1M [00:01<00:00, 20.3MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=18KrD7-8k0BSKk0zIJIFjoHPcppbtbpJc
+To: /tmp/src/JustMates Ep40.mp4
+  0%|          | 0.00/26.1M [00:00<?, ?B/s]  2%|▏         | 524k/26.1M [00:00<00:05, 4.66MB/s] 26%|██▌       | 6.82M/26.1M [00:00<00:00, 21.2MB/s] 42%|████▏     | 11.0M/26.1M [00:00<00:00, 21.4MB/s] 58%|█████▊    | 15.2M/26.1M [00:00<00:00, 22.8MB/s] 90%|█████████ | 23.6M/26.1M [00:00<00:00, 36.2MB/s]100%|██████████| 26.1M/26.1M [00:00<00:00, 31.5MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1ccRt48YxI6Zf7P9JS5hLEWWjyGSPg82n
+To: /tmp/src/JustMates Ep41.mp4
+  0%|          | 0.00/29.9M [00:00<?, ?B/s]  2%|▏         | 524k/29.9M [00:00<00:06, 4.65MB/s] 16%|█▌        | 4.72M/29.9M [00:00<00:01, 17.5MB/s] 30%|██▉       | 8.91M/29.9M [00:00<00:01, 16.8MB/s] 44%|████▍     | 13.1M/29.9M [00:00<00:01, 16.1MB/s] 58%|█████▊    | 17.3M/29.9M [00:01<00:00, 15.7MB/s] 72%|███████▏  | 21.5M/29.9M [00:01<00:00, 14.7MB/s] 86%|████████▌ | 25.7M/29.9M [00:01<00:00, 14.7MB/s]100%|██████████| 29.9M/29.9M [00:01<00:00, 17.3MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1m8kG4dl7Qbq-JBMijcpeu8j293qtd78p
+To: /tmp/src/JustMates Ep42.mp4
+  0%|          | 0.00/55.6M [00:00<?, ?B/s]  2%|▏         | 1.05M/55.6M [00:00<00:06, 8.87MB/s]  8%|▊         | 4.72M/55.6M [00:00<00:02, 21.6MB/s] 13%|█▎        | 7.34M/55.6M [00:00<00:02, 23.2MB/s] 18%|█▊        | 9.96M/55.6M [00:00<00:02, 20.6MB/s] 23%|██▎       | 12.6M/55.6M [00:00<00:01, 22.1MB/s] 27%|██▋       | 15.2M/55.6M [00:00<00:02, 14.1MB/s] 35%|███▍      | 19.4M/55.6M [00:01<00:02, 15.3MB/s] 39%|███▊      | 21.5M/55.6M [00:01<00:02, 15.3MB/s] 46%|████▌     | 25.7M/55.6M [00:01<00:01, 20.3MB/s] 51%|█████     | 28.3M/55.6M [00:01<00:01, 19.9MB/s] 58%|█████▊    | 32.0M/55.6M [00:01<00:01, 22.9MB/s] 62%|██████▏   | 34.6M/55.6M [00:01<00:00, 22.6MB/s] 69%|██████▉   | 38.3M/55.6M [00:01<00:00, 24.8MB/s] 74%|███████▎  | 40.9M/55.6M [00:02<00:00, 23.4MB/s] 81%|████████  | 45.1M/55.6M [00:02<00:00, 28.0MB/s] 88%|████████▊ | 48.8M/55.6M [00:02<00:00, 24.3MB/s] 95%|█████████▌| 53.0M/55.6M [00:02<00:00, 15.8MB/s]100%|██████████| 55.6M/55.6M [00:02<00:00, 20.0MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1fBoArWO6wAUbdEacKlKLm5GSkkXAWrVD
+To: /tmp/src/JustMates Ep43.mp4
+  0%|          | 0.00/37.4M [00:00<?, ?B/s]  1%|▏         | 524k/37.4M [00:00<00:08, 4.55MB/s] 13%|█▎        | 4.72M/37.4M [00:00<00:01, 16.7MB/s] 18%|█▊        | 6.82M/37.4M [00:00<00:02, 13.6MB/s] 24%|██▍       | 8.91M/37.4M [00:00<00:01, 14.3MB/s] 29%|██▉       | 11.0M/37.4M [00:00<00:01, 15.3MB/s] 35%|███▌      | 13.1M/37.4M [00:00<00:01, 13.3MB/s] 46%|████▋     | 17.3M/37.4M [00:01<00:01, 13.3MB/s] 58%|█████▊    | 21.5M/37.4M [00:01<00:01, 13.1MB/s] 69%|██████▊   | 25.7M/37.4M [00:01<00:00, 13.2MB/s] 86%|████████▌ | 32.0M/37.4M [00:02<00:00, 15.9MB/s]100%|██████████| 37.4M/37.4M [00:02<00:00, 16.5MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1RhkC961xh4cTO3oflwzgla1g24PBlwt4
+To: /tmp/src/JustMates Ep44.mp4
+  0%|          | 0.00/30.5M [00:00<?, ?B/s]  2%|▏         | 524k/30.5M [00:00<00:06, 4.39MB/s] 15%|█▌        | 4.72M/30.5M [00:00<00:01, 15.5MB/s] 22%|██▏       | 6.82M/30.5M [00:00<00:01, 15.8MB/s] 29%|██▉       | 8.91M/30.5M [00:00<00:01, 13.2MB/s] 38%|███▊      | 11.5M/30.5M [00:00<00:01, 16.3MB/s] 45%|████▍     | 13.6M/30.5M [00:01<00:01, 12.7MB/s] 50%|████▉     | 15.2M/30.5M [00:01<00:01, 12.6MB/s] 57%|█████▋    | 17.3M/30.5M [00:01<00:01, 11.2MB/s] 64%|██████▎   | 19.4M/30.5M [00:01<00:01, 10.9MB/s] 77%|███████▋  | 23.6M/30.5M [00:01<00:00, 12.0MB/s] 91%|█████████ | 27.8M/30.5M [00:02<00:00, 12.4MB/s]100%|██████████| 30.5M/30.5M [00:02<00:00, 13.7MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1aCocJPT5jIEHOGHIj-OEokrv4hk0BenV
+To: /tmp/src/JustMates Ep45.mp4
+  0%|          | 0.00/26.8M [00:00<?, ?B/s]  2%|▏         | 524k/26.8M [00:00<00:05, 4.83MB/s] 18%|█▊        | 4.72M/26.8M [00:00<00:01, 18.9MB/s] 25%|██▌       | 6.82M/26.8M [00:00<00:01, 10.2MB/s] 41%|████      | 11.0M/26.8M [00:00<00:01, 12.4MB/s] 57%|█████▋    | 15.2M/26.8M [00:01<00:00, 13.9MB/s] 73%|███████▎  | 19.4M/26.8M [00:01<00:00, 12.3MB/s] 88%|████████▊ | 23.6M/26.8M [00:01<00:00, 13.4MB/s]100%|██████████| 26.8M/26.8M [00:01<00:00, 14.5MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1ZB_eq9xwJgxWShMgl-b167ZZkXeOd2yZ
+To: /tmp/src/JustMates Ep46.mp4
+  0%|          | 0.00/28.7M [00:00<?, ?B/s]  2%|▏         | 524k/28.7M [00:00<00:07, 4.01MB/s]  9%|▉         | 2.62M/28.7M [00:00<00:02, 11.8MB/s] 24%|██▎       | 6.82M/28.7M [00:00<00:01, 12.6MB/s] 38%|███▊      | 11.0M/28.7M [00:00<00:01, 13.1MB/s] 53%|█████▎    | 15.2M/28.7M [00:01<00:00, 14.3MB/s] 60%|██████    | 17.3M/28.7M [00:01<00:00, 14.3MB/s] 67%|██████▋   | 19.4M/28.7M [00:01<00:00, 13.3MB/s] 82%|████████▏ | 23.6M/28.7M [00:01<00:00, 11.7MB/s]100%|██████████| 28.7M/28.7M [00:01<00:00, 15.0MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=13qUZb13xUTeuisrDRUKEAx7Pl-jvrxpk
+To: /tmp/src/JustMates Ep48.mp4
+  0%|          | 0.00/27.8M [00:00<?, ?B/s]  2%|▏         | 524k/27.8M [00:00<00:05, 4.55MB/s] 17%|█▋        | 4.72M/27.8M [00:00<00:01, 21.6MB/s] 32%|███▏      | 8.91M/27.8M [00:00<00:01, 18.0MB/s] 47%|████▋     | 13.1M/27.8M [00:00<00:00, 16.1MB/s] 62%|██████▏   | 17.3M/27.8M [00:01<00:00, 15.5MB/s] 77%|███████▋  | 21.5M/27.8M [00:01<00:00, 16.2MB/s]100%|██████████| 27.8M/27.8M [00:01<00:00, 19.9MB/s]100%|██████████| 27.8M/27.8M [00:01<00:00, 17.9MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1q7_jU--sU-Qg1UjiXf6r35cNn8xfWncV
+To: /tmp/src/JustMates Ep49.mp4
+  0%|          | 0.00/27.7M [00:00<?, ?B/s]  2%|▏         | 524k/27.7M [00:00<00:06, 4.53MB/s] 17%|█▋        | 4.72M/27.7M [00:00<00:01, 18.0MB/s] 25%|██▍       | 6.82M/27.7M [00:00<00:01, 17.0MB/s] 32%|███▏      | 8.91M/27.7M [00:00<00:01, 14.7MB/s] 40%|███▉      | 11.0M/27.7M [00:00<00:01, 14.3MB/s] 47%|████▋     | 13.1M/27.7M [00:00<00:01, 13.8MB/s] 55%|█████▍    | 15.2M/27.7M [00:01<00:01, 10.7MB/s] 70%|███████   | 19.4M/27.7M [00:01<00:00, 11.8MB/s] 85%|████████▌ | 23.6M/27.7M [00:01<00:00, 10.9MB/s]100%|██████████| 27.7M/27.7M [00:01<00:00, 14.1MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1IfUMpas48T0S-NX_SGSzZl0VME6BrLEv
+To: /tmp/src/JustMates Ep5.mp4
+  0%|          | 0.00/29.4M [00:00<?, ?B/s]  2%|▏         | 524k/29.4M [00:00<00:06, 4.14MB/s] 21%|██▏       | 6.29M/29.4M [00:00<00:00, 32.3MB/s] 34%|███▍      | 9.96M/29.4M [00:00<00:00, 23.3MB/s] 45%|████▍     | 13.1M/29.4M [00:00<00:00, 20.0MB/s] 59%|█████▉    | 17.3M/29.4M [00:00<00:00, 19.8MB/s] 73%|███████▎  | 21.5M/29.4M [00:01<00:00, 20.1MB/s] 87%|████████▋ | 25.7M/29.4M [00:01<00:00, 20.2MB/s]100%|██████████| 29.4M/29.4M [00:01<00:00, 23.2MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=12SjDXuak6L2MCoLga0NXi5jL2V2SN9Oe
+To: /tmp/src/JustMates Ep50.mp4
+  0%|          | 0.00/69.0M [00:00<?, ?B/s]  1%|          | 524k/69.0M [00:00<00:14, 4.63MB/s]  7%|▋         | 4.72M/69.0M [00:00<00:04, 15.0MB/s] 13%|█▎        | 8.91M/69.0M [00:00<00:04, 12.1MB/s] 19%|█▉        | 13.1M/69.0M [00:01<00:04, 13.1MB/s] 25%|██▌       | 17.3M/69.0M [00:01<00:04, 12.2MB/s] 31%|███       | 21.5M/69.0M [00:01<00:03, 13.3MB/s] 34%|███▍      | 23.6M/69.0M [00:01<00:03, 14.1MB/s] 37%|███▋      | 25.7M/69.0M [00:01<00:03, 13.6MB/s] 40%|████      | 27.8M/69.0M [00:02<00:03, 13.4MB/s] 43%|████▎     | 29.9M/69.0M [00:02<00:02, 14.4MB/s] 49%|████▉     | 34.1M/69.0M [00:02<00:02, 14.9MB/s] 52%|█████▏    | 36.2M/69.0M [00:02<00:02, 15.8MB/s] 58%|█████▊    | 40.4M/69.0M [00:02<00:01, 16.0MB/s] 62%|██████▏   | 42.5M/69.0M [00:02<00:01, 16.9MB/s] 68%|██████▊   | 46.7M/69.0M [00:03<00:01, 17.0MB/s] 71%|███████   | 48.8M/69.0M [00:03<00:01, 17.6MB/s] 77%|███████▋  | 53.0M/69.0M [00:03<00:00, 19.4MB/s] 80%|███████▉  | 55.1M/69.0M [00:03<00:00, 16.7MB/s] 89%|████████▉ | 61.3M/69.0M [00:03<00:00, 23.0MB/s] 93%|█████████▎| 64.0M/69.0M [00:04<00:00, 19.6MB/s]100%|██████████| 69.0M/69.0M [00:04<00:00, 16.6MB/s]
+Failed to download /tmp/src/JustMates Ep7.mp4: Failed to retrieve file url:
+
+	Cannot retrieve the public link of the file. You may need to change
+	the permission to 'Anyone with the link', or have had many accesses.
+	Check FAQ in https://github.com/wkentaro/gdown?tab=readme-ov-file#faq.
+
+You may still be able to access the file from the browser:
+
+	https://drive.google.com/uc?id=1TpriCdr2gv5ZouIfZJGsWgPDKJO9PE3l
+
+but Gdown can't. Please check connections and permissions.
+Failed to download /tmp/src/JustMates Ep8.mp4: Failed to retrieve file url:
+
+	Cannot retrieve the public link of the file. You may need to change
+	the permission to 'Anyone with the link', or have had many accesses.
+	Check FAQ in https://github.com/wkentaro/gdown?tab=readme-ov-file#faq.
+
+You may still be able to access the file from the browser:
+
+	https://drive.google.com/uc?id=1pfR9XXg1j_aut5AsDkjUHC-3_KzxTv6k
+
+but Gdown can't. Please check connections and permissions.
+Failed to download /tmp/src/JustMates Ep9.mp4: Failed to retrieve file url:
+
+	Cannot retrieve the public link of the file. You may need to change
+	the permission to 'Anyone with the link', or have had many accesses.
+	Check FAQ in https://github.com/wkentaro/gdown?tab=readme-ov-file#faq.
+
+You may still be able to access the file from the browser:
+
+	https://drive.google.com/uc?id=1we-vq4g8CLUU_NSywj9tbZzBwiLQYXaT
+
+but Gdown can't. Please check connections and permissions.
+Failed to download the following files:
+- /tmp/src/JustMates Ep7.mp4
+- /tmp/src/JustMates Ep8.mp4
+- /tmp/src/JustMates Ep9.mp4
+GDOWN FAILED 1
+/tmp/src/JustMates Ep 3.mp4
+/tmp/src/JustMates Ep 47.mp4
+/tmp/src/JustMates Ep 6.mp4
+/tmp/src/JustMates Ep1.mp4
+/tmp/src/JustMates Ep10.mp4
+/tmp/src/JustMates Ep11.mp4
+/tmp/src/JustMates Ep12.mp4
+/tmp/src/JustMates Ep13.mp4
+/tmp/src/JustMates Ep14.mp4
+/tmp/src/JustMates Ep15.mp4
+/tmp/src/JustMates Ep16.mp4
+/tmp/src/JustMates Ep17.mp4
+/tmp/src/JustMates Ep18.mp4
+/tmp/src/JustMates Ep19.mp4
+/tmp/src/JustMates Ep2.mp4
+/tmp/src/JustMates Ep20.mp4
+/tmp/src/JustMates Ep21.mp4
+/tmp/src/JustMates Ep22.mp4
+/tmp/src/JustMates Ep23.mp4
+/tmp/src/JustMates Ep24.mp4
+/tmp/src/JustMates Ep25.mp4
+/tmp/src/JustMates Ep26.mp4
+/tmp/src/JustMates Ep27.mp4
+/tmp/src/JustMates Ep28.mp4
+/tmp/src/JustMates Ep29.mp4
+/tmp/src/JustMates Ep30.mp4
+/tmp/src/JustMates Ep31.mp4
+/tmp/src/JustMates Ep32.mp4
+/tmp/src/JustMates Ep33.mp4
+/tmp/src/JustMates Ep34.mp4
+/tmp/src/JustMates Ep35.mp4
+/tmp/src/JustMates Ep36.mp4
+/tmp/src/JustMates Ep37.mp4
+/tmp/src/JustMates Ep38.mp4
+/tmp/src/JustMates Ep39.mp4
+/tmp/src/JustMates Ep4.mp4
+/tmp/src/JustMates Ep40.mp4
+/tmp/src/JustMates Ep41.mp4
+/tmp/src/JustMates Ep42.mp4
+/tmp/src/JustMates Ep43.mp4
+/tmp/src/JustMates Ep44.mp4
+/tmp/src/JustMates Ep45.mp4
+/tmp/src/JustMates Ep46.mp4
+/tmp/src/JustMates Ep48.mp4
+/tmp/src/JustMates Ep49.mp4
+/tmp/src/JustMates Ep5.mp4
+/tmp/src/JustMates Ep50.mp4
+ep3 720x1280 -> top 720x1280  30 MB
+ep47 720x1280 -> top 720x1280  22 MB
+ep6 720x1280 -> top 720x1280  25 MB
+ep1 720x1280 -> top 720x1280  33 MB
+ep10 720x1280 -> top 720x1280  40 MB
+ep11 720x1280 -> top 720x1280  28 MB
+ep12 720x1280 -> top 720x1280  27 MB
+ep13 720x1280 -> top 720x1280  24 MB
+ep14 720x1280 -> top 720x1280  24 MB
+ep15 720x1280 -> top 720x1280  25 MB
+ep16 720x1280 -> top 720x1280  22 MB
+ep17 720x1280 -> top 720x1280  29 MB
+ep18 720x1280 -> top 720x1280  43 MB
+ep19 720x1280 -> top 720x1280  20 MB
+ep2 720x1280 -> top 720x1280  30 MB
+ep20 720x1280 -> top 720x1280  28 MB
+ep21 720x1280 -> top 720x1280  25 MB
+ep22 720x1280 -> top 720x1280  43 MB
+ep23 720x1280 -> top 720x1280  27 MB
+ep24 720x1280 -> top 720x1280  27 MB
+ep25 720x1280 -> top 720x1280  62 MB
+ep26 720x1280 -> top 720x1280  27 MB
+ep27 720x1280 -> top 720x1280  53 MB
+ep28 720x1280 -> top 720x1280  27 MB
+ep29 720x1280 -> top 720x1280  32 MB
+ep30 720x1280 -> top 720x1280  24 MB
+ep31 720x1280 -> top 720x1280  36 MB
+ep32 720x1280 -> top 720x1280  29 MB
+ep33 720x1280 -> top 720x1280  31 MB
+ep34 720x1280 -> top 720x1280  28 MB
+ep35 720x1280 -> top 720x1280  27 MB
+ep36 720x1280 -> top 720x1280  29 MB
+ep37 720x1280 -> top 720x1280  25 MB
+ep38 1088x1920 -> top 1080x1920  32 MB
+ep39 720x1280 -> top 720x1280  29 MB
+ep4 720x1280 -> top 720x1280  31 MB
+ep40 720x1280 -> top 720x1280  23 MB
+ep41 720x1280 -> top 720x1280  29 MB
+ep42 720x1280 -> top 720x1280  59 MB
+ep43 720x1280 -> top 720x1280  34 MB
+ep44 720x1280 -> top 720x1280  27 MB
+ep45 720x1280 -> top 720x1280  24 MB
+ep46 720x1280 -> top 720x1280  27 MB
+ep48 720x1280 -> top 720x1280  26 MB
+ep49 720x1280 -> top 720x1280  24 MB
+ep5 720x1280 -> top 720x1280  26 MB
+ep50 720x1280 -> top 720x1280  59 MB
+== uploaded
