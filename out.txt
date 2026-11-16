@@ -1,0 +1,21 @@
+Downloading...
+From: https://drive.google.com/uc?id=1TpriCdr2gv5ZouIfZJGsWgPDKJO9PE3l
+To: /tmp/src/JustMates Ep7.mp4
+  0%|          | 0.00/28.8M [00:00<?, ?B/s]  4%|▎         | 1.05M/28.8M [00:00<00:04, 6.77MB/s] 13%|█▎        | 3.67M/28.8M [00:00<00:01, 15.9MB/s] 24%|██▎       | 6.82M/28.8M [00:00<00:01, 18.5MB/s] 44%|████▎     | 12.6M/28.8M [00:00<00:00, 28.3MB/s] 55%|█████▍    | 15.7M/28.8M [00:00<00:00, 17.9MB/s] 75%|███████▍  | 21.5M/28.8M [00:01<00:00, 21.1MB/s] 96%|█████████▋| 27.8M/28.8M [00:01<00:00, 23.9MB/s]100%|██████████| 28.8M/28.8M [00:01<00:00, 22.4MB/s]
+Using cookies from /home/runner/.cache/gdown/cookies.txt
+Downloading...
+From: https://drive.google.com/uc?id=1pfR9XXg1j_aut5AsDkjUHC-3_KzxTv6k
+To: /tmp/src/JustMates Ep8.mp4
+  0%|          | 0.00/29.0M [00:00<?, ?B/s]  2%|▏         | 524k/29.0M [00:00<00:16, 1.68MB/s]  5%|▌         | 1.57M/29.0M [00:00<00:06, 4.45MB/s] 16%|█▋        | 4.72M/29.0M [00:00<00:01, 12.7MB/s] 38%|███▊      | 11.0M/29.0M [00:00<00:00, 27.8MB/s] 58%|█████▊    | 16.8M/29.0M [00:00<00:00, 36.1MB/s] 78%|███████▊  | 22.5M/29.0M [00:00<00:00, 41.2MB/s]100%|██████████| 29.0M/29.0M [00:00<00:00, 31.6MB/s]
+Using cookies from /home/runner/.cache/gdown/cookies.txt
+Downloading...
+From: https://drive.google.com/uc?id=1we-vq4g8CLUU_NSywj9tbZzBwiLQYXaT
+To: /tmp/src/JustMates Ep9.mp4
+  0%|          | 0.00/27.1M [00:00<?, ?B/s]  2%|▏         | 524k/27.1M [00:00<00:09, 2.84MB/s]  8%|▊         | 2.10M/27.1M [00:00<00:03, 8.19MB/s] 29%|██▉       | 7.86M/27.1M [00:00<00:00, 26.4MB/s] 56%|█████▌    | 15.2M/27.1M [00:00<00:00, 42.2MB/s] 79%|███████▉  | 21.5M/27.1M [00:00<00:00, 48.8MB/s]100%|██████████| 27.1M/27.1M [00:00<00:00, 40.3MB/s]
+/tmp/src/JustMates Ep7.mp4
+/tmp/src/JustMates Ep8.mp4
+/tmp/src/JustMates Ep9.mp4
+ep7 720x1280 -> top 720x1280  30 MB
+ep8 720x1280 -> top 720x1280  29 MB
+ep9 720x1280 -> top 720x1280  23 MB
+== uploaded
