@@ -1176,7 +1176,7 @@ function openItem(p,i){
   }
   PL.el.classList.add("on");PL.el.setAttribute("aria-hidden","false");
   document.body.classList.add("film");
-  posT=pos+wrapD(i-pos);
+  // v2: the home screen always keeps the PINKMOON film, so opening a film no longer moves it
   PL.lastMove=performance.now();
 }
 function closeFilm(){
