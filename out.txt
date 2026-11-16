@@ -1,0 +1,46 @@
+HTTP/2 200 
+cache-control: public, max-age=14400
+cf-cache-status: REVALIDATED
+time 0.449880s
+HTTP/2 200 
+cache-control: public, max-age=14400
+cf-cache-status: HIT
+time 0.183843s
+HTTP/2 200 
+cache-control: public, max-age=14400
+cf-cache-status: HIT
+time 0.177324s
+--
+HTTP/2 200 
+cache-control: public, max-age=14400
+cf-cache-status: REVALIDATED
+time 0.381994s
+HTTP/2 200 
+cache-control: public, max-age=14400
+cf-cache-status: HIT
+time 0.117848s
+HTTP/2 200 
+cache-control: public, max-age=14400
+cf-cache-status: HIT
+time 0.111050s
+--
+HTTP/2 200 
+cache-control: public, max-age=31536000, immutable
+cf-cache-status: HIT
+time 0.645191s
+HTTP/2 200 
+cache-control: public, max-age=31536000, immutable
+cf-cache-status: HIT
+time 0.233302s
+HTTP/2 200 
+cache-control: public, max-age=31536000, immutable
+cf-cache-status: HIT
+time 0.131202s
+--
+checked
+https://pinkmoonhouse.com/films/pinkmoon-loop.mp4 200 36468735 video/mp4 0.829915s
+https://pinkmoonhouse.com/films/m/pinkmoon-loop.mp4 200 9294310 video/mp4 0.413063s
+https://pinkmoonhouse.com/films/m/pinkmoon-loop-portrait.mp4 200 34096608 video/mp4 0.681289s
+https://pinkmoonhouse.com/ 200 165010 text/html; charset=utf-8 0.145122s
+pinkmoon-loop-portrait.mp4
+pinkmoon-loop.mp4
