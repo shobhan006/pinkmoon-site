@@ -1,0 +1,14 @@
+usage: gdown [-h] [-V] [-O OUTPUT] [-q] [--proxy PROXY] [--speed SPEED]
+             [--cookies FILE] [--cookies-from-browser BROWSER] [--no-cookies]
+             [--no-check-certificate] [--continue] [--retries N] [--folder]
+             [--json] [--format FORMAT] [--user-agent USER_AGENT]
+             [--timeout SECONDS]
+             url_or_id
+gdown: error: unrecognized arguments: --remaining-ok
+GDOWN FAILED 2
+MODE probe
+== R2 test
+Completed 3 Bytes/3 Bytes (4 Bytes/s) with 1 file(s) remainingupload: ../../../../../tmp/t.txt to s3://pinkmoon/_test.txt   
+2026-11-16 10:29:23          3 _test.txt
+2026-11-16 10:17:41         15 test.txt
+delete: s3://pinkmoon/_test.txt
