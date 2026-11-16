@@ -17,7 +17,7 @@ jobs:
         run: |
           DRIVE=$(jq -r .drive job.json)
           mkdir -p /tmp/src
-          gdown --folder "$DRIVE" -O /tmp/src --remaining-ok > dl.log 2>&1 || echo "GDOWN FAILED $?" >> dl.log
+          gdown --folder "$DRIVE" -O /tmp/src > dl.log 2>&1 || echo "GDOWN FAILED $?" >> dl.log
           find /tmp/src -type f | sort >> dl.log
           cat dl.log
       - name: work
