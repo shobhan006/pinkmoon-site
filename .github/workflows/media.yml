@@ -1,0 +1,33 @@
+name: media
+on:
+  push:
+    branches: [media-job]
+    paths: [job.json]
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - name: tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg jq >/dev/null && pip install -q gdown awscli
+      - name: download
+        run: |
+          DRIVE=$(jq -r .drive job.json)
+          mkdir -p /tmp/src && gdown --folder "$DRIVE" -O /tmp/src --remaining-ok -q || gdown --folder "$DRIVE" -O /tmp/src --remaining-ok
+          find /tmp/src -type f | sort
+      - name: work
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          R2: ${{ secrets.R2_ENDPOINT }}
+        run: bash work.sh
+      - name: report
+        if: always()
+        run: |
+          git config user.name PINKMOON; git config user.email noreply@anthropic.com
+          git add -f report.txt 2>/dev/null || true
+          git commit -qm "media report" && git push -q || true
