@@ -1743,6 +1743,8 @@ async function boot(){
   try{await Promise.race([document.fonts.ready,wait(2500)])}catch(_){}
   paintTalent();
   await wait(Math.max(0,2000-(performance.now()-t0)));
+  // the film has been running behind the loader; restart it so the reveal opens on its first frame
+  {const v=sources[0]&&sources[0].v;if(v&&route==="home"){try{v.currentTime=0}catch(_){}}}
   LD.classList.add("reveal");await wait(475);
   started=true;LD.classList.add("out");
   setTimeout(()=>LD.remove(),1000);
