@@ -596,6 +596,14 @@ body.film #hd .hold{pointer-events:none}
   #p-series .emark{display:none}
 }
 @media (hover:none){.u:not(.active):hover::before{opacity:0}}
+/* Scrolling pages: no CSS mask on the scrolling box itself (iPad/iPhone Safari and Chrome repaint masked scrollers badly,
+   so content jumped and the footer popped in and out while scrolling). The fade under the menu is a fixed layer instead. */
+#p-team,#p-services,#p-contact,#p-ip,body.abt-done #p-approach{-webkit-mask-image:none!important;mask-image:none!important}
+body.r-services #hd::before,body.r-contact #hd::before,body.r-team #hd::before,body.abt-done #hd::before{opacity:1;height:132px;-webkit-mask-image:none!important;mask-image:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+body.r-services #hd::before,body.r-contact #hd::before,body.abt-done #hd::before{background:linear-gradient(#F7F3E6 72px,rgba(247,243,230,0) 132px)!important}
+body.r-team #hd::before{background:linear-gradient(#18233f 72px,rgba(24,35,63,0) 132px)!important}
+@media (max-width:600px),(max-height:520px){body.r-ip #hd::before{opacity:1;height:132px;-webkit-mask-image:none!important;mask-image:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:linear-gradient(#05080f 72px,rgba(5,8,15,0) 132px)!important}}
+body.film #hd::before{opacity:0!important}
 </style>
 </head>
 <body class="r-home">
